@@ -468,9 +468,23 @@ h1, h2, h3 { font-family: var(--face-display); font-weight: 600; text-wrap: bala
 
 footer.note {
   margin-top: 48px; padding-top: 14px; border-top: 1px solid var(--rule);
-  font-size: 12px; color: var(--ink-faint); max-width: 76ch;
+  font-size: 12px; line-height: 1.55; color: var(--ink-faint); max-width: 76ch;
+  display: flex; flex-direction: column; gap: 10px;
 }
+footer.note p { margin: 0; }
 footer.note code { font-family: var(--face-data); }
+footer.note a {
+  color: var(--ink-soft);
+  text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px;
+}
+footer.note a:hover { color: var(--ink); text-decoration-color: var(--leaf); }
+footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2px; }
+
+.foot-links { display: flex; flex-wrap: wrap; gap: 4px 18px; padding-top: 2px; }
+.foot-links a {
+  font-family: var(--face-data); font-size: 11px;
+  letter-spacing: .07em; text-transform: uppercase;
+}
 </style>
 
 <div class="wrap">
@@ -529,10 +543,25 @@ footer.note code { font-family: var(--face-data); }
   </div>
 
   <footer class="note">
-    Extracted from the bytecode of <code>cropsnh-2.0.101.jar</code> - recipes, pools, soils, sub-soils and light
-    requirements come straight out of <code>MutationLoader</code>, <code>CropLoader</code> and
-    <code>SubSoilRequirementLoader</code>. No other mod in this instance registers crops with CropsNH, so the list is
-    complete. Ticks are stored in this browser and survive page updates; move them elsewhere from <b>Manage list</b>.
+    <p>
+      Extracted from the bytecode of <code>cropsnh-2.0.101.jar</code>, as shipped in GTNH 2.9 - recipes, pools, soils,
+      sub-soils and light requirements come straight out of <code>MutationLoader</code>, <code>CropLoader</code> and
+      <code>SubSoilRequirementLoader</code>, not from a wiki. Nothing else in the pack registers crops with CropsNH,
+      so the list above is the whole set rather than a selection.
+    </p>
+    <p>
+      Your ticks are stored in this browser and nowhere else. The page makes no external requests and works offline -
+      move a list between copies from <b>Manage list</b> in the sidebar.
+    </p>
+    <p class="foot-links">
+      <a href="https://github.com/paner91-ux/gtnh-cropsnh-planner" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
+      <a href="https://github.com/paner91-ux/gtnh-cropsnh-planner/issues" target="_blank" rel="noopener noreferrer">Report a mistake</a>
+    </p>
+    <p>
+      <a href="https://github.com/GTNewHorizons/CropsNH" target="_blank" rel="noopener noreferrer">CropsNH</a> is by
+      C0bra5 and the GTNH Team, built on AgriCraft. This is an unofficial fan tool, not affiliated with or endorsed by
+      the GTNH team. Planner code is MIT.
+    </p>
   </footer>
 </div>
 
