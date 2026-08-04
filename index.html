@@ -124,12 +124,23 @@ h1, h2, h3 { font-family: var(--face-display); font-weight: 600; text-wrap: bala
 .rail { position: sticky; top: 12px; padding-top: 18px; }
 @media (max-width: 900px) { .rail { position: static; } }
 
-.rail-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 10px; }
+.rail-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 7px; }
 .rail-head h2 { font-size: 16px; }
 .tally {
   margin-left: auto; font-family: var(--face-data); font-size: 12px;
   font-variant-numeric: tabular-nums; color: var(--ink-faint);
 }
+.tally b { color: var(--leaf); font-weight: 600; margin-left: 4px; }
+
+.progress {
+  height: 4px; margin-bottom: 12px; border-radius: 2px;
+  background: var(--rule); overflow: hidden;
+}
+.progress-fill {
+  display: block; height: 100%; width: 0; border-radius: 2px;
+  background: var(--leaf); transition: width .3s ease;
+}
+@media (prefers-reduced-motion: reduce) { .progress-fill { transition: none; } }
 
 .field {
   width: 100%; padding: 7px 10px; font: inherit; font-size: 14px;
@@ -561,6 +572,9 @@ footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2p
         <h2>Your seeds</h2>
         <span class="tally" id="tally">0</span>
       </div>
+      <div class="progress" id="progress" role="progressbar"
+           aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+           aria-label="Share of all crops you hold"><span class="progress-fill" id="progressFill"></span></div>
       <input class="field" id="search" type="search" placeholder="Search crops…" autocomplete="off">
       <div class="seedlist" id="seedlist"></div>
       <p class="raillegend"><span class="mark">&#9670;</span> needs a specific block under the soil</p>
@@ -885,7 +899,11 @@ function renderRail() {
     html += `</div>`;
   }
   $("seedlist").innerHTML = html || `<div class="empty">No matches</div>`;
-  $("tally").textContent = `${owned.size} / ${byName.length}`;
+  const share = owned.size / byName.length * 100;
+  $("tally").innerHTML = `${owned.size} / ${byName.length} <b>${Math.round(share)}%</b>`;
+  $("progress").setAttribute("aria-valuenow", Math.round(share));
+  /* a sliver still has to be visible, or one crop looks the same as none */
+  $("progressFill").style.width = owned.size ? `max(2px, ${share.toFixed(1)}%)` : "0";
   $("undo").hidden = undoState === null;
 }
 
