@@ -116,6 +116,17 @@ separate lists. Use **Backup** in the sidebar to move a list between them.
 
 ## Credits
 
-CropsNH is part of [GregTech: New Horizons](https://github.com/GTNewHorizons). This is an
-unofficial fan-made tool and is not affiliated with or endorsed by the GTNH team. Crop names and
-game data belong to that project; the tool itself is MIT licensed, see [LICENSE](LICENSE).
+[CropsNH](https://github.com/GTNewHorizons/CropsNH) is by C0bra5 and the GTNH Team, built on
+AgriCraft. GTNH modifications are LGPL-3.0-or-later, the original AgriCraft code is MIT.
+
+This is an unofficial fan-made tool, not affiliated with or endorsed by the GTNH team.
+
+**It contains no CropsNH code.** No Java sources, no class files, no jar, no textures. What it does
+carry from the mod is game data read out of the compiled classes - recipes, pool memberships, tiers,
+soils, light levels - plus the English display names, sub-soil descriptions, pool names and a
+handful of flavour texts, taken from the mod's language file so the tool matches what you see in
+NEI. All of that belongs to the CropsNH authors.
+
+The tool itself, meaning the page and the extraction scripts, is MIT licensed. See [LICENSE](LICENSE).
+
+If anything here oversteps, open an issue and it will be changed or removed.
