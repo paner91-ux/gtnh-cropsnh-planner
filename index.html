@@ -188,7 +188,9 @@ h1, h2, h3 { font-family: var(--face-display); font-weight: 600; text-wrap: bala
 }
 .seed-tick[aria-pressed="true"] .nm { font-weight: 600; }
 .seed-tick .nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.seed .mark { flex: none; font-family: var(--face-data); font-size: 10px; color: var(--ore); }
+/* the under-block marker, wherever it appears - rail rows, legend, tips */
+.mark { font-family: var(--face-data); font-size: 10px; color: var(--ore); }
+.seed .mark { flex: none; }
 
 .seed-info {
   flex: none; width: 16px; height: 16px; padding: 0; cursor: pointer;
@@ -204,7 +206,6 @@ h1, h2, h3 { font-family: var(--face-display); font-weight: 600; text-wrap: bala
   margin: 6px 0 0; padding: 0 4px;
   font-size: 11.5px; line-height: 1.4; color: var(--ink-faint);
 }
-.raillegend .mark { font-family: var(--face-data); font-size: 10px; color: var(--ore); }
 .raillegend .legend-i {
   display: inline-flex; align-items: center; justify-content: center;
   width: 15px; height: 15px; flex: none;
@@ -367,6 +368,39 @@ h1, h2, h3 { font-family: var(--face-display); font-weight: 600; text-wrap: bala
 }
 .why-pop em { color: var(--ink); font-style: normal; font-weight: 600; }
 .why:hover .why-pop, .why:focus-within .why-pop { display: block; }
+
+/* ---------------------------------------------------------- the loop */
+.flow-steps { list-style: none; margin: 4px 0 0; padding: 0; }
+.flow-step { position: relative; display: flex; gap: 13px; align-items: flex-start; }
+.flow-step + .flow-step { margin-top: 23px; }
+/* the arrow lives in the gap above each step but the first, centred on the
+   number column so the whole thing reads as one vertical chain            */
+.flow-step + .flow-step::before {
+  content: "\2193"; position: absolute; left: 7px; top: -20px;
+  font-family: var(--face-data); font-size: 13px; line-height: 1;
+  color: var(--ink-faint);
+}
+.flow-n {
+  flex: none; width: 22px; height: 22px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-family: var(--face-data); font-size: 11px; font-variant-numeric: tabular-nums;
+  color: var(--paper); background: var(--leaf);
+}
+.flow-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.flow-body p { margin: 0; }
+.flow-head { display: flex; align-items: baseline; gap: 12px; }
+.flow-head p { flex: 1; min-width: 0; }
+.flow-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 13px; }
+.flow-pick select { min-width: 190px; font-size: 13px; padding: 5px 8px; }
+
+.goview {
+  font: inherit; cursor: pointer; padding: 0;
+  color: var(--leaf); background: none; border: 0;
+  text-decoration: underline; text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--leaf) 45%, transparent);
+}
+.goview:hover { text-decoration-color: var(--leaf); }
+.goview:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2px; }
 
 /* ---------------------------------------------------------- drawer */
 .drawer {
@@ -958,6 +992,17 @@ function renderBestPairs() {
    Everything below was read out of the mod's compiled code. The plain
    sentence is the advice; the WHY box is where it comes from.              */
 const TIPS = [
+  { h: "Common mistakes",
+    lead: "Three ways to run a setup for an hour and get nothing, none of which give you an error message.",
+    items: [
+    [`<b>Farmland is not dirt.</b> This is the single most common one. Tilling flips a block between two requirements that share nothing at all: <b>${Object.values(C).filter(c => topParts(c).join() === "farmland").length} crops want farmland</b> and refuse plain dirt, while <b>${Object.values(C).filter(c => topParts(c).includes("dirtGrass")).length} want dirt or grass</b> and stop being valid the moment you run a hoe over the block. Read the top block on the card, then go and look at what is actually under your stick.`,
+     "The two soil lists have no block in common. The farmland list holds exactly one entry, the tilled block. The dirt list holds dirt and grass plus a few modded dirt variants. Neither contains the other, so a hoe turns a valid spot into an invalid one in whichever direction you were not thinking about."],
+    ["<b>You got the top block right and forgot the one underneath.</b> That second block is needed at the moment the mutation happens, not just afterwards for growing - without it the roll is thrown away in silence. Anything marked <span class=\"mark\">&#9670;</span> in the seed list needs one.",
+     "<em>SubSoilRequirement</em> reports <em>onlyPreventsHarvest() = false</em>, so the pre-planting check rejects the result outright. It also implements the breeding-requirement interface, whose check simply delegates to the growth check."],
+    ["<b>Breaking a plant below resistance 31 can destroy the seed.</b> The seed comes back on a roll against resistance, so at 20 you lose it about one time in three. At 31 it is guaranteed. Harvest for produce instead, or push resistance up before you start pulling plants.",
+     "<em>getSeedDrop()</em> returns null unless <em>passesResistanceCheck()</em> passes, which is <em>resistance &gt; random(0…30)</em>. Only 31 beats every roll. The left-click path calls <em>doPlayerHarvest(player, true)</em>, which clears the stick either way - so a failed roll takes the plant with it."],
+  ]},
+
   { h: "How one breeding attempt works",
     lead: "A double crop stick is not a machine that runs once. It keeps rolling dice for as long as it stands there.",
     items: [
@@ -987,12 +1032,8 @@ const TIPS = [
   { h: "Where the blocks go",
     lead: "Two different blocks matter, they are not the same block, and neither is the one you probably assumed.",
     items: [
-    [`<b>Farmland is not dirt.</b> This is the single most common mistake. Tilling flips a block between two requirements that share nothing at all: <b>${Object.values(C).filter(c => topParts(c).join() === "farmland").length} crops want farmland</b> and refuse plain dirt, while <b>${Object.values(C).filter(c => topParts(c).includes("dirtGrass")).length} want dirt or grass</b> and stop being valid the moment you run a hoe over the block. Read the top block on the card, then go and look at what is actually under your stick.`,
-     "The two soil lists have no block in common. The farmland list holds exactly one entry, the tilled block. The dirt list holds dirt and grass plus a few modded dirt variants. Neither contains the other, so a hoe turns a valid spot into an invalid one in whichever direction you were not thinking about."],
     ["The <b>top block</b> is the one directly under the crop stick. The <b>under block</b> goes one deeper, two blocks below the stick and underneath the top block.",
      "<em>isValidSoilForCrop()</em> reads the block at <em>y - 1</em>. <em>SubSoilRequirement.getSubSoil()</em> starts by doing <em>y -= 2</em>."],
-    ["That block underneath is needed <b>at the moment the mutation happens</b>, not just afterwards for growing. Without it the roll is thrown away.",
-     "<em>SubSoilRequirement</em> reports <em>onlyPreventsHarvest() = false</em>, so the pre-planting check rejects the result outright. It also implements the breeding-requirement interface, whose check simply delegates to the growth check."],
     ["<b>Ore counts, not just the crafted block.</b> A gold ore block under the soil works as well as a block of gold.",
      "Sub-soils are registered with a helper that adds both the <em>block…</em> and <em>ore…</em> ore-dictionary entries, plus the GregTech material variants of each."],
     ["<b>Light rules apply to mutation too.</b> A crop that wants darkness will never appear under an open sky, however perfect the rest of the setup is. Roof it over.",
@@ -1080,8 +1121,59 @@ const TIPS = [
   ]},
 ];
 
+/* The whole game loop as one chain. Steps that claim something about the mod
+   carry the same why box as a tip; the navigational ones do not.           */
+const FLOW = [
+  { t: "Pick any one crop",
+    d: "It genuinely does not matter which. Barley, Wheat, whatever you already hold. This first plant is a tool, not a goal." },
+
+  { t: "Take that one plant to 31/31/31",
+    d: "Growth, Gain and Resistance all stop at 31, and nothing else you do matters until one plant is there. Keep fertiliser in every stick the whole way - that is what stops the numbers sliding backwards. You only ever have to do this once.",
+    w: "<em>Constants.MAX_SEED_STAT</em> is 31 and <em>MIN_SEED_STAT</em> is 1; <em>SeedStats</em> clamps all three values into that range. Each stat then rolls a change between the <em>Breeding Range Low</em> and <em>High</em> configs, -2 to +4 by default, and a negative roll is clamped away only while every counted parent still holds fertiliser." },
+
+  { t: "Clone it with a double crop stick",
+    d: "Stand a double stick next to the finished plant and wait. Half of every successful attempt simply copies a neighbour, and a fertilised copy of a 31/31/31 parent cannot come out worse than its parent.",
+    w: "New stats start from the average of the counted parents - here a single 31/31/31 plant, so the average is 31. Upward rolls hit the same clamp at 31 and downward rolls are removed by the fertiliser check, which leaves 31/31/31 as the only possible result." },
+
+  { t: "Left-click both plants to take the seeds",
+    d: "At resistance 31 the seed is guaranteed, which is the real reason step 2 comes first. You now hold two identical maxed seeds.",
+    w: "<em>onLeftClick()</em> calls <em>doPlayerHarvest(player, true)</em>, which drops whatever <em>getSeedDrop()</em> returns. That method is gated on <em>passesResistanceCheck()</em>, namely <em>resistance &gt; random(0…30)</em>, so only 31 never fails." },
+
+  { t: "Plant them one block apart, double crop stick in the gap",
+    d: "Seed, stick, seed. Build the ground <i>under the middle stick</i> for the crop you are hoping to see - the parents can stand on anything at all. That is the whole rig; it rolls on its own from here.",
+    w: "The soil and sub-soil checks run against the breeding stick's own coordinates; neighbours are read only for their crop and stats. <em>attemptBreeding()</em> then opens with a roll against the <em>Breeding Chance</em> config, default 3, and returns immediately on two results out of three." },
+
+  { t: "Check what those two can actually make",
+    d: "Two of the same crop can never trigger a recipe, but they open every mutation pool that crop belongs to - the widest spread available. Pick your starter below to see the full list with odds.",
+    pick: true },
+
+  { t: "Tick every new seed and go again",
+    d: "The more seeds you hold, the more real recipes come into reach, and recipes beat pool luck every time. Ready now lists the ones where you already hold both parents.",
+    ready: true,
+    w: "Recipes are looked up from the parents present and one is drawn before any pool draw happens. Pools are only consulted when there is no matching recipe, or when the matched recipe's own conditions fail." },
+];
+
+function renderFlow() {
+  const opts = allSorted.map(c =>
+    `<option value="${c.id}">${esc(c.name)}${owned.has(c.id) ? " ✓" : ""}</option>`).join("");
+  let html = `<section class="tipgroup">
+    <h3>The whole loop, start to finish</h3>
+    <p class="lead">Seven steps from one random plant to a working breeding base. Everything further down this page is detail on one of them.</p>
+    <ol class="flow-steps">`;
+  FLOW.forEach((s, i) => {
+    html += `<li class="flow-step"><span class="flow-n">${i + 1}</span><div class="flow-body">
+      <div class="flow-head"><p><b>${s.t}</b></p>${s.w ? `<span class="why"><button class="why-btn" type="button">why</button>
+        <span class="why-pop" role="note">${s.w}</span></span>` : ""}</div>
+      <p>${s.d}</p>`;
+    if (s.pick) html += `<div class="flow-pick"><label>Two of <select class="field" id="flowPick"><option value="">-</option>${opts}</select></label></div>`;
+    if (s.ready) html += `<p><button class="goview" type="button" data-goview="ready">Open Ready now</button></p>`;
+    html += `</div></li>`;
+  });
+  return html + `</ol></section>`;
+}
+
 function renderTips() {
-  let html = `<p class="viewnote">Everything here was read out of the pack's own code rather than collected from experience, so it should hold exactly. Hover <span class="why-btn" style="cursor:default">why</span> on any line to see where it comes from.</p><div class="tips">`;
+  let html = `<p class="viewnote">Everything here was read out of the pack's own code rather than collected from experience, so it should hold exactly. Hover <span class="why-btn" style="cursor:default">why</span> on any line to see where it comes from.</p><div class="tips">` + renderFlow();
   for (const g of TIPS) {
     html += `<section class="tipgroup"><h3>${g.h}</h3>`;
     if (g.lead) html += `<p class="lead">${g.lead}</p>`;
@@ -1323,10 +1415,17 @@ function render() {
     view === "pool" ? renderPool() :
     view === "tips" ? renderTips() : renderPath();
 
-  const sa = $("selA"), sb = $("selB"), st = $("selTarget");
+  const sa = $("selA"), sb = $("selB"), st = $("selTarget"), fp = $("flowPick");
   if (sa) sa.onchange = e => { pairA = e.target.value; render(); };
   if (sb) sb.onchange = e => { pairB = e.target.value; render(); };
   if (st) st.onchange = e => { target = e.target.value; render(); };
+  /* the loop step is about two of the SAME crop, so it fills both parents */
+  if (fp) fp.onchange = e => {
+    if (!e.target.value) return;
+    pairA = pairB = e.target.value;
+    view = "pool";
+    render();
+  };
 }
 
 function toggle(id) {
@@ -1343,6 +1442,8 @@ document.addEventListener("click", e => {
   if (pool) { showPool(pool.dataset.pool); return; }
   const crop = e.target.closest("[data-crop]");
   if (crop) { showCrop(crop.dataset.crop); return; }
+  const goview = e.target.closest("[data-goview]");
+  if (goview) { view = goview.dataset.goview; render(); return; }
   if (e.target.id === "clearPair") { pairA = pairB = ""; render(); return; }
   const tab = e.target.closest(".tab");
   if (tab) { view = tab.dataset.view; render(); return; }
