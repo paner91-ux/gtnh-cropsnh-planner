@@ -1195,7 +1195,7 @@ const FLOW = [
     w: "<em>onLeftClick()</em> calls <em>doPlayerHarvest(player, true)</em>, which drops whatever <em>getSeedDrop()</em> returns. That method is gated on <em>passesResistanceCheck()</em>, namely <em>resistance &gt; random(0…30)</em>, so only 31 never fails. A failed roll is not a retry either: the same method ends with an unconditional <em>clear()</em> whenever the remove flag is set, so the plant is gone and you get nothing." },
 
   { t: "Plant them one block apart, double crop stick in the gap",
-    d: "Seed, stick, seed. The middle stick's ground decides what can appear on it, so build that for the crop you want. The parents only need ground valid for their own crop. It runs on its own from here.",
+    d: "Seed, double stick, seed. The middle stick's ground decides what can appear on it, so build that for the crop you want. The parents only need ground valid for their own crop.",
     w: "The soil and sub-soil checks run against the breeding stick's own coordinates. Neighbours are read for their crop, their stats, how grown they are and whether their own stick still holds fertiliser, never for what they are standing on. <em>attemptBreeding()</em> then opens with a roll against the <em>Breeding Chance</em> config, default 3, and returns immediately on two results out of three." },
 
   { t: "Check what the pair can produce",
