@@ -1,11 +1,11 @@
-# CropsNH Breeding Planner
+# GTNH Crop Breeding Planner
 
 A single-page planner for crop breeding in **GregTech: New Horizons**.
 
 Tick off the seeds you own and it tells you what you can breed next, the exact odds of each
 outcome, and which two blocks have to be under the crop stick for the result to be planted at all.
 
-**Live version:** https://paner91-ux.github.io/cropsnh-planner/
+**Live version:** https://paner91-ux.github.io/gtnh-cropsnh-planner/
 
 No install, no account, nothing sent anywhere. Your ticked seeds are stored in your own browser.
 
