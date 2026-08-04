@@ -1,0 +1,1227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<title>CropsNH - Breeding Planner</title>
+
+<style>
+:root {
+  --ink:        #14170F;
+  --ink-soft:   #3B4034;
+  --ink-faint:  #6B7062;
+  --paper:      #E8E4D7;
+  --paper-2:    #DFDACB;
+  --paper-3:    #D3CDBB;
+  --leaf:       #3D7A33;
+  --leaf-bg:    #DDE6D3;
+  --ore:        #A8521C;
+  --ore-bg:     #EFDFCF;
+  --steel:      #46697A;
+  --steel-bg:   #D9E1E4;
+  --rule:       #C3BCA7;
+  --shadow:     rgba(20, 23, 15, .10);
+
+  --face-display: "Palatino Linotype", Palatino, "Iowan Old Style", Georgia, serif;
+  --face-ui: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --face-data: ui-monospace, "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace;
+
+  --rail: 320px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink:       #E4E2D6;
+    --ink-soft:  #B0AE9F;
+    --ink-faint: #7E7C6E;
+    --paper:     #14170F;
+    --paper-2:   #1C2016;
+    --paper-3:   #262B1E;
+    --leaf:      #8FC47C;
+    --leaf-bg:   #23301B;
+    --ore:       #DA9058;
+    --ore-bg:    #33220F;
+    --steel:     #8FB4C4;
+    --steel-bg:  #16242B;
+    --rule:      #333829;
+    --shadow:    rgba(0, 0, 0, .45);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ink:       #E4E2D6;
+  --ink-soft:  #B0AE9F;
+  --ink-faint: #7E7C6E;
+  --paper:     #14170F;
+  --paper-2:   #1C2016;
+  --paper-3:   #262B1E;
+  --leaf:      #8FC47C;
+  --leaf-bg:   #23301B;
+  --ore:       #DA9058;
+  --ore-bg:    #33220F;
+  --steel:     #8FB4C4;
+  --steel-bg:  #16242B;
+  --rule:      #333829;
+  --shadow:    rgba(0, 0, 0, .45);
+  color-scheme: dark;
+}
+:root[data-theme="light"] {
+  --ink:       #14170F;
+  --ink-soft:  #3B4034;
+  --ink-faint: #6B7062;
+  --paper:     #E8E4D7;
+  --paper-2:   #DFDACB;
+  --paper-3:   #D3CDBB;
+  --leaf:      #3D7A33;
+  --leaf-bg:   #DDE6D3;
+  --ore:       #A8521C;
+  --ore-bg:    #EFDFCF;
+  --steel:     #46697A;
+  --steel-bg:  #D9E1E4;
+  --rule:      #C3BCA7;
+  --shadow:    rgba(20, 23, 15, .10);
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--face-ui);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { font-family: var(--face-display); font-weight: 600; text-wrap: balance; margin: 0; }
+
+.wrap { max-width: 1440px; margin: 0 auto; padding: 0 20px 72px; }
+
+/* ---------------------------------------------------------- masthead */
+.masthead {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 20px;
+  padding: 26px 0 16px; border-bottom: 2px solid var(--ink);
+}
+.masthead h1 { font-size: 27px; letter-spacing: -.01em; }
+.masthead .sub { color: var(--ink-faint); font-size: 13px; }
+.masthead .src {
+  margin-left: auto; font-family: var(--face-data); font-size: 11px;
+  color: var(--ink-faint); letter-spacing: .02em;
+}
+
+/* ---------------------------------------------------------- layout */
+.cols { display: grid; grid-template-columns: var(--rail) minmax(0, 1fr); gap: 32px; align-items: start; }
+@media (max-width: 900px) { .cols { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
+
+/* ---------------------------------------------------------- rail */
+.rail { position: sticky; top: 12px; padding-top: 18px; }
+@media (max-width: 900px) { .rail { position: static; } }
+
+.rail-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 10px; }
+.rail-head h2 { font-size: 16px; }
+.tally {
+  margin-left: auto; font-family: var(--face-data); font-size: 12px;
+  font-variant-numeric: tabular-nums; color: var(--ink-faint);
+}
+
+.field {
+  width: 100%; padding: 7px 10px; font: inherit; font-size: 14px;
+  color: var(--ink); background: var(--paper-2);
+  border: 1px solid var(--rule); border-radius: 2px;
+}
+.field:focus-visible { outline: 2px solid var(--leaf); outline-offset: 1px; }
+
+.rail-tools { display: flex; gap: 6px; margin: 8px 0 10px; flex-wrap: wrap; }
+
+.btn {
+  font: inherit; font-size: 12px; padding: 4px 9px; cursor: pointer;
+  color: var(--ink-soft); background: var(--paper-2);
+  border: 1px solid var(--rule); border-radius: 2px;
+}
+.btn:hover { background: var(--paper-3); color: var(--ink); }
+.btn:focus-visible { outline: 2px solid var(--leaf); outline-offset: 1px; }
+
+.seedlist {
+  max-height: 62vh; overflow-y: auto; overflow-x: hidden;
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+}
+@media (max-width: 900px) { .seedlist { max-height: 340px; } }
+
+.tiergroup + .tiergroup { margin-top: 2px; }
+.tierhead {
+  position: sticky; top: 0; z-index: 1;
+  display: flex; align-items: center; gap: 8px;
+  padding: 5px 4px 3px; background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--face-data); font-size: 10.5px; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--ink-faint);
+}
+.tierhead::after { content: ""; flex: 1; }
+
+.seed {
+  display: flex; align-items: center; gap: 8px; width: 100%;
+  padding: 3px 4px; cursor: pointer; text-align: left;
+  font: inherit; font-size: 13.5px; color: var(--ink);
+  background: none; border: 0; border-bottom: 1px solid transparent;
+}
+.seed:hover { background: var(--paper-2); }
+.seed:focus-visible { outline: 2px solid var(--leaf); outline-offset: -2px; }
+.seed .box {
+  flex: none; width: 13px; height: 13px; border: 1px solid var(--ink-faint);
+  border-radius: 1px; position: relative;
+}
+.seed[aria-pressed="true"] .box { background: var(--leaf); border-color: var(--leaf); }
+.seed[aria-pressed="true"] .box::after {
+  content: ""; position: absolute; inset: 2px 2px 3px 2px;
+  border-left: 2px solid var(--paper); border-bottom: 2px solid var(--paper);
+  transform: rotate(-45deg);
+}
+.seed[aria-pressed="true"] .nm { font-weight: 600; }
+.seed .nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.seed .mark { flex: none; font-family: var(--face-data); font-size: 10px; color: var(--ore); }
+
+/* ---------------------------------------------------------- views */
+.views { padding-top: 18px; min-width: 0; }
+
+.tabs { display: flex; flex-wrap: wrap; gap: 0; border-bottom: 1px solid var(--rule); margin-bottom: 4px; }
+.tab {
+  font: inherit; font-size: 13.5px; padding: 7px 13px 6px; cursor: pointer;
+  color: var(--ink-faint); background: none; border: 0;
+  border-bottom: 3px solid transparent; margin-bottom: -1px;
+}
+.tab:hover { color: var(--ink); }
+.tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--leaf); font-weight: 600; }
+.tab:focus-visible { outline: 2px solid var(--leaf); outline-offset: -2px; }
+.tab .n {
+  font-family: var(--face-data); font-size: 11px; font-variant-numeric: tabular-nums;
+  color: var(--ink-faint); margin-left: 5px;
+}
+
+.viewnote { color: var(--ink-faint); font-size: 13px; margin: 12px 0 16px; max-width: 68ch; }
+.viewnote code { font-family: var(--face-data); font-size: 12px; }
+
+.empty {
+  padding: 40px 20px; text-align: center; color: var(--ink-faint);
+  border: 1px dashed var(--rule); border-radius: 3px; font-size: 14px;
+}
+
+/* ---------------------------------------------------------- cards */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+
+.card {
+  background: var(--paper-2); border: 1px solid var(--rule); border-radius: 3px;
+  padding: 11px 13px 12px; display: flex; flex-direction: column; gap: 8px;
+}
+
+.card-top { display: flex; align-items: baseline; gap: 8px; }
+.card-out {
+  font-family: var(--face-display); font-size: 17px; font-weight: 600;
+  background: none; border: 0; padding: 0; cursor: pointer; color: var(--ink);
+  text-align: left; text-decoration: underline; text-decoration-color: var(--rule);
+  text-underline-offset: 3px;
+}
+.card-out:hover { text-decoration-color: var(--leaf); }
+.card-out:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2px; }
+
+.tier {
+  flex: none; font-family: var(--face-data); font-size: 10.5px;
+  font-variant-numeric: tabular-nums; color: var(--ink-faint);
+  border: 1px solid var(--rule); border-radius: 2px; padding: 0 4px;
+}
+
+.parents { font-size: 13px; color: var(--ink-soft); }
+.parents b { font-weight: 600; color: var(--ink); }
+.parents .plus { color: var(--ink-faint); margin: 0 3px; }
+.parents .miss { color: var(--ore); font-weight: 600; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.chip {
+  font-size: 11.5px; line-height: 1.35; padding: 2px 7px; border-radius: 2px;
+  border: 1px solid transparent; display: inline-flex; gap: 5px; align-items: baseline;
+}
+.chip .k {
+  font-family: var(--face-data); font-size: 9.5px; letter-spacing: .07em;
+  text-transform: uppercase; opacity: .75;
+}
+.chip.soil  { background: var(--leaf-bg);  color: var(--leaf);  border-color: color-mix(in srgb, var(--leaf) 30%, transparent); }
+.chip.sub   { background: var(--ore-bg);   color: var(--ore);   border-color: color-mix(in srgb, var(--ore) 32%, transparent); }
+.chip.light { background: var(--ore-bg);   color: var(--ore);   border-color: color-mix(in srgb, var(--ore) 32%, transparent); }
+.chip.mach  { background: var(--steel-bg); color: var(--steel); border-color: color-mix(in srgb, var(--steel) 34%, transparent); }
+.chip.none  { background: none; color: var(--ink-faint); border-color: var(--rule); }
+
+/* ---------------------------------------------------------- roulette */
+.pairpick { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; margin-bottom: 18px; }
+.pairpick label { display: flex; flex-direction: column; gap: 3px; font-size: 12px; color: var(--ink-faint); }
+.pairpick select { min-width: 180px; }
+
+.odds { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.odds th {
+  text-align: left; font-family: var(--face-data); font-size: 10px; font-weight: 500;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--ink-faint);
+  padding: 0 8px 5px 0; border-bottom: 1px solid var(--rule);
+}
+.odds th.num, .odds td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.odds td { padding: 5px 8px 5px 0; border-bottom: 1px solid var(--rule); vertical-align: baseline; }
+.odds tr.dead td { color: var(--ink-faint); }
+.odds td.num { font-family: var(--face-data); font-size: 12.5px; }
+.odds .bar { display: block; height: 3px; background: var(--leaf); border-radius: 2px; margin-top: 3px; }
+.odds tr.dead .bar { background: var(--ink-faint); }
+.odds .via { font-size: 11.5px; color: var(--ink-faint); }
+.tablescroll { overflow-x: auto; }
+
+.branch {
+  font-family: var(--face-data); font-size: 10.5px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--ink-faint);
+  padding: 14px 0 4px; border-bottom: 1px solid var(--ink); margin-bottom: 2px;
+}
+
+/* ---------------------------------------------------------- route */
+.steps { display: flex; flex-direction: column; gap: 0; }
+.step {
+  display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 12px;
+  padding: 12px 0; border-bottom: 1px solid var(--rule);
+}
+.step .idx {
+  font-family: var(--face-data); font-size: 12px; font-variant-numeric: tabular-nums;
+  color: var(--ink-faint); padding-top: 3px;
+}
+.step .body { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+.step .made { font-family: var(--face-display); font-size: 16px; font-weight: 600; }
+
+/* ---------------------------------------------------------- tips */
+.tips { display: flex; flex-direction: column; gap: 26px; max-width: 780px; }
+.tipgroup > h3 {
+  font-family: var(--face-display); font-size: 19px;
+  padding-bottom: 5px; border-bottom: 1px solid var(--ink); margin-bottom: 2px;
+}
+.tipgroup > p.lead { color: var(--ink-faint); font-size: 13px; margin: 7px 0 2px; }
+.tiplist { list-style: none; margin: 0; padding: 0; }
+
+.tip { border-bottom: 1px solid var(--rule); }
+.tip-line {
+  display: flex; align-items: baseline; gap: 12px;
+  padding: 11px 0 10px;
+}
+.tip-line p { margin: 0; flex: 1; min-width: 0; }
+.tip-line b { font-weight: 600; }
+
+.why { position: relative; flex: none; }
+.why-btn {
+  font-family: var(--face-data); font-size: 9.5px; letter-spacing: .09em;
+  text-transform: uppercase; cursor: help;
+  color: var(--ore); background: var(--ore-bg);
+  border: 1px solid color-mix(in srgb, var(--ore) 32%, transparent);
+  border-radius: 2px; padding: 2px 6px;
+}
+.why-btn:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2px; }
+
+.why-pop {
+  display: none; position: absolute; z-index: 6;
+  top: calc(100% + 6px); right: 0;
+  width: max-content; max-width: min(440px, 72vw);
+  padding: 9px 11px; text-align: left;
+  font-family: var(--face-data); font-size: 11.5px; line-height: 1.55;
+  color: var(--ink-soft); background: var(--paper-3);
+  border: 1px solid var(--ink-faint); border-radius: 2px;
+  box-shadow: 0 6px 20px var(--shadow);
+}
+.why-pop em { color: var(--ink); font-style: normal; font-weight: 600; }
+.why:hover .why-pop, .why:focus-within .why-pop { display: block; }
+
+/* ---------------------------------------------------------- drawer */
+.drawer {
+  position: fixed; inset: 0 0 0 auto; width: min(460px, 100%); z-index: 20;
+  background: var(--paper); border-left: 1px solid var(--ink);
+  box-shadow: -14px 0 40px var(--shadow);
+  padding: 20px 22px 40px; overflow-y: auto;
+  transform: translateX(100%); transition: transform .18s ease;
+}
+.drawer[data-open="true"] { transform: translateX(0); }
+@media (prefers-reduced-motion: reduce) { .drawer { transition: none; } }
+
+.drawer-top { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 4px; }
+.drawer-top h2 { font-size: 22px; }
+.drawer .close { margin-left: auto; }
+.drawer .flav { font-size: 13px; color: var(--ink-faint); font-style: italic; margin-bottom: 14px; }
+
+.dsec { margin-top: 18px; }
+.dsec > h3 {
+  font-family: var(--face-data); font-size: 10px; font-weight: 500; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--ink-faint);
+  padding-bottom: 4px; border-bottom: 1px solid var(--rule); margin-bottom: 8px;
+}
+.dl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 3px 12px; font-size: 13.5px; }
+.dl dt { color: var(--ink-faint); }
+.dl dd { margin: 0; }
+
+.linkrow { display: flex; flex-direction: column; gap: 5px; font-size: 13.5px; }
+.inline-crop {
+  font: inherit; background: none; border: 0; padding: 0; cursor: pointer; color: var(--ink);
+  text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px;
+}
+.inline-crop:hover { text-decoration-color: var(--leaf); }
+.inline-crop:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2px; }
+
+.scrim {
+  position: fixed; inset: 0; z-index: 19; background: rgba(20, 23, 15, .34);
+  opacity: 0; pointer-events: none; transition: opacity .18s ease;
+}
+.scrim[data-open="true"] { opacity: 1; pointer-events: auto; }
+
+.own-toggle { margin-top: 14px; }
+
+/* ---------------------------------------------------------- backup */
+.backup { margin-top: 14px; }
+.backup > summary {
+  cursor: pointer; list-style: none;
+  font-family: var(--face-data); font-size: 10px; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--ink-faint);
+  padding: 5px 0; display: flex; align-items: center; gap: 6px;
+}
+.backup > summary::-webkit-details-marker { display: none; }
+.backup > summary::before { content: "▸"; font-size: 9px; }
+.backup[open] > summary::before { content: "▾"; }
+.backup > summary:hover { color: var(--ink); }
+.backup > summary:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2px; }
+
+.backup-body { display: flex; flex-direction: column; gap: 7px; padding: 4px 0 2px; }
+.backup-body p { margin: 0; font-size: 12px; color: var(--ink-faint); }
+#code {
+  width: 100%; min-height: 86px; resize: vertical;
+  font-family: var(--face-data); font-size: 11px; line-height: 1.45;
+  color: var(--ink); background: var(--paper-2);
+  border: 1px solid var(--rule); border-radius: 2px; padding: 6px 8px;
+}
+#code:focus-visible { outline: 2px solid var(--leaf); outline-offset: 1px; }
+.backup-btns { display: flex; flex-wrap: wrap; gap: 6px; }
+.status { font-size: 12px; min-height: 1.4em; }
+.status[data-kind="ok"] { color: var(--leaf); }
+.status[data-kind="warn"] { color: var(--ore); }
+
+.storagewarn {
+  margin: 10px 0 0; padding: 8px 10px; font-size: 12px; line-height: 1.45;
+  color: var(--ore); background: var(--ore-bg);
+  border: 1px solid color-mix(in srgb, var(--ore) 32%, transparent); border-radius: 2px;
+}
+
+footer.note {
+  margin-top: 48px; padding-top: 14px; border-top: 1px solid var(--rule);
+  font-size: 12px; color: var(--ink-faint); max-width: 76ch;
+}
+footer.note code { font-family: var(--face-data); }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <h1>CropsNH - Breeding Planner</h1>
+    <span class="sub">GregTech: New Horizons</span>
+    <span class="src" id="src"></span>
+  </header>
+
+  <div class="cols">
+    <aside class="rail">
+      <div class="rail-head">
+        <h2>Your seeds</h2>
+        <span class="tally" id="tally">0</span>
+      </div>
+      <input class="field" id="search" type="search" placeholder="Search crops…" autocomplete="off">
+      <div class="rail-tools">
+        <button class="btn" id="clearAll" type="button">Clear</button>
+        <button class="btn" id="undo" type="button" hidden>Undo</button>
+      </div>
+      <div class="seedlist" id="seedlist"></div>
+
+      <details class="backup">
+        <summary>Backup</summary>
+        <div class="backup-body">
+          <p>Your ticks live in this browser. The hosted page and a local copy keep separate stores - use this box to move the list between them.</p>
+          <textarea id="code" spellcheck="false" aria-label="Seed list code"></textarea>
+          <div class="backup-btns">
+            <button class="btn" id="btnCopy" type="button">Copy</button>
+            <button class="btn" id="btnLoad" type="button">Load from box</button>
+            <button class="btn" id="btnFile" type="button" hidden>Download file</button>
+            <button class="btn" id="btnOpen" type="button">Open file</button>
+          </div>
+          <p id="dlnote" hidden>This page runs in a sandboxed frame, so it cannot write files. Use <b>Copy</b> and paste the text somewhere safe - the offline copy of this page can download instead.</p>
+          <div class="status" id="status" role="status"></div>
+          <input type="file" id="filein" accept=".json,application/json,text/plain" hidden>
+        </div>
+      </details>
+
+      <div class="storagewarn" id="storagewarn" hidden></div>
+    </aside>
+
+    <main class="views">
+      <div class="tabs" role="tablist">
+        <button class="tab" type="button" role="tab" data-view="ready">Ready now<span class="n" id="n-ready"></span></button>
+        <button class="tab" type="button" role="tab" data-view="near">One parent short<span class="n" id="n-near"></span></button>
+        <button class="tab" type="button" role="tab" data-view="pool">Pool roulette</button>
+        <button class="tab" type="button" role="tab" data-view="path">Route to a goal</button>
+        <button class="tab" type="button" role="tab" data-view="tips">Tips &amp; tricks</button>
+      </div>
+      <div id="view"></div>
+    </main>
+  </div>
+
+  <footer class="note">
+    Extracted from the bytecode of <code>cropsnh-2.0.101.jar</code> - recipes, pools, soils, sub-soils and light
+    requirements come straight out of <code>MutationLoader</code>, <code>CropLoader</code> and
+    <code>SubSoilRequirementLoader</code>. No other mod in this instance registers crops with CropsNH, so the list is
+    complete. Ticks are stored in this browser and survive page updates; move them elsewhere with <b>Backup</b>.
+  </footer>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true"></aside>
+
+<script>
+const DATA = {"crops":{"Allium":{"id":"Allium","name":"Allium","tier":2,"soil":["dirtGrass"],"subsoil":[],"maxLight":null,"minLight":null,"growth":600,"pools":["purple","root","flower"],"flavour":null},"AluminiumOreBerry":{"id":"AluminiumOreBerry","name":"Aluminium Oreberry","tier":5,"soil":["stone"],"subsoil":["aluminium"],"maxLight":10,"minLight":null,"growth":6000,"pools":["white","oreBerry","danger","metal"],"flavour":null},"AndesiteLily":{"id":"AndesiteLily","name":"Andesite Lily","tier":1,"soil":["stone"],"subsoil":["modernAndesite"],"maxLight":null,"minLight":null,"growth":600,"pools":["stone","gray","stone"],"flavour":null},"ArditeOreBerry":{"id":"ArditeOreBerry","name":"Ardite Oreberry","tier":5,"soil":["stone"],"subsoil":["ardite"],"maxLight":10,"minLight":null,"growth":6000,"pools":["orange","oreBerry","danger","metal"],"flavour":null},"Argentia":{"id":"Argentia","name":"Argentia","tier":7,"soil":["stone"],"subsoil":["silver"],"maxLight":null,"minLight":null,"growth":1400,"pools":["white","metal","shiny","tendrilly","silver"],"flavour":null},"Auronia":{"id":"Auronia","name":"Auronia","tier":8,"soil":["stone"],"subsoil":["gold"],"maxLight":null,"minLight":null,"growth":3700,"pools":["yellow","dense","metal","tendrilly","gold"],"flavour":null},"AzureBluet":{"id":"AzureBluet","name":"Azure Bluet","tier":2,"soil":["dirtGrass"],"subsoil":[],"maxLight":null,"minLight":null,"growth":600,"pools":["white","flower"],"flavour":null},"Bamboo":{"id":"Bamboo","name":"Bamboo Shoot","tier":2,"soil":["dirtGrass"],"subsoil":[],"maxLight":null,"minLight":null,"growth":250,"pools":["green","stem","danger","leafy"],"flavour":null},"Barley":{"id":"Barley","name":"Barley","tier":2,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":675,"pools":["green","wheat","food"],"flavour":null},"BasaltLily":{"id":"BasaltLily","name":"Basalt Lily","tier":1,"soil":["stone"],"subsoil":["basalt"],"maxLight":null,"minLight":null,"growth":600,"pools":["black","dark","stone"],"flavour":null},"Bauxia":{"id":"Bauxia","name":"Bauxia","tier":6,"soil":["stone"],"subsoil":["aluminiumBauxite"],"maxLight":null,"minLight":null,"growth":1200,"pools":[],"flavour":null},"Belladonna":{"id":"Belladonna","name":"Belladonna","tier":4,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":1100,"pools":["purple","flower","poison","ingredient"],"flavour":null},"BlackGraniteLily":{"id":"BlackGraniteLily","name":"Black Granite Lily","tier":1,"soil":["stone"],"subsoil":["blackGranite"],"maxLight":null,"minLight":null,"growth":600,"pools":["black","dark","stone"],"flavour":null},"Blackberry":{"id":"Blackberry","name":"Blackberry","tier":2,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":200,"pools":["black","berry","bush","food"],"flavour":null},"Blazereed":{"id":"Blazereed","name":"Blazereed","tier":6,"soil":["netherrack"],"subsoil":[],"maxLight":null,"minLight":null,"growth":3600,"pools":["orange","nether","reed","fire","evil","blaze","ingredient","sulfur"],"flavour":null},"Blightberry":{"id":"Blightberry","name":"Blightberry","tier":4,"soil":["netherrack"],"subsoil":[],"maxLight":null,"minLight":null,"growth":300,"pools":["green","nether","berry","bush","danger","poison","addictive","food","healing","ingredient"],"flavour":null},"BlueGlowshroom":{"id":"BlueGlowshroom","name":"Blue Glowshroom","tier":3,"soil":["netherMushroom"],"subsoil":[],"maxLight":null,"minLight":null,"growth":600,"pools":["blue","nether","mushroom","light","food","ingredient"],"flavour":null},"BlueOrchid":{"id":"BlueOrchid","name":"Blue Orchid","tier":2,"soil":["dirtGrass"],"subsoil":[],"maxLight":null,"minLight":null,"growth":600,"pools":["blue","flower"],"flavour":null},"Blueberry":{"id":"Blueberry","name":"Blueberry","tier":2,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":200,"pools":["blue","berry","bush","food"],"flavour":null},"BoPBerry":{"id":"BoPBerry","name":"Berry","tier":2,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":200,"pools":["red","berry","bush","food"],"flavour":null},"BobsYerUncleRanks":{"id":"BobsYerUncleRanks","name":"Bobs-Yer-Uncle-Ranks","tier":6,"soil":["stone"],"subsoil":["emerald"],"maxLight":null,"minLight":null,"growth":3000,"pools":["green","berry","crystal","shiny","tendrilly"],"flavour":null},"BonsaiAcacia":{"id":"BonsaiAcacia","name":"Acacia Bonsai","tier":1,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":null,"pools":["orange","tree","leafy","wood"],"flavour":null},"BonsaiBirch":{"id":"BonsaiBirch","name":"Birch Bonsai","tier":1,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":null,"pools":["white","tree","leafy","wood"],"flavour":null},"BonsaiDarkOak":{"id":"BonsaiDarkOak","name":"Dark Oak Bonsai","tier":1,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":null,"pools":["brown","tree","leafy","dark","wood","food"],"flavour":null},"BonsaiJungle":{"id":"BonsaiJungle","name":"Jungle Bonsai","tier":1,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":null,"pools":["brown","tree","leafy","wood"],"flavour":null},"BonsaiOak":{"id":"BonsaiOak","name":"Oak Bonsai","tier":1,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":null,"pools":["brown","tree","leafy","wood","food"],"flavour":null},"BonsaiRubber":{"id":"BonsaiRubber","name":"Rubber Bonsai","tier":1,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":null,"pools":["brown","tree","wood","sticky"],"flavour":null},"BonsaiSlimy":{"id":"BonsaiSlimy","name":"Slimy Bonsai","tier":1,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":null,"pools":[],"flavour":null},"BonsaiSpruce":{"id":"BonsaiSpruce","name":"Spruce Bonsai","tier":1,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":null,"pools":["brown","tree","wood"],"flavour":null},"BrownMushroom":{"id":"BrownMushroom","name":"Brown Mushroom","tier":1,"soil":["mushroom"],"subsoil":[],"maxLight":9,"minLight":null,"growth":400,"pools":["brown","mushroom","food"],"flavour":null},"Cactus":{"id":"Cactus","name":"Cactus","tier":3,"soil":["sand"],"subsoil":[],"maxLight":null,"minLight":null,"growth":450,"pools":["green","cactus","danger"],"flavour":null},"Canola":{"id":"Canola","name":"Canola","tier":4,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":450,"pools":["yellow","wheat","food","oil"],"flavour":null},"Carrot":{"id":"Carrot","name":"Carrot","tier":2,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":800,"pools":["orange","root","food","ingredient"],"flavour":null},"Cassitine":{"id":"Cassitine","name":"Cassitine","tier":6,"soil":["stone"],"subsoil":["tin"],"maxLight":null,"minLight":null,"growth":2800,"pools":["gray","bush","leafy","metal","shiny","tin"],"flavour":null},"Chilly":{"id":"Chilly","name":"Chilly","tier":4,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":800,"pools":["red","fire","food"],"flavour":null},"Cinderpearl":{"id":"Cinderpearl","name":"Cinderpearl","tier":5,"soil":["dirtGrass"],"subsoil":["blaze"],"maxLight":null,"minLight":null,"growth":4000,"pools":["orange","magic","blaze"],"flavour":null},"ClayLily":{"id":"ClayLily","name":"Clay Lily","tier":1,"soil":["stone"],"subsoil":["clay"],"maxLight":null,"minLight":null,"growth":850,"pools":["gray","water","stone"],"flavour":null},"CobaltOreBerry":{"id":"CobaltOreBerry","name":"Cobalt Oreberry","tier":5,"soil":["stone"],"subsoil":["cobalt"],"maxLight":10,"minLight":null,"growth":6000,"pools":["blue","nether","oreBerry","danger","metal"],"flavour":null},"Cocoa":{"id":"Cocoa","name":"Cocoa","tier":3,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":1700,"pools":["brown","bean","tree","leafy","addictive","food"],"flavour":null},"Coffee":{"id":"Coffee","name":"Coffee","tier":7,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":2800,"pools":["brown","bean","leafy","addictive","food"],"flavour":null},"CopperOreBerry":{"id":"CopperOreBerry","name":"Copper Oreberry","tier":5,"soil":["stone"],"subsoil":["copper"],"maxLight":10,"minLight":null,"growth":6000,"pools":["orange","oreBerry","danger","metal","shiny","copper"],"flavour":null},"Coppon":{"id":"Coppon","name":"Coppon","tier":6,"soil":["stone"],"subsoil":["copper"],"maxLight":null,"minLight":null,"growth":1200,"pools":["orange","bush","metal","shiny","cotton","copper"],"flavour":null},"Corium":{"id":"Corium","name":"Corium","tier":6,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":800,"pools":["brown","mushroom","cow"],"flavour":null},"Corpseplant":{"id":"Corpseplant","name":"Corpseplant","tier":5,"soil":["graveyard"],"subsoil":[],"maxLight":null,"minLight":null,"growth":800,"pools":["brown","bush","evil","poison","undead","addictive","food"],"flavour":null},"Cotton":{"id":"Cotton","name":"Cotton","tier":3,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":900,"pools":["white","tendrilly","cotton","silk"],"flavour":null},"Creeperweed":{"id":"Creeperweed","name":"Creeperweed","tier":7,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":1000,"pools":["green","evil","fire","tendrilly","sulfur","saltpeter","coal","ingredient"],"flavour":null},"Cucumber":{"id":"Cucumber","name":"Cucumber","tier":4,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":800,"pools":["green","tendrilly","food"],"flavour":null},"Dandelion":{"id":"Dandelion","name":"Dandelion","tier":2,"soil":["dirtGrass"],"subsoil":[],"maxLight":null,"minLight":null,"growth":600,"pools":["yellow","flower"],"flavour":null},"Dayflower":{"id":"Dayflower","name":"Dayflower","tier":2,"soil":["dirtGrass"],"subsoil":[],"maxLight":null,"minLight":null,"growth":600,"pools":["blue","flower","addictive"],"flavour":null},"DeepslateLily":{"id":"DeepslateLily","name":"Deepslate Lily","tier":1,"soil":["stone"],"subsoil":["deepslate"],"maxLight":null,"minLight":null,"growth":600,"pools":["black","dark","dense","stone"],"flavour":null},"Diareed":{"id":"Diareed","name":"Diareed","tier":12,"soil":["stone"],"subsoil":["diamond"],"maxLight":null,"minLight":null,"growth":7200,"pools":["blue","reed","crystal","fire","shiny","coal"],"flavour":null},"DioriteLily":{"id":"DioriteLily","name":"Diorite Lily","tier":1,"soil":["stone"],"subsoil":["modernDiorite"],"maxLight":null,"minLight":null,"growth":600,"pools":["white","stone"],"flavour":null},"Duskberry":{"id":"Duskberry","name":"Duskberry","tier":4,"soil":["netherrack"],"subsoil":[],"maxLight":null,"minLight":null,"growth":300,"pools":["gray","nether","berry","bush","danger","poison","addictive","food","ingredient"],"flavour":null},"EggPlant":{"id":"EggPlant","name":"Egg Plant","tier":6,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":1200,"pools":["white","mushroom","addictive","chicken","food"],"flavour":"Not to be confused with eggplants."},"EmberMoss":{"id":"EmberMoss","name":"Ember Moss","tier":7,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":1100,"pools":["red","climbable","danger","fire","tendrilly","ingredient"],"flavour":null},"EndStoneLily":{"id":"EndStoneLily","name":"End Stone Lily","tier":1,"soil":["stone"],"subsoil":["endStone"],"maxLight":null,"minLight":null,"growth":850,"pools":["yellow","alien","stone"],"flavour":null},"Enderbloom":{"id":"Enderbloom","name":"Enderbloom","tier":10,"soil":["farmland"],"subsoil":["endStone"],"maxLight":null,"minLight":null,"growth":3000,"pools":["black","flower","void","alien","magic"],"flavour":null},"EssenceOreBerry":{"id":"EssenceOreBerry","name":"Essence Berry","tier":5,"soil":["stone"],"subsoil":["skull"],"maxLight":null,"minLight":null,"growth":6000,"pools":["green","oreBerry","danger","undead","food"],"flavour":null},"EvilOre":{"id":"EvilOre","name":"Evil Ore","tier":8,"soil":["netherrack"],"subsoil":[],"maxLight":null,"minLight":null,"growth":1600,"pools":["white","nether","crystal","evil","fire"],"flavour":null},"Eyebulb":{"id":"Eyebulb","name":"Eyebulb","tier":1,"soil":["netherrack"],"subsoil":[],"maxLight":null,"minLight":null,"growth":450,"pools":["red","nether","evil","tendrilly"],"flavour":null},"Ferrofern":{"id":"Ferrofern","name":"Ferrofern","tier":6,"soil":["stone"],"subsoil":["iron"],"maxLight":null,"minLight":null,"growth":2800,"pools":["gray","metal","tendrilly","iron"],"flavour":null},"Fertilia":{"id":"Fertilia","name":"Fertilia","tier":3,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":1800,"pools":["brown","mushroom","healing"],"flavour":null},"Flax":{"id":"Flax","name":"Flax","tier":2,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":1200,"pools":["blue","wheat","addictive","silk"],"flavour":null},"FloweringVine":{"id":"FloweringVine","name":"Flowering Vine","tier":3,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":675,"pools":["green","flower","tendrilly","climbable"],"flavour":null},"GaiaWart":{"id":"GaiaWart","name":"Gaia Wart","tier":5,"soil":["soulsand"],"subsoil":["snow"],"maxLight":null,"minLight":null,"growth":1000,"pools":[],"flavour":null},"Galvania":{"id":"Galvania","name":"Galvania","tier":6,"soil":["stone"],"subsoil":["zinc"],"maxLight":null,"minLight":null,"growth":1200,"pools":["white","bush","metal"],"flavour":null},"Garlic":{"id":"Garlic","name":"Garlic","tier":3,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":450,"pools":["white","root","food","ingredient"],"flavour":null},"Garnydinia":{"id":"Garnydinia","name":"Garnydinia","tier":7,"soil":["stone"],"subsoil":["garnetGem"],"maxLight":null,"minLight":null,"growth":850,"pools":[],"flavour":null},"GlintWeed":{"id":"GlintWeed","name":"Glint Weed","tier":4,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":1100,"pools":["orange","flower","magic"],"flavour":null},"Glowflower":{"id":"Glowflower","name":"Glowflower","tier":3,"soil":["dirtGrass"],"subsoil":[],"maxLight":null,"minLight":null,"growth":2000,"pools":["blue","nether","light","shiny","ingredient"],"flavour":null},"Glowheat":{"id":"Glowheat","name":"Glowheat","tier":4,"soil":["netherrack"],"subsoil":["glowstone"],"maxLight":null,"minLight":null,"growth":1500,"pools":["yellow","nether","wheat","light","shiny","crystal","ingredient"],"flavour":null},"GlowingCoral":{"id":"GlowingCoral","name":"Glowing Coral","tier":5,"soil":["farmland"],"subsoil":["glowstone"],"maxLight":null,"minLight":null,"growth":450,"pools":["purple","water","light","shiny","ingredient"],"flavour":null},"Glowshroom":{"id":"Glowshroom","name":"Glowshroom","tier":3,"soil":["netherMushroom"],"subsoil":[],"maxLight":null,"minLight":null,"growth":600,"pools":["green","nether","mushroom","light","ingredient"],"flavour":null},"GodOfThunder":{"id":"GodOfThunder","name":"God of Thunder","tier":9,"soil":["stone"],"subsoil":["thorium"],"maxLight":null,"minLight":null,"growth":3600,"pools":[],"flavour":null},"GoldOreBerry":{"id":"GoldOreBerry","name":"Gold Oreberry","tier":5,"soil":["stone"],"subsoil":["gold"],"maxLight":10,"minLight":null,"growth":6000,"pools":["yellow","oreBerry","dense","danger","metal","gold"],"flavour":null},"Goldfish":{"id":"Goldfish","name":"Goldfish","tier":4,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":450,"pools":["orange","nether","stem","danger","water","addictive","food","fish"],"flavour":"Screams."},"GraniteLily":{"id":"GraniteLily","name":"Granite Lily","tier":1,"soil":["stone"],"subsoil":["modernGranite"],"maxLight":null,"minLight":null,"growth":600,"pools":["red","stone"],"flavour":null},"Grape":{"id":"Grape","name":"Grape","tier":4,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":800,"pools":["purple","climbable","leafy","tendrilly","food"],"flavour":null},"GreenGlowshroom":{"id":"GreenGlowshroom","name":"Green Glowshroom","tier":3,"soil":["netherMushroom"],"subsoil":[],"maxLight":null,"minLight":null,"growth":600,"pools":["green","nether","mushroom","light","food","ingredient"],"flavour":null},"Hemp":{"id":"Hemp","name":"Hemp","tier":5,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":800,"pools":["green","stem","addictive","silk"],"flavour":null},"Hops":{"id":"Hops","name":"Hops","tier":5,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":2400,"pools":["green","wheat","food"],"flavour":null},"Huckleberry":{"id":"Huckleberry","name":"Huckleberry","tier":2,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":200,"pools":["purple","bush","leafy","berry","food"],"flavour":null},"Indigo":{"id":"Indigo","name":"Indigo","tier":2,"soil":["dirtGrass"],"subsoil":[],"maxLight":null,"minLight":null,"growth":1200,"pools":["blue","flower"],"flavour":null},"InkBloom":{"id":"InkBloom","name":"Inkbloom","tier":4,"soil":["dirtGrass"],"subsoil":[],"maxLight":null,"minLight":null,"growth":600,"pools":["black","flower","water"],"flavour":null},"Iridine":{"id":"Iridine","name":"Iridine","tier":12,"soil":["stone"],"subsoil":["iridium"],"maxLight":null,"minLight":null,"growth":7200,"pools":[],"flavour":null},"IronOreBerry":{"id":"IronOreBerry","name":"Iron Oreberry","tier":5,"soil":["stone"],"subsoil":["iron"],"maxLight":10,"minLight":null,"growth":6000,"pools":["gray","oreBerry","danger","metal","iron"],"flavour":null},"Ivy":{"id":"Ivy","name":"Ivy","tier":2,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":450,"pools":["green","flower","tendrilly","danger","poison","climbable"],"flavour":null},"KnightmetalBerry":{"id":"KnightmetalBerry","name":"Knightmetal Berry","tier":8,"soil":["stone"],"subsoil":["knightmetal"],"maxLight":10,"minLight":null,"growth":5500,"pools":["gray","twilightForest","oreBerry","danger","metal"],"flavour":null},"Lazulia":{"id":"Lazulia","name":"Lazulia","tier":7,"soil":["stone"],"subsoil":["lapis"],"maxLight":null,"minLight":null,"growth":2800,"pools":["blue","crystal","shiny","healing"],"flavour":null},"Lemon":{"id":"Lemon","name":"Lemon","tier":4,"soil":["dirtGrass"],"subsoil":[],"maxLight":null,"minLight":null,"growth":800,"pools":["yellow","tree","leafy","food"],"flavour":null},"Liveroot":{"id":"Liveroot","name":"Liveroot","tier":8,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":4800,"pools":["brown","twilightForest","root","tendrilly","wood"],"flavour":null},"MagicalNightshade":{"id":"MagicalNightshade","name":"Magical Nightshade","tier":13,"soil":["farmland"],"subsoil":["shadowmetal"],"maxLight":null,"minLight":null,"growth":23436,"pools":[],"flavour":null},"Malaxia":{"id":"Malaxia","name":"Malaxia","tier":6,"soil":["stone"],"subsoil":["copper"],"maxLight":null,"minLight":null,"growth":2800,"pools":["orange","bush","leafy","metal","copper"],"flavour":null},"Maloberry":{"id":"Maloberry","name":"Maloberry","tier":2,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":200,"pools":["yellow","berry","bush","food"],"flavour":null},"ManaBean":{"id":"ManaBean","name":"Mana Bean","tier":5,"soil":["thaumLogs"],"subsoil":["mixedCrystalCluster"],"maxLight":null,"minLight":null,"growth":2000,"pools":["brown","bean","magic"],"flavour":null},"Mandrake":{"id":"Mandrake","name":"Mandrake","tier":4,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":1100,"pools":["brown","flower","danger","evil","magic","ingredient"],"flavour":null},"MarbleLily":{"id":"MarbleLily","name":"Marble Lily","tier":1,"soil":["stone"],"subsoil":["marble"],"maxLight":null,"minLight":null,"growth":600,"pools":["white","stone"],"flavour":null},"Meatrose":{"id":"Meatrose","name":"Meatrose","tier":7,"soil":["dirtGrass"],"subsoil":[],"maxLight":null,"minLight":9,"growth":4200,"pools":["red","flower","chicken","cow","food","fish"],"flavour":null},"Melon":{"id":"Melon","name":"Melon","tier":2,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":1200,"pools":["green","stem","food","healing","ingredient"],"flavour":null},"Micadia":{"id":"Micadia","name":"Micadia","tier":9,"soil":["stone"],"subsoil":["mica"],"maxLight":null,"minLight":null,"growth":1800,"pools":[],"flavour":null},"MilkWart":{"id":"MilkWart","name":"Milk Wart","tier":6,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":2400,"pools":["white","food","cow","healing"],"flavour":null},"Moss":{"id":"Moss","name":"Moss","tier":4,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":450,"pools":["green","twilightForest","climbable","tendrilly"],"flavour":null},"Necrobloom":{"id":"Necrobloom","name":"Necrobloom","tier":3,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":1800,"pools":["purple","flower","poison","danger"],"flavour":null},"NetherStoneLily":{"id":"NetherStoneLily","name":"Nether Stone Lily","tier":1,"soil":["stone"],"subsoil":["netherrack"],"maxLight":null,"minLight":null,"growth":600,"pools":["red","nether","stone"],"flavour":null},"Netherwart":{"id":"Netherwart","name":"Netherwart","tier":5,"soil":["soulsand"],"subsoil":[],"maxLight":null,"minLight":null,"growth":2000,"pools":["red","nether","ingredient"],"flavour":null},"Nickelback":{"id":"Nickelback","name":"Nickelback","tier":5,"soil":["stone"],"subsoil":["nickel"],"maxLight":null,"minLight":null,"growth":1000,"pools":["gray","metal","fire"],"flavour":"Makes a nice hum in the wind."},"OilBerry":{"id":"OilBerry","name":"Oil Berry","tier":4,"soil":["oil"],"subsoil":[],"maxLight":null,"minLight":null,"growth":1200,"pools":[],"flavour":null},"Olivia":{"id":"Olivia","name":"Olivia","tier":2,"soil":["stone"],"subsoil":["olivine"],"maxLight":null,"minLight":null,"growth":400,"pools":[],"flavour":null},"Onion":{"id":"Onion","name":"Onion","tier":4,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":800,"pools":["brown","root","food"],"flavour":null},"OrangeTulip":{"id":"OrangeTulip","name":"Orange Tulip","tier":2,"soil":["dirtGrass"],"subsoil":[],"maxLight":null,"minLight":null,"growth":600,"pools":["orange","flower","tulip"],"flavour":null},"Osmianth":{"id":"Osmianth","name":"Osmianth","tier":12,"soil":["stone"],"subsoil":["osmium"],"maxLight":null,"minLight":null,"growth":7200,"pools":[],"flavour":null},"OxeyeDaisy":{"id":"OxeyeDaisy","name":"Oxeye Daisy","tier":2,"soil":["dirtGrass"],"subsoil":[],"maxLight":null,"minLight":null,"growth":600,"pools":["white","flower"],"flavour":null},"Papyrus":{"id":"Papyrus","name":"Papyrus","tier":5,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":450,"pools":["white","stem"],"flavour":null},"PinkTulip":{"id":"PinkTulip","name":"Pink Tulip","tier":2,"soil":["dirtGrass"],"subsoil":[],"maxLight":null,"minLight":null,"growth":600,"pools":["red","flower","tulip"],"flavour":null},"Platina":{"id":"Platina","name":"Platina","tier":11,"soil":["stone"],"subsoil":["platinum"],"maxLight":null,"minLight":null,"growth":6600,"pools":[],"flavour":null},"Plumbilia":{"id":"Plumbilia","name":"Plumbilia","tier":6,"soil":["stone"],"subsoil":["lead"],"maxLight":null,"minLight":null,"growth":1200,"pools":["purple","metal","lead","dense","tendrilly"],"flavour":null},"Plumbshade":{"id":"Plumbshade","name":"Plumbshade","tier":6,"soil":["stone"],"subsoil":["lead"],"maxLight":null,"minLight":null,"growth":2800,"pools":["purple","bush","dense","leafy","metal","lead"],"flavour":null},"Poppy":{"id":"Poppy","name":"Poppy","tier":2,"soil":["dirtGrass"],"subsoil":[],"maxLight":null,"minLight":null,"growth":600,"pools":["red","flower"],"flavour":null},"Potato":{"id":"Potato","name":"Potato","tier":1,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":800,"pools":["yellow","root","food"],"flavour":null},"PrimordialBerry":{"id":"PrimordialBerry","name":"Primordial Berry","tier":16,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":375000,"pools":[],"flavour":null},"Pumpkin":{"id":"Pumpkin","name":"Pumpkin","tier":2,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":1000,"pools":["orange","stem","food"],"flavour":null},"PurpleGlowshroom":{"id":"PurpleGlowshroom","name":"Purple Glowshroom","tier":3,"soil":["netherMushroom"],"subsoil":[],"maxLight":null,"minLight":null,"growth":600,"pools":["purple","nether","mushroom","light","food","ingredient"],"flavour":null},"PurpleTulip":{"id":"PurpleTulip","name":"Purple Tulip","tier":2,"soil":["dirtGrass"],"subsoil":[],"maxLight":null,"minLight":null,"growth":600,"pools":["purple","flower","tulip"],"flavour":null},"Pyrolusium":{"id":"Pyrolusium","name":"Pyrolusium","tier":12,"soil":["stone"],"subsoil":["manganese"],"maxLight":null,"minLight":null,"growth":2400,"pools":["red","metal","bush"],"flavour":"It's trying its best."},"Raspberry":{"id":"Raspberry","name":"Raspberry","tier":2,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":200,"pools":["red","berry","bush","food"],"flavour":null},"Reactoria":{"id":"Reactoria","name":"Reactoria","tier":12,"soil":["stone"],"subsoil":["uranium"],"maxLight":null,"minLight":null,"growth":4800,"pools":[],"flavour":null},"RedGraniteLily":{"id":"RedGraniteLily","name":"Red Granite Lily","tier":1,"soil":["stone"],"subsoil":["redGranite"],"maxLight":null,"minLight":null,"growth":600,"pools":["red","stone"],"flavour":null},"RedMushroom":{"id":"RedMushroom","name":"Red Mushroom","tier":1,"soil":["mushroom"],"subsoil":[],"maxLight":9,"minLight":null,"growth":400,"pools":["red","mushroom","food"],"flavour":null},"RedStraw":{"id":"RedStraw","name":"Redstraw","tier":6,"soil":["farmland"],"subsoil":["redstone"],"maxLight":12,"minLight":5,"growth":1500,"pools":["red","stone","wheat","light","ingredient"],"flavour":null},"RedTulip":{"id":"RedTulip","name":"Red Tulip","tier":2,"soil":["dirtGrass"],"subsoil":[],"maxLight":null,"minLight":null,"growth":600,"pools":["red","flower","tulip"],"flavour":null},"Rubyne":{"id":"Rubyne","name":"Rubyne","tier":4,"soil":["farmland"],"subsoil":["ruby"],"maxLight":null,"minLight":null,"growth":800,"pools":["red","crystal","shiny"],"flavour":null},"SaguaroCactus":{"id":"SaguaroCactus","name":"Saguaro Cactus","tier":4,"soil":["sand"],"subsoil":[],"maxLight":null,"minLight":9,"growth":450,"pools":["green","cactus","danger","food"],"flavour":null},"SaltyRoot":{"id":"SaltyRoot","name":"Salty Root","tier":4,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":1600,"pools":["gray","root","saltpeter"],"flavour":"Inedible."},"SandLily":{"id":"SandLily","name":"Sand Lily","tier":1,"soil":["stone"],"subsoil":["sand"],"maxLight":null,"minLight":null,"growth":600,"pools":["yellow","stone"],"flavour":null},"Sapphirum":{"id":"Sapphirum","name":"Sapphirum","tier":4,"soil":["stone"],"subsoil":["sapphire"],"maxLight":null,"minLight":null,"growth":800,"pools":["blue","crystal","shiny"],"flavour":null},"Scheelinium":{"id":"Scheelinium","name":"Scheelinium","tier":12,"soil":["stone"],"subsoil":["tungsten"],"maxLight":null,"minLight":null,"growth":2400,"pools":[],"flavour":null},"Shimmerleaf":{"id":"Shimmerleaf","name":"Shimmerleaf","tier":5,"soil":["dirtGrass"],"subsoil":["quicksilver"],"maxLight":null,"minLight":null,"growth":4000,"pools":["gray","light","magic","poison","silver"],"flavour":null},"Silviscus":{"id":"Silviscus","name":"Silviscus","tier":8,"soil":["stone"],"subsoil":["silver"],"maxLight":null,"minLight":null,"growth":3700,"pools":["white","bush","leafy","metal","silver"],"flavour":null},"Skyberry":{"id":"Skyberry","name":"Skyberry","tier":4,"soil":["netherrack"],"subsoil":[],"maxLight":null,"minLight":null,"growth":300,"pools":["blue","nether","berry","bush","danger","poison","addictive","food","ingredient"],"flavour":null},"Slimeplant":{"id":"Slimeplant","name":"Slimeplant","tier":6,"soil":["dirtGrass"],"subsoil":[],"maxLight":null,"minLight":null,"growth":1200,"pools":["green","tree","evil","leafy","sticky","ingredient"],"flavour":null},"Snowbell":{"id":"Snowbell","name":"Snowbell","tier":4,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":1100,"pools":["white","flower","poison","ingredient"],"flavour":null},"SoulSandLily":{"id":"SoulSandLily","name":"Soul Sand Lily","tier":2,"soil":["stone"],"subsoil":["soulSand"],"maxLight":null,"minLight":null,"growth":2000,"pools":["brown","nether","danger","stone","oil"],"flavour":null},"SpaceFlower":{"id":"SpaceFlower","name":"Space Flower","tier":13,"soil":["farmland"],"subsoil":["space"],"maxLight":null,"minLight":null,"growth":15000,"pools":[],"flavour":null},"SpanishMoss":{"id":"SpanishMoss","name":"Spanish Moss","tier":7,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":675,"pools":["green","climbable","magic"],"flavour":null},"Spidernip":{"id":"Spidernip","name":"Spidernip","tier":4,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":2400,"pools":["white","evil","poison","addictive","food","ingredient","silk"],"flavour":null},"StarWart":{"id":"StarWart","name":"Star Wart","tier":12,"soil":["stone"],"subsoil":["netherStar"],"maxLight":null,"minLight":null,"growth":7200,"pools":[],"flavour":null},"Stargatium":{"id":"Stargatium","name":"Stargatium","tier":12,"soil":["stone"],"subsoil":["naquadah"],"maxLight":null,"minLight":null,"growth":7200,"pools":[],"flavour":null},"Steeleafranks":{"id":"Steeleafranks","name":"Steeleafranks","tier":10,"soil":["stone"],"subsoil":["steeleaf"],"maxLight":null,"minLight":null,"growth":6000,"pools":["green","twilightForest","metal","tendrilly","iron"],"flavour":null},"StickyCane":{"id":"StickyCane","name":"Sticky Cane","tier":4,"soil":["sugarcane"],"subsoil":[],"maxLight":null,"minLight":null,"growth":200,"pools":["green","reed","sticky"],"flavour":null},"Stingberry":{"id":"Stingberry","name":"Stingberry","tier":4,"soil":["netherrack"],"subsoil":[],"maxLight":null,"minLight":null,"growth":300,"pools":["brown","nether","berry","bush","danger","poison","addictive","food","ingredient"],"flavour":null},"StoneLily":{"id":"StoneLily","name":"Stone Lily","tier":1,"soil":["stone"],"subsoil":["stone"],"maxLight":null,"minLight":null,"growth":600,"pools":["gray","stone"],"flavour":null},"Strawberry":{"id":"Strawberry","name":"Strawberry","tier":2,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":200,"pools":["red","berry","bush","food"],"flavour":null},"SugarBeet":{"id":"SugarBeet","name":"Sugar Beet","tier":4,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":450,"pools":["white","root","addictive","food","ingredient"],"flavour":null},"SugarCane":{"id":"SugarCane","name":"Sugar Cane","tier":2,"soil":["sugarcane"],"subsoil":[],"maxLight":null,"minLight":null,"growth":400,"pools":["green","reed","food"],"flavour":null},"Tea":{"id":"Tea","name":"Tea","tier":4,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":2400,"pools":["green","leafy","food"],"flavour":null},"Tearstalks":{"id":"Tearstalks","name":"Tearstalks","tier":8,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":4800,"pools":["white","nether","stem","evil","healing","ingredient"],"flavour":null},"ThauminiteOreBerry":{"id":"ThauminiteOreBerry","name":"Thauminite Oreberry","tier":7,"soil":["stone"],"subsoil":["thauminite"],"maxLight":10,"minLight":null,"growth":4500,"pools":["blue","oreBerry","danger","magic","metal","void"],"flavour":null},"ThaumiumOreBerry":{"id":"ThaumiumOreBerry","name":"Thaumium Oreberry","tier":7,"soil":["stone"],"subsoil":["thaumium"],"maxLight":10,"minLight":null,"growth":3000,"pools":["purple","oreBerry","danger","magic","metal","void"],"flavour":null},"Thiosulfine":{"id":"Thiosulfine","name":"Thiosulfine","tier":6,"soil":["stone"],"subsoil":["sulfur"],"maxLight":null,"minLight":null,"growth":1200,"pools":["yellow","flower","danger","sulfur"],"flavour":null},"Thornvine":{"id":"Thornvine","name":"Thornvine","tier":3,"soil":["netherrack"],"subsoil":[],"maxLight":null,"minLight":null,"growth":450,"pools":["yellow","nether","climbable","danger","light","tendrilly"],"flavour":null},"TinOreBerry":{"id":"TinOreBerry","name":"Tin Oreberry","tier":4,"soil":["stone"],"subsoil":["tin"],"maxLight":10,"minLight":null,"growth":6000,"pools":["white","oreBerry","danger","metal","shiny","tin"],"flavour":null},"Tine":{"id":"Tine","name":"Tine","tier":5,"soil":["stone"],"subsoil":["tin"],"maxLight":null,"minLight":null,"growth":1000,"pools":["gray","stem","metal","shiny","wood","tin"],"flavour":null},"Titania":{"id":"Titania","name":"Titania","tier":9,"soil":["stone"],"subsoil":["titanium"],"maxLight":null,"minLight":null,"growth":1800,"pools":[],"flavour":"The queen of crops."},"Tomato":{"id":"Tomato","name":"Tomato","tier":4,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":800,"pools":["red","tendrilly","leafy","food"],"flavour":null},"Torchberry":{"id":"Torchberry","name":"Torchberry","tier":2,"soil":["farmland"],"subsoil":[],"maxLight":10,"minLight":null,"growth":150,"pools":["yellow","twilightForest","berry","light"],"flavour":null},"Transformium":{"id":"Transformium","name":"Transformium","tier":12,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":7200,"pools":[],"flavour":null},"Trollplant":{"id":"Trollplant","name":"Trollplant","tier":6,"soil":["brick"],"subsoil":[],"maxLight":null,"minLight":null,"growth":4800,"pools":[],"flavour":"Trololololol, lololol, lololol!"},"TuffLily":{"id":"TuffLily","name":"Tuff Lily","tier":1,"soil":["stone"],"subsoil":["tuff"],"maxLight":null,"minLight":null,"growth":600,"pools":["gray","dark","stone"],"flavour":null},"Turnip":{"id":"Turnip","name":"Turnip","tier":2,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":450,"pools":["purple","root","food"],"flavour":null},"Vine":{"id":"Vine","name":"Vine","tier":2,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":450,"pools":["green","climbable","tendrilly"],"flavour":null},"VoidOreBerry":{"id":"VoidOreBerry","name":"Void Metal Oreberry","tier":7,"soil":["stone"],"subsoil":["$void"],"maxLight":10,"minLight":null,"growth":4500,"pools":["black","oreBerry","danger","magic","metal","void"],"flavour":null},"WaterArtichoke":{"id":"WaterArtichoke","name":"Water Artichoke","tier":4,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":1100,"pools":["blue","flower","water","food","ingredient"],"flavour":null},"Waterlily":{"id":"Waterlily","name":"Water Lily","tier":2,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":450,"pools":["green","water"],"flavour":null},"Wheat":{"id":"Wheat","name":"Wheat","tier":1,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":1000,"pools":["yellow","wheat","food"],"flavour":null},"WhiteTulip":{"id":"WhiteTulip","name":"White Tulip","tier":2,"soil":["dirtGrass"],"subsoil":[],"maxLight":null,"minLight":null,"growth":600,"pools":["white","flower","tulip"],"flavour":null},"WildCarrot":{"id":"WildCarrot","name":"Wild Carrot","tier":2,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":9,"growth":450,"pools":["white","root","food"],"flavour":null},"Withereed":{"id":"Withereed","name":"Withereed","tier":8,"soil":["stone"],"subsoil":["coal"],"maxLight":null,"minLight":null,"growth":4800,"pools":["black","reed","fire","undead","coal","sulfur"],"flavour":null},"Wolfsbane":{"id":"Wolfsbane","name":"Wolfsbane","tier":4,"soil":["farmland"],"subsoil":[],"maxLight":null,"minLight":null,"growth":1100,"pools":["purple","flower","poison","ingredient"],"flavour":null},"Zomplant":{"id":"Zomplant","name":"Zomplant","tier":3,"soil":["graveyard"],"subsoil":[],"maxLight":null,"minLight":null,"growth":1800,"pools":["brown","evil","poison","undead","food"],"flavour":null}},"mutations":[{"out":"BonsaiOak","parents":["Wheat","BrownMushroom"],"machineOnly":false},{"out":"BonsaiBirch","parents":["BonsaiOak","SugarCane"],"machineOnly":false},{"out":"BonsaiSpruce","parents":["BonsaiOak","Pumpkin"],"machineOnly":false},{"out":"BonsaiDarkOak","parents":["BonsaiSpruce","BonsaiOak"],"machineOnly":false},{"out":"BonsaiAcacia","parents":["BonsaiOak","Cactus"],"machineOnly":false},{"out":"BonsaiJungle","parents":["BonsaiOak","Vine"],"machineOnly":false},{"out":"BonsaiRubber","parents":["BonsaiJungle","BonsaiSpruce"],"machineOnly":false},{"out":"BonsaiSlimy","parents":["Slimeplant","BonsaiJungle","BonsaiRubber"],"machineOnly":true},{"out":"Bamboo","parents":["BonsaiJungle","Vine"],"machineOnly":false},{"out":"Eyebulb","parents":["NetherStoneLily","RedTulip"],"machineOnly":false},{"out":"FloweringVine","parents":["OxeyeDaisy","Ivy"],"machineOnly":false},{"out":"Glowflower","parents":["NetherStoneLily","Dandelion"],"machineOnly":false},{"out":"GlowingCoral","parents":["Glowflower","Waterlily"],"machineOnly":false},{"out":"Glowshroom","parents":["BlueGlowshroom","GreenGlowshroom","PurpleGlowshroom"],"machineOnly":false},{"out":"Ivy","parents":["Vine","BonsaiSpruce"],"machineOnly":false},{"out":"Moss","parents":["Ivy","FloweringVine"],"machineOnly":false},{"out":"Fertilia","parents":["Corium","Corpseplant"],"machineOnly":false},{"out":"Flax","parents":["Wheat","AzureBluet"],"machineOnly":false},{"out":"Hemp","parents":["Flax","Papyrus"],"machineOnly":false},{"out":"BoPBerry","parents":["Poppy","Blackberry"],"machineOnly":false},{"out":"Turnip","parents":["Potato","BoPBerry"],"machineOnly":false},{"out":"WildCarrot","parents":["Carrot","BoPBerry"],"machineOnly":false},{"out":"Barley","parents":["Bamboo","Wheat"],"machineOnly":false},{"out":"Blueberry","parents":["AzureBluet","BonsaiOak"],"machineOnly":false},{"out":"Maloberry","parents":["OrangeTulip","Blueberry"],"machineOnly":false},{"out":"Raspberry","parents":["RedTulip","OxeyeDaisy"],"machineOnly":false},{"out":"SaguaroCactus","parents":["Cactus","SandLily"],"machineOnly":false},{"out":"Blackberry","parents":["Strawberry","Blueberry"],"machineOnly":false},{"out":"Chilly","parents":["Cactus","Cocoa"],"machineOnly":false},{"out":"Coffee","parents":["Cocoa","BonsaiAcacia"],"machineOnly":false},{"out":"Cucumber","parents":["Melon","Carrot"],"machineOnly":false},{"out":"Grape","parents":["Blueberry","Blackberry"],"machineOnly":false},{"out":"Hops","parents":["Hemp","Dandelion"],"machineOnly":false},{"out":"Huckleberry","parents":["Blackberry","Grape"],"machineOnly":false},{"out":"Lemon","parents":["BonsaiOak","BonsaiAcacia"],"machineOnly":false},{"out":"Onion","parents":["Allium","Carrot"],"machineOnly":false},{"out":"Strawberry","parents":["Wheat","Raspberry"],"machineOnly":false},{"out":"SugarBeet","parents":["SugarCane","Allium"],"machineOnly":false},{"out":"Tea","parents":["Blueberry","BonsaiJungle"],"machineOnly":false},{"out":"Tomato","parents":["Onion","RedTulip"],"machineOnly":false},{"out":"Dayflower","parents":["AzureBluet","BlueOrchid"],"machineOnly":false},{"out":"Malaxia","parents":["OrangeTulip","Pumpkin","StoneLily"],"machineOnly":false},{"out":"Plumbshade","parents":["AzureBluet","Malaxia","BlackGraniteLily"],"machineOnly":false},{"out":"Silviscus","parents":["Cassitine","Malaxia","MarbleLily"],"machineOnly":false},{"out":"Cassitine","parents":["Malaxia","StoneLily","MarbleLily"],"machineOnly":false},{"out":"StickyCane","parents":["BonsaiJungle","SugarCane"],"machineOnly":false},{"out":"PurpleTulip","parents":["RedTulip","BlueOrchid"],"machineOnly":false},{"out":"Necrobloom","parents":["Spidernip","PurpleTulip"],"machineOnly":false},{"out":"Argentia","parents":["Plumbilia","Tine"],"machineOnly":false},{"out":"Auronia","parents":["Plumbilia","Coppon"],"machineOnly":false},{"out":"Bauxia","parents":["Galvania","Nickelback"],"machineOnly":true},{"out":"BobsYerUncleRanks","parents":["Diareed","Olivia"],"machineOnly":false},{"out":"Canola","parents":["OxeyeDaisy","Wheat"],"machineOnly":false},{"out":"Coppon","parents":["StoneLily","NetherStoneLily"],"machineOnly":false},{"out":"Diareed","parents":["Withereed","EvilOre"],"machineOnly":false},{"out":"EvilOre","parents":["NetherStoneLily","SoulSandLily"],"machineOnly":false},{"out":"Ferrofern","parents":["StoneLily","BlackGraniteLily"],"machineOnly":false},{"out":"Galvania","parents":["Tine","Ferrofern"],"machineOnly":false},{"out":"Thiosulfine","parents":["Galvania","Plumbilia"],"machineOnly":false},{"out":"Garnydinia","parents":["Diareed","RedStraw"],"machineOnly":true},{"out":"Glowheat","parents":["Glowflower","Wheat"],"machineOnly":false},{"out":"GodOfThunder","parents":["BobsYerUncleRanks","Withereed"],"machineOnly":true},{"out":"Indigo","parents":["Dayflower","BlueOrchid"],"machineOnly":false},{"out":"Iridine","parents":["Scheelinium","Platina"],"machineOnly":true},{"out":"Lazulia","parents":["StoneLily","Indigo"],"machineOnly":false},{"out":"Liveroot","parents":["Torchberry","BonsaiDarkOak"],"machineOnly":false},{"out":"MagicalNightshade","parents":["PrimordialBerry","ManaBean","Cinderpearl","Shimmerleaf"],"machineOnly":true},{"out":"Micadia","parents":["Tine","Bauxia"],"machineOnly":true},{"out":"MilkWart","parents":["Corium","Netherwart"],"machineOnly":false},{"out":"Nickelback","parents":["Ferrofern","Coppon"],"machineOnly":false},{"out":"OilBerry","parents":["SoulSandLily","Withereed"],"machineOnly":true},{"out":"Olivia","parents":["EndStoneLily","EvilOre"],"machineOnly":true},{"out":"Osmianth","parents":["Platina","Scheelinium"],"machineOnly":true},{"out":"Papyrus","parents":["Corium","BonsaiBirch"],"machineOnly":false},{"out":"Platina","parents":["Diareed","Rubyne"],"machineOnly":true},{"out":"Plumbilia","parents":["Coppon","Withereed"],"machineOnly":false},{"out":"Pyrolusium","parents":["Nickelback","Bauxia"],"machineOnly":false},{"out":"Reactoria","parents":["Titania","GodOfThunder"],"machineOnly":true},{"out":"RedStraw","parents":["NetherStoneLily","Wheat"],"machineOnly":false},{"out":"Rubyne","parents":["RedStraw","Diareed"],"machineOnly":false},{"out":"SaltyRoot","parents":["SugarBeet","Canola"],"machineOnly":false},{"out":"Sapphirum","parents":["EvilOre","Lazulia"],"machineOnly":false},{"out":"Scheelinium","parents":["Titania","Pyrolusium","EndStoneLily"],"machineOnly":true},{"out":"SpaceFlower","parents":["EndStoneLily","Titania"],"machineOnly":true},{"out":"Stargatium","parents":["Iridine","Trollplant"],"machineOnly":true},{"out":"StarWart","parents":["Withereed","Titania","GodOfThunder"],"machineOnly":true},{"out":"Steeleafranks","parents":["Torchberry","KnightmetalBerry"],"machineOnly":false},{"out":"Tine","parents":["StoneLily","BonsaiSpruce"],"machineOnly":false},{"out":"Titania","parents":["Bauxia","RedStraw"],"machineOnly":true},{"out":"Transformium","parents":["Trollplant","Bauxia","Titania"],"machineOnly":true},{"out":"Trollplant","parents":["Goldfish","Reactoria","Fertilia"],"machineOnly":true},{"out":"Withereed","parents":["BasaltLily","BlackGraniteLily"],"machineOnly":false},{"out":"InkBloom","parents":["Blackberry","Goldfish"],"machineOnly":false},{"out":"Blazereed","parents":["SugarCane","Cinderpearl"],"machineOnly":false},{"out":"Corium","parents":["Wheat","Cocoa"],"machineOnly":false},{"out":"Corpseplant","parents":["Zomplant","Eyebulb"],"machineOnly":false},{"out":"Creeperweed","parents":["NetherStoneLily","Withereed","SaltyRoot"],"machineOnly":false},{"out":"EggPlant","parents":["Corium","OxeyeDaisy"],"machineOnly":false},{"out":"Enderbloom","parents":["EndStoneLily","Creeperweed"],"machineOnly":false},{"out":"Goldfish","parents":["Waterlily","WaterArtichoke","Mandrake"],"machineOnly":false},{"out":"Meatrose","parents":["Goldfish","EggPlant","Corium"],"machineOnly":false},{"out":"Slimeplant","parents":["BlueOrchid","ClayLily"],"machineOnly":false},{"out":"Spidernip","parents":["Flax","Hemp","Zomplant"],"machineOnly":false},{"out":"Tearstalks","parents":["Goldfish","SoulSandLily","NetherStoneLily"],"machineOnly":false},{"out":"Zomplant","parents":["Withereed","Eyebulb"],"machineOnly":false},{"out":"Blightberry","parents":["Maloberry","Raspberry"],"machineOnly":false},{"out":"Duskberry","parents":["InkBloom","Blackberry"],"machineOnly":false},{"out":"Skyberry","parents":["Dayflower","Blueberry"],"machineOnly":false},{"out":"Stingberry","parents":["Thornvine","SaguaroCactus"],"machineOnly":false},{"out":"Cotton","parents":["Flax","Hemp"],"machineOnly":false},{"out":"Thornvine","parents":["Vine","Cactus"],"machineOnly":false},{"out":"BlueGlowshroom","parents":["BlueOrchid","Glowflower"],"machineOnly":false},{"out":"GreenGlowshroom","parents":["Cactus","Glowflower"],"machineOnly":false},{"out":"PurpleGlowshroom","parents":["Indigo","Glowflower"],"machineOnly":false},{"out":"AluminiumOreBerry","parents":["GoldOreBerry","EssenceOreBerry"],"machineOnly":false},{"out":"CopperOreBerry","parents":["Malaxia","BoPBerry","StoneLily"],"machineOnly":false},{"out":"EssenceOreBerry","parents":["Creeperweed","Zomplant","Spidernip","Tearstalks"],"machineOnly":false},{"out":"GoldOreBerry","parents":["CopperOreBerry","IronOreBerry","TinOreBerry"],"machineOnly":false},{"out":"IronOreBerry","parents":["TinOreBerry","StoneLily"],"machineOnly":false},{"out":"TinOreBerry","parents":["Cassitine","BoPBerry","StoneLily"],"machineOnly":false},{"out":"ArditeOreBerry","parents":["NetherStoneLily","Coppon","CopperOreBerry","Malaxia"],"machineOnly":false},{"out":"CobaltOreBerry","parents":["NetherStoneLily","ArditeOreBerry","Lazulia","GoldOreBerry"],"machineOnly":false},{"out":"ThaumiumOreBerry","parents":["StoneLily","GoldOreBerry"],"machineOnly":false},{"out":"VoidOreBerry","parents":["ThaumiumOreBerry","GoldOreBerry"],"machineOnly":false},{"out":"ThauminiteOreBerry","parents":["ThaumiumOreBerry","ManaBean"],"machineOnly":false},{"out":"KnightmetalBerry","parents":["IronOreBerry","Torchberry","BonsaiDarkOak"],"machineOnly":false},{"out":"AndesiteLily","parents":["StoneLily","ClayLily"],"machineOnly":false},{"out":"DioriteLily","parents":["StoneLily","MarbleLily"],"machineOnly":false},{"out":"GraniteLily","parents":["BlackGraniteLily","RedGraniteLily"],"machineOnly":false},{"out":"TuffLily","parents":["BlackGraniteLily","AndesiteLily"],"machineOnly":false},{"out":"DeepslateLily","parents":["TuffLily","BlackGraniteLily"],"machineOnly":false},{"out":"BasaltLily","parents":["StoneLily","InkBloom"],"machineOnly":false},{"out":"BlackGraniteLily","parents":["StoneLily","BasaltLily"],"machineOnly":false},{"out":"ClayLily","parents":["StoneLily","Waterlily"],"machineOnly":false},{"out":"EndStoneLily","parents":["StoneLily","Enderbloom"],"machineOnly":false},{"out":"MarbleLily","parents":["StoneLily","OxeyeDaisy"],"machineOnly":false},{"out":"NetherStoneLily","parents":["StoneLily","Netherwart"],"machineOnly":false},{"out":"RedGraniteLily","parents":["StoneLily","Poppy"],"machineOnly":false},{"out":"SandLily","parents":["StoneLily","Cactus"],"machineOnly":false},{"out":"SoulSandLily","parents":["NetherStoneLily","SandLily"],"machineOnly":false},{"out":"StoneLily","parents":["Vine","Pumpkin"],"machineOnly":false},{"out":"Cinderpearl","parents":["EmberMoss","GlintWeed"],"machineOnly":false},{"out":"ManaBean","parents":["Cocoa","Cinderpearl","Shimmerleaf"],"machineOnly":false},{"out":"Shimmerleaf","parents":["WhiteTulip","RedStraw"],"machineOnly":false},{"out":"Torchberry","parents":["Glowflower","BoPBerry"],"machineOnly":false},{"out":"Cocoa","parents":["Melon","BonsaiJungle"],"machineOnly":false},{"out":"Melon","parents":["Pumpkin","BonsaiJungle"],"machineOnly":false},{"out":"Pumpkin","parents":["Carrot","SugarCane"],"machineOnly":false},{"out":"RedMushroom","parents":["Pumpkin","Poppy"],"machineOnly":false},{"out":"BrownMushroom","parents":["Cocoa","RedMushroom"],"machineOnly":false},{"out":"BlueOrchid","parents":["Poppy","Waterlily"],"machineOnly":false},{"out":"AzureBluet","parents":["Poppy","Potato"],"machineOnly":false},{"out":"RedTulip","parents":["Poppy","WhiteTulip"],"machineOnly":false},{"out":"OrangeTulip","parents":["RedTulip","Dandelion"],"machineOnly":false},{"out":"PinkTulip","parents":["RedTulip","WhiteTulip"],"machineOnly":false},{"out":"WhiteTulip","parents":["PinkTulip","OxeyeDaisy"],"machineOnly":false},{"out":"Allium","parents":["PinkTulip","PurpleTulip"],"machineOnly":false},{"out":"OxeyeDaisy","parents":["AzureBluet","Dandelion"],"machineOnly":false},{"out":"Cactus","parents":["SugarCane","Potato"],"machineOnly":false},{"out":"SugarCane","parents":["Carrot","Potato"],"machineOnly":false},{"out":"Netherwart","parents":["RedMushroom","BrownMushroom"],"machineOnly":false},{"out":"Vine","parents":["Pumpkin","BlueOrchid"],"machineOnly":false},{"out":"Waterlily","parents":["Vine","SugarCane"],"machineOnly":false},{"out":"Belladonna","parents":["PurpleTulip","Huckleberry"],"machineOnly":false},{"out":"EmberMoss","parents":["RedTulip","Moss"],"machineOnly":false},{"out":"Garlic","parents":["Onion","Allium"],"machineOnly":false},{"out":"GlintWeed","parents":["Vine","EmberMoss"],"machineOnly":false},{"out":"Mandrake","parents":["Carrot","Belladonna"],"machineOnly":false},{"out":"Snowbell","parents":["Belladonna","GlintWeed"],"machineOnly":false},{"out":"SpanishMoss","parents":["Moss","EmberMoss"],"machineOnly":false},{"out":"WaterArtichoke","parents":["Waterlily","Hops"],"machineOnly":false},{"out":"Wolfsbane","parents":["WaterArtichoke","Belladonna"],"machineOnly":false}],"subsoil":{"stone":{"oredict":["bricksStone"],"materials":[],"modBlocks":["cobblestone","color_stone","color_stonebrick","decoration.multibrick","decoration.multibrickfancy","mossy_cobblestone","oldCobble","oldCobbleMossy","stone_snakestone","stonebricksmooth"]},"sand":{"oredict":[],"materials":[],"modBlocks":["red_sandstone","sand_snakestone","sandstone","sandstone2","sandstone_scribbles","smooth_red_sandstone"]},"clay":{"oredict":["blockStainedHardenedClay","hardenedClay"],"materials":[],"modBlocks":["black_glazed_terracotta","blue_glazed_terracotta","brown_glazed_terracotta","cyan_glazed_terracotta","gray_glazed_terracotta","green_glazed_terracotta","hardened_clay","hardened_clay2","hardened_clay_black","hardened_clay_blue","hardened_clay_blue2","hardened_clay_brown","hardened_clay_brown2","hardened_clay_cyan","hardened_clay_cyan2","hardened_clay_gray","hardened_clay_gray2","hardened_clay_green","hardened_clay_green2","hardened_clay_lightblue","hardened_clay_lightblue2","hardened_clay_lightgray","hardened_clay_lightgray2","hardened_clay_lime","hardened_clay_lime2","hardened_clay_magenta","hardened_clay_magenta2","hardened_clay_orange","hardened_clay_orange2","hardened_clay_pink","hardened_clay_pink2","hardened_clay_purple","hardened_clay_purple2","hardened_clay_red","hardened_clay_red2","hardened_clay_white","hardened_clay_white2","hardened_clay_yellow","hardened_clay_yellow2","light_blue_glazed_terracotta","light_gray_glazed_terracotta","lime_glazed_terracotta","magenta_glazed_terracotta","orange_glazed_terracotta","pink_glazed_terracotta","purple_glazed_terracotta","red_glazed_terracotta","white_glazed_terracotta","yellow_glazed_terracotta"]},"soulSand":{"oredict":["soulSand","soulsand"],"materials":[],"modBlocks":[]},"netherrack":{"oredict":[],"materials":[],"modBlocks":["decoration.multibrick","decoration.multibrickfancy","netherrack"]},"endStone":{"oredict":[],"materials":[],"modBlocks":["decoration.multibrick","decoration.multibrickfancy","endStoneBrick","end_Stone","end_bricks"]},"redGranite":{"oredict":["stoneGraniteRed"],"materials":[],"modBlocks":[]},"blackGranite":{"oredict":["stoneGraniteBlack"],"materials":[],"modBlocks":[]},"marble":{"oredict":["stoneMarble"],"materials":[],"modBlocks":["marble"]},"basalt":{"oredict":["stoneBasalt"],"materials":[],"modBlocks":[]},"modernAndesite":{"oredict":["stoneAndesite","stoneAndesiteBricks","stoneAndesiteChiseled","stoneAndesitePolished"],"materials":[],"modBlocks":["andesite"]},"modernDiorite":{"oredict":["stoneDiorite","stoneDioriteBricks","stoneDioriteChiseled","stoneDioritePolished"],"materials":[],"modBlocks":["diorite"]},"modernGranite":{"oredict":["stoneGranite","stoneGraniteBricks","stoneGraniteChiseled","stoneGranitePolished"],"materials":[],"modBlocks":["granite"]},"tuff":{"oredict":[],"materials":[],"modBlocks":["tuff"]},"deepslate":{"oredict":[],"materials":[],"modBlocks":["cobbled_deepslate","deepslate","deepslate_bricks","polished_deepslate"]},"coal":{"oredict":["blockCoal","oreCoal"],"materials":["Coal"],"modBlocks":[]},"iron":{"oredict":["blockIron","oreIron"],"materials":["Iron"],"modBlocks":["iron2","iron_block"]},"gold":{"oredict":["blockGold","oreGold"],"materials":["Gold"],"modBlocks":["gold2","gold_block"]},"diamond":{"oredict":["blockDiamond","oreDiamond"],"materials":["Diamond"],"modBlocks":["diamond_block"]},"emerald":{"oredict":["blockEmerald","oreEmerald"],"materials":["Emerald"],"modBlocks":["emerald_block"]},"redstone":{"oredict":["blockRedstone","oreRedstone"],"materials":["Redstone"],"modBlocks":["redstone_block"]},"lapis":{"oredict":["blockLapis","oreLapis"],"materials":["Lapis"],"modBlocks":["lapis_block"]},"aluminium":{"oredict":["blockAluminium","blockAluminum","oreAluminium","oreAluminum"],"materials":["Aluminium"],"modBlocks":["aluminumblock"]},"aluminiumBauxite":{"oredict":["blockAluminium","blockAluminum","blockBauxite","oreAluminium","oreAluminum","oreBauxite"],"materials":["Aluminium","Bauxite"],"modBlocks":["aluminumblock"]},"copper":{"oredict":["blockCopper","oreCopper"],"materials":["Copper"],"modBlocks":["chiseled_copper","copper_block","copperblock"]},"chrome":{"oredict":["blockChrome","oreChrome"],"materials":["Chrome"],"modBlocks":[]},"iridium":{"oredict":["blockIridium","oreIridium"],"materials":["Iridium"],"modBlocks":[]},"lead":{"oredict":["blockLead","oreLead"],"materials":["Galena","Lead"],"modBlocks":["leadblock"]},"magnesium":{"oredict":["blockMagnesium","oreMagnesium"],"materials":["Magnesium"],"modBlocks":[]},"manganese":{"oredict":["blockManganese","oreManganese"],"materials":["Manganese","Pyrolusite"],"modBlocks":[]},"mica":{"oredict":["blockMica","oreMica"],"materials":["Mica"],"modBlocks":[]},"naquadah":{"oredict":["blockNaquadah","oreNaquadah"],"materials":["Naquadah","NaquadahEnriched","Naquadria"],"modBlocks":[]},"netherStar":{"oredict":["blockNetherStar","oreNetherStar"],"materials":["NetherStar"],"modBlocks":[]},"nickel":{"oredict":["blockNickel","oreNickel"],"materials":["Nickel"],"modBlocks":["nickelblock"]},"osmium":{"oredict":["blockOsmium","oreOsmium"],"materials":["Osmium"],"modBlocks":[]},"platinum":{"oredict":["blockPlatinum","orePlatinum"],"materials":["Cooperite","Platinum"],"modBlocks":["platinumblock"]},"silver":{"oredict":["blockSilver","oreSilver"],"materials":["Silver"],"modBlocks":["silverblock"]},"thorium":{"oredict":["blockThorium","oreThorium"],"materials":["Thorium"],"modBlocks":[]},"tin":{"oredict":["blockTin","oreTin"],"materials":["Tin"],"modBlocks":["tinblock"]},"titanium":{"oredict":["blockTitanium","oreTitanium"],"materials":["Ilmenite","Rutile","Titanium"],"modBlocks":[]},"tungsten":{"oredict":["blockTungsten","oreTungsten"],"materials":["Scheelite","Tungstate","Tungsten"],"modBlocks":[]},"uranium":{"oredict":["blockUranium","blockUranium235","blockUranium238","oreUranium","oreUranium235","oreUranium238"],"materials":["Pitchblende","Uraninite","Uranium","Uranium235"],"modBlocks":["uraniumblock"]},"zinc":{"oredict":["blockZinc","oreZinc"],"materials":["Sphalerite","Zinc"],"modBlocks":[]},"sulfur":{"oredict":["blockSulfur","oreSulfur"],"materials":["Galena","Sphalerite","Sulfur"],"modBlocks":["Cloud"]},"garnetGem":{"oredict":["blockGarnetGem","oreGarnetGem"],"materials":["GarnetRed","GarnetSand","GarnetYellow"],"modBlocks":[]},"olivine":{"oredict":["blockOlivine","oreOlivine"],"materials":["Olivine"],"modBlocks":[]},"sapphire":{"oredict":["blockSapphire","oreSapphire"],"materials":["Sapphire"],"modBlocks":[]},"ruby":{"oredict":["blockRuby","oreRuby"],"materials":["Ruby"],"modBlocks":[]},"knightmetal":{"oredict":["blockKnightmetal","oreKnightmetal"],"materials":["Knightmetal"],"modBlocks":[]},"steeleaf":{"oredict":["blockSteeleaf","oreSteeleaf"],"materials":["Steeleaf"],"modBlocks":["tile.SteeleafBlock"]},"cobalt":{"oredict":["blockCobalt","oreCobalt"],"materials":["Cobalt"],"modBlocks":["cobaltblock","decoration.multibrickmetal"]},"ardite":{"oredict":["blockArdite","oreArdite"],"materials":["Ardite"],"modBlocks":["decoration.multibrickmetal"]},"$void":{"oredict":["block$void","ore$void"],"materials":["Void"],"modBlocks":[]},"thaumium":{"oredict":["blockThaumium","oreThaumium"],"materials":["Thaumium"],"modBlocks":["thaumium"]},"thauminite":{"oredict":["blockThauminite"],"materials":[],"modBlocks":[]},"shadowmetal":{"oredict":["blockShadow","oreShadow"],"materials":["Shadow"],"modBlocks":[]},"snow":{"oredict":["blockSnow"],"materials":[],"modBlocks":[]},"skull":{"oredict":["itemSkull"],"materials":[],"modBlocks":[]},"glowstone":{"oredict":["glowstone","stoneGlowstone"],"materials":[],"modBlocks":["glowstone"]},"blaze":{"oredict":["blockBlaze"],"materials":[],"modBlocks":[]},"quicksilver":{"oredict":["blockQuicksilver"],"materials":[],"modBlocks":[]},"mixedCrystalCluster":{"oredict":[],"materials":[],"modBlocks":["blockCrystal"]},"space":{"oredict":["rockSpace"],"materials":[],"modBlocks":[]}},"subsoilDesc":{"stone":"Needs a block of stone under it to grow","sand":"Needs a block of sand or sandstone under it to grow","clay":"Needs a block of clay or hardened clay under it to grow","soulSand":"Needs a block of soul sand under it to grow","netherrack":"Needs a block of netherrack under it to grow","endStone":"Needs a block of end stone under it to grow","redGranite":"Needs a block of red granite under it to grow","blackGranite":"Needs a block of black granite under it to grow","marble":"Needs a block of marble under it to grow","basalt":"Needs a block of basalt under it to grow","deepslate":"Needs a block of deepslate under it to grow","tuff":"Needs a block of tuff under it to grow","modernAndesite":"Needs a block of andesite under it to grow","modernDiorite":"Needs a block of diorite under it to grow","modernGranite":"Needs a block of granite under it to grow","coal":"Needs a block of coal under it to grow","iron":"Needs a block of iron under it to grow","gold":"Needs a block of gold under it to grow","diamond":"Needs a block of diamond under it to grow","emerald":"Needs a block of emerald under it to grow","redstone":"Needs a block of redstone under it to grow","lapis":"Needs a block of lapis under it to grow","aluminium":"Needs a block of aluminium under it to grow","aluminiumBauxite":"Needs a block of aluminium or bauxite under it to grow","copper":"Needs a block of copper under it to grow","iridium":"Needs a block of iridium under it to grow","lead":"Needs a block of lead or galena under it to grow","magnesium":"Needs a block of magnesium under it to grow","manganese":"Needs a block of manganese or pyrolusite under it to grow","mica":"Needs a block of mica or cupronickel coil under it to grow","naquadah":"Needs a block of naquadah under it to grow","netherStar":"Needs a block of nether star under it to grow","nickel":"Needs a block of nickel under it to grow","osmium":"Needs a block of osmium under it to grow","platinum":"Needs a block of platinum or sheldonite under it to grow","silver":"Needs a block of silver under it to grow","sulfur":"Needs a block of sulfur or sphalerite under it to grow","thorium":"Needs a block of thorium or thorianite under it to grow","tin":"Needs a block of tin under it to grow","titanium":"Needs a block of titanium, ilmenite, or rutile under it to grow","tungsten":"Needs a block of tungsten, scheelite, or tungstate under it to grow","uranium":"Needs a block of uranium, uranite, or pitchblende under it to grow","zinc":"Needs a block of zinc or sphalerite under it to grow","garnetGem":"Needs a block of red or yellow garnet or garnet sand under it to grow","olivine":"Needs a block of olivine under it to grow","sapphire":"Needs a block of sapphire under it to grow","ruby":"Needs a block of ruby under it to grow","knightmetal":"Needs a block of knightmetal under it to grow","steeleaf":"Needs a block of steeleaf under it to grow","cobalt":"Needs a block of cobalt under it to grow","ardite":"Needs a block of ardite under it to grow","void":"Needs a block of void under it to grow","thaumium":"Needs a block of thaumium under it to grow","thauminite":"Needs a block of thauminite under it to grow","shadowmetal":"Needs a block of shadow metal under it to grow","skull":"Needs a skull under it to grow","snow":"Needs a block of snow under it to grow","glowstone":"Needs a block of glowstone under it to grow","blaze":"Needs a block of blaze under it to grow","quicksilver":"Needs a block of quicksilver under it to grow","mixedCrystalCluster":"Needs a mixed crystal cluster under it to grow","space":"Needs a block from space under it to grow"},"poolNames":{"addictive":"Addictive","alien":"Alien","bean":"Bean","berry":"Berry","black":"Black","blaze":"Blaze","blue":"Blue","brown":"Brown","bush":"Bush","cactus":"Cactus","chicken":"Chicken","climbable":"Climbable","coal":"Coal","copper":"Copper","cotton":"Cotton","cow":"Cow","crystal":"Crystal","danger":"Danger","dark":"Dark","dense":"Dense","evil":"Evil","fire":"Fire","fish":"Fish","flower":"Flower","food":"Food","gold":"Gold","gray":"Gray","green":"Green","healing":"Healing","ingredient":"Ingredient","iron":"Iron","lead":"Lead","leafy":"Leafy","light":"Light","magic":"Magic","metal":"Metal","mushroom":"Mushroom","nether":"Nether","oil":"Oil","orange":"Orange","oreBerry":"Ore Berry","poison":"Poison","purple":"Purple","red":"Red","reed":"Reed","root":"Root","saltpeter":"Saltpeter","shiny":"Shiny","silk":"Silk","silver":"Silver","stem":"Stem","sticky":"Sticky","stone":"Stone","sulfur":"Sulfur","tendrilly":"Tendrilly","tin":"Tin","tree":"Tree","tulip":"Tulip","twilightForest":"Twilight Forest","undead":"Undead","void":"Void","water":"Water","wheat":"Wheat","white":"White","wood":"Wood","yellow":"Yellow"},"poolMembers":{"purple":["Allium","Belladonna","GlowingCoral","Grape","Huckleberry","Necrobloom","Plumbilia","Plumbshade","PurpleGlowshroom","PurpleTulip","ThaumiumOreBerry","Turnip","Wolfsbane"],"root":["Allium","Carrot","Garlic","Liveroot","Onion","Potato","SaltyRoot","SugarBeet","Turnip","WildCarrot"],"flower":["Allium","AzureBluet","Belladonna","BlueOrchid","Dandelion","Dayflower","Enderbloom","FloweringVine","GlintWeed","Indigo","InkBloom","Ivy","Mandrake","Meatrose","Necrobloom","OrangeTulip","OxeyeDaisy","PinkTulip","Poppy","PurpleTulip","RedTulip","Snowbell","Thiosulfine","WaterArtichoke","WhiteTulip","Wolfsbane"],"white":["AluminiumOreBerry","Argentia","AzureBluet","BonsaiBirch","Cotton","DioriteLily","EggPlant","EvilOre","Galvania","Garlic","MarbleLily","MilkWart","OxeyeDaisy","Papyrus","Silviscus","Snowbell","Spidernip","SugarBeet","Tearstalks","TinOreBerry","WhiteTulip","WildCarrot"],"oreBerry":["AluminiumOreBerry","ArditeOreBerry","CobaltOreBerry","CopperOreBerry","EssenceOreBerry","GoldOreBerry","IronOreBerry","KnightmetalBerry","ThauminiteOreBerry","ThaumiumOreBerry","TinOreBerry","VoidOreBerry"],"danger":["AluminiumOreBerry","ArditeOreBerry","Bamboo","Blightberry","Cactus","CobaltOreBerry","CopperOreBerry","Duskberry","EmberMoss","EssenceOreBerry","GoldOreBerry","Goldfish","IronOreBerry","Ivy","KnightmetalBerry","Mandrake","Necrobloom","SaguaroCactus","Skyberry","SoulSandLily","Stingberry","ThauminiteOreBerry","ThaumiumOreBerry","Thiosulfine","Thornvine","TinOreBerry","VoidOreBerry"],"metal":["AluminiumOreBerry","ArditeOreBerry","Argentia","Auronia","Cassitine","CobaltOreBerry","CopperOreBerry","Coppon","Ferrofern","Galvania","GoldOreBerry","IronOreBerry","KnightmetalBerry","Malaxia","Nickelback","Plumbilia","Plumbshade","Pyrolusium","Silviscus","Steeleafranks","ThauminiteOreBerry","ThaumiumOreBerry","TinOreBerry","Tine","VoidOreBerry"],"stone":["AndesiteLily","AndesiteLily","BasaltLily","BlackGraniteLily","ClayLily","DeepslateLily","DioriteLily","EndStoneLily","GraniteLily","MarbleLily","NetherStoneLily","RedGraniteLily","RedStraw","SandLily","SoulSandLily","StoneLily","TuffLily"],"gray":["AndesiteLily","Cassitine","ClayLily","Duskberry","Ferrofern","IronOreBerry","KnightmetalBerry","Nickelback","SaltyRoot","Shimmerleaf","StoneLily","Tine","TuffLily"],"orange":["ArditeOreBerry","Blazereed","BonsaiAcacia","Carrot","Cinderpearl","CopperOreBerry","Coppon","GlintWeed","Goldfish","Malaxia","OrangeTulip","Pumpkin"],"shiny":["Argentia","BobsYerUncleRanks","Cassitine","CopperOreBerry","Coppon","Diareed","Glowflower","Glowheat","GlowingCoral","Lazulia","Rubyne","Sapphirum","TinOreBerry","Tine"],"tendrilly":["Argentia","Auronia","BobsYerUncleRanks","Cotton","Creeperweed","Cucumber","EmberMoss","Eyebulb","Ferrofern","FloweringVine","Grape","Ivy","Liveroot","Moss","Plumbilia","Steeleafranks","Thornvine","Tomato","Vine"],"silver":["Argentia","Shimmerleaf","Silviscus"],"yellow":["Auronia","Canola","Dandelion","EndStoneLily","Glowheat","GoldOreBerry","Lemon","Maloberry","Potato","SandLily","Thiosulfine","Thornvine","Torchberry","Wheat"],"dense":["Auronia","DeepslateLily","GoldOreBerry","Plumbilia","Plumbshade"],"gold":["Auronia","GoldOreBerry"],"green":["Bamboo","Barley","Blightberry","BobsYerUncleRanks","Cactus","Creeperweed","Cucumber","EssenceOreBerry","FloweringVine","Glowshroom","GreenGlowshroom","Hemp","Hops","Ivy","Melon","Moss","SaguaroCactus","Slimeplant","SpanishMoss","Steeleafranks","StickyCane","SugarCane","Tea","Vine","Waterlily"],"stem":["Bamboo","Goldfish","Hemp","Melon","Papyrus","Pumpkin","Tearstalks","Tine"],"leafy":["Bamboo","BonsaiAcacia","BonsaiBirch","BonsaiDarkOak","BonsaiJungle","BonsaiOak","Cassitine","Cocoa","Coffee","Grape","Huckleberry","Lemon","Malaxia","Plumbshade","Silviscus","Slimeplant","Tea","Tomato"],"wheat":["Barley","Canola","Flax","Glowheat","Hops","RedStraw","Wheat"],"food":["Barley","Blackberry","Blightberry","BlueGlowshroom","Blueberry","BoPBerry","BonsaiDarkOak","BonsaiOak","BrownMushroom","Canola","Carrot","Chilly","Cocoa","Coffee","Corpseplant","Cucumber","Duskberry","EggPlant","EssenceOreBerry","Garlic","Goldfish","Grape","GreenGlowshroom","Hops","Huckleberry","Lemon","Maloberry","Meatrose","Melon","MilkWart","Onion","Potato","Pumpkin","PurpleGlowshroom","Raspberry","RedMushroom","SaguaroCactus","Skyberry","Spidernip","Stingberry","Strawberry","SugarBeet","SugarCane","Tea","Tomato","Turnip","WaterArtichoke","Wheat","WildCarrot","Zomplant"],"black":["BasaltLily","BlackGraniteLily","Blackberry","DeepslateLily","Enderbloom","InkBloom","VoidOreBerry","Withereed"],"dark":["BasaltLily","BlackGraniteLily","BonsaiDarkOak","DeepslateLily","TuffLily"],"poison":["Belladonna","Blightberry","Corpseplant","Duskberry","Ivy","Necrobloom","Shimmerleaf","Skyberry","Snowbell","Spidernip","Stingberry","Wolfsbane","Zomplant"],"ingredient":["Belladonna","Blazereed","Blightberry","BlueGlowshroom","Carrot","Creeperweed","Duskberry","EmberMoss","Garlic","Glowflower","Glowheat","GlowingCoral","Glowshroom","GreenGlowshroom","Mandrake","Melon","Netherwart","PurpleGlowshroom","RedStraw","Skyberry","Slimeplant","Snowbell","Spidernip","Stingberry","SugarBeet","Tearstalks","WaterArtichoke","Wolfsbane"],"berry":["Blackberry","Blightberry","Blueberry","BoPBerry","BobsYerUncleRanks","Duskberry","Huckleberry","Maloberry","Raspberry","Skyberry","Stingberry","Strawberry","Torchberry"],"bush":["Blackberry","Blightberry","Blueberry","BoPBerry","Cassitine","Coppon","Corpseplant","Duskberry","Galvania","Huckleberry","Malaxia","Maloberry","Plumbshade","Pyrolusium","Raspberry","Silviscus","Skyberry","Stingberry","Strawberry"],"nether":["Blazereed","Blightberry","BlueGlowshroom","CobaltOreBerry","Duskberry","EvilOre","Eyebulb","Glowflower","Glowheat","Glowshroom","Goldfish","GreenGlowshroom","NetherStoneLily","Netherwart","PurpleGlowshroom","Skyberry","SoulSandLily","Stingberry","Tearstalks","Thornvine"],"reed":["Blazereed","Diareed","StickyCane","SugarCane","Withereed"],"fire":["Blazereed","Chilly","Creeperweed","Diareed","EmberMoss","EvilOre","Nickelback","Withereed"],"evil":["Blazereed","Corpseplant","Creeperweed","EvilOre","Eyebulb","Mandrake","Slimeplant","Spidernip","Tearstalks","Zomplant"],"blaze":["Blazereed","Cinderpearl"],"sulfur":["Blazereed","Creeperweed","Thiosulfine","Withereed"],"addictive":["Blightberry","Cocoa","Coffee","Corpseplant","Dayflower","Duskberry","EggPlant","Flax","Goldfish","Hemp","Skyberry","Spidernip","Stingberry","SugarBeet"],"healing":["Blightberry","Fertilia","Lazulia","Melon","MilkWart","Tearstalks"],"blue":["BlueGlowshroom","BlueOrchid","Blueberry","CobaltOreBerry","Dayflower","Diareed","Flax","Glowflower","Indigo","Lazulia","Sapphirum","Skyberry","ThauminiteOreBerry","WaterArtichoke"],"mushroom":["BlueGlowshroom","BrownMushroom","Corium","EggPlant","Fertilia","Glowshroom","GreenGlowshroom","PurpleGlowshroom","RedMushroom"],"light":["BlueGlowshroom","Glowflower","Glowheat","GlowingCoral","Glowshroom","GreenGlowshroom","PurpleGlowshroom","RedStraw","Shimmerleaf","Thornvine","Torchberry"],"red":["BoPBerry","Chilly","EmberMoss","Eyebulb","GraniteLily","Meatrose","NetherStoneLily","Netherwart","PinkTulip","Poppy","Pyrolusium","Raspberry","RedGraniteLily","RedMushroom","RedStraw","RedTulip","Rubyne","Strawberry","Tomato"],"crystal":["BobsYerUncleRanks","Diareed","EvilOre","Glowheat","Lazulia","Rubyne","Sapphirum"],"tree":["BonsaiAcacia","BonsaiBirch","BonsaiDarkOak","BonsaiJungle","BonsaiOak","BonsaiRubber","BonsaiSpruce","Cocoa","Lemon","Slimeplant"],"wood":["BonsaiAcacia","BonsaiBirch","BonsaiDarkOak","BonsaiJungle","BonsaiOak","BonsaiRubber","BonsaiSpruce","Liveroot","Tine"],"brown":["BonsaiDarkOak","BonsaiJungle","BonsaiOak","BonsaiRubber","BonsaiSpruce","BrownMushroom","Cocoa","Coffee","Corium","Corpseplant","Fertilia","Liveroot","ManaBean","Mandrake","Onion","SoulSandLily","Stingberry","Zomplant"],"sticky":["BonsaiRubber","Slimeplant","StickyCane"],"cactus":["Cactus","SaguaroCactus"],"oil":["Canola","SoulSandLily"],"tin":["Cassitine","TinOreBerry","Tine"],"magic":["Cinderpearl","Enderbloom","GlintWeed","ManaBean","Mandrake","Shimmerleaf","SpanishMoss","ThauminiteOreBerry","ThaumiumOreBerry","VoidOreBerry"],"water":["ClayLily","GlowingCoral","Goldfish","InkBloom","WaterArtichoke","Waterlily"],"bean":["Cocoa","Coffee","ManaBean"],"copper":["CopperOreBerry","Coppon","Malaxia"],"cotton":["Coppon","Cotton"],"cow":["Corium","Meatrose","MilkWart"],"undead":["Corpseplant","EssenceOreBerry","Withereed","Zomplant"],"silk":["Cotton","Flax","Hemp","Spidernip"],"saltpeter":["Creeperweed","SaltyRoot"],"coal":["Creeperweed","Diareed","Withereed"],"chicken":["EggPlant","Meatrose"],"climbable":["EmberMoss","FloweringVine","Grape","Ivy","Moss","SpanishMoss","Thornvine","Vine"],"alien":["EndStoneLily","Enderbloom"],"void":["Enderbloom","ThauminiteOreBerry","ThaumiumOreBerry","VoidOreBerry"],"iron":["Ferrofern","IronOreBerry","Steeleafranks"],"fish":["Goldfish","Meatrose"],"twilightForest":["KnightmetalBerry","Liveroot","Moss","Steeleafranks","Torchberry"],"tulip":["OrangeTulip","PinkTulip","PurpleTulip","RedTulip","WhiteTulip"],"lead":["Plumbilia","Plumbshade"]},"soilGloss":{"farmland":"Farmland","sand":"Sand or sandstone","soulsand":"Soul sand","dirtGrass":"Dirt or grass","mycelium":"Mycelium","end":"End stone","stone":"Stone, cobblestone and variants","netherrack":"Netherrack","brick":"Brick blocks","thaumLogs":"Thaumcraft logs","graveyard":"Graveyard dirt","slimy":"Slime grass or slimy mud","gravel":"Gravel","oilSands":"Oil sands"},"soilShort":{"farmland":"Farmland","sand":"Sand","soulsand":"Soul sand","dirtGrass":"Dirt/grass","mycelium":"Mycelium","end":"End stone","stone":"Stone","netherrack":"Netherrack","brick":"Bricks","thaumLogs":"Thaum logs","graveyard":"Graveyard dirt","slimy":"Slime grass","gravel":"Gravel","oilSands":"Oil sands"},"soilExpand":{"brick":["brick"],"dirtGrass":["dirtGrass"],"end":["end"],"farmland":["farmland"],"gravel":["gravel"],"graveyard":["graveyard"],"mushroom":["stone","dirtGrass","mycelium"],"mycelium":["mycelium"],"netherMushroom":["stone","dirtGrass","mycelium","netherrack"],"netherrack":["netherrack"],"oil":["sand","gravel","soulsand","oilSands"],"oilSands":["oilSands"],"sand":["sand"],"slimy":["slimy"],"slimyDirt":["dirtGrass","slimy"],"soulsand":["soulsand"],"stone":["stone"],"sugarcane":["sand","dirtGrass"],"thaumLogs":["thaumLogs"]}};
+const C = DATA.crops, MUT = DATA.mutations, POOLM = DATA.poolMembers;
+
+const byName = Object.values(C).sort((a, b) => a.tier - b.tier || a.name.localeCompare(b.name));
+const allSorted = Object.values(C).sort((a, b) => a.name.localeCompare(b.name));
+
+const LS = "cropsnh-owned-v1";
+
+/* localStorage can be blocked: private mode, or file:// in some browsers */
+const storage = (() => {
+  try {
+    localStorage.setItem(LS + "-probe", "1");
+    localStorage.removeItem(LS + "-probe");
+    return localStorage;
+  } catch (e) { return null; }
+})();
+
+let owned = new Set();
+if (storage) {
+  try { owned = new Set(JSON.parse(storage.getItem(LS) || "[]").filter(id => C[id])); } catch (e) {}
+}
+
+let view = "ready";
+let filter = "";
+let pairA = "", pairB = "";
+let target = "";
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const nm = id => C[id] ? C[id].name : id;
+const pct = p => (p * 100).toFixed(2) + "%";
+
+function save() {
+  if (storage) { try { storage.setItem(LS, JSON.stringify([...owned])); } catch (e) {} }
+  syncCode();
+}
+
+/* One step of undo, for the actions that rewrite the whole list at once.
+   Undo is itself undoable - it swaps the current list with the stored one.  */
+let undoState = null;
+function snapshot() { undoState = [...owned]; }
+
+/* ---------------------------------------------------------- backup */
+function currentCode() {
+  return JSON.stringify({
+    tool: "cropsnh-planner", v: 1,
+    saved: new Date().toISOString().slice(0, 10),
+    seeds: [...owned].sort()
+  }, null, 1);
+}
+function syncCode() {
+  const box = $("code");
+  if (box && document.activeElement !== box) box.value = currentCode();
+}
+function status(msg, kind) {
+  const s = $("status");
+  s.textContent = msg;
+  s.dataset.kind = kind || "";
+}
+
+function applyImport(text) {
+  let ids;
+  try {
+    const p = JSON.parse(text);
+    // `nasiona` is the key older exports used, kept so those still load
+    ids = Array.isArray(p) ? p : (p.seeds || p.owned || p.nasiona);
+  } catch (e) {
+    ids = text.split(/[\s,;]+/);            // a plain list of names works too
+  }
+  if (!Array.isArray(ids)) { status("Unrecognised format - paste a code from this tool.", "warn"); return; }
+  const known = ids.map(String).map(s => s.trim()).filter(id => C[id]);
+  const unknown = ids.length - known.length;
+  if (!known.length) { status("Found no known crops in that - nothing was changed.", "warn"); return; }
+  snapshot();
+  owned = new Set(known);
+  save(); render();
+  status(`Loaded ${known.length} crops` + (unknown > 0 ? ` · skipped ${unknown} unknown` : "") + " · Undo is in the rail", "ok");
+}
+
+/* ---------------------------------------------------------- requirements */
+/* Three blocks matter, always in this order:
+   the crop stick, the TOP BLOCK right under it, the UNDER BLOCK one deeper. */
+/* Several soil lists are just unions of other lists, so a crop's top block is
+   usually a choice of several blocks rather than one.                        */
+function topParts(crop) {
+  const out = [];
+  for (const s of crop.soil)
+    for (const p of (DATA.soilExpand[s] || [s]))
+      if (!out.includes(p)) out.push(p);
+  return out;
+}
+function topBlock(crop) {
+  const p = topParts(crop);
+  return p.map(s => DATA.soilGloss[s] || s).join(", or ");
+}
+function topBlockShort(crop) {
+  const p = topParts(crop);
+  return p.map(s => DATA.soilShort[s] || s).join(" / ");
+}
+function underBlock(crop) {
+  return crop.subsoil.length ? crop.subsoil.map(subLabel).join(" / ") : "";
+}
+function lightReq(crop) {
+  if (crop.maxLight !== null) return `max ${crop.maxLight} - dark`;
+  if (crop.minLight !== null && crop.minLight > 9) return `min ${crop.minLight}`;
+  return "";
+}
+
+function reqChips(crop) {
+  if (!crop) return "";
+  const out = [`<span class="chip soil"><span class="k">top block</span>${esc(topBlockShort(crop))}</span>`];
+  const u = underBlock(crop);
+  out.push(u
+    ? `<span class="chip sub"><span class="k">under block</span>${esc(u)}</span>`
+    : `<span class="chip none"><span class="k">under block</span>anything</span>`);
+  const l = lightReq(crop);
+  if (l) out.push(`<span class="chip light"><span class="k">light</span>${esc(l)}</span>`);
+  return `<div class="chips">${out.join("")}</div>`;
+}
+
+function subLabel(key) {
+  const d = DATA.subsoilDesc[key];
+  if (!d) return key;
+  const t = d.replace(/^Needs an? /i, "").replace(/ (under it )?to grow$/i, "").replace(/ under it$/i, "");
+  return t.charAt(0).toUpperCase() + t.slice(1);
+}
+
+/* ---------------------------------------------------------- logic */
+const missingOf = m => m.parents.filter(p => !owned.has(p));
+
+function readyList() {
+  return MUT.filter(m => !owned.has(m.out) && missingOf(m).length === 0)
+            .sort((a, b) => (C[a.out]?.tier ?? 99) - (C[b.out]?.tier ?? 99) || nm(a.out).localeCompare(nm(b.out)));
+}
+function nearList() {
+  return MUT.filter(m => !owned.has(m.out) && missingOf(m).length === 1)
+            .sort((a, b) => (C[a.out]?.tier ?? 99) - (C[b.out]?.tier ?? 99) || nm(a.out).localeCompare(nm(b.out)));
+}
+
+/* forward BFS: everything the current set can eventually produce */
+function reachable() {
+  const have = new Set(owned), via = new Map();
+  let grew = true;
+  while (grew) {
+    grew = false;
+    for (const m of MUT) {
+      if (have.has(m.out)) continue;
+      if (m.parents.every(p => have.has(p))) { have.add(m.out); via.set(m.out, m); grew = true; }
+    }
+  }
+  return { have, via };
+}
+
+function planFor(goal) {
+  const { have, via } = reachable();
+  if (!have.has(goal)) return null;
+  const steps = [], done = new Set(owned);
+  (function walk(id) {
+    if (done.has(id)) return;
+    const m = via.get(id);
+    if (!m) return;
+    m.parents.forEach(walk);
+    if (!done.has(id)) { done.add(id); steps.push(m); }
+  })(goal);
+  return steps;
+}
+
+/* Odds for a pair of parents.
+   a === b is allowed and matters: createLookupQueue() calls .distinct(), so two
+   identical crops fire no recipe at all, while createPoolQueue() does not
+   deduplicate - so pools still apply, and every pool of that crop matches.   */
+function oddsFor(a, b) {
+  if (!a || !b) return null;
+  const same = a === b;
+  const det = same ? [] : MUT.filter(m =>
+    m.parents.length === 2 && m.parents.includes(a) && m.parents.includes(b));
+  const pools = Object.keys(POOLM).filter(p =>
+    same ? POOLM[p].includes(a) : (POOLM[p].includes(a) && POOLM[p].includes(b)));
+
+  const rows = new Map();
+  const add = (id, p, via, isDet) => {
+    const r = rows.get(id) || { id, p: 0, via: new Set(), det: false };
+    r.p += p; r.det = r.det || !!isDet; if (via) r.via.add(via); rows.set(id, r);
+  };
+
+  if (det.length) {
+    // the engine picks ONE candidate at random among matching recipes
+    for (const m of det) add(m.out, 0.5 / det.length, "recipe", true);
+  } else {
+    for (const p of pools) {
+      const mem = POOLM[p];
+      for (const id of mem) add(id, 0.5 * (1 / pools.length) * (1 / mem.length), DATA.poolNames[p] || p);
+    }
+  }
+  /* crops you already have sink to the bottom; within each block, best odds first */
+  const held = r => owned.has(r.id) ? 1 : 0;
+  const list = [...rows.values()].sort((x, y) => held(x) - held(y) || y.p - x.p);
+  const gain = list.filter(r => !owned.has(r.id)).reduce((s, r) => s + r.p, 0);
+  return { same, det, pools, rows: list, gain, newCount: list.filter(r => !owned.has(r.id)).length };
+}
+
+/* Rank pairs from the owned set by the chance of anything new.
+   Pairs of the same crop twice are included - that is the most common setup. */
+function bestPairs(limit) {
+  const ids = [...owned];
+  const out = [];
+  for (let i = 0; i < ids.length; i++) {
+    for (let j = i; j < ids.length; j++) {
+      const o = oddsFor(ids[i], ids[j]);
+      if (o && o.gain > 0) out.push({ a: ids[i], b: ids[j], gain: o.gain, n: o.newCount, det: o.det.length > 0 });
+    }
+  }
+  return out.sort((x, y) => y.gain - x.gain || y.n - x.n).slice(0, limit);
+}
+
+/* ---------------------------------------------------------- rail */
+function renderRail() {
+  const q = filter.trim().toLowerCase();
+  const list = byName.filter(c => !q || c.name.toLowerCase().includes(q) || c.id.toLowerCase().includes(q));
+  const groups = new Map();
+  for (const c of list) (groups.get(c.tier) || groups.set(c.tier, []).get(c.tier)).push(c);
+
+  let html = "";
+  for (const [tier, cs] of [...groups.entries()].sort((x, y) => x[0] - y[0])) {
+    html += `<div class="tiergroup"><div class="tierhead">Tier ${tier}</div>`;
+    for (const c of cs) {
+      const mark = c.subsoil.length ? "◆" : "";
+      html += `<button class="seed" type="button" role="checkbox" data-id="${c.id}" aria-pressed="${owned.has(c.id)}">
+        <span class="box"></span><span class="nm">${esc(c.name)}</span>
+        <span class="mark" title="needs a specific block under the soil">${mark}</span></button>`;
+    }
+    html += `</div>`;
+  }
+  $("seedlist").innerHTML = html || `<div class="empty">No matches</div>`;
+  $("tally").textContent = `${owned.size} / ${byName.length}`;
+  $("undo").hidden = undoState === null;
+}
+
+/* ---------------------------------------------------------- views */
+function cardFor(m) {
+  const c = C[m.out];
+  const parents = m.parents.map(p =>
+    owned.has(p) ? `<b>${esc(nm(p))}</b>` : `<span class="miss">${esc(nm(p))}</span>`
+  ).join(`<span class="plus">+</span>`);
+  const mach = m.machineOnly
+    ? `<span class="chip mach"><span class="k">only in</span>Crop Breeder</span>` : "";
+  return `<article class="card">
+    <div class="card-top">
+      <button class="card-out" type="button" data-crop="${m.out}">${esc(nm(m.out))}</button>
+      <span class="tier">T${c ? c.tier : "?"}</span>
+    </div>
+    <div class="parents">${parents}</div>
+    ${reqChips(c)}
+    ${mach ? `<div class="chips">${mach}</div>` : ""}
+  </article>`;
+}
+
+function renderReady() {
+  const list = readyList();
+  if (!owned.size) return `<div class="empty">Tick off what you have in the rail on the left.</div>`;
+  if (!list.length) return `<div class="empty">No new recipe is fully covered by this set.<br>Try <b>One parent short</b> or the <b>Pool roulette</b>.</div>`;
+  return `<p class="viewnote">Recipes where you already hold every parent. Put the parents around a double crop stick, and make sure the ground under the stick satisfies the result's requirements - otherwise the attempt is discarded silently.</p>
+    <div class="grid">${list.map(m => cardFor(m)).join("")}</div>`;
+}
+
+function renderNear() {
+  const list = nearList();
+  if (!owned.size) return `<div class="empty">Tick off what you have in the rail on the left.</div>`;
+  if (!list.length) return `<div class="empty">No recipe is exactly one parent away.</div>`;
+  return `<p class="viewnote">One crop short, shown in <span style="color:var(--ore);font-weight:600">rust</span>. Click a result to see where the missing parent comes from.</p>
+    <div class="grid">${list.map(m => cardFor(m)).join("")}</div>`;
+}
+
+function renderPool() {
+  const opts = sel => allSorted.map(c =>
+    `<option value="${c.id}"${sel === c.id ? " selected" : ""}>${esc(c.name)}${owned.has(c.id) ? " ✓" : ""}</option>`).join("");
+  let html = `<p class="viewnote">What can come out of a double crop stick between two mature crops. Figures are the chance <b>per successful breeding attempt</b> (one fires on roughly every third growth tick). Picking the same crop twice is allowed - it is the most common setup.</p>
+    <div class="pairpick">
+      <label>Parent A<select class="field" id="selA"><option value="">-</option>${opts(pairA)}</select></label>
+      <label>Parent B<select class="field" id="selB"><option value="">-</option>${opts(pairB)}</select></label>
+      ${pairA || pairB ? `<button class="btn" id="clearPair" type="button">Clear pair</button>` : ""}
+    </div>`;
+
+  const o = oddsFor(pairA, pairB);
+  if (!o) return html + renderBestPairs();
+
+  const A = C[pairA], B = C[pairB];
+
+  html += o.newCount
+    ? `<p class="viewnote"><b style="color:var(--leaf)">${pct(o.gain)}</b> chance at one of <b>${o.newCount}</b> crops you do not have yet.</p>`
+    : `<p class="viewnote">This pair gives you nothing new - you already have every possible result.</p>`;
+
+  /* --- cloning branch --- */
+  html += `<div class="branch">50% - copy of a parent</div><div class="tablescroll"><table class="odds">`;
+  if (o.same) {
+    html += `<tr><td class="nm">${esc(A.name)}</td><td class="num">50.00%<span class="bar" style="width:100%"></span></td>
+      <td class="via">both neighbours are the same crop</td></tr>`;
+  } else {
+    html += `<tr><td class="nm">${esc(A.name)}</td><td class="num">25.00%<span class="bar" style="width:50%"></span></td><td class="via">clone of a neighbour</td></tr>
+      <tr><td class="nm">${esc(B.name)}</td><td class="num">25.00%<span class="bar" style="width:50%"></span></td><td class="via">clone of a neighbour</td></tr>`;
+  }
+  html += `</table></div>`;
+
+  /* --- mutation branch --- */
+  if (o.det.length) {
+    html += `<div class="branch">50% - deterministic recipe</div>
+      <p class="viewnote">This pair has a specific recipe, so the mutation branch goes there instead of drawing from a pool.
+      ${o.det.length > 1 ? `${o.det.length} recipes match and the engine picks one at random, hence ${pct(0.5 / o.det.length)} each. ` : ""}
+      If the recipe's conditions are not met, that half falls back to a pool draw instead.</p>
+      <div class="grid">${o.det.map(m => cardFor(m)).join("")}</div>`;
+    return html;
+  }
+
+  if (!o.pools.length) {
+    html += `<div class="branch">50% - mutation</div>
+      <div class="empty">${o.same
+        ? `<b>${esc(A.name)}</b> belongs to no pool - that crop is recipe-only.`
+        : `This pair shares neither a pool nor a recipe.`}<br>
+        The mutation branch always fails - you will only ever get copies of the parents.</div>`;
+    return html;
+  }
+
+  const poolTxt = o.pools.map(p => `${DATA.poolNames[p] || p} (${POOLM[p].length})`).join(", ");
+  const showLight = o.rows.some(r => lightReq(C[r.id]));   // column only when it applies
+  html += `<div class="branch">50% - draw from pools</div>
+    <p class="viewnote">${o.same
+      ? `Two identical crops match <b>every</b> pool ${esc(A.name)} belongs to: `
+      : `Shared pools: `}<b>${esc(poolTxt)}</b>.
+      The pool is drawn uniformly - a small pool is worth as much as a large one, it just spreads over fewer crops.</p>
+    <p class="viewnote"><b>Top block</b> is the one directly under the crop stick, <b>under block</b> is one deeper.
+      A result whose ground you have not built simply never gets planted, so setting those two blocks up for the
+      crop you actually want quietly removes most of this table.</p>
+    <div class="tablescroll"><table class="odds">
+      <tr><th>Result</th><th class="num">Chance</th><th>Pool</th><th>Top block</th><th>Under block</th>${showLight ? `<th>Light</th>` : ""}</tr>`;
+  const max = Math.max(...o.rows.map(r => r.p));   // rows are no longer ordered by odds
+  for (const r of o.rows) {
+    const c = C[r.id];
+    const have = owned.has(r.id);
+    const u = underBlock(c);
+    html += `<tr${have ? ` class="dead"` : ""}>
+      <td class="nm"><button class="inline-crop" type="button" data-crop="${r.id}">${esc(c.name)}</button>${have ? ` <span class="tier">have</span>` : ""}</td>
+      <td class="num">${pct(r.p)}<span class="bar" style="width:${(r.p / max * 100).toFixed(1)}%"></span></td>
+      <td class="via">${esc([...r.via].join(", "))}</td>
+      <td class="via">${esc(topBlockShort(c))}</td>
+      <td class="via"${u ? ` style="color:var(--ore)"` : ""}>${u ? esc(u) : "anything"}</td>
+      ${showLight ? `<td class="via"${lightReq(c) ? ` style="color:var(--ore)"` : ""}>${esc(lightReq(c) || "any")}</td>` : ""}
+    </tr>`;
+  }
+  html += `</table></div>`;
+  return html;
+}
+
+/* shown when no pair is picked */
+function renderBestPairs() {
+  if (owned.size < 1) return `<div class="empty">Pick two crops above - or tick off what you have on the left and I will rank the best pairs.</div>`;
+  const best = bestPairs(15);
+  if (!best.length) return `<div class="empty">No pair from your seeds yields anything new. You need a crop from outside the current set.</div>`;
+  let html = `<div class="branch">Best pairs from your seeds</div>
+    <p class="viewnote">Ranked by the total chance of a crop you do not have yet. Click a pair to load its full breakdown.</p>
+    <div class="tablescroll"><table class="odds">
+    <tr><th>Pair</th><th class="num">Chance at something new</th><th class="num">New</th><th>Branch</th></tr>`;
+  const max = best[0].gain;
+  for (const p of best) {
+    html += `<tr>
+      <td class="nm"><button class="inline-crop" type="button" data-pair="${p.a}|${p.b}">${esc(nm(p.a))}${p.a === p.b ? " ×2" : ` + ${esc(nm(p.b))}`}</button></td>
+      <td class="num">${pct(p.gain)}<span class="bar" style="width:${(p.gain / max * 100).toFixed(1)}%"></span></td>
+      <td class="num">${p.n}</td>
+      <td class="via">${p.det ? "recipe" : "pools"}</td>
+    </tr>`;
+  }
+  return html + `</table></div>`;
+}
+
+/* ---------------------------------------------------------- tips
+   Everything below was read out of the mod's compiled code. The plain
+   sentence is the advice; the WHY box is where it comes from.              */
+const TIPS = [
+  { h: "How one breeding attempt works",
+    lead: "A double crop stick is not a machine that runs once. It keeps rolling dice for as long as it stands there.",
+    items: [
+    ["A double crop stick only tries to breed on roughly <b>one growth tick in three</b>. Everything below is the chance <i>per attempt</i>, not per tick.",
+     "<em>attemptBreeding()</em> opens with a roll against the <em>Breeding Chance</em> config (default 3) and returns immediately on two out of three results."],
+    ["Every attempt is a coin flip. Half the time the stick <b>copies a neighbour</b> and gives you nothing new, half the time it actually <b>mutates</b>. Getting the same two crops back over and over is the normal case, not bad luck.",
+     "<em>getBreedingResult()</em> begins with a 50/50 draw. Heads takes the cloning path, which keeps only neighbours grown enough to cross, picks one at random and replants its crop. Tails takes the mutation path. If no neighbour is grown enough, the cloning path falls through to the mutation path instead."],
+    ["If the result cannot live on that spot, <b>nothing happens at all</b>. No message, no half-grown plant - the stick stays empty and rolls again later.",
+     "<em>attemptBreeding()</em> plants only when both <em>isValidSoilForCrop()</em> and <em>wouldCropBeAbleToGrow()</em> pass for the result. Otherwise the whole attempt is dropped."],
+  ]},
+
+  { h: "Steering what comes out",
+    lead: "You cannot control the dice, but you can decide which dice are on the table.",
+    items: [
+    ["<b>Two of the same crop can never produce a recipe result</b> - but they do open up every single pool that crop belongs to. It is the widest possible spread and the classic setup for finding something unexpected.",
+     "The recipe lookup runs the parents through a <em>.distinct()</em> filter first, so two identical crops collapse into one entry and fail the \"at least two parents\" check. The pool lookup has no such filter, so both entries survive and every pool containing that crop matches."],
+    ["<b>Two different crops that share a recipe will give that recipe</b>, not a random pool result. Pools only get a look in if the recipe's own conditions are not satisfied.",
+     "<em>getBreedingResult()</em> asks for matching recipes first. If there are any, one is drawn at random and its conditions checked; only when that check fails does it drop through to the pool draw."],
+    ["<b>A small pool is worth exactly as much as a huge one.</b> The pool is picked first, the crop second - so a 7-crop pool concentrates your odds seven ways, while a 50-crop pool scatters them.",
+     "The matching pools are collected into a list and one is chosen with a flat random index, then a member of that pool is chosen the same way. Pool size never weights either draw."],
+    ["A pool only counts if <b>at least two of the parents belong to it</b>.",
+     "<em>MutationPool.isMatch()</em> walks the parent list counting members and returns true the moment the counter reaches two."],
+    ["Requirements are a <b>filter, not an obstacle</b>. Build the ground for exactly the crop you want and most of the pool simply cannot be planted there - so the few that can show up far more often in practice.",
+     "This is the same <em>wouldCropBeAbleToGrow()</em> check. Every requirement whose <em>onlyPreventsHarvest()</em> is false stops the result from being planted at all, and the attempt is discarded rather than substituted."],
+  ]},
+
+  { h: "Where the blocks go",
+    lead: "Two different blocks matter, they are not the same block, and neither is the one you probably assumed.",
+    items: [
+    [`<b>Farmland is not dirt.</b> This is the single most common mistake. Tilling flips a block between two requirements that share nothing at all: <b>${Object.values(C).filter(c => topParts(c).join() === "farmland").length} crops want farmland</b> and refuse plain dirt, while <b>${Object.values(C).filter(c => topParts(c).includes("dirtGrass")).length} want dirt or grass</b> and stop being valid the moment you run a hoe over the block. Read the top block on the card, then go and look at what is actually under your stick.`,
+     "The two soil lists have no block in common. The farmland list holds exactly one entry, the tilled block. The dirt list holds dirt and grass plus a few modded dirt variants. Neither contains the other, so a hoe turns a valid spot into an invalid one in whichever direction you were not thinking about."],
+    ["The <b>top block</b> is the one directly under the crop stick. The <b>under block</b> goes one deeper, two blocks below the stick and underneath the top block.",
+     "<em>isValidSoilForCrop()</em> reads the block at <em>y - 1</em>. <em>SubSoilRequirement.getSubSoil()</em> starts by doing <em>y -= 2</em>."],
+    ["That block underneath is needed <b>at the moment the mutation happens</b>, not just afterwards for growing. Without it the roll is thrown away.",
+     "<em>SubSoilRequirement</em> reports <em>onlyPreventsHarvest() = false</em>, so the pre-planting check rejects the result outright. It also implements the breeding-requirement interface, whose check simply delegates to the growth check."],
+    ["<b>Ore counts, not just the crafted block.</b> A gold ore block under the soil works as well as a block of gold.",
+     "Sub-soils are registered with a helper that adds both the <em>block…</em> and <em>ore…</em> ore-dictionary entries, plus the GregTech material variants of each."],
+    ["<b>Light rules apply to mutation too.</b> A crop that wants darkness will never appear under an open sky, however perfect the rest of the setup is. Roof it over.",
+     "The minimum and maximum light requirements also report <em>onlyPreventsHarvest() = false</em>, so they gate planting in exactly the same way the sub-soil does."],
+    ["<b>Most crops accept several different top blocks</b>, so a listing like \"Stone / Dirt&#8203;/grass / Mycelium / Netherrack\" means any one of them will do - not all four. Glowshroom is a good example: almost anything you already have underfoot works.",
+     "Some soil lists are unions of other lists rather than lists of blocks. <em>netherMushroom</em> is <em>mushroom</em> plus <em>netherrack</em>, and <em>mushroom</em> is itself <em>stone</em> plus <em>dirt/grass</em> plus <em>mycelium</em>. This page expands those unions instead of showing the internal name."],
+    ["The parents can stand on <b>completely different ground</b> than the breeding stick. Only the stick's own ground decides what may appear on it.",
+     "The soil and sub-soil checks are run against the coordinates of the breeding stick alone; neighbours are only read for their crop and stats."],
+  ]},
+
+  { h: "Water and fertiliser",
+    lead: "Both feed a single number the game calls the Nutrient Score, and that number decides how fast anything grows - or whether it grows at all.",
+    items: [
+    ["<b>A full water tank is worth +10 Nutrient Score, and so is full fertiliser.</b> The base score is only 5, and an open sky adds 2. These two are by far the biggest thing you control.",
+     "The score is built as: base 5, plus up to 10 for water, plus up to 10 for fertiliser, plus 2 for sky access, plus whichever is larger of a humidity bonus (up to 14) or a liked-biome bonus (up to 28). Water and fertiliser count in tenths, so 100 stored units give the full 10."],
+    ["<b>A higher-tier crop will simply refuse to grow on a dry stick.</b> The score a crop needs is twice its tier - and base plus open sky only reaches 7, which covers tier 3 and nothing above it.",
+     "Growth rate compares <em>score × 5</em> against <em>tier × 10</em>, so the requirement is a score of twice the tier. Each point above adds 1% speed; each point below costs 4%, down to a floor of zero. Measured against the same crop with both tanks full: a tier 3 crop on a dry stick runs at about half speed, a tier 5 at roughly a fifth, and a tier 8 does not grow at all."],
+    ["<b>Keep both topped up all the time</b> - every growth tick spends a point of each, so they drain constantly. Outdoors, rain refills water for free. Early on the easiest tool by far is the <b>Watering Can from Extra Utilities</b>: hold right-click over the patch and it keeps the whole thing wet.",
+     "The growth tick decrements the water and fertiliser stores by one each. Rain calls a top-up of 11 points of water at a time, up to the cap of 100. (Which tool you use to water is practical advice - the mod only cares that the store is above zero.)"],
+    ["<b>Before you can produce fertiliser yourself, buy it from a vending machine.</b> It is the cheapest early supply, and a breeding farm wants it constantly - it feeds growth speed and protects your stats at the same time.",
+     "One store is read by two separate systems: the Nutrient Score takes up to 10 from it, and the stat roll uses it as the condition for clamping away negative results. (Where you buy it is practical advice, not a code detail.)"],
+    ["<b>The enriched versions are worth ten times as much per unit</b> - that goes for fertiliser and for Weed-EX alike. Once you can make them, the same tank lasts ten times longer.",
+     "Fluids are registered with a potency value. Plain fertiliser is 1 and enriched fertiliser is 10; plain Weed-EX is 1 and GregTech's WeedEX9000 is 10."],
+    ["<b>Distilled water hydrates twice as well as ordinary water</b>, which is worth knowing once you start piping it around.",
+     "The hydration registry gives ordinary water a potency of 1 and GregTech's distilled water a potency of 2."],
+  ]},
+
+  { h: "Getting good stats",
+    lead: "Growth, gain and resistance drift a little on every successful cross.",
+    items: [
+    ["<b>Fertiliser in every parent stops stats from dropping.</b> One parent running dry is enough to put the downside back on the table.",
+     "Each stat rolls a change between the <em>Breeding Range Low</em> and <em>High</em> configs, -2 to +4 by default. Only when every counted parent still has fertiliser is a negative roll clamped to zero."],
+    ["The starting point is the <b>average of the parents that actually counted</b> - not of everything standing around the stick.",
+     "The average is taken over the filtered parent list: for a copy that is only the neighbours holding the same crop, for a mutation only the recipe's parents or the matched pool's members. It is integer division, so fractions are lost each time."],
+  ]},
+
+  { h: "Weeds",
+    lead: "Weeds are far less dangerous to grown crops than they look - the danger is somewhere else.",
+    items: [
+    ["<b>Resistance 31 is total immunity, and it covers three separate things:</b> that plant cannot be overgrown, cannot fall sick, and cannot be trampled by you walking into it. It is the single most valuable stat to max on anything you intend to leave standing.",
+     "The disease check is <em>resistance &gt; random(0…30)</em>, which 31 always wins. The overgrowth path and the trample check each have their own explicit \"resistance of 31 or more, do nothing\" guard."],
+    ["Below 31, your odds of shrugging off a disease are simply <b>resistance ÷ 31</b>. Resistance 20 is about 65%, resistance 25 about 81%.",
+     "Same check as above - the roll is uniform over 0…30, so a resistance of r wins r out of 31 times."],
+    ["<b>Weeds never replace a grown crop anyway.</b> A weed beside a planted crop passes on disease instead, and that is what resistance blocks.",
+     "Weed planting has only two call sites in the whole mod, and both fire only on a stick holding no crop. When a spreading weed finds an occupied neighbour it calls the disease transfer instead."],
+    ["<b>The weak spot is the empty stick in the middle.</b> If a weed grows there, breeding stops dead - the parents are fine, but nothing will ever come out until you clear it.",
+     "An empty stick rolls the <em>Weed Spawn Chance</em> config (1 in 100 by default) on every tick where breeding did not succeed. Once it holds a weed the growth tick takes the \"has a crop\" branch and never calls <em>attemptBreeding()</em> again."],
+    ["<b>Weed-EX in the middle stick prevents that</b>, which is what makes a breeding setup safe to leave running unattended.",
+     "<em>spawnWeed()</em> checks the stored Weed-EX before anything else and burns 5 points instead of planting the weed."],
+    ["<b>Necrobloom turns into a weed factory once it is grown.</b> Keep one near a breeding setup and it will seed weeds into the empty sticks around it, which is a strange thing to discover about a crop you planted on purpose.",
+     "It declares that it starts spreading weeds at growth stage 8, which puts it on the same footing as an actual weed for that part of the growth tick."],
+  ]},
+
+  { h: "Walking through your farm",
+    lead: "Your own feet are one of the more reliable ways to lose a breeding setup.",
+    items: [
+    ["<b>Never sprint across a crop field.</b> Sprinting can snap a crop stick outright, taking the plant with it, and the rarer the crop the easier it breaks. Walk. Only a resistance-31 plant is safe from this.",
+     "Sprinting rolls a chance of roughly <em>1 in 100 × 0.95^tier</em>, then a second roll against the plant's resistance. That works out at about 1 in 95 for a tier 1 crop and 1 in 44 for a tier 16 one."],
+    ["<b>Do not jump down onto crops either.</b> Any drop over three quarters of a block can break the stick, and from about 1.75 blocks it is a certainty.",
+     "Landing triggers a check once the fall distance passes 0.75. The chance of breaking is the fall distance minus 0.75, so at 1.75 blocks the roll can no longer fail."],
+    ["<b>Crouch to walk past spiky crops.</b> Ore berries, Bamboo, Thornvine and Cactus all prick you for half a heart on contact, and sneaking skips the damage entirely.",
+     "The collision handler applies the crop's contact damage only when the entity is not sneaking. Those four crop types are the ones that declare a damage value above zero, all of them 1.0."],
+  ]},
+
+  { h: "Odd corners",
+    lead: "Things the mod authors clearly enjoyed putting in.",
+    items: [
+    ["<b>Do not step on a Goldfish plant.</b> It screams every single time you walk into it, and a fully grown one is genuinely startling: five times normal volume, pitched right down into ghast territory. A young one only manages a thin squeak, so the fright sneaks up on you as the patch matures.",
+     "Walking into one calls the scream unconditionally. Once mature it plays at volume 5.0 and pitch 0.5, against the 1.0 of an ordinary sound, so it carries a very long way. Before maturity the volume is 3.0 scaled by growth and the pitch is 4.0 minus growth, sliding from squeak to roar as it fills out."],
+    ["<b>It also screams on its own, at random, forever.</b> Roughly once every 512 growth ticks per plant. Put a big patch near your base and you have given yourself a permanent horror soundtrack.",
+     "Each growth tick rolls a number under 512 and screams when it comes up exactly 42. Two configs cover this: one silences crop sounds entirely, another leaves the random screams but stops the stepped-on one."],
+    ["<b>Trollplant lives up to the name.</b> To duplicate its seeds you need a screw made of Fool's Ruby, which is exactly the kind of item you would only ever make for this.",
+     "Its duplication catalyst is registered against the <em>screwFoolsRuby</em> ore dictionary entry. Its flavour text is \"Trololololol\"."],
+  ]},
+
+  { h: "Where crops come from",
+    lead: "Not everything in the game is reachable the same way.",
+    items: [
+    ["<b>Some crops belong to no pool at all.</b> Those can only ever come from their exact recipe - no amount of random crossing will produce one.",
+     `In this pack ${Object.values(C).filter(c => !c.pools.length).length} of the ${Object.keys(C).length} crops are registered into no pool. The crop drawer lists this under Mutation pools.`],
+    ["<b>Some crops have no recipe at all.</b> Barley is one - you find those in the world, you never breed them.",
+     "Crops with no entry as a recipe output are only obtainable as seeds from world generation, mobs or loot, plus whatever pools they belong to."],
+    ["A recipe with three or four parents needs that <b>many grown crops around one stick</b>. You have four sides and no more.",
+     "Only the four horizontal neighbours are read, and a recipe is matched against the parents actually present."],
+  ]},
+];
+
+function renderTips() {
+  let html = `<p class="viewnote">Everything here was read out of the pack's own code rather than collected from experience, so it should hold exactly. Hover <span class="why-btn" style="cursor:default">why</span> on any line to see where it comes from.</p><div class="tips">`;
+  for (const g of TIPS) {
+    html += `<section class="tipgroup"><h3>${g.h}</h3>`;
+    if (g.lead) html += `<p class="lead">${g.lead}</p>`;
+    html += `<ul class="tiplist">`;
+    for (const [text, why] of g.items) {
+      html += `<li class="tip"><div class="tip-line">
+        <p>${text}</p>
+        <span class="why"><button class="why-btn" type="button">why</button>
+          <span class="why-pop" role="note">${why}</span></span>
+      </div></li>`;
+    }
+    html += `</ul></section>`;
+  }
+  return html + `</div>`;
+}
+
+function renderPath() {
+  const { have } = reachable();
+  const opts = allSorted.map(c => {
+    const flag = owned.has(c.id) ? " - have" : (have.has(c.id) ? "" : " - out of reach");
+    return `<option value="${c.id}"${target === c.id ? " selected" : ""}>${esc(c.name)} (T${c.tier})${flag}</option>`;
+  }).join("");
+  let html = `<p class="viewnote">The shortest chain of deterministic recipes from what you own to the crop you want.</p>
+    <div class="pairpick"><label>Goal<select class="field" id="selTarget" style="min-width:260px"><option value="">-</option>${opts}</select></label></div>`;
+
+  if (!target) return html + `<div class="empty">Pick a goal.</div>`;
+  if (owned.has(target)) return html + `<div class="empty">You already have it.</div>`;
+
+  const steps = planFor(target);
+  if (!steps) {
+    const m = MUT.filter(x => x.out === target);
+    if (!m.length) return html + `<div class="empty"><b>${esc(nm(target))}</b> has no deterministic recipe at all - it only ever comes out of a pool draw. See the <b>Pool roulette</b>.</div>`;
+    const need = [...new Set(m.flatMap(x => x.parents))].filter(p => !owned.has(p));
+    return html + `<div class="empty">There is no route from your current set.<br>Missing links: <b>${need.map(nm).map(esc).join(", ")}</b></div>`;
+  }
+
+  html += `<div class="steps">`;
+  steps.forEach((m, i) => {
+    const c = C[m.out];
+    html += `<div class="step">
+      <div class="idx">${String(i + 1).padStart(2, "0")}</div>
+      <div class="body">
+        <div class="made"><button class="inline-crop" type="button" data-crop="${m.out}">${esc(nm(m.out))}</button>
+          <span class="tier">T${c ? c.tier : "?"}</span></div>
+        <div class="parents">${m.parents.map(p => esc(nm(p))).join(`<span class="plus">+</span>`)}</div>
+        ${reqChips(c)}
+        ${m.machineOnly ? `<div class="chips"><span class="chip mach"><span class="k">only in</span>Crop Breeder</span></div>` : ""}
+      </div></div>`;
+  });
+  html += `</div>`;
+  return html;
+}
+
+/* ---------------------------------------------------------- drawer */
+function openDrawer(id) {
+  const c = C[id]; if (!c) return;
+  const from = MUT.filter(m => m.out === id);
+  const used = MUT.filter(m => m.parents.includes(id));
+  const sub = c.subsoil.map(k => {
+    const info = DATA.subsoil[k] || {};
+    const acc = [...(info.oredict || []), ...(info.modBlocks || [])];
+    return `<dt>Under block</dt><dd>${esc(DATA.subsoilDesc[k] || k)}` +
+      (acc.length ? `<br><span style="font-family:var(--face-data);font-size:12px;color:var(--ink-faint)">${esc(acc.join(", "))}</span>` : "") +
+      `</dd>`;
+  }).join("");
+
+  $("drawer").innerHTML = `
+    <div class="drawer-top">
+      <h2>${esc(c.name)}</h2>
+      <button class="btn close" type="button" id="closeDrawer">Close</button>
+    </div>
+    ${c.flavour ? `<p class="flav">${esc(c.flavour)}</p>` : ""}
+
+    <div class="dsec"><h3>Growing conditions</h3>
+      <p class="flav" style="font-style:normal;margin-bottom:8px">Crop stick on top, <b>top block</b> directly under it, <b>under block</b> one deeper.</p>
+      <dl class="dl">
+        <dt>Tier</dt><dd>${c.tier}</dd>
+        <dt>Top block</dt><dd>${topParts(c).length > 1
+          ? `any one of:<br>` + topParts(c).map(s => `· ${esc(DATA.soilGloss[s] || s)}`).join("<br>")
+          : esc(topBlock(c))}</dd>
+        ${c.subsoil.length ? sub : `<dt>Under block</dt><dd>anything - no requirement</dd>`}
+        ${c.maxLight !== null ? `<dt>Light</dt><dd>max ${c.maxLight} - needs to be dark</dd>` : ""}
+        ${c.minLight !== null ? `<dt>Light</dt><dd>min ${c.minLight}</dd>` : ""}
+        <dt>Growth time</dt><dd>${c.growth ?? "-"}</dd>
+      </dl>
+      <button class="btn own-toggle" type="button" id="toggleOwn">${owned.has(id) ? "✓ Have it - untick" : "Add to my seeds"}</button>
+    </div>
+
+    <div class="dsec"><h3>Mutation pools (${c.pools.length})</h3>
+      <div class="linkrow">${c.pools.length
+        ? c.pools.map(p => `<span>${esc(DATA.poolNames[p] || p)} <span class="tier">${POOLM[p] ? POOLM[p].length : 0}</span></span>`).join("")
+        : `<span style="color:var(--ink-faint)">None - this crop can only be obtained from a recipe.</span>`}</div>
+    </div>
+
+    <div class="dsec"><h3>How to get it (${from.length})</h3>
+      <div class="linkrow">${from.length
+        ? from.map(m => `<span>${m.parents.map(p =>
+            `<button class="inline-crop" type="button" data-crop="${p}">${esc(nm(p))}</button>`).join(" + ")}${m.machineOnly ? " <span class=\"tier\">Crop Breeder</span>" : ""}</span>`).join("")
+        : `<span style="color:var(--ink-faint)">No recipe - pools only.</span>`}</div>
+    </div>
+
+    <div class="dsec"><h3>Used as a parent (${used.length})</h3>
+      <div class="linkrow">${used.length
+        ? used.map(m => `<span><button class="inline-crop" type="button" data-crop="${m.out}">${esc(nm(m.out))}</button>
+            <span style="color:var(--ink-faint);font-size:12px"> ← ${m.parents.map(p => esc(nm(p))).join(" + ")}</span></span>`).join("")
+        : `<span style="color:var(--ink-faint)">Nowhere.</span>`}</div>
+    </div>`;
+
+  $("drawer").dataset.open = "true";
+  $("drawer").setAttribute("aria-hidden", "false");
+  $("scrim").dataset.open = "true";
+  $("closeDrawer").onclick = closeDrawer;
+  $("toggleOwn").onclick = () => { toggle(id); openDrawer(id); };
+}
+function closeDrawer() {
+  $("drawer").dataset.open = "false";
+  $("drawer").setAttribute("aria-hidden", "true");
+  $("scrim").dataset.open = "false";
+}
+
+/* ---------------------------------------------------------- render */
+function render() {
+  renderRail();
+  for (const t of document.querySelectorAll(".tab"))
+    t.setAttribute("aria-selected", t.dataset.view === view);
+  $("n-ready").textContent = owned.size ? readyList().length : "";
+  $("n-near").textContent = owned.size ? nearList().length : "";
+  $("view").innerHTML =
+    view === "ready" ? renderReady() :
+    view === "near" ? renderNear() :
+    view === "pool" ? renderPool() :
+    view === "tips" ? renderTips() : renderPath();
+
+  const sa = $("selA"), sb = $("selB"), st = $("selTarget");
+  if (sa) sa.onchange = e => { pairA = e.target.value; render(); };
+  if (sb) sb.onchange = e => { pairB = e.target.value; render(); };
+  if (st) st.onchange = e => { target = e.target.value; render(); };
+}
+
+function toggle(id) {
+  owned.has(id) ? owned.delete(id) : owned.add(id);
+  save(); render();
+}
+
+document.addEventListener("click", e => {
+  const seed = e.target.closest(".seed");
+  if (seed) { toggle(seed.dataset.id); return; }
+  const pair = e.target.closest("[data-pair]");
+  if (pair) { [pairA, pairB] = pair.dataset.pair.split("|"); render(); return; }
+  const crop = e.target.closest("[data-crop]");
+  if (crop) { openDrawer(crop.dataset.crop); return; }
+  if (e.target.id === "clearPair") { pairA = pairB = ""; render(); return; }
+  const tab = e.target.closest(".tab");
+  if (tab) { view = tab.dataset.view; render(); return; }
+  if (e.target.id === "scrim") closeDrawer();
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeDrawer(); });
+
+$("search").addEventListener("input", e => { filter = e.target.value; renderRail(); });
+
+$("clearAll").onclick = () => {
+  if (!owned.size) return;
+  snapshot(); owned.clear(); save(); render();
+  status(`Cleared ${undoState.length} crops - Undo is next to Clear.`, "warn");
+};
+
+$("undo").onclick = () => {
+  if (undoState === null) return;
+  const back = undoState;
+  snapshot();                       // so Undo can be undone
+  owned = new Set(back);
+  save(); render();
+  status(`Restored ${owned.size} crops.`, "ok");
+};
+
+/* --- export / import --- */
+$("btnCopy").onclick = async () => {
+  const box = $("code");
+  box.value = currentCode();
+  try {
+    await navigator.clipboard.writeText(box.value);
+    status("Copied to clipboard.", "ok");
+  } catch (e) {
+    box.focus(); box.select();
+    status("Clipboard is blocked - the box is selected, press Ctrl+C.", "warn");
+  }
+};
+
+$("btnLoad").onclick = () => applyImport($("code").value);
+
+/* A sandboxed frame ignores <a download> silently instead of throwing, so the
+   button is only offered when this page is the top-level document.          */
+const embedded = (() => {
+  try { return window.self !== window.top; } catch (e) { return true; }
+})();
+
+$("btnFile").onclick = () => {
+  const stamp = new Date().toISOString().slice(0, 10);
+  try {
+    const url = URL.createObjectURL(new Blob([currentCode()], { type: "application/json" }));
+    const a = document.createElement("a");
+    a.href = url; a.download = `cropsnh-seeds-${stamp}.json`;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+    status(`Sent cropsnh-seeds-${stamp}.json to your downloads.`, "ok");
+  } catch (e) {
+    status("The browser refused the download - use Copy instead.", "warn");
+  }
+};
+
+$("btnOpen").onclick = () => $("filein").click();
+$("filein").onchange = e => {
+  const f = e.target.files && e.target.files[0];
+  if (!f) return;
+  const r = new FileReader();
+  r.onload = () => { $("code").value = r.result; applyImport(r.result); };
+  r.onerror = () => status("Could not read that file.", "warn");
+  r.readAsText(f);
+  e.target.value = "";
+};
+
+/* Only downloads are gated by the sandbox - the file picker still opens, so
+   "Open file" stays available either way.                                    */
+$("btnFile").hidden = embedded;
+$("dlnote").hidden = !embedded;
+
+/* clicking the box selects everything, so Ctrl+C always works */
+$("code").addEventListener("focus", e => e.target.select());
+
+if (!storage) {
+  const w = $("storagewarn");
+  w.hidden = false;
+  w.textContent = embedded
+    ? "This browser will not let the page store anything, so your ticks disappear on reload. Press Copy and keep the text somewhere before you close the tab."
+    : "This browser will not let the page store anything, so your ticks disappear on reload. Take a copy with Download file or Copy before you close it.";
+}
+
+$("src").textContent = `${byName.length} crops · ${MUT.length} recipes · ${Object.keys(POOLM).length} pools`;
+render();
+syncCode();
+</script>
+
+</body>
+</html>

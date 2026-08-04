@@ -1,0 +1,7200 @@
+{
+ "crops": {
+  "Allium": {
+   "id": "Allium",
+   "internal": "allium",
+   "name": "Allium",
+   "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.flowers.CropAllium",
+   "tier": 2,
+   "soil": [
+    "dirtGrass"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "purple",
+    "root",
+    "flower"
+   ],
+   "flavour": null
+  },
+  "AluminiumOreBerry": {
+   "id": "AluminiumOreBerry",
+   "internal": "aluminiumOreBerry",
+   "name": "Aluminium Oreberry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.oreBerries.CropAluminiumOreBerry",
+   "tier": 5,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "aluminium"
+   ],
+   "maxLight": 10,
+   "minLight": null,
+   "growth": 6000,
+   "pools": [
+    "white",
+    "oreBerry",
+    "danger",
+    "metal"
+   ],
+   "flavour": null
+  },
+  "AndesiteLily": {
+   "id": "AndesiteLily",
+   "internal": "andesiteLily",
+   "name": "Andesite Lily",
+   "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.modern.CropAndesiteLily",
+   "tier": 1,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "modernAndesite"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "stone",
+    "gray",
+    "stone"
+   ],
+   "flavour": null
+  },
+  "ArditeOreBerry": {
+   "id": "ArditeOreBerry",
+   "internal": "arditeOreBerry",
+   "name": "Ardite Oreberry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.oreBerries.CropArditeOreBerry",
+   "tier": 5,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "ardite"
+   ],
+   "maxLight": 10,
+   "minLight": null,
+   "growth": 6000,
+   "pools": [
+    "orange",
+    "oreBerry",
+    "danger",
+    "metal"
+   ],
+   "flavour": null
+  },
+  "Argentia": {
+   "id": "Argentia",
+   "internal": "argentia",
+   "name": "Argentia",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropArgentia",
+   "tier": 7,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "silver"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1400,
+   "pools": [
+    "white",
+    "metal",
+    "shiny",
+    "tendrilly",
+    "silver"
+   ],
+   "flavour": null
+  },
+  "Auronia": {
+   "id": "Auronia",
+   "internal": "auronia",
+   "name": "Auronia",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropAuronia",
+   "tier": 8,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "gold"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 3700,
+   "pools": [
+    "yellow",
+    "dense",
+    "metal",
+    "tendrilly",
+    "gold"
+   ],
+   "flavour": null
+  },
+  "AzureBluet": {
+   "id": "AzureBluet",
+   "internal": "azureBluet",
+   "name": "Azure Bluet",
+   "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.flowers.CropAzureBluet",
+   "tier": 2,
+   "soil": [
+    "dirtGrass"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "white",
+    "flower"
+   ],
+   "flavour": null
+  },
+  "Bamboo": {
+   "id": "Bamboo",
+   "internal": "bamboo",
+   "name": "Bamboo Shoot",
+   "cls": "com.gtnewhorizon.cropsnh.crops.biomesoplenty.CropBamboo",
+   "tier": 2,
+   "soil": [
+    "dirtGrass"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 250,
+   "pools": [
+    "green",
+    "stem",
+    "danger",
+    "leafy"
+   ],
+   "flavour": null
+  },
+  "Barley": {
+   "id": "Barley",
+   "internal": "barley",
+   "name": "Barley",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.natura.CropBarley",
+   "tier": 2,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 675,
+   "pools": [
+    "green",
+    "wheat",
+    "food"
+   ],
+   "flavour": null
+  },
+  "BasaltLily": {
+   "id": "BasaltLily",
+   "internal": "basaltLily",
+   "name": "Basalt Lily",
+   "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.CropBasaltLily",
+   "tier": 1,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "basalt"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "black",
+    "dark",
+    "stone"
+   ],
+   "flavour": null
+  },
+  "Bauxia": {
+   "id": "Bauxia",
+   "internal": "bauxia",
+   "name": "Bauxia",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropBauxia",
+   "tier": 6,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "aluminiumBauxite"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1200,
+   "pools": [],
+   "flavour": null
+  },
+  "Belladonna": {
+   "id": "Belladonna",
+   "internal": "belladonna",
+   "name": "Belladonna",
+   "cls": "com.gtnewhorizon.cropsnh.crops.witchery.CropBelladonna",
+   "tier": 4,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1100,
+   "pools": [
+    "purple",
+    "flower",
+    "poison",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "BlackGraniteLily": {
+   "id": "BlackGraniteLily",
+   "internal": "blackGraniteLily",
+   "name": "Black Granite Lily",
+   "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.CropBlackGraniteLily",
+   "tier": 1,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "blackGranite"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "black",
+    "dark",
+    "stone"
+   ],
+   "flavour": null
+  },
+  "Blackberry": {
+   "id": "Blackberry",
+   "internal": "blackberry",
+   "name": "Blackberry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.natura.CropBlackberry",
+   "tier": 2,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 200,
+   "pools": [
+    "black",
+    "berry",
+    "bush",
+    "food"
+   ],
+   "flavour": null
+  },
+  "Blazereed": {
+   "id": "Blazereed",
+   "internal": "blazereed",
+   "name": "Blazereed",
+   "cls": "com.gtnewhorizon.cropsnh.crops.mobs.CropBlazereed",
+   "tier": 6,
+   "soil": [
+    "netherrack"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 3600,
+   "pools": [
+    "orange",
+    "nether",
+    "reed",
+    "fire",
+    "evil",
+    "blaze",
+    "ingredient",
+    "sulfur"
+   ],
+   "flavour": null
+  },
+  "Blightberry": {
+   "id": "Blightberry",
+   "internal": "blightberry",
+   "name": "Blightberry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.natura.nether.berry.CropBlightberry",
+   "tier": 4,
+   "soil": [
+    "netherrack"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 300,
+   "pools": [
+    "green",
+    "nether",
+    "berry",
+    "bush",
+    "danger",
+    "poison",
+    "addictive",
+    "food",
+    "healing",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "BlueGlowshroom": {
+   "id": "BlueGlowshroom",
+   "internal": "blueGlowshroom",
+   "name": "Blue Glowshroom",
+   "cls": "com.gtnewhorizon.cropsnh.crops.natura.nether.glowshroom.CropBlueGlowshroom",
+   "tier": 3,
+   "soil": [
+    "netherMushroom"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "blue",
+    "nether",
+    "mushroom",
+    "light",
+    "food",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "BlueOrchid": {
+   "id": "BlueOrchid",
+   "internal": "blueOrchid",
+   "name": "Blue Orchid",
+   "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.flowers.CropBlueOrchid",
+   "tier": 2,
+   "soil": [
+    "dirtGrass"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "blue",
+    "flower"
+   ],
+   "flavour": null
+  },
+  "Blueberry": {
+   "id": "Blueberry",
+   "internal": "blueberry",
+   "name": "Blueberry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.natura.CropBlueberry",
+   "tier": 2,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 200,
+   "pools": [
+    "blue",
+    "berry",
+    "bush",
+    "food"
+   ],
+   "flavour": null
+  },
+  "BoPBerry": {
+   "id": "BoPBerry",
+   "internal": "bopBerry",
+   "name": "Berry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.bop.CropBoPBerry",
+   "tier": 2,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 200,
+   "pools": [
+    "red",
+    "berry",
+    "bush",
+    "food"
+   ],
+   "flavour": null
+  },
+  "BobsYerUncleRanks": {
+   "id": "BobsYerUncleRanks",
+   "internal": "bobsYerUncleRanks",
+   "name": "Bobs-Yer-Uncle-Ranks",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropBobsYerUncleRanks",
+   "tier": 6,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "emerald"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 3000,
+   "pools": [
+    "green",
+    "berry",
+    "crystal",
+    "shiny",
+    "tendrilly"
+   ],
+   "flavour": null
+  },
+  "BonsaiAcacia": {
+   "id": "BonsaiAcacia",
+   "internal": "bonsaiAcacia",
+   "name": "Acacia Bonsai",
+   "cls": "net.minecraft.item.ItemStack",
+   "tier": 1,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": null,
+   "pools": [
+    "orange",
+    "tree",
+    "leafy",
+    "wood"
+   ],
+   "flavour": null
+  },
+  "BonsaiBirch": {
+   "id": "BonsaiBirch",
+   "internal": "bonsaiBirch",
+   "name": "Birch Bonsai",
+   "cls": "net.minecraft.item.ItemStack",
+   "tier": 1,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": null,
+   "pools": [
+    "white",
+    "tree",
+    "leafy",
+    "wood"
+   ],
+   "flavour": null
+  },
+  "BonsaiDarkOak": {
+   "id": "BonsaiDarkOak",
+   "internal": "bonsaiDarkOak",
+   "name": "Dark Oak Bonsai",
+   "cls": "net.minecraft.item.ItemStack",
+   "tier": 1,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": null,
+   "pools": [
+    "brown",
+    "tree",
+    "leafy",
+    "dark",
+    "wood",
+    "food"
+   ],
+   "flavour": null
+  },
+  "BonsaiJungle": {
+   "id": "BonsaiJungle",
+   "internal": "bonsaiJungle",
+   "name": "Jungle Bonsai",
+   "cls": "net.minecraft.item.ItemStack",
+   "tier": 1,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": null,
+   "pools": [
+    "brown",
+    "tree",
+    "leafy",
+    "wood"
+   ],
+   "flavour": null
+  },
+  "BonsaiOak": {
+   "id": "BonsaiOak",
+   "internal": "bonsaiOak",
+   "name": "Oak Bonsai",
+   "cls": "net.minecraft.item.ItemStack",
+   "tier": 1,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": null,
+   "pools": [
+    "brown",
+    "tree",
+    "leafy",
+    "wood",
+    "food"
+   ],
+   "flavour": null
+  },
+  "BonsaiRubber": {
+   "id": "BonsaiRubber",
+   "internal": "bonsaiRubber",
+   "name": "Rubber Bonsai",
+   "cls": "java.awt.Color",
+   "tier": 1,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": null,
+   "pools": [
+    "brown",
+    "tree",
+    "wood",
+    "sticky"
+   ],
+   "flavour": null
+  },
+  "BonsaiSlimy": {
+   "id": "BonsaiSlimy",
+   "internal": "bonsaiSlimy",
+   "name": "Slimy Bonsai",
+   "cls": "java.awt.Color",
+   "tier": 1,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": null,
+   "pools": [],
+   "flavour": null
+  },
+  "BonsaiSpruce": {
+   "id": "BonsaiSpruce",
+   "internal": "bonsaiSpruce",
+   "name": "Spruce Bonsai",
+   "cls": "net.minecraft.item.ItemStack",
+   "tier": 1,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": null,
+   "pools": [
+    "brown",
+    "tree",
+    "wood"
+   ],
+   "flavour": null
+  },
+  "BrownMushroom": {
+   "id": "BrownMushroom",
+   "internal": "brownMushroom",
+   "name": "Brown Mushroom",
+   "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.mushrooms.CropBrownMushroom",
+   "tier": 1,
+   "soil": [
+    "mushroom"
+   ],
+   "subsoil": [],
+   "maxLight": 9,
+   "minLight": null,
+   "growth": 400,
+   "pools": [
+    "brown",
+    "mushroom",
+    "food"
+   ],
+   "flavour": null
+  },
+  "Cactus": {
+   "id": "Cactus",
+   "internal": "cactus",
+   "name": "Cactus",
+   "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.CropCactus",
+   "tier": 3,
+   "soil": [
+    "sand"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 450,
+   "pools": [
+    "green",
+    "cactus",
+    "danger"
+   ],
+   "flavour": null
+  },
+  "Canola": {
+   "id": "Canola",
+   "internal": "canola",
+   "name": "Canola",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropCanola",
+   "tier": 4,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 450,
+   "pools": [
+    "yellow",
+    "wheat",
+    "food",
+    "oil"
+   ],
+   "flavour": null
+  },
+  "Carrot": {
+   "id": "Carrot",
+   "internal": "carrot",
+   "name": "Carrot",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.vanilla.CropCarrot",
+   "tier": 2,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 800,
+   "pools": [
+    "orange",
+    "root",
+    "food",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "Cassitine": {
+   "id": "Cassitine",
+   "internal": "cassitine",
+   "name": "Cassitine",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropCassitine",
+   "tier": 6,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "tin"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 2800,
+   "pools": [
+    "gray",
+    "bush",
+    "leafy",
+    "metal",
+    "shiny",
+    "tin"
+   ],
+   "flavour": null
+  },
+  "Chilly": {
+   "id": "Chilly",
+   "internal": "chilly",
+   "name": "Chilly",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.CropChilly",
+   "tier": 4,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 800,
+   "pools": [
+    "red",
+    "fire",
+    "food"
+   ],
+   "flavour": null
+  },
+  "Cinderpearl": {
+   "id": "Cinderpearl",
+   "internal": "cinderpearl",
+   "name": "Cinderpearl",
+   "cls": "com.gtnewhorizon.cropsnh.crops.thaumcraft.CropCinderpearl",
+   "tier": 5,
+   "soil": [
+    "dirtGrass"
+   ],
+   "subsoil": [
+    "blaze"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 4000,
+   "pools": [
+    "orange",
+    "magic",
+    "blaze"
+   ],
+   "flavour": null
+  },
+  "ClayLily": {
+   "id": "ClayLily",
+   "internal": "clayLily",
+   "name": "Clay Lily",
+   "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.CropClayLily",
+   "tier": 1,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "clay"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 850,
+   "pools": [
+    "gray",
+    "water",
+    "stone"
+   ],
+   "flavour": null
+  },
+  "CobaltOreBerry": {
+   "id": "CobaltOreBerry",
+   "internal": "cobaltOreBerry",
+   "name": "Cobalt Oreberry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.oreBerries.CropCobaltOreBerry",
+   "tier": 5,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "cobalt"
+   ],
+   "maxLight": 10,
+   "minLight": null,
+   "growth": 6000,
+   "pools": [
+    "blue",
+    "nether",
+    "oreBerry",
+    "danger",
+    "metal"
+   ],
+   "flavour": null
+  },
+  "Cocoa": {
+   "id": "Cocoa",
+   "internal": "cocoa",
+   "name": "Cocoa",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.vanilla.CropCocoa",
+   "tier": 3,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 1700,
+   "pools": [
+    "brown",
+    "bean",
+    "tree",
+    "leafy",
+    "addictive",
+    "food"
+   ],
+   "flavour": null
+  },
+  "Coffee": {
+   "id": "Coffee",
+   "internal": "coffee",
+   "name": "Coffee",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.CropCoffee",
+   "tier": 7,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 2800,
+   "pools": [
+    "brown",
+    "bean",
+    "leafy",
+    "addictive",
+    "food"
+   ],
+   "flavour": null
+  },
+  "CopperOreBerry": {
+   "id": "CopperOreBerry",
+   "internal": "copperOreBerry",
+   "name": "Copper Oreberry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.oreBerries.CropCopperOreBerry",
+   "tier": 5,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "copper"
+   ],
+   "maxLight": 10,
+   "minLight": null,
+   "growth": 6000,
+   "pools": [
+    "orange",
+    "oreBerry",
+    "danger",
+    "metal",
+    "shiny",
+    "copper"
+   ],
+   "flavour": null
+  },
+  "Coppon": {
+   "id": "Coppon",
+   "internal": "coppon",
+   "name": "Coppon",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropCoppon",
+   "tier": 6,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "copper"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1200,
+   "pools": [
+    "orange",
+    "bush",
+    "metal",
+    "shiny",
+    "cotton",
+    "copper"
+   ],
+   "flavour": null
+  },
+  "Corium": {
+   "id": "Corium",
+   "internal": "corium",
+   "name": "Corium",
+   "cls": "com.gtnewhorizon.cropsnh.crops.mobs.CropCorium",
+   "tier": 6,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 800,
+   "pools": [
+    "brown",
+    "mushroom",
+    "cow"
+   ],
+   "flavour": null
+  },
+  "Corpseplant": {
+   "id": "Corpseplant",
+   "internal": "corpseplant",
+   "name": "Corpseplant",
+   "cls": "com.gtnewhorizon.cropsnh.crops.mobs.CropCorpseplant",
+   "tier": 5,
+   "soil": [
+    "graveyard"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 800,
+   "pools": [
+    "brown",
+    "bush",
+    "evil",
+    "poison",
+    "undead",
+    "addictive",
+    "food"
+   ],
+   "flavour": null
+  },
+  "Cotton": {
+   "id": "Cotton",
+   "internal": "cotton",
+   "name": "Cotton",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropCotton",
+   "tier": 3,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 900,
+   "pools": [
+    "white",
+    "tendrilly",
+    "cotton",
+    "silk"
+   ],
+   "flavour": null
+  },
+  "Creeperweed": {
+   "id": "Creeperweed",
+   "internal": "creeperweed",
+   "name": "Creeperweed",
+   "cls": "com.gtnewhorizon.cropsnh.crops.mobs.CropCreeperweed",
+   "tier": 7,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1000,
+   "pools": [
+    "green",
+    "evil",
+    "fire",
+    "tendrilly",
+    "sulfur",
+    "saltpeter",
+    "coal",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "Cucumber": {
+   "id": "Cucumber",
+   "internal": "cucumber",
+   "name": "Cucumber",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.CropCucumber",
+   "tier": 4,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 800,
+   "pools": [
+    "green",
+    "tendrilly",
+    "food"
+   ],
+   "flavour": null
+  },
+  "Dandelion": {
+   "id": "Dandelion",
+   "internal": "dandelion",
+   "name": "Dandelion",
+   "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.flowers.CropDandelion",
+   "tier": 2,
+   "soil": [
+    "dirtGrass"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "yellow",
+    "flower"
+   ],
+   "flavour": null
+  },
+  "Dayflower": {
+   "id": "Dayflower",
+   "internal": "dayflower",
+   "name": "Dayflower",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropDayflower",
+   "tier": 2,
+   "soil": [
+    "dirtGrass"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "blue",
+    "flower",
+    "addictive"
+   ],
+   "flavour": null
+  },
+  "DeepslateLily": {
+   "id": "DeepslateLily",
+   "internal": "deepslateLily",
+   "name": "Deepslate Lily",
+   "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.etfuturum.CropDeepslateLily",
+   "tier": 1,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "deepslate"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "black",
+    "dark",
+    "dense",
+    "stone"
+   ],
+   "flavour": null
+  },
+  "Diareed": {
+   "id": "Diareed",
+   "internal": "diareed",
+   "name": "Diareed",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropDiareed",
+   "tier": 12,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "diamond"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 7200,
+   "pools": [
+    "blue",
+    "reed",
+    "crystal",
+    "fire",
+    "shiny",
+    "coal"
+   ],
+   "flavour": null
+  },
+  "DioriteLily": {
+   "id": "DioriteLily",
+   "internal": "dioriteLily",
+   "name": "Diorite Lily",
+   "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.modern.CropDioriteLily",
+   "tier": 1,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "modernDiorite"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "white",
+    "stone"
+   ],
+   "flavour": null
+  },
+  "Duskberry": {
+   "id": "Duskberry",
+   "internal": "duskberry",
+   "name": "Duskberry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.natura.nether.berry.CropDuskberry",
+   "tier": 4,
+   "soil": [
+    "netherrack"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 300,
+   "pools": [
+    "gray",
+    "nether",
+    "berry",
+    "bush",
+    "danger",
+    "poison",
+    "addictive",
+    "food",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "EggPlant": {
+   "id": "EggPlant",
+   "internal": "eggPlant",
+   "name": "Egg Plant",
+   "cls": "com.gtnewhorizon.cropsnh.crops.mobs.CropEggPlant",
+   "tier": 6,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 1200,
+   "pools": [
+    "white",
+    "mushroom",
+    "addictive",
+    "chicken",
+    "food"
+   ],
+   "flavour": "Not to be confused with eggplants."
+  },
+  "EmberMoss": {
+   "id": "EmberMoss",
+   "internal": "emberMoss",
+   "name": "Ember Moss",
+   "cls": "com.gtnewhorizon.cropsnh.crops.witchery.CropEmberMoss",
+   "tier": 7,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1100,
+   "pools": [
+    "red",
+    "climbable",
+    "danger",
+    "fire",
+    "tendrilly",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "EndStoneLily": {
+   "id": "EndStoneLily",
+   "internal": "endStoneLily",
+   "name": "End Stone Lily",
+   "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.CropEndStoneLily",
+   "tier": 1,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "endStone"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 850,
+   "pools": [
+    "yellow",
+    "alien",
+    "stone"
+   ],
+   "flavour": null
+  },
+  "Enderbloom": {
+   "id": "Enderbloom",
+   "internal": "enderbloom",
+   "name": "Enderbloom",
+   "cls": "com.gtnewhorizon.cropsnh.crops.mobs.CropEnderbloom",
+   "tier": 10,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [
+    "endStone"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 3000,
+   "pools": [
+    "black",
+    "flower",
+    "void",
+    "alien",
+    "magic"
+   ],
+   "flavour": null
+  },
+  "EssenceOreBerry": {
+   "id": "EssenceOreBerry",
+   "internal": "essenceOreBerry",
+   "name": "Essence Berry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.oreBerries.CropEssenceOreBerry",
+   "tier": 5,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "skull"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 6000,
+   "pools": [
+    "green",
+    "oreBerry",
+    "danger",
+    "undead",
+    "food"
+   ],
+   "flavour": null
+  },
+  "EvilOre": {
+   "id": "EvilOre",
+   "internal": "evilOre",
+   "name": "Evil Ore",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropEvilOre",
+   "tier": 8,
+   "soil": [
+    "netherrack"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1600,
+   "pools": [
+    "white",
+    "nether",
+    "crystal",
+    "evil",
+    "fire"
+   ],
+   "flavour": null
+  },
+  "Eyebulb": {
+   "id": "Eyebulb",
+   "internal": "eyebulb",
+   "name": "Eyebulb",
+   "cls": "com.gtnewhorizon.cropsnh.crops.biomesoplenty.CropEyebulb",
+   "tier": 1,
+   "soil": [
+    "netherrack"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 450,
+   "pools": [
+    "red",
+    "nether",
+    "evil",
+    "tendrilly"
+   ],
+   "flavour": null
+  },
+  "Ferrofern": {
+   "id": "Ferrofern",
+   "internal": "ferrofern",
+   "name": "Ferrofern",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropFerrofern",
+   "tier": 6,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "iron"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 2800,
+   "pools": [
+    "gray",
+    "metal",
+    "tendrilly",
+    "iron"
+   ],
+   "flavour": null
+  },
+  "Fertilia": {
+   "id": "Fertilia",
+   "internal": "fertilia",
+   "name": "Fertilia",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropFertilia",
+   "tier": 3,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1800,
+   "pools": [
+    "brown",
+    "mushroom",
+    "healing"
+   ],
+   "flavour": null
+  },
+  "Flax": {
+   "id": "Flax",
+   "internal": "flax",
+   "name": "Flax",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropFlax",
+   "tier": 2,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1200,
+   "pools": [
+    "blue",
+    "wheat",
+    "addictive",
+    "silk"
+   ],
+   "flavour": null
+  },
+  "FloweringVine": {
+   "id": "FloweringVine",
+   "internal": "floweringVine",
+   "name": "Flowering Vine",
+   "cls": "com.gtnewhorizon.cropsnh.crops.biomesoplenty.CropFloweringVine",
+   "tier": 3,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 675,
+   "pools": [
+    "green",
+    "flower",
+    "tendrilly",
+    "climbable"
+   ],
+   "flavour": null
+  },
+  "GaiaWart": {
+   "id": "GaiaWart",
+   "internal": "gaiaWart",
+   "name": "Gaia Wart",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.CropGaiaWart",
+   "tier": 5,
+   "soil": [
+    "soulsand"
+   ],
+   "subsoil": [
+    "snow"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1000,
+   "pools": [],
+   "flavour": null
+  },
+  "Galvania": {
+   "id": "Galvania",
+   "internal": "galvania",
+   "name": "Galvania",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropGalvania",
+   "tier": 6,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "zinc"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1200,
+   "pools": [
+    "white",
+    "bush",
+    "metal"
+   ],
+   "flavour": null
+  },
+  "Garlic": {
+   "id": "Garlic",
+   "internal": "garlic",
+   "name": "Garlic",
+   "cls": "com.gtnewhorizon.cropsnh.crops.witchery.CropGarlic",
+   "tier": 3,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 450,
+   "pools": [
+    "white",
+    "root",
+    "food",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "Garnydinia": {
+   "id": "Garnydinia",
+   "internal": "garnydinia",
+   "name": "Garnydinia",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropGarnydinia",
+   "tier": 7,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "garnetGem"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 850,
+   "pools": [],
+   "flavour": null
+  },
+  "GlintWeed": {
+   "id": "GlintWeed",
+   "internal": "glintWeed",
+   "name": "Glint Weed",
+   "cls": "com.gtnewhorizon.cropsnh.crops.witchery.CropGlintWeed",
+   "tier": 4,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1100,
+   "pools": [
+    "orange",
+    "flower",
+    "magic"
+   ],
+   "flavour": null
+  },
+  "Glowflower": {
+   "id": "Glowflower",
+   "internal": "glowflower",
+   "name": "Glowflower",
+   "cls": "com.gtnewhorizon.cropsnh.crops.biomesoplenty.CropGlowflower",
+   "tier": 3,
+   "soil": [
+    "dirtGrass"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 2000,
+   "pools": [
+    "blue",
+    "nether",
+    "light",
+    "shiny",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "Glowheat": {
+   "id": "Glowheat",
+   "internal": "glowheat",
+   "name": "Glowheat",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropGlowheat",
+   "tier": 4,
+   "soil": [
+    "netherrack"
+   ],
+   "subsoil": [
+    "glowstone"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1500,
+   "pools": [
+    "yellow",
+    "nether",
+    "wheat",
+    "light",
+    "shiny",
+    "crystal",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "GlowingCoral": {
+   "id": "GlowingCoral",
+   "internal": "glowingCoral",
+   "name": "Glowing Coral",
+   "cls": "com.gtnewhorizon.cropsnh.crops.biomesoplenty.CropGlowingCoral",
+   "tier": 5,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [
+    "glowstone"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 450,
+   "pools": [
+    "purple",
+    "water",
+    "light",
+    "shiny",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "Glowshroom": {
+   "id": "Glowshroom",
+   "internal": "glowshroom",
+   "name": "Glowshroom",
+   "cls": "com.gtnewhorizon.cropsnh.crops.biomesoplenty.CropGlowshroom",
+   "tier": 3,
+   "soil": [
+    "netherMushroom"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "green",
+    "nether",
+    "mushroom",
+    "light",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "GodOfThunder": {
+   "id": "GodOfThunder",
+   "internal": "godOfThunder",
+   "name": "God of Thunder",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropGodOfThunder",
+   "tier": 9,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "thorium"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 3600,
+   "pools": [],
+   "flavour": null
+  },
+  "GoldOreBerry": {
+   "id": "GoldOreBerry",
+   "internal": "goldOreBerry",
+   "name": "Gold Oreberry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.oreBerries.CropGoldOreBerry",
+   "tier": 5,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "gold"
+   ],
+   "maxLight": 10,
+   "minLight": null,
+   "growth": 6000,
+   "pools": [
+    "yellow",
+    "oreBerry",
+    "dense",
+    "danger",
+    "metal",
+    "gold"
+   ],
+   "flavour": null
+  },
+  "Goldfish": {
+   "id": "Goldfish",
+   "internal": "goldfish",
+   "name": "Goldfish",
+   "cls": "com.gtnewhorizon.cropsnh.crops.mobs.CropGoldfish",
+   "tier": 4,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 450,
+   "pools": [
+    "orange",
+    "nether",
+    "stem",
+    "danger",
+    "water",
+    "addictive",
+    "food",
+    "fish"
+   ],
+   "flavour": "Screams."
+  },
+  "GraniteLily": {
+   "id": "GraniteLily",
+   "internal": "graniteLily",
+   "name": "Granite Lily",
+   "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.modern.CropGraniteLily",
+   "tier": 1,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "modernGranite"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "red",
+    "stone"
+   ],
+   "flavour": null
+  },
+  "Grape": {
+   "id": "Grape",
+   "internal": "grape",
+   "name": "Grape",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.CropGrape",
+   "tier": 4,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 800,
+   "pools": [
+    "purple",
+    "climbable",
+    "leafy",
+    "tendrilly",
+    "food"
+   ],
+   "flavour": null
+  },
+  "GreenGlowshroom": {
+   "id": "GreenGlowshroom",
+   "internal": "greenGlowshroom",
+   "name": "Green Glowshroom",
+   "cls": "com.gtnewhorizon.cropsnh.crops.natura.nether.glowshroom.CropGreenGlowshroom",
+   "tier": 3,
+   "soil": [
+    "netherMushroom"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "green",
+    "nether",
+    "mushroom",
+    "light",
+    "food",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "Hemp": {
+   "id": "Hemp",
+   "internal": "hemp",
+   "name": "Hemp",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropHemp",
+   "tier": 5,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 800,
+   "pools": [
+    "green",
+    "stem",
+    "addictive",
+    "silk"
+   ],
+   "flavour": null
+  },
+  "Hops": {
+   "id": "Hops",
+   "internal": "hops",
+   "name": "Hops",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.CropHops",
+   "tier": 5,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 2400,
+   "pools": [
+    "green",
+    "wheat",
+    "food"
+   ],
+   "flavour": null
+  },
+  "Huckleberry": {
+   "id": "Huckleberry",
+   "internal": "huckleberry",
+   "name": "Huckleberry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.CropHuckleberry",
+   "tier": 2,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 200,
+   "pools": [
+    "purple",
+    "bush",
+    "leafy",
+    "berry",
+    "food"
+   ],
+   "flavour": null
+  },
+  "Indigo": {
+   "id": "Indigo",
+   "internal": "indigo",
+   "name": "Indigo",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropIndigo",
+   "tier": 2,
+   "soil": [
+    "dirtGrass"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1200,
+   "pools": [
+    "blue",
+    "flower"
+   ],
+   "flavour": null
+  },
+  "InkBloom": {
+   "id": "InkBloom",
+   "internal": "inkbloom",
+   "name": "Inkbloom",
+   "cls": "com.gtnewhorizon.cropsnh.crops.mobs.CropInkbloom",
+   "tier": 4,
+   "soil": [
+    "dirtGrass"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "black",
+    "flower",
+    "water"
+   ],
+   "flavour": null
+  },
+  "Iridine": {
+   "id": "Iridine",
+   "internal": "iridine",
+   "name": "Iridine",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropIridine",
+   "tier": 12,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "iridium"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 7200,
+   "pools": [],
+   "flavour": null
+  },
+  "IronOreBerry": {
+   "id": "IronOreBerry",
+   "internal": "ironOreBerry",
+   "name": "Iron Oreberry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.oreBerries.CropIronOreBerry",
+   "tier": 5,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "iron"
+   ],
+   "maxLight": 10,
+   "minLight": null,
+   "growth": 6000,
+   "pools": [
+    "gray",
+    "oreBerry",
+    "danger",
+    "metal",
+    "iron"
+   ],
+   "flavour": null
+  },
+  "Ivy": {
+   "id": "Ivy",
+   "internal": "ivy",
+   "name": "Ivy",
+   "cls": "com.gtnewhorizon.cropsnh.crops.biomesoplenty.CropIvy",
+   "tier": 2,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 450,
+   "pools": [
+    "green",
+    "flower",
+    "tendrilly",
+    "danger",
+    "poison",
+    "climbable"
+   ],
+   "flavour": null
+  },
+  "KnightmetalBerry": {
+   "id": "KnightmetalBerry",
+   "internal": "knightmetalBerry",
+   "name": "Knightmetal Berry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.oreBerries.CropKnightmetalBerry",
+   "tier": 8,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "knightmetal"
+   ],
+   "maxLight": 10,
+   "minLight": null,
+   "growth": 5500,
+   "pools": [
+    "gray",
+    "twilightForest",
+    "oreBerry",
+    "danger",
+    "metal"
+   ],
+   "flavour": null
+  },
+  "Lazulia": {
+   "id": "Lazulia",
+   "internal": "lazulia",
+   "name": "Lazulia",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropLazulia",
+   "tier": 7,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "lapis"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 2800,
+   "pools": [
+    "blue",
+    "crystal",
+    "shiny",
+    "healing"
+   ],
+   "flavour": null
+  },
+  "Lemon": {
+   "id": "Lemon",
+   "internal": "lemon",
+   "name": "Lemon",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.CropLemon",
+   "tier": 4,
+   "soil": [
+    "dirtGrass"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 800,
+   "pools": [
+    "yellow",
+    "tree",
+    "leafy",
+    "food"
+   ],
+   "flavour": null
+  },
+  "Liveroot": {
+   "id": "Liveroot",
+   "internal": "liveroot",
+   "name": "Liveroot",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropLiveroot",
+   "tier": 8,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 4800,
+   "pools": [
+    "brown",
+    "twilightForest",
+    "root",
+    "tendrilly",
+    "wood"
+   ],
+   "flavour": null
+  },
+  "MagicalNightshade": {
+   "id": "MagicalNightshade",
+   "internal": "magicalNightshade",
+   "name": "Magical Nightshade",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropMagicalNightshade",
+   "tier": 13,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [
+    "shadowmetal"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 23436,
+   "pools": [],
+   "flavour": null
+  },
+  "Malaxia": {
+   "id": "Malaxia",
+   "internal": "malaxia",
+   "name": "Malaxia",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropMalaxia",
+   "tier": 6,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "copper"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 2800,
+   "pools": [
+    "orange",
+    "bush",
+    "leafy",
+    "metal",
+    "copper"
+   ],
+   "flavour": null
+  },
+  "Maloberry": {
+   "id": "Maloberry",
+   "internal": "maloberry",
+   "name": "Maloberry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.natura.CropMaloberry",
+   "tier": 2,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 200,
+   "pools": [
+    "yellow",
+    "berry",
+    "bush",
+    "food"
+   ],
+   "flavour": null
+  },
+  "ManaBean": {
+   "id": "ManaBean",
+   "internal": "manaBean",
+   "name": "Mana Bean",
+   "cls": "com.gtnewhorizon.cropsnh.crops.thaumcraft.CropManaBean",
+   "tier": 5,
+   "soil": [
+    "thaumLogs"
+   ],
+   "subsoil": [
+    "mixedCrystalCluster"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 2000,
+   "pools": [
+    "brown",
+    "bean",
+    "magic"
+   ],
+   "flavour": null
+  },
+  "Mandrake": {
+   "id": "Mandrake",
+   "internal": "mandrake",
+   "name": "Mandrake",
+   "cls": "com.gtnewhorizon.cropsnh.crops.witchery.CropMandrake",
+   "tier": 4,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1100,
+   "pools": [
+    "brown",
+    "flower",
+    "danger",
+    "evil",
+    "magic",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "MarbleLily": {
+   "id": "MarbleLily",
+   "internal": "marbleLily",
+   "name": "Marble Lily",
+   "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.CropMarbleLily",
+   "tier": 1,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "marble"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "white",
+    "stone"
+   ],
+   "flavour": null
+  },
+  "Meatrose": {
+   "id": "Meatrose",
+   "internal": "meatrose",
+   "name": "Meatrose",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.CropMeatrose",
+   "tier": 7,
+   "soil": [
+    "dirtGrass"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 4200,
+   "pools": [
+    "red",
+    "flower",
+    "chicken",
+    "cow",
+    "food",
+    "fish"
+   ],
+   "flavour": null
+  },
+  "Melon": {
+   "id": "Melon",
+   "internal": "melon",
+   "name": "Melon",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.vanilla.CropMelon",
+   "tier": 2,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 1200,
+   "pools": [
+    "green",
+    "stem",
+    "food",
+    "healing",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "Micadia": {
+   "id": "Micadia",
+   "internal": "micadia",
+   "name": "Micadia",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropMicadia",
+   "tier": 9,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "mica"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1800,
+   "pools": [],
+   "flavour": null
+  },
+  "MilkWart": {
+   "id": "MilkWart",
+   "internal": "milkWart",
+   "name": "Milk Wart",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropMilkWart",
+   "tier": 6,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 2400,
+   "pools": [
+    "white",
+    "food",
+    "cow",
+    "healing"
+   ],
+   "flavour": null
+  },
+  "Moss": {
+   "id": "Moss",
+   "internal": "moss",
+   "name": "Moss",
+   "cls": "com.gtnewhorizon.cropsnh.crops.biomesoplenty.CropMoss",
+   "tier": 4,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 450,
+   "pools": [
+    "green",
+    "twilightForest",
+    "climbable",
+    "tendrilly"
+   ],
+   "flavour": null
+  },
+  "Necrobloom": {
+   "id": "Necrobloom",
+   "internal": "necrobloom",
+   "name": "Necrobloom",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropNecrobloom",
+   "tier": 3,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1800,
+   "pools": [
+    "purple",
+    "flower",
+    "poison",
+    "danger"
+   ],
+   "flavour": null
+  },
+  "NetherStoneLily": {
+   "id": "NetherStoneLily",
+   "internal": "netherStoneLily",
+   "name": "Nether Stone Lily",
+   "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.CropNetherStoneLily",
+   "tier": 1,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "netherrack"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "red",
+    "nether",
+    "stone"
+   ],
+   "flavour": null
+  },
+  "Netherwart": {
+   "id": "Netherwart",
+   "internal": "netherwart",
+   "name": "Netherwart",
+   "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.CropNetherwart",
+   "tier": 5,
+   "soil": [
+    "soulsand"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 2000,
+   "pools": [
+    "red",
+    "nether",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "Nickelback": {
+   "id": "Nickelback",
+   "internal": "nickelback",
+   "name": "Nickelback",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropNickelback",
+   "tier": 5,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "nickel"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1000,
+   "pools": [
+    "gray",
+    "metal",
+    "fire"
+   ],
+   "flavour": "Makes a nice hum in the wind."
+  },
+  "OilBerry": {
+   "id": "OilBerry",
+   "internal": "oilBerry",
+   "name": "Oil Berry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropOilBerry",
+   "tier": 4,
+   "soil": [
+    "oil"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1200,
+   "pools": [],
+   "flavour": null
+  },
+  "Olivia": {
+   "id": "Olivia",
+   "internal": "olivia",
+   "name": "Olivia",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropOlivia",
+   "tier": 2,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "olivine"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 400,
+   "pools": [],
+   "flavour": null
+  },
+  "Onion": {
+   "id": "Onion",
+   "internal": "onion",
+   "name": "Onion",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.CropOnion",
+   "tier": 4,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 800,
+   "pools": [
+    "brown",
+    "root",
+    "food"
+   ],
+   "flavour": null
+  },
+  "OrangeTulip": {
+   "id": "OrangeTulip",
+   "internal": "orangeTulip",
+   "name": "Orange Tulip",
+   "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.flowers.CropOrangeTulip",
+   "tier": 2,
+   "soil": [
+    "dirtGrass"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "orange",
+    "flower",
+    "tulip"
+   ],
+   "flavour": null
+  },
+  "Osmianth": {
+   "id": "Osmianth",
+   "internal": "osmianth",
+   "name": "Osmianth",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropOsmianth",
+   "tier": 12,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "osmium"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 7200,
+   "pools": [],
+   "flavour": null
+  },
+  "OxeyeDaisy": {
+   "id": "OxeyeDaisy",
+   "internal": "oxeyeDaisy",
+   "name": "Oxeye Daisy",
+   "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.flowers.CropOxeyeDaisy",
+   "tier": 2,
+   "soil": [
+    "dirtGrass"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "white",
+    "flower"
+   ],
+   "flavour": null
+  },
+  "Papyrus": {
+   "id": "Papyrus",
+   "internal": "papyrus",
+   "name": "Papyrus",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropPapyrus",
+   "tier": 5,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 450,
+   "pools": [
+    "white",
+    "stem"
+   ],
+   "flavour": null
+  },
+  "PinkTulip": {
+   "id": "PinkTulip",
+   "internal": "pinkTulip",
+   "name": "Pink Tulip",
+   "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.flowers.CropPinkTulip",
+   "tier": 2,
+   "soil": [
+    "dirtGrass"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "red",
+    "flower",
+    "tulip"
+   ],
+   "flavour": null
+  },
+  "Platina": {
+   "id": "Platina",
+   "internal": "platina",
+   "name": "Platina",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropPlatina",
+   "tier": 11,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "platinum"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 6600,
+   "pools": [],
+   "flavour": null
+  },
+  "Plumbilia": {
+   "id": "Plumbilia",
+   "internal": "plumbilia",
+   "name": "Plumbilia",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropPlumbilia",
+   "tier": 6,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "lead"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1200,
+   "pools": [
+    "purple",
+    "metal",
+    "lead",
+    "dense",
+    "tendrilly"
+   ],
+   "flavour": null
+  },
+  "Plumbshade": {
+   "id": "Plumbshade",
+   "internal": "plumbshade",
+   "name": "Plumbshade",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropPlumbshade",
+   "tier": 6,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "lead"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 2800,
+   "pools": [
+    "purple",
+    "bush",
+    "dense",
+    "leafy",
+    "metal",
+    "lead"
+   ],
+   "flavour": null
+  },
+  "Poppy": {
+   "id": "Poppy",
+   "internal": "poppy",
+   "name": "Poppy",
+   "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.flowers.CropPoppy",
+   "tier": 2,
+   "soil": [
+    "dirtGrass"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "red",
+    "flower"
+   ],
+   "flavour": null
+  },
+  "Potato": {
+   "id": "Potato",
+   "internal": "potato",
+   "name": "Potato",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.vanilla.CropPotato",
+   "tier": 1,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 800,
+   "pools": [
+    "yellow",
+    "root",
+    "food"
+   ],
+   "flavour": null
+  },
+  "PrimordialBerry": {
+   "id": "PrimordialBerry",
+   "internal": "primordialBerry",
+   "name": "Primordial Berry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.thaumcraft.CropPrimordialBerry",
+   "tier": 16,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 375000,
+   "pools": [],
+   "flavour": null
+  },
+  "Pumpkin": {
+   "id": "Pumpkin",
+   "internal": "pumpkin",
+   "name": "Pumpkin",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.vanilla.CropPumpkin",
+   "tier": 2,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 1000,
+   "pools": [
+    "orange",
+    "stem",
+    "food"
+   ],
+   "flavour": null
+  },
+  "PurpleGlowshroom": {
+   "id": "PurpleGlowshroom",
+   "internal": "purpleGlowshroom",
+   "name": "Purple Glowshroom",
+   "cls": "com.gtnewhorizon.cropsnh.crops.natura.nether.glowshroom.CropPurpleGlowshroom",
+   "tier": 3,
+   "soil": [
+    "netherMushroom"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "purple",
+    "nether",
+    "mushroom",
+    "light",
+    "food",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "PurpleTulip": {
+   "id": "PurpleTulip",
+   "internal": "purpleTulip",
+   "name": "Purple Tulip",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropPurpleTulip",
+   "tier": 2,
+   "soil": [
+    "dirtGrass"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "purple",
+    "flower",
+    "tulip"
+   ],
+   "flavour": null
+  },
+  "Pyrolusium": {
+   "id": "Pyrolusium",
+   "internal": "pyrolusium",
+   "name": "Pyrolusium",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropPyrolusium",
+   "tier": 12,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "manganese"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 2400,
+   "pools": [
+    "red",
+    "metal",
+    "bush"
+   ],
+   "flavour": "It's trying its best."
+  },
+  "Raspberry": {
+   "id": "Raspberry",
+   "internal": "raspberry",
+   "name": "Raspberry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.natura.CropRaspberry",
+   "tier": 2,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 200,
+   "pools": [
+    "red",
+    "berry",
+    "bush",
+    "food"
+   ],
+   "flavour": null
+  },
+  "Reactoria": {
+   "id": "Reactoria",
+   "internal": "reactoria",
+   "name": "Reactoria",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropReactoria",
+   "tier": 12,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "uranium"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 4800,
+   "pools": [],
+   "flavour": null
+  },
+  "RedGraniteLily": {
+   "id": "RedGraniteLily",
+   "internal": "redGraniteLily",
+   "name": "Red Granite Lily",
+   "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.CropRedGraniteLily",
+   "tier": 1,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "redGranite"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "red",
+    "stone"
+   ],
+   "flavour": null
+  },
+  "RedMushroom": {
+   "id": "RedMushroom",
+   "internal": "redMushroom",
+   "name": "Red Mushroom",
+   "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.mushrooms.CropRedMushroom",
+   "tier": 1,
+   "soil": [
+    "mushroom"
+   ],
+   "subsoil": [],
+   "maxLight": 9,
+   "minLight": null,
+   "growth": 400,
+   "pools": [
+    "red",
+    "mushroom",
+    "food"
+   ],
+   "flavour": null
+  },
+  "RedStraw": {
+   "id": "RedStraw",
+   "internal": "redstraw",
+   "name": "Redstraw",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropRedstraw",
+   "tier": 6,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [
+    "redstone"
+   ],
+   "maxLight": 12,
+   "minLight": 5,
+   "growth": 1500,
+   "pools": [
+    "red",
+    "stone",
+    "wheat",
+    "light",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "RedTulip": {
+   "id": "RedTulip",
+   "internal": "redTulip",
+   "name": "Red Tulip",
+   "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.flowers.CropRedTulip",
+   "tier": 2,
+   "soil": [
+    "dirtGrass"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "red",
+    "flower",
+    "tulip"
+   ],
+   "flavour": null
+  },
+  "Rubyne": {
+   "id": "Rubyne",
+   "internal": "rubyne",
+   "name": "Rubyne",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropRubyne",
+   "tier": 4,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [
+    "ruby"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 800,
+   "pools": [
+    "red",
+    "crystal",
+    "shiny"
+   ],
+   "flavour": null
+  },
+  "SaguaroCactus": {
+   "id": "SaguaroCactus",
+   "internal": "saguaroCactus",
+   "name": "Saguaro Cactus",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.natura.CropSaguaroCactus",
+   "tier": 4,
+   "soil": [
+    "sand"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 450,
+   "pools": [
+    "green",
+    "cactus",
+    "danger",
+    "food"
+   ],
+   "flavour": null
+  },
+  "SaltyRoot": {
+   "id": "SaltyRoot",
+   "internal": "saltyRoot",
+   "name": "Salty Root",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropSaltyRoot",
+   "tier": 4,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1600,
+   "pools": [
+    "gray",
+    "root",
+    "saltpeter"
+   ],
+   "flavour": "Inedible."
+  },
+  "SandLily": {
+   "id": "SandLily",
+   "internal": "sandLily",
+   "name": "Sand Lily",
+   "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.CropSandLily",
+   "tier": 1,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "sand"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "yellow",
+    "stone"
+   ],
+   "flavour": null
+  },
+  "Sapphirum": {
+   "id": "Sapphirum",
+   "internal": "sapphirum",
+   "name": "Sapphirum",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropSapphirum",
+   "tier": 4,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "sapphire"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 800,
+   "pools": [
+    "blue",
+    "crystal",
+    "shiny"
+   ],
+   "flavour": null
+  },
+  "Scheelinium": {
+   "id": "Scheelinium",
+   "internal": "scheelinium",
+   "name": "Scheelinium",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropScheelinium",
+   "tier": 12,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "tungsten"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 2400,
+   "pools": [],
+   "flavour": null
+  },
+  "Shimmerleaf": {
+   "id": "Shimmerleaf",
+   "internal": "shimmerleaf",
+   "name": "Shimmerleaf",
+   "cls": "com.gtnewhorizon.cropsnh.crops.thaumcraft.CropShimmerleaf",
+   "tier": 5,
+   "soil": [
+    "dirtGrass"
+   ],
+   "subsoil": [
+    "quicksilver"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 4000,
+   "pools": [
+    "gray",
+    "light",
+    "magic",
+    "poison",
+    "silver"
+   ],
+   "flavour": null
+  },
+  "Silviscus": {
+   "id": "Silviscus",
+   "internal": "silviscus",
+   "name": "Silviscus",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropSilviscus",
+   "tier": 8,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "silver"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 3700,
+   "pools": [
+    "white",
+    "bush",
+    "leafy",
+    "metal",
+    "silver"
+   ],
+   "flavour": null
+  },
+  "Skyberry": {
+   "id": "Skyberry",
+   "internal": "skyberry",
+   "name": "Skyberry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.natura.nether.berry.CropSkyberry",
+   "tier": 4,
+   "soil": [
+    "netherrack"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 300,
+   "pools": [
+    "blue",
+    "nether",
+    "berry",
+    "bush",
+    "danger",
+    "poison",
+    "addictive",
+    "food",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "Slimeplant": {
+   "id": "Slimeplant",
+   "internal": "slimeplant",
+   "name": "Slimeplant",
+   "cls": "com.gtnewhorizon.cropsnh.crops.mobs.CropSlimeplant",
+   "tier": 6,
+   "soil": [
+    "dirtGrass"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1200,
+   "pools": [
+    "green",
+    "tree",
+    "evil",
+    "leafy",
+    "sticky",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "Snowbell": {
+   "id": "Snowbell",
+   "internal": "snowbell",
+   "name": "Snowbell",
+   "cls": "com.gtnewhorizon.cropsnh.crops.witchery.CropSnowbell",
+   "tier": 4,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1100,
+   "pools": [
+    "white",
+    "flower",
+    "poison",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "SoulSandLily": {
+   "id": "SoulSandLily",
+   "internal": "soulSandLily",
+   "name": "Soul Sand Lily",
+   "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.CropSoulSandLily",
+   "tier": 2,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "soulSand"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 2000,
+   "pools": [
+    "brown",
+    "nether",
+    "danger",
+    "stone",
+    "oil"
+   ],
+   "flavour": null
+  },
+  "SpaceFlower": {
+   "id": "SpaceFlower",
+   "internal": "spaceFlower",
+   "name": "Space Flower",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropSpaceFlower",
+   "tier": 13,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [
+    "space"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 15000,
+   "pools": [],
+   "flavour": null
+  },
+  "SpanishMoss": {
+   "id": "SpanishMoss",
+   "internal": "spanishMoss",
+   "name": "Spanish Moss",
+   "cls": "com.gtnewhorizon.cropsnh.crops.witchery.CropSpanishMoss",
+   "tier": 7,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 675,
+   "pools": [
+    "green",
+    "climbable",
+    "magic"
+   ],
+   "flavour": null
+  },
+  "Spidernip": {
+   "id": "Spidernip",
+   "internal": "spidernip",
+   "name": "Spidernip",
+   "cls": "com.gtnewhorizon.cropsnh.crops.mobs.CropSpidernip",
+   "tier": 4,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 2400,
+   "pools": [
+    "white",
+    "evil",
+    "poison",
+    "addictive",
+    "food",
+    "ingredient",
+    "silk"
+   ],
+   "flavour": null
+  },
+  "StarWart": {
+   "id": "StarWart",
+   "internal": "starWart",
+   "name": "Star Wart",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropStarWart",
+   "tier": 12,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "netherStar"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 7200,
+   "pools": [],
+   "flavour": null
+  },
+  "Stargatium": {
+   "id": "Stargatium",
+   "internal": "stargatium",
+   "name": "Stargatium",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropStargatium",
+   "tier": 12,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "naquadah"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 7200,
+   "pools": [],
+   "flavour": null
+  },
+  "Steeleafranks": {
+   "id": "Steeleafranks",
+   "internal": "steeleafranks",
+   "name": "Steeleafranks",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropSteeleafranks",
+   "tier": 10,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "steeleaf"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 6000,
+   "pools": [
+    "green",
+    "twilightForest",
+    "metal",
+    "tendrilly",
+    "iron"
+   ],
+   "flavour": null
+  },
+  "StickyCane": {
+   "id": "StickyCane",
+   "internal": "stickyCane",
+   "name": "Sticky Cane",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropStickyCane",
+   "tier": 4,
+   "soil": [
+    "sugarcane"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 200,
+   "pools": [
+    "green",
+    "reed",
+    "sticky"
+   ],
+   "flavour": null
+  },
+  "Stingberry": {
+   "id": "Stingberry",
+   "internal": "stingberry",
+   "name": "Stingberry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.natura.nether.berry.CropStingberry",
+   "tier": 4,
+   "soil": [
+    "netherrack"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 300,
+   "pools": [
+    "brown",
+    "nether",
+    "berry",
+    "bush",
+    "danger",
+    "poison",
+    "addictive",
+    "food",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "StoneLily": {
+   "id": "StoneLily",
+   "internal": "stoneLily",
+   "name": "Stone Lily",
+   "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.CropStoneLily",
+   "tier": 1,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "stone"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "gray",
+    "stone"
+   ],
+   "flavour": null
+  },
+  "Strawberry": {
+   "id": "Strawberry",
+   "internal": "strawberry",
+   "name": "Strawberry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.CropStrawberry",
+   "tier": 2,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 200,
+   "pools": [
+    "red",
+    "berry",
+    "bush",
+    "food"
+   ],
+   "flavour": null
+  },
+  "SugarBeet": {
+   "id": "SugarBeet",
+   "internal": "sugarBeet",
+   "name": "Sugar Beet",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.CropSugarBeet",
+   "tier": 4,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 450,
+   "pools": [
+    "white",
+    "root",
+    "addictive",
+    "food",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "SugarCane": {
+   "id": "SugarCane",
+   "internal": "sugarCane",
+   "name": "Sugar Cane",
+   "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.CropSugarCane",
+   "tier": 2,
+   "soil": [
+    "sugarcane"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 400,
+   "pools": [
+    "green",
+    "reed",
+    "food"
+   ],
+   "flavour": null
+  },
+  "Tea": {
+   "id": "Tea",
+   "internal": "tea",
+   "name": "Tea",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.CropTea",
+   "tier": 4,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 2400,
+   "pools": [
+    "green",
+    "leafy",
+    "food"
+   ],
+   "flavour": null
+  },
+  "Tearstalks": {
+   "id": "Tearstalks",
+   "internal": "tearstalks",
+   "name": "Tearstalks",
+   "cls": "com.gtnewhorizon.cropsnh.crops.mobs.CropTearstalks",
+   "tier": 8,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 4800,
+   "pools": [
+    "white",
+    "nether",
+    "stem",
+    "evil",
+    "healing",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "ThauminiteOreBerry": {
+   "id": "ThauminiteOreBerry",
+   "internal": "thauminiteOreBerry",
+   "name": "Thauminite Oreberry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.oreBerries.CropThauminiteOreBerry",
+   "tier": 7,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "thauminite"
+   ],
+   "maxLight": 10,
+   "minLight": null,
+   "growth": 4500,
+   "pools": [
+    "blue",
+    "oreBerry",
+    "danger",
+    "magic",
+    "metal",
+    "void"
+   ],
+   "flavour": null
+  },
+  "ThaumiumOreBerry": {
+   "id": "ThaumiumOreBerry",
+   "internal": "thaumiumOreBerry",
+   "name": "Thaumium Oreberry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.oreBerries.CropThaumiumOreBerry",
+   "tier": 7,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "thaumium"
+   ],
+   "maxLight": 10,
+   "minLight": null,
+   "growth": 3000,
+   "pools": [
+    "purple",
+    "oreBerry",
+    "danger",
+    "magic",
+    "metal",
+    "void"
+   ],
+   "flavour": null
+  },
+  "Thiosulfine": {
+   "id": "Thiosulfine",
+   "internal": "thiosulfine",
+   "name": "Thiosulfine",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropThiosulfine",
+   "tier": 6,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "sulfur"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1200,
+   "pools": [
+    "yellow",
+    "flower",
+    "danger",
+    "sulfur"
+   ],
+   "flavour": null
+  },
+  "Thornvine": {
+   "id": "Thornvine",
+   "internal": "thornvine",
+   "name": "Thornvine",
+   "cls": "com.gtnewhorizon.cropsnh.crops.natura.nether.CropThornvine",
+   "tier": 3,
+   "soil": [
+    "netherrack"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 450,
+   "pools": [
+    "yellow",
+    "nether",
+    "climbable",
+    "danger",
+    "light",
+    "tendrilly"
+   ],
+   "flavour": null
+  },
+  "TinOreBerry": {
+   "id": "TinOreBerry",
+   "internal": "tinOreBerry",
+   "name": "Tin Oreberry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.oreBerries.CropTinOreBerry",
+   "tier": 4,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "tin"
+   ],
+   "maxLight": 10,
+   "minLight": null,
+   "growth": 6000,
+   "pools": [
+    "white",
+    "oreBerry",
+    "danger",
+    "metal",
+    "shiny",
+    "tin"
+   ],
+   "flavour": null
+  },
+  "Tine": {
+   "id": "Tine",
+   "internal": "tine",
+   "name": "Tine",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropTine",
+   "tier": 5,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "tin"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1000,
+   "pools": [
+    "gray",
+    "stem",
+    "metal",
+    "shiny",
+    "wood",
+    "tin"
+   ],
+   "flavour": null
+  },
+  "Titania": {
+   "id": "Titania",
+   "internal": "titania",
+   "name": "Titania",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropTitania",
+   "tier": 9,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "titanium"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1800,
+   "pools": [],
+   "flavour": "The queen of crops."
+  },
+  "Tomato": {
+   "id": "Tomato",
+   "internal": "tomato",
+   "name": "Tomato",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.CropTomato",
+   "tier": 4,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 800,
+   "pools": [
+    "red",
+    "tendrilly",
+    "leafy",
+    "food"
+   ],
+   "flavour": null
+  },
+  "Torchberry": {
+   "id": "Torchberry",
+   "internal": "torchberry",
+   "name": "Torchberry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.twilightforest.CropTorchberry",
+   "tier": 2,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": 10,
+   "minLight": null,
+   "growth": 150,
+   "pools": [
+    "yellow",
+    "twilightForest",
+    "berry",
+    "light"
+   ],
+   "flavour": null
+  },
+  "Transformium": {
+   "id": "Transformium",
+   "internal": "transformium",
+   "name": "Transformium",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropTransformium",
+   "tier": 12,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 7200,
+   "pools": [],
+   "flavour": null
+  },
+  "Trollplant": {
+   "id": "Trollplant",
+   "internal": "trollplant",
+   "name": "Trollplant",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropTrollplant",
+   "tier": 6,
+   "soil": [
+    "brick"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 4800,
+   "pools": [],
+   "flavour": "Trololololol, lololol, lololol!"
+  },
+  "TuffLily": {
+   "id": "TuffLily",
+   "internal": "tuffLily",
+   "name": "Tuff Lily",
+   "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.etfuturum.CropTuffLily",
+   "tier": 1,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "tuff"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "gray",
+    "dark",
+    "stone"
+   ],
+   "flavour": null
+  },
+  "Turnip": {
+   "id": "Turnip",
+   "internal": "turnip",
+   "name": "Turnip",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.bop.CropTurnip",
+   "tier": 2,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 450,
+   "pools": [
+    "purple",
+    "root",
+    "food"
+   ],
+   "flavour": null
+  },
+  "Vine": {
+   "id": "Vine",
+   "internal": "vine",
+   "name": "Vine",
+   "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.CropVine",
+   "tier": 2,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 450,
+   "pools": [
+    "green",
+    "climbable",
+    "tendrilly"
+   ],
+   "flavour": null
+  },
+  "VoidOreBerry": {
+   "id": "VoidOreBerry",
+   "internal": "voidOreBerry",
+   "name": "Void Metal Oreberry",
+   "cls": "com.gtnewhorizon.cropsnh.crops.oreBerries.CropVoidOreBerry",
+   "tier": 7,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "$void"
+   ],
+   "maxLight": 10,
+   "minLight": null,
+   "growth": 4500,
+   "pools": [
+    "black",
+    "oreBerry",
+    "danger",
+    "magic",
+    "metal",
+    "void"
+   ],
+   "flavour": null
+  },
+  "WaterArtichoke": {
+   "id": "WaterArtichoke",
+   "internal": "waterArtichoke",
+   "name": "Water Artichoke",
+   "cls": "com.gtnewhorizon.cropsnh.crops.witchery.CropWaterArtichoke",
+   "tier": 4,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 1100,
+   "pools": [
+    "blue",
+    "flower",
+    "water",
+    "food",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "Waterlily": {
+   "id": "Waterlily",
+   "internal": "waterLily",
+   "name": "Water Lily",
+   "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.CropWaterlily",
+   "tier": 2,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 450,
+   "pools": [
+    "green",
+    "water"
+   ],
+   "flavour": null
+  },
+  "Wheat": {
+   "id": "Wheat",
+   "internal": "wheat",
+   "name": "Wheat",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.vanilla.CropWheat",
+   "tier": 1,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 1000,
+   "pools": [
+    "yellow",
+    "wheat",
+    "food"
+   ],
+   "flavour": null
+  },
+  "WhiteTulip": {
+   "id": "WhiteTulip",
+   "internal": "whiteTulip",
+   "name": "White Tulip",
+   "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.flowers.CropWhiteTulip",
+   "tier": 2,
+   "soil": [
+    "dirtGrass"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 600,
+   "pools": [
+    "white",
+    "flower",
+    "tulip"
+   ],
+   "flavour": null
+  },
+  "WildCarrot": {
+   "id": "WildCarrot",
+   "internal": "wildCarrot",
+   "name": "Wild Carrot",
+   "cls": "com.gtnewhorizon.cropsnh.crops.food.bop.CropWildCarrot",
+   "tier": 2,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": 9,
+   "growth": 450,
+   "pools": [
+    "white",
+    "root",
+    "food"
+   ],
+   "flavour": null
+  },
+  "Withereed": {
+   "id": "Withereed",
+   "internal": "withereed",
+   "name": "Withereed",
+   "cls": "com.gtnewhorizon.cropsnh.crops.material.CropWithereed",
+   "tier": 8,
+   "soil": [
+    "stone"
+   ],
+   "subsoil": [
+    "coal"
+   ],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 4800,
+   "pools": [
+    "black",
+    "reed",
+    "fire",
+    "undead",
+    "coal",
+    "sulfur"
+   ],
+   "flavour": null
+  },
+  "Wolfsbane": {
+   "id": "Wolfsbane",
+   "internal": "wolfsbane",
+   "name": "Wolfsbane",
+   "cls": "com.gtnewhorizon.cropsnh.crops.witchery.CropWolfsbane",
+   "tier": 4,
+   "soil": [
+    "farmland"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1100,
+   "pools": [
+    "purple",
+    "flower",
+    "poison",
+    "ingredient"
+   ],
+   "flavour": null
+  },
+  "Zomplant": {
+   "id": "Zomplant",
+   "internal": "zomplant",
+   "name": "Zomplant",
+   "cls": "com.gtnewhorizon.cropsnh.crops.mobs.CropZomplant",
+   "tier": 3,
+   "soil": [
+    "graveyard"
+   ],
+   "subsoil": [],
+   "maxLight": null,
+   "minLight": null,
+   "growth": 1800,
+   "pools": [
+    "brown",
+    "evil",
+    "poison",
+    "undead",
+    "food"
+   ],
+   "flavour": null
+  }
+ },
+ "mutations": [
+  {
+   "out": "BonsaiOak",
+   "parents": [
+    "Wheat",
+    "BrownMushroom"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "BonsaiBirch",
+   "parents": [
+    "BonsaiOak",
+    "SugarCane"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "BonsaiSpruce",
+   "parents": [
+    "BonsaiOak",
+    "Pumpkin"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "BonsaiDarkOak",
+   "parents": [
+    "BonsaiSpruce",
+    "BonsaiOak"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "BonsaiAcacia",
+   "parents": [
+    "BonsaiOak",
+    "Cactus"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "BonsaiJungle",
+   "parents": [
+    "BonsaiOak",
+    "Vine"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "BonsaiRubber",
+   "parents": [
+    "BonsaiJungle",
+    "BonsaiSpruce"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "BonsaiSlimy",
+   "parents": [
+    "Slimeplant",
+    "BonsaiJungle",
+    "BonsaiRubber"
+   ],
+   "req": [],
+   "machineOnly": true
+  },
+  {
+   "out": "Bamboo",
+   "parents": [
+    "BonsaiJungle",
+    "Vine"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Eyebulb",
+   "parents": [
+    "NetherStoneLily",
+    "RedTulip"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "FloweringVine",
+   "parents": [
+    "OxeyeDaisy",
+    "Ivy"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Glowflower",
+   "parents": [
+    "NetherStoneLily",
+    "Dandelion"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "GlowingCoral",
+   "parents": [
+    "Glowflower",
+    "Waterlily"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Glowshroom",
+   "parents": [
+    "BlueGlowshroom",
+    "GreenGlowshroom",
+    "PurpleGlowshroom"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Ivy",
+   "parents": [
+    "Vine",
+    "BonsaiSpruce"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Moss",
+   "parents": [
+    "Ivy",
+    "FloweringVine"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Fertilia",
+   "parents": [
+    "Corium",
+    "Corpseplant"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Flax",
+   "parents": [
+    "Wheat",
+    "AzureBluet"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Hemp",
+   "parents": [
+    "Flax",
+    "Papyrus"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "BoPBerry",
+   "parents": [
+    "Poppy",
+    "Blackberry"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Turnip",
+   "parents": [
+    "Potato",
+    "BoPBerry"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "WildCarrot",
+   "parents": [
+    "Carrot",
+    "BoPBerry"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Barley",
+   "parents": [
+    "Bamboo",
+    "Wheat"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Blueberry",
+   "parents": [
+    "AzureBluet",
+    "BonsaiOak"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Maloberry",
+   "parents": [
+    "OrangeTulip",
+    "Blueberry"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Raspberry",
+   "parents": [
+    "RedTulip",
+    "OxeyeDaisy"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "SaguaroCactus",
+   "parents": [
+    "Cactus",
+    "SandLily"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Blackberry",
+   "parents": [
+    "Strawberry",
+    "Blueberry"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Chilly",
+   "parents": [
+    "Cactus",
+    "Cocoa"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Coffee",
+   "parents": [
+    "Cocoa",
+    "BonsaiAcacia"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Cucumber",
+   "parents": [
+    "Melon",
+    "Carrot"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Grape",
+   "parents": [
+    "Blueberry",
+    "Blackberry"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Hops",
+   "parents": [
+    "Hemp",
+    "Dandelion"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Huckleberry",
+   "parents": [
+    "Blackberry",
+    "Grape"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Lemon",
+   "parents": [
+    "BonsaiOak",
+    "BonsaiAcacia"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Onion",
+   "parents": [
+    "Allium",
+    "Carrot"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Strawberry",
+   "parents": [
+    "Wheat",
+    "Raspberry"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "SugarBeet",
+   "parents": [
+    "SugarCane",
+    "Allium"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Tea",
+   "parents": [
+    "Blueberry",
+    "BonsaiJungle"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Tomato",
+   "parents": [
+    "Onion",
+    "RedTulip"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Dayflower",
+   "parents": [
+    "AzureBluet",
+    "BlueOrchid"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Malaxia",
+   "parents": [
+    "OrangeTulip",
+    "Pumpkin",
+    "StoneLily"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Plumbshade",
+   "parents": [
+    "AzureBluet",
+    "Malaxia",
+    "BlackGraniteLily"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Silviscus",
+   "parents": [
+    "Cassitine",
+    "Malaxia",
+    "MarbleLily"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Cassitine",
+   "parents": [
+    "Malaxia",
+    "StoneLily",
+    "MarbleLily"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "StickyCane",
+   "parents": [
+    "BonsaiJungle",
+    "SugarCane"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "PurpleTulip",
+   "parents": [
+    "RedTulip",
+    "BlueOrchid"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Necrobloom",
+   "parents": [
+    "Spidernip",
+    "PurpleTulip"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Argentia",
+   "parents": [
+    "Plumbilia",
+    "Tine"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Auronia",
+   "parents": [
+    "Plumbilia",
+    "Coppon"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Bauxia",
+   "parents": [
+    "Galvania",
+    "Nickelback"
+   ],
+   "req": [],
+   "machineOnly": true
+  },
+  {
+   "out": "BobsYerUncleRanks",
+   "parents": [
+    "Diareed",
+    "Olivia"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Canola",
+   "parents": [
+    "OxeyeDaisy",
+    "Wheat"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Coppon",
+   "parents": [
+    "StoneLily",
+    "NetherStoneLily"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Diareed",
+   "parents": [
+    "Withereed",
+    "EvilOre"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "EvilOre",
+   "parents": [
+    "NetherStoneLily",
+    "SoulSandLily"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Ferrofern",
+   "parents": [
+    "StoneLily",
+    "BlackGraniteLily"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Galvania",
+   "parents": [
+    "Tine",
+    "Ferrofern"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Thiosulfine",
+   "parents": [
+    "Galvania",
+    "Plumbilia"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Garnydinia",
+   "parents": [
+    "Diareed",
+    "RedStraw"
+   ],
+   "req": [],
+   "machineOnly": true
+  },
+  {
+   "out": "Glowheat",
+   "parents": [
+    "Glowflower",
+    "Wheat"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "GodOfThunder",
+   "parents": [
+    "BobsYerUncleRanks",
+    "Withereed"
+   ],
+   "req": [],
+   "machineOnly": true
+  },
+  {
+   "out": "Indigo",
+   "parents": [
+    "Dayflower",
+    "BlueOrchid"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Iridine",
+   "parents": [
+    "Scheelinium",
+    "Platina"
+   ],
+   "req": [],
+   "machineOnly": true
+  },
+  {
+   "out": "Lazulia",
+   "parents": [
+    "StoneLily",
+    "Indigo"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Liveroot",
+   "parents": [
+    "Torchberry",
+    "BonsaiDarkOak"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "MagicalNightshade",
+   "parents": [
+    "PrimordialBerry",
+    "ManaBean",
+    "Cinderpearl",
+    "Shimmerleaf"
+   ],
+   "req": [],
+   "machineOnly": true
+  },
+  {
+   "out": "Micadia",
+   "parents": [
+    "Tine",
+    "Bauxia"
+   ],
+   "req": [],
+   "machineOnly": true
+  },
+  {
+   "out": "MilkWart",
+   "parents": [
+    "Corium",
+    "Netherwart"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Nickelback",
+   "parents": [
+    "Ferrofern",
+    "Coppon"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "OilBerry",
+   "parents": [
+    "SoulSandLily",
+    "Withereed"
+   ],
+   "req": [],
+   "machineOnly": true
+  },
+  {
+   "out": "Olivia",
+   "parents": [
+    "EndStoneLily",
+    "EvilOre"
+   ],
+   "req": [],
+   "machineOnly": true
+  },
+  {
+   "out": "Osmianth",
+   "parents": [
+    "Platina",
+    "Scheelinium"
+   ],
+   "req": [],
+   "machineOnly": true
+  },
+  {
+   "out": "Papyrus",
+   "parents": [
+    "Corium",
+    "BonsaiBirch"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Platina",
+   "parents": [
+    "Diareed",
+    "Rubyne"
+   ],
+   "req": [],
+   "machineOnly": true
+  },
+  {
+   "out": "Plumbilia",
+   "parents": [
+    "Coppon",
+    "Withereed"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Pyrolusium",
+   "parents": [
+    "Nickelback",
+    "Bauxia"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Reactoria",
+   "parents": [
+    "Titania",
+    "GodOfThunder"
+   ],
+   "req": [],
+   "machineOnly": true
+  },
+  {
+   "out": "RedStraw",
+   "parents": [
+    "NetherStoneLily",
+    "Wheat"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Rubyne",
+   "parents": [
+    "RedStraw",
+    "Diareed"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "SaltyRoot",
+   "parents": [
+    "SugarBeet",
+    "Canola"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Sapphirum",
+   "parents": [
+    "EvilOre",
+    "Lazulia"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Scheelinium",
+   "parents": [
+    "Titania",
+    "Pyrolusium",
+    "EndStoneLily"
+   ],
+   "req": [],
+   "machineOnly": true
+  },
+  {
+   "out": "SpaceFlower",
+   "parents": [
+    "EndStoneLily",
+    "Titania"
+   ],
+   "req": [],
+   "machineOnly": true
+  },
+  {
+   "out": "Stargatium",
+   "parents": [
+    "Iridine",
+    "Trollplant"
+   ],
+   "req": [],
+   "machineOnly": true
+  },
+  {
+   "out": "StarWart",
+   "parents": [
+    "Withereed",
+    "Titania",
+    "GodOfThunder"
+   ],
+   "req": [],
+   "machineOnly": true
+  },
+  {
+   "out": "Steeleafranks",
+   "parents": [
+    "Torchberry",
+    "KnightmetalBerry"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Tine",
+   "parents": [
+    "StoneLily",
+    "BonsaiSpruce"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Titania",
+   "parents": [
+    "Bauxia",
+    "RedStraw"
+   ],
+   "req": [],
+   "machineOnly": true
+  },
+  {
+   "out": "Transformium",
+   "parents": [
+    "Trollplant",
+    "Bauxia",
+    "Titania"
+   ],
+   "req": [],
+   "machineOnly": true
+  },
+  {
+   "out": "Trollplant",
+   "parents": [
+    "Goldfish",
+    "Reactoria",
+    "Fertilia"
+   ],
+   "req": [],
+   "machineOnly": true
+  },
+  {
+   "out": "Withereed",
+   "parents": [
+    "BasaltLily",
+    "BlackGraniteLily"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "InkBloom",
+   "parents": [
+    "Blackberry",
+    "Goldfish"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Blazereed",
+   "parents": [
+    "SugarCane",
+    "Cinderpearl"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Corium",
+   "parents": [
+    "Wheat",
+    "Cocoa"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Corpseplant",
+   "parents": [
+    "Zomplant",
+    "Eyebulb"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Creeperweed",
+   "parents": [
+    "NetherStoneLily",
+    "Withereed",
+    "SaltyRoot"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "EggPlant",
+   "parents": [
+    "Corium",
+    "OxeyeDaisy"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Enderbloom",
+   "parents": [
+    "EndStoneLily",
+    "Creeperweed"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Goldfish",
+   "parents": [
+    "Waterlily",
+    "WaterArtichoke",
+    "Mandrake"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Meatrose",
+   "parents": [
+    "Goldfish",
+    "EggPlant",
+    "Corium"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Slimeplant",
+   "parents": [
+    "BlueOrchid",
+    "ClayLily"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Spidernip",
+   "parents": [
+    "Flax",
+    "Hemp",
+    "Zomplant"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Tearstalks",
+   "parents": [
+    "Goldfish",
+    "SoulSandLily",
+    "NetherStoneLily"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Zomplant",
+   "parents": [
+    "Withereed",
+    "Eyebulb"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Blightberry",
+   "parents": [
+    "Maloberry",
+    "Raspberry"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Duskberry",
+   "parents": [
+    "InkBloom",
+    "Blackberry"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Skyberry",
+   "parents": [
+    "Dayflower",
+    "Blueberry"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Stingberry",
+   "parents": [
+    "Thornvine",
+    "SaguaroCactus"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Cotton",
+   "parents": [
+    "Flax",
+    "Hemp"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Thornvine",
+   "parents": [
+    "Vine",
+    "Cactus"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "BlueGlowshroom",
+   "parents": [
+    "BlueOrchid",
+    "Glowflower"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "GreenGlowshroom",
+   "parents": [
+    "Cactus",
+    "Glowflower"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "PurpleGlowshroom",
+   "parents": [
+    "Indigo",
+    "Glowflower"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "AluminiumOreBerry",
+   "parents": [
+    "GoldOreBerry",
+    "EssenceOreBerry"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "CopperOreBerry",
+   "parents": [
+    "Malaxia",
+    "BoPBerry",
+    "StoneLily"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "EssenceOreBerry",
+   "parents": [
+    "Creeperweed",
+    "Zomplant",
+    "Spidernip",
+    "Tearstalks"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "GoldOreBerry",
+   "parents": [
+    "CopperOreBerry",
+    "IronOreBerry",
+    "TinOreBerry"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "IronOreBerry",
+   "parents": [
+    "TinOreBerry",
+    "StoneLily"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "TinOreBerry",
+   "parents": [
+    "Cassitine",
+    "BoPBerry",
+    "StoneLily"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "ArditeOreBerry",
+   "parents": [
+    "NetherStoneLily",
+    "Coppon",
+    "CopperOreBerry",
+    "Malaxia"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "CobaltOreBerry",
+   "parents": [
+    "NetherStoneLily",
+    "ArditeOreBerry",
+    "Lazulia",
+    "GoldOreBerry"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "ThaumiumOreBerry",
+   "parents": [
+    "StoneLily",
+    "GoldOreBerry"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "VoidOreBerry",
+   "parents": [
+    "ThaumiumOreBerry",
+    "GoldOreBerry"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "ThauminiteOreBerry",
+   "parents": [
+    "ThaumiumOreBerry",
+    "ManaBean"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "KnightmetalBerry",
+   "parents": [
+    "IronOreBerry",
+    "Torchberry",
+    "BonsaiDarkOak"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "AndesiteLily",
+   "parents": [
+    "StoneLily",
+    "ClayLily"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "DioriteLily",
+   "parents": [
+    "StoneLily",
+    "MarbleLily"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "GraniteLily",
+   "parents": [
+    "BlackGraniteLily",
+    "RedGraniteLily"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "TuffLily",
+   "parents": [
+    "BlackGraniteLily",
+    "AndesiteLily"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "DeepslateLily",
+   "parents": [
+    "TuffLily",
+    "BlackGraniteLily"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "BasaltLily",
+   "parents": [
+    "StoneLily",
+    "InkBloom"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "BlackGraniteLily",
+   "parents": [
+    "StoneLily",
+    "BasaltLily"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "ClayLily",
+   "parents": [
+    "StoneLily",
+    "Waterlily"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "EndStoneLily",
+   "parents": [
+    "StoneLily",
+    "Enderbloom"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "MarbleLily",
+   "parents": [
+    "StoneLily",
+    "OxeyeDaisy"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "NetherStoneLily",
+   "parents": [
+    "StoneLily",
+    "Netherwart"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "RedGraniteLily",
+   "parents": [
+    "StoneLily",
+    "Poppy"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "SandLily",
+   "parents": [
+    "StoneLily",
+    "Cactus"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "SoulSandLily",
+   "parents": [
+    "NetherStoneLily",
+    "SandLily"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "StoneLily",
+   "parents": [
+    "Vine",
+    "Pumpkin"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Cinderpearl",
+   "parents": [
+    "EmberMoss",
+    "GlintWeed"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "ManaBean",
+   "parents": [
+    "Cocoa",
+    "Cinderpearl",
+    "Shimmerleaf"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Shimmerleaf",
+   "parents": [
+    "WhiteTulip",
+    "RedStraw"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Torchberry",
+   "parents": [
+    "Glowflower",
+    "BoPBerry"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Cocoa",
+   "parents": [
+    "Melon",
+    "BonsaiJungle"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Melon",
+   "parents": [
+    "Pumpkin",
+    "BonsaiJungle"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Pumpkin",
+   "parents": [
+    "Carrot",
+    "SugarCane"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "RedMushroom",
+   "parents": [
+    "Pumpkin",
+    "Poppy"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "BrownMushroom",
+   "parents": [
+    "Cocoa",
+    "RedMushroom"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "BlueOrchid",
+   "parents": [
+    "Poppy",
+    "Waterlily"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "AzureBluet",
+   "parents": [
+    "Poppy",
+    "Potato"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "RedTulip",
+   "parents": [
+    "Poppy",
+    "WhiteTulip"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "OrangeTulip",
+   "parents": [
+    "RedTulip",
+    "Dandelion"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "PinkTulip",
+   "parents": [
+    "RedTulip",
+    "WhiteTulip"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "WhiteTulip",
+   "parents": [
+    "PinkTulip",
+    "OxeyeDaisy"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Allium",
+   "parents": [
+    "PinkTulip",
+    "PurpleTulip"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "OxeyeDaisy",
+   "parents": [
+    "AzureBluet",
+    "Dandelion"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Cactus",
+   "parents": [
+    "SugarCane",
+    "Potato"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "SugarCane",
+   "parents": [
+    "Carrot",
+    "Potato"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Netherwart",
+   "parents": [
+    "RedMushroom",
+    "BrownMushroom"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Vine",
+   "parents": [
+    "Pumpkin",
+    "BlueOrchid"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Waterlily",
+   "parents": [
+    "Vine",
+    "SugarCane"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Belladonna",
+   "parents": [
+    "PurpleTulip",
+    "Huckleberry"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "EmberMoss",
+   "parents": [
+    "RedTulip",
+    "Moss"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Garlic",
+   "parents": [
+    "Onion",
+    "Allium"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "GlintWeed",
+   "parents": [
+    "Vine",
+    "EmberMoss"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Mandrake",
+   "parents": [
+    "Carrot",
+    "Belladonna"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Snowbell",
+   "parents": [
+    "Belladonna",
+    "GlintWeed"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "SpanishMoss",
+   "parents": [
+    "Moss",
+    "EmberMoss"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "WaterArtichoke",
+   "parents": [
+    "Waterlily",
+    "Hops"
+   ],
+   "req": [],
+   "machineOnly": false
+  },
+  {
+   "out": "Wolfsbane",
+   "parents": [
+    "WaterArtichoke",
+    "Belladonna"
+   ],
+   "req": [],
+   "machineOnly": false
+  }
+ ],
+ "subsoil": {
+  "stone": {
+   "oredict": [
+    "bricksStone"
+   ],
+   "materials": [],
+   "modBlocks": [
+    "cobblestone",
+    "color_stone",
+    "color_stonebrick",
+    "decoration.multibrick",
+    "decoration.multibrickfancy",
+    "mossy_cobblestone",
+    "oldCobble",
+    "oldCobbleMossy",
+    "stone_snakestone",
+    "stonebricksmooth"
+   ]
+  },
+  "sand": {
+   "oredict": [],
+   "materials": [],
+   "modBlocks": [
+    "red_sandstone",
+    "sand_snakestone",
+    "sandstone",
+    "sandstone2",
+    "sandstone_scribbles",
+    "smooth_red_sandstone"
+   ]
+  },
+  "clay": {
+   "oredict": [
+    "blockStainedHardenedClay",
+    "hardenedClay"
+   ],
+   "materials": [],
+   "modBlocks": [
+    "black_glazed_terracotta",
+    "blue_glazed_terracotta",
+    "brown_glazed_terracotta",
+    "cyan_glazed_terracotta",
+    "gray_glazed_terracotta",
+    "green_glazed_terracotta",
+    "hardened_clay",
+    "hardened_clay2",
+    "hardened_clay_black",
+    "hardened_clay_blue",
+    "hardened_clay_blue2",
+    "hardened_clay_brown",
+    "hardened_clay_brown2",
+    "hardened_clay_cyan",
+    "hardened_clay_cyan2",
+    "hardened_clay_gray",
+    "hardened_clay_gray2",
+    "hardened_clay_green",
+    "hardened_clay_green2",
+    "hardened_clay_lightblue",
+    "hardened_clay_lightblue2",
+    "hardened_clay_lightgray",
+    "hardened_clay_lightgray2",
+    "hardened_clay_lime",
+    "hardened_clay_lime2",
+    "hardened_clay_magenta",
+    "hardened_clay_magenta2",
+    "hardened_clay_orange",
+    "hardened_clay_orange2",
+    "hardened_clay_pink",
+    "hardened_clay_pink2",
+    "hardened_clay_purple",
+    "hardened_clay_purple2",
+    "hardened_clay_red",
+    "hardened_clay_red2",
+    "hardened_clay_white",
+    "hardened_clay_white2",
+    "hardened_clay_yellow",
+    "hardened_clay_yellow2",
+    "light_blue_glazed_terracotta",
+    "light_gray_glazed_terracotta",
+    "lime_glazed_terracotta",
+    "magenta_glazed_terracotta",
+    "orange_glazed_terracotta",
+    "pink_glazed_terracotta",
+    "purple_glazed_terracotta",
+    "red_glazed_terracotta",
+    "white_glazed_terracotta",
+    "yellow_glazed_terracotta"
+   ]
+  },
+  "soulSand": {
+   "oredict": [
+    "soulSand",
+    "soulsand"
+   ],
+   "materials": [],
+   "modBlocks": []
+  },
+  "netherrack": {
+   "oredict": [],
+   "materials": [],
+   "modBlocks": [
+    "decoration.multibrick",
+    "decoration.multibrickfancy",
+    "netherrack"
+   ]
+  },
+  "endStone": {
+   "oredict": [],
+   "materials": [],
+   "modBlocks": [
+    "decoration.multibrick",
+    "decoration.multibrickfancy",
+    "endStoneBrick",
+    "end_Stone",
+    "end_bricks"
+   ]
+  },
+  "redGranite": {
+   "oredict": [
+    "stoneGraniteRed"
+   ],
+   "materials": [],
+   "modBlocks": []
+  },
+  "blackGranite": {
+   "oredict": [
+    "stoneGraniteBlack"
+   ],
+   "materials": [],
+   "modBlocks": []
+  },
+  "marble": {
+   "oredict": [
+    "stoneMarble"
+   ],
+   "materials": [],
+   "modBlocks": [
+    "marble"
+   ]
+  },
+  "basalt": {
+   "oredict": [
+    "stoneBasalt"
+   ],
+   "materials": [],
+   "modBlocks": []
+  },
+  "modernAndesite": {
+   "oredict": [
+    "stoneAndesite",
+    "stoneAndesiteBricks",
+    "stoneAndesiteChiseled",
+    "stoneAndesitePolished"
+   ],
+   "materials": [],
+   "modBlocks": [
+    "andesite"
+   ]
+  },
+  "modernDiorite": {
+   "oredict": [
+    "stoneDiorite",
+    "stoneDioriteBricks",
+    "stoneDioriteChiseled",
+    "stoneDioritePolished"
+   ],
+   "materials": [],
+   "modBlocks": [
+    "diorite"
+   ]
+  },
+  "modernGranite": {
+   "oredict": [
+    "stoneGranite",
+    "stoneGraniteBricks",
+    "stoneGraniteChiseled",
+    "stoneGranitePolished"
+   ],
+   "materials": [],
+   "modBlocks": [
+    "granite"
+   ]
+  },
+  "tuff": {
+   "oredict": [],
+   "materials": [],
+   "modBlocks": [
+    "tuff"
+   ]
+  },
+  "deepslate": {
+   "oredict": [],
+   "materials": [],
+   "modBlocks": [
+    "cobbled_deepslate",
+    "deepslate",
+    "deepslate_bricks",
+    "polished_deepslate"
+   ]
+  },
+  "coal": {
+   "oredict": [
+    "blockCoal",
+    "oreCoal"
+   ],
+   "materials": [
+    "Coal"
+   ],
+   "modBlocks": []
+  },
+  "iron": {
+   "oredict": [
+    "blockIron",
+    "oreIron"
+   ],
+   "materials": [
+    "Iron"
+   ],
+   "modBlocks": [
+    "iron2",
+    "iron_block"
+   ]
+  },
+  "gold": {
+   "oredict": [
+    "blockGold",
+    "oreGold"
+   ],
+   "materials": [
+    "Gold"
+   ],
+   "modBlocks": [
+    "gold2",
+    "gold_block"
+   ]
+  },
+  "diamond": {
+   "oredict": [
+    "blockDiamond",
+    "oreDiamond"
+   ],
+   "materials": [
+    "Diamond"
+   ],
+   "modBlocks": [
+    "diamond_block"
+   ]
+  },
+  "emerald": {
+   "oredict": [
+    "blockEmerald",
+    "oreEmerald"
+   ],
+   "materials": [
+    "Emerald"
+   ],
+   "modBlocks": [
+    "emerald_block"
+   ]
+  },
+  "redstone": {
+   "oredict": [
+    "blockRedstone",
+    "oreRedstone"
+   ],
+   "materials": [
+    "Redstone"
+   ],
+   "modBlocks": [
+    "redstone_block"
+   ]
+  },
+  "lapis": {
+   "oredict": [
+    "blockLapis",
+    "oreLapis"
+   ],
+   "materials": [
+    "Lapis"
+   ],
+   "modBlocks": [
+    "lapis_block"
+   ]
+  },
+  "aluminium": {
+   "oredict": [
+    "blockAluminium",
+    "blockAluminum",
+    "oreAluminium",
+    "oreAluminum"
+   ],
+   "materials": [
+    "Aluminium"
+   ],
+   "modBlocks": [
+    "aluminumblock"
+   ]
+  },
+  "aluminiumBauxite": {
+   "oredict": [
+    "blockAluminium",
+    "blockAluminum",
+    "blockBauxite",
+    "oreAluminium",
+    "oreAluminum",
+    "oreBauxite"
+   ],
+   "materials": [
+    "Aluminium",
+    "Bauxite"
+   ],
+   "modBlocks": [
+    "aluminumblock"
+   ]
+  },
+  "copper": {
+   "oredict": [
+    "blockCopper",
+    "oreCopper"
+   ],
+   "materials": [
+    "Copper"
+   ],
+   "modBlocks": [
+    "chiseled_copper",
+    "copper_block",
+    "copperblock"
+   ]
+  },
+  "chrome": {
+   "oredict": [
+    "blockChrome",
+    "oreChrome"
+   ],
+   "materials": [
+    "Chrome"
+   ],
+   "modBlocks": []
+  },
+  "iridium": {
+   "oredict": [
+    "blockIridium",
+    "oreIridium"
+   ],
+   "materials": [
+    "Iridium"
+   ],
+   "modBlocks": []
+  },
+  "lead": {
+   "oredict": [
+    "blockLead",
+    "oreLead"
+   ],
+   "materials": [
+    "Galena",
+    "Lead"
+   ],
+   "modBlocks": [
+    "leadblock"
+   ]
+  },
+  "magnesium": {
+   "oredict": [
+    "blockMagnesium",
+    "oreMagnesium"
+   ],
+   "materials": [
+    "Magnesium"
+   ],
+   "modBlocks": []
+  },
+  "manganese": {
+   "oredict": [
+    "blockManganese",
+    "oreManganese"
+   ],
+   "materials": [
+    "Manganese",
+    "Pyrolusite"
+   ],
+   "modBlocks": []
+  },
+  "mica": {
+   "oredict": [
+    "blockMica",
+    "oreMica"
+   ],
+   "materials": [
+    "Mica"
+   ],
+   "modBlocks": []
+  },
+  "naquadah": {
+   "oredict": [
+    "blockNaquadah",
+    "oreNaquadah"
+   ],
+   "materials": [
+    "Naquadah",
+    "NaquadahEnriched",
+    "Naquadria"
+   ],
+   "modBlocks": []
+  },
+  "netherStar": {
+   "oredict": [
+    "blockNetherStar",
+    "oreNetherStar"
+   ],
+   "materials": [
+    "NetherStar"
+   ],
+   "modBlocks": []
+  },
+  "nickel": {
+   "oredict": [
+    "blockNickel",
+    "oreNickel"
+   ],
+   "materials": [
+    "Nickel"
+   ],
+   "modBlocks": [
+    "nickelblock"
+   ]
+  },
+  "osmium": {
+   "oredict": [
+    "blockOsmium",
+    "oreOsmium"
+   ],
+   "materials": [
+    "Osmium"
+   ],
+   "modBlocks": []
+  },
+  "platinum": {
+   "oredict": [
+    "blockPlatinum",
+    "orePlatinum"
+   ],
+   "materials": [
+    "Cooperite",
+    "Platinum"
+   ],
+   "modBlocks": [
+    "platinumblock"
+   ]
+  },
+  "silver": {
+   "oredict": [
+    "blockSilver",
+    "oreSilver"
+   ],
+   "materials": [
+    "Silver"
+   ],
+   "modBlocks": [
+    "silverblock"
+   ]
+  },
+  "thorium": {
+   "oredict": [
+    "blockThorium",
+    "oreThorium"
+   ],
+   "materials": [
+    "Thorium"
+   ],
+   "modBlocks": []
+  },
+  "tin": {
+   "oredict": [
+    "blockTin",
+    "oreTin"
+   ],
+   "materials": [
+    "Tin"
+   ],
+   "modBlocks": [
+    "tinblock"
+   ]
+  },
+  "titanium": {
+   "oredict": [
+    "blockTitanium",
+    "oreTitanium"
+   ],
+   "materials": [
+    "Ilmenite",
+    "Rutile",
+    "Titanium"
+   ],
+   "modBlocks": []
+  },
+  "tungsten": {
+   "oredict": [
+    "blockTungsten",
+    "oreTungsten"
+   ],
+   "materials": [
+    "Scheelite",
+    "Tungstate",
+    "Tungsten"
+   ],
+   "modBlocks": []
+  },
+  "uranium": {
+   "oredict": [
+    "blockUranium",
+    "blockUranium235",
+    "blockUranium238",
+    "oreUranium",
+    "oreUranium235",
+    "oreUranium238"
+   ],
+   "materials": [
+    "Pitchblende",
+    "Uraninite",
+    "Uranium",
+    "Uranium235"
+   ],
+   "modBlocks": [
+    "uraniumblock"
+   ]
+  },
+  "zinc": {
+   "oredict": [
+    "blockZinc",
+    "oreZinc"
+   ],
+   "materials": [
+    "Sphalerite",
+    "Zinc"
+   ],
+   "modBlocks": []
+  },
+  "sulfur": {
+   "oredict": [
+    "blockSulfur",
+    "oreSulfur"
+   ],
+   "materials": [
+    "Galena",
+    "Sphalerite",
+    "Sulfur"
+   ],
+   "modBlocks": [
+    "Cloud"
+   ]
+  },
+  "garnetGem": {
+   "oredict": [
+    "blockGarnetGem",
+    "oreGarnetGem"
+   ],
+   "materials": [
+    "GarnetRed",
+    "GarnetSand",
+    "GarnetYellow"
+   ],
+   "modBlocks": []
+  },
+  "olivine": {
+   "oredict": [
+    "blockOlivine",
+    "oreOlivine"
+   ],
+   "materials": [
+    "Olivine"
+   ],
+   "modBlocks": []
+  },
+  "sapphire": {
+   "oredict": [
+    "blockSapphire",
+    "oreSapphire"
+   ],
+   "materials": [
+    "Sapphire"
+   ],
+   "modBlocks": []
+  },
+  "ruby": {
+   "oredict": [
+    "blockRuby",
+    "oreRuby"
+   ],
+   "materials": [
+    "Ruby"
+   ],
+   "modBlocks": []
+  },
+  "knightmetal": {
+   "oredict": [
+    "blockKnightmetal",
+    "oreKnightmetal"
+   ],
+   "materials": [
+    "Knightmetal"
+   ],
+   "modBlocks": []
+  },
+  "steeleaf": {
+   "oredict": [
+    "blockSteeleaf",
+    "oreSteeleaf"
+   ],
+   "materials": [
+    "Steeleaf"
+   ],
+   "modBlocks": [
+    "tile.SteeleafBlock"
+   ]
+  },
+  "cobalt": {
+   "oredict": [
+    "blockCobalt",
+    "oreCobalt"
+   ],
+   "materials": [
+    "Cobalt"
+   ],
+   "modBlocks": [
+    "cobaltblock",
+    "decoration.multibrickmetal"
+   ]
+  },
+  "ardite": {
+   "oredict": [
+    "blockArdite",
+    "oreArdite"
+   ],
+   "materials": [
+    "Ardite"
+   ],
+   "modBlocks": [
+    "decoration.multibrickmetal"
+   ]
+  },
+  "$void": {
+   "oredict": [
+    "block$void",
+    "ore$void"
+   ],
+   "materials": [
+    "Void"
+   ],
+   "modBlocks": []
+  },
+  "thaumium": {
+   "oredict": [
+    "blockThaumium",
+    "oreThaumium"
+   ],
+   "materials": [
+    "Thaumium"
+   ],
+   "modBlocks": [
+    "thaumium"
+   ]
+  },
+  "thauminite": {
+   "oredict": [
+    "blockThauminite"
+   ],
+   "materials": [],
+   "modBlocks": []
+  },
+  "shadowmetal": {
+   "oredict": [
+    "blockShadow",
+    "oreShadow"
+   ],
+   "materials": [
+    "Shadow"
+   ],
+   "modBlocks": []
+  },
+  "snow": {
+   "oredict": [
+    "blockSnow"
+   ],
+   "materials": [],
+   "modBlocks": []
+  },
+  "skull": {
+   "oredict": [
+    "itemSkull"
+   ],
+   "materials": [],
+   "modBlocks": []
+  },
+  "glowstone": {
+   "oredict": [
+    "glowstone",
+    "stoneGlowstone"
+   ],
+   "materials": [],
+   "modBlocks": [
+    "glowstone"
+   ]
+  },
+  "blaze": {
+   "oredict": [
+    "blockBlaze"
+   ],
+   "materials": [],
+   "modBlocks": []
+  },
+  "quicksilver": {
+   "oredict": [
+    "blockQuicksilver"
+   ],
+   "materials": [],
+   "modBlocks": []
+  },
+  "mixedCrystalCluster": {
+   "oredict": [],
+   "materials": [],
+   "modBlocks": [
+    "blockCrystal"
+   ]
+  },
+  "space": {
+   "oredict": [
+    "rockSpace"
+   ],
+   "materials": [],
+   "modBlocks": []
+  }
+ },
+ "subsoilDesc": {
+  "stone": "Needs a block of stone under it to grow",
+  "sand": "Needs a block of sand or sandstone under it to grow",
+  "clay": "Needs a block of clay or hardened clay under it to grow",
+  "soulSand": "Needs a block of soul sand under it to grow",
+  "netherrack": "Needs a block of netherrack under it to grow",
+  "endStone": "Needs a block of end stone under it to grow",
+  "redGranite": "Needs a block of red granite under it to grow",
+  "blackGranite": "Needs a block of black granite under it to grow",
+  "marble": "Needs a block of marble under it to grow",
+  "basalt": "Needs a block of basalt under it to grow",
+  "deepslate": "Needs a block of deepslate under it to grow",
+  "tuff": "Needs a block of tuff under it to grow",
+  "modernAndesite": "Needs a block of andesite under it to grow",
+  "modernDiorite": "Needs a block of diorite under it to grow",
+  "modernGranite": "Needs a block of granite under it to grow",
+  "coal": "Needs a block of coal under it to grow",
+  "iron": "Needs a block of iron under it to grow",
+  "gold": "Needs a block of gold under it to grow",
+  "diamond": "Needs a block of diamond under it to grow",
+  "emerald": "Needs a block of emerald under it to grow",
+  "redstone": "Needs a block of redstone under it to grow",
+  "lapis": "Needs a block of lapis under it to grow",
+  "aluminium": "Needs a block of aluminium under it to grow",
+  "aluminiumBauxite": "Needs a block of aluminium or bauxite under it to grow",
+  "copper": "Needs a block of copper under it to grow",
+  "iridium": "Needs a block of iridium under it to grow",
+  "lead": "Needs a block of lead or galena under it to grow",
+  "magnesium": "Needs a block of magnesium under it to grow",
+  "manganese": "Needs a block of manganese or pyrolusite under it to grow",
+  "mica": "Needs a block of mica or cupronickel coil under it to grow",
+  "naquadah": "Needs a block of naquadah under it to grow",
+  "netherStar": "Needs a block of nether star under it to grow",
+  "nickel": "Needs a block of nickel under it to grow",
+  "osmium": "Needs a block of osmium under it to grow",
+  "platinum": "Needs a block of platinum or sheldonite under it to grow",
+  "silver": "Needs a block of silver under it to grow",
+  "sulfur": "Needs a block of sulfur or sphalerite under it to grow",
+  "thorium": "Needs a block of thorium or thorianite under it to grow",
+  "tin": "Needs a block of tin under it to grow",
+  "titanium": "Needs a block of titanium, ilmenite, or rutile under it to grow",
+  "tungsten": "Needs a block of tungsten, scheelite, or tungstate under it to grow",
+  "uranium": "Needs a block of uranium, uranite, or pitchblende under it to grow",
+  "zinc": "Needs a block of zinc or sphalerite under it to grow",
+  "garnetGem": "Needs a block of red or yellow garnet or garnet sand under it to grow",
+  "olivine": "Needs a block of olivine under it to grow",
+  "sapphire": "Needs a block of sapphire under it to grow",
+  "ruby": "Needs a block of ruby under it to grow",
+  "knightmetal": "Needs a block of knightmetal under it to grow",
+  "steeleaf": "Needs a block of steeleaf under it to grow",
+  "cobalt": "Needs a block of cobalt under it to grow",
+  "ardite": "Needs a block of ardite under it to grow",
+  "void": "Needs a block of void under it to grow",
+  "thaumium": "Needs a block of thaumium under it to grow",
+  "thauminite": "Needs a block of thauminite under it to grow",
+  "shadowmetal": "Needs a block of shadow metal under it to grow",
+  "skull": "Needs a skull under it to grow",
+  "snow": "Needs a block of snow under it to grow",
+  "glowstone": "Needs a block of glowstone under it to grow",
+  "blaze": "Needs a block of blaze under it to grow",
+  "quicksilver": "Needs a block of quicksilver under it to grow",
+  "mixedCrystalCluster": "Needs a mixed crystal cluster under it to grow",
+  "space": "Needs a block from space under it to grow"
+ },
+ "poolNames": {
+  "addictive": "Addictive",
+  "alien": "Alien",
+  "bean": "Bean",
+  "berry": "Berry",
+  "black": "Black",
+  "blaze": "Blaze",
+  "blue": "Blue",
+  "brown": "Brown",
+  "bush": "Bush",
+  "cactus": "Cactus",
+  "chicken": "Chicken",
+  "climbable": "Climbable",
+  "coal": "Coal",
+  "copper": "Copper",
+  "cotton": "Cotton",
+  "cow": "Cow",
+  "crystal": "Crystal",
+  "danger": "Danger",
+  "dark": "Dark",
+  "dense": "Dense",
+  "evil": "Evil",
+  "fire": "Fire",
+  "fish": "Fish",
+  "flower": "Flower",
+  "food": "Food",
+  "gold": "Gold",
+  "gray": "Gray",
+  "green": "Green",
+  "healing": "Healing",
+  "ingredient": "Ingredient",
+  "iron": "Iron",
+  "lead": "Lead",
+  "leafy": "Leafy",
+  "light": "Light",
+  "magic": "Magic",
+  "metal": "Metal",
+  "mushroom": "Mushroom",
+  "nether": "Nether",
+  "oil": "Oil",
+  "orange": "Orange",
+  "oreBerry": "Ore Berry",
+  "poison": "Poison",
+  "purple": "Purple",
+  "red": "Red",
+  "reed": "Reed",
+  "root": "Root",
+  "saltpeter": "Saltpeter",
+  "shiny": "Shiny",
+  "silk": "Silk",
+  "silver": "Silver",
+  "stem": "Stem",
+  "sticky": "Sticky",
+  "stone": "Stone",
+  "sulfur": "Sulfur",
+  "tendrilly": "Tendrilly",
+  "tin": "Tin",
+  "tree": "Tree",
+  "tulip": "Tulip",
+  "twilightForest": "Twilight Forest",
+  "undead": "Undead",
+  "void": "Void",
+  "water": "Water",
+  "wheat": "Wheat",
+  "white": "White",
+  "wood": "Wood",
+  "yellow": "Yellow"
+ },
+ "poolMembers": {
+  "purple": [
+   "Allium",
+   "Belladonna",
+   "GlowingCoral",
+   "Grape",
+   "Huckleberry",
+   "Necrobloom",
+   "Plumbilia",
+   "Plumbshade",
+   "PurpleGlowshroom",
+   "PurpleTulip",
+   "ThaumiumOreBerry",
+   "Turnip",
+   "Wolfsbane"
+  ],
+  "root": [
+   "Allium",
+   "Carrot",
+   "Garlic",
+   "Liveroot",
+   "Onion",
+   "Potato",
+   "SaltyRoot",
+   "SugarBeet",
+   "Turnip",
+   "WildCarrot"
+  ],
+  "flower": [
+   "Allium",
+   "AzureBluet",
+   "Belladonna",
+   "BlueOrchid",
+   "Dandelion",
+   "Dayflower",
+   "Enderbloom",
+   "FloweringVine",
+   "GlintWeed",
+   "Indigo",
+   "InkBloom",
+   "Ivy",
+   "Mandrake",
+   "Meatrose",
+   "Necrobloom",
+   "OrangeTulip",
+   "OxeyeDaisy",
+   "PinkTulip",
+   "Poppy",
+   "PurpleTulip",
+   "RedTulip",
+   "Snowbell",
+   "Thiosulfine",
+   "WaterArtichoke",
+   "WhiteTulip",
+   "Wolfsbane"
+  ],
+  "white": [
+   "AluminiumOreBerry",
+   "Argentia",
+   "AzureBluet",
+   "BonsaiBirch",
+   "Cotton",
+   "DioriteLily",
+   "EggPlant",
+   "EvilOre",
+   "Galvania",
+   "Garlic",
+   "MarbleLily",
+   "MilkWart",
+   "OxeyeDaisy",
+   "Papyrus",
+   "Silviscus",
+   "Snowbell",
+   "Spidernip",
+   "SugarBeet",
+   "Tearstalks",
+   "TinOreBerry",
+   "WhiteTulip",
+   "WildCarrot"
+  ],
+  "oreBerry": [
+   "AluminiumOreBerry",
+   "ArditeOreBerry",
+   "CobaltOreBerry",
+   "CopperOreBerry",
+   "EssenceOreBerry",
+   "GoldOreBerry",
+   "IronOreBerry",
+   "KnightmetalBerry",
+   "ThauminiteOreBerry",
+   "ThaumiumOreBerry",
+   "TinOreBerry",
+   "VoidOreBerry"
+  ],
+  "danger": [
+   "AluminiumOreBerry",
+   "ArditeOreBerry",
+   "Bamboo",
+   "Blightberry",
+   "Cactus",
+   "CobaltOreBerry",
+   "CopperOreBerry",
+   "Duskberry",
+   "EmberMoss",
+   "EssenceOreBerry",
+   "GoldOreBerry",
+   "Goldfish",
+   "IronOreBerry",
+   "Ivy",
+   "KnightmetalBerry",
+   "Mandrake",
+   "Necrobloom",
+   "SaguaroCactus",
+   "Skyberry",
+   "SoulSandLily",
+   "Stingberry",
+   "ThauminiteOreBerry",
+   "ThaumiumOreBerry",
+   "Thiosulfine",
+   "Thornvine",
+   "TinOreBerry",
+   "VoidOreBerry"
+  ],
+  "metal": [
+   "AluminiumOreBerry",
+   "ArditeOreBerry",
+   "Argentia",
+   "Auronia",
+   "Cassitine",
+   "CobaltOreBerry",
+   "CopperOreBerry",
+   "Coppon",
+   "Ferrofern",
+   "Galvania",
+   "GoldOreBerry",
+   "IronOreBerry",
+   "KnightmetalBerry",
+   "Malaxia",
+   "Nickelback",
+   "Plumbilia",
+   "Plumbshade",
+   "Pyrolusium",
+   "Silviscus",
+   "Steeleafranks",
+   "ThauminiteOreBerry",
+   "ThaumiumOreBerry",
+   "TinOreBerry",
+   "Tine",
+   "VoidOreBerry"
+  ],
+  "stone": [
+   "AndesiteLily",
+   "AndesiteLily",
+   "BasaltLily",
+   "BlackGraniteLily",
+   "ClayLily",
+   "DeepslateLily",
+   "DioriteLily",
+   "EndStoneLily",
+   "GraniteLily",
+   "MarbleLily",
+   "NetherStoneLily",
+   "RedGraniteLily",
+   "RedStraw",
+   "SandLily",
+   "SoulSandLily",
+   "StoneLily",
+   "TuffLily"
+  ],
+  "gray": [
+   "AndesiteLily",
+   "Cassitine",
+   "ClayLily",
+   "Duskberry",
+   "Ferrofern",
+   "IronOreBerry",
+   "KnightmetalBerry",
+   "Nickelback",
+   "SaltyRoot",
+   "Shimmerleaf",
+   "StoneLily",
+   "Tine",
+   "TuffLily"
+  ],
+  "orange": [
+   "ArditeOreBerry",
+   "Blazereed",
+   "BonsaiAcacia",
+   "Carrot",
+   "Cinderpearl",
+   "CopperOreBerry",
+   "Coppon",
+   "GlintWeed",
+   "Goldfish",
+   "Malaxia",
+   "OrangeTulip",
+   "Pumpkin"
+  ],
+  "shiny": [
+   "Argentia",
+   "BobsYerUncleRanks",
+   "Cassitine",
+   "CopperOreBerry",
+   "Coppon",
+   "Diareed",
+   "Glowflower",
+   "Glowheat",
+   "GlowingCoral",
+   "Lazulia",
+   "Rubyne",
+   "Sapphirum",
+   "TinOreBerry",
+   "Tine"
+  ],
+  "tendrilly": [
+   "Argentia",
+   "Auronia",
+   "BobsYerUncleRanks",
+   "Cotton",
+   "Creeperweed",
+   "Cucumber",
+   "EmberMoss",
+   "Eyebulb",
+   "Ferrofern",
+   "FloweringVine",
+   "Grape",
+   "Ivy",
+   "Liveroot",
+   "Moss",
+   "Plumbilia",
+   "Steeleafranks",
+   "Thornvine",
+   "Tomato",
+   "Vine"
+  ],
+  "silver": [
+   "Argentia",
+   "Shimmerleaf",
+   "Silviscus"
+  ],
+  "yellow": [
+   "Auronia",
+   "Canola",
+   "Dandelion",
+   "EndStoneLily",
+   "Glowheat",
+   "GoldOreBerry",
+   "Lemon",
+   "Maloberry",
+   "Potato",
+   "SandLily",
+   "Thiosulfine",
+   "Thornvine",
+   "Torchberry",
+   "Wheat"
+  ],
+  "dense": [
+   "Auronia",
+   "DeepslateLily",
+   "GoldOreBerry",
+   "Plumbilia",
+   "Plumbshade"
+  ],
+  "gold": [
+   "Auronia",
+   "GoldOreBerry"
+  ],
+  "green": [
+   "Bamboo",
+   "Barley",
+   "Blightberry",
+   "BobsYerUncleRanks",
+   "Cactus",
+   "Creeperweed",
+   "Cucumber",
+   "EssenceOreBerry",
+   "FloweringVine",
+   "Glowshroom",
+   "GreenGlowshroom",
+   "Hemp",
+   "Hops",
+   "Ivy",
+   "Melon",
+   "Moss",
+   "SaguaroCactus",
+   "Slimeplant",
+   "SpanishMoss",
+   "Steeleafranks",
+   "StickyCane",
+   "SugarCane",
+   "Tea",
+   "Vine",
+   "Waterlily"
+  ],
+  "stem": [
+   "Bamboo",
+   "Goldfish",
+   "Hemp",
+   "Melon",
+   "Papyrus",
+   "Pumpkin",
+   "Tearstalks",
+   "Tine"
+  ],
+  "leafy": [
+   "Bamboo",
+   "BonsaiAcacia",
+   "BonsaiBirch",
+   "BonsaiDarkOak",
+   "BonsaiJungle",
+   "BonsaiOak",
+   "Cassitine",
+   "Cocoa",
+   "Coffee",
+   "Grape",
+   "Huckleberry",
+   "Lemon",
+   "Malaxia",
+   "Plumbshade",
+   "Silviscus",
+   "Slimeplant",
+   "Tea",
+   "Tomato"
+  ],
+  "wheat": [
+   "Barley",
+   "Canola",
+   "Flax",
+   "Glowheat",
+   "Hops",
+   "RedStraw",
+   "Wheat"
+  ],
+  "food": [
+   "Barley",
+   "Blackberry",
+   "Blightberry",
+   "BlueGlowshroom",
+   "Blueberry",
+   "BoPBerry",
+   "BonsaiDarkOak",
+   "BonsaiOak",
+   "BrownMushroom",
+   "Canola",
+   "Carrot",
+   "Chilly",
+   "Cocoa",
+   "Coffee",
+   "Corpseplant",
+   "Cucumber",
+   "Duskberry",
+   "EggPlant",
+   "EssenceOreBerry",
+   "Garlic",
+   "Goldfish",
+   "Grape",
+   "GreenGlowshroom",
+   "Hops",
+   "Huckleberry",
+   "Lemon",
+   "Maloberry",
+   "Meatrose",
+   "Melon",
+   "MilkWart",
+   "Onion",
+   "Potato",
+   "Pumpkin",
+   "PurpleGlowshroom",
+   "Raspberry",
+   "RedMushroom",
+   "SaguaroCactus",
+   "Skyberry",
+   "Spidernip",
+   "Stingberry",
+   "Strawberry",
+   "SugarBeet",
+   "SugarCane",
+   "Tea",
+   "Tomato",
+   "Turnip",
+   "WaterArtichoke",
+   "Wheat",
+   "WildCarrot",
+   "Zomplant"
+  ],
+  "black": [
+   "BasaltLily",
+   "BlackGraniteLily",
+   "Blackberry",
+   "DeepslateLily",
+   "Enderbloom",
+   "InkBloom",
+   "VoidOreBerry",
+   "Withereed"
+  ],
+  "dark": [
+   "BasaltLily",
+   "BlackGraniteLily",
+   "BonsaiDarkOak",
+   "DeepslateLily",
+   "TuffLily"
+  ],
+  "poison": [
+   "Belladonna",
+   "Blightberry",
+   "Corpseplant",
+   "Duskberry",
+   "Ivy",
+   "Necrobloom",
+   "Shimmerleaf",
+   "Skyberry",
+   "Snowbell",
+   "Spidernip",
+   "Stingberry",
+   "Wolfsbane",
+   "Zomplant"
+  ],
+  "ingredient": [
+   "Belladonna",
+   "Blazereed",
+   "Blightberry",
+   "BlueGlowshroom",
+   "Carrot",
+   "Creeperweed",
+   "Duskberry",
+   "EmberMoss",
+   "Garlic",
+   "Glowflower",
+   "Glowheat",
+   "GlowingCoral",
+   "Glowshroom",
+   "GreenGlowshroom",
+   "Mandrake",
+   "Melon",
+   "Netherwart",
+   "PurpleGlowshroom",
+   "RedStraw",
+   "Skyberry",
+   "Slimeplant",
+   "Snowbell",
+   "Spidernip",
+   "Stingberry",
+   "SugarBeet",
+   "Tearstalks",
+   "WaterArtichoke",
+   "Wolfsbane"
+  ],
+  "berry": [
+   "Blackberry",
+   "Blightberry",
+   "Blueberry",
+   "BoPBerry",
+   "BobsYerUncleRanks",
+   "Duskberry",
+   "Huckleberry",
+   "Maloberry",
+   "Raspberry",
+   "Skyberry",
+   "Stingberry",
+   "Strawberry",
+   "Torchberry"
+  ],
+  "bush": [
+   "Blackberry",
+   "Blightberry",
+   "Blueberry",
+   "BoPBerry",
+   "Cassitine",
+   "Coppon",
+   "Corpseplant",
+   "Duskberry",
+   "Galvania",
+   "Huckleberry",
+   "Malaxia",
+   "Maloberry",
+   "Plumbshade",
+   "Pyrolusium",
+   "Raspberry",
+   "Silviscus",
+   "Skyberry",
+   "Stingberry",
+   "Strawberry"
+  ],
+  "nether": [
+   "Blazereed",
+   "Blightberry",
+   "BlueGlowshroom",
+   "CobaltOreBerry",
+   "Duskberry",
+   "EvilOre",
+   "Eyebulb",
+   "Glowflower",
+   "Glowheat",
+   "Glowshroom",
+   "Goldfish",
+   "GreenGlowshroom",
+   "NetherStoneLily",
+   "Netherwart",
+   "PurpleGlowshroom",
+   "Skyberry",
+   "SoulSandLily",
+   "Stingberry",
+   "Tearstalks",
+   "Thornvine"
+  ],
+  "reed": [
+   "Blazereed",
+   "Diareed",
+   "StickyCane",
+   "SugarCane",
+   "Withereed"
+  ],
+  "fire": [
+   "Blazereed",
+   "Chilly",
+   "Creeperweed",
+   "Diareed",
+   "EmberMoss",
+   "EvilOre",
+   "Nickelback",
+   "Withereed"
+  ],
+  "evil": [
+   "Blazereed",
+   "Corpseplant",
+   "Creeperweed",
+   "EvilOre",
+   "Eyebulb",
+   "Mandrake",
+   "Slimeplant",
+   "Spidernip",
+   "Tearstalks",
+   "Zomplant"
+  ],
+  "blaze": [
+   "Blazereed",
+   "Cinderpearl"
+  ],
+  "sulfur": [
+   "Blazereed",
+   "Creeperweed",
+   "Thiosulfine",
+   "Withereed"
+  ],
+  "addictive": [
+   "Blightberry",
+   "Cocoa",
+   "Coffee",
+   "Corpseplant",
+   "Dayflower",
+   "Duskberry",
+   "EggPlant",
+   "Flax",
+   "Goldfish",
+   "Hemp",
+   "Skyberry",
+   "Spidernip",
+   "Stingberry",
+   "SugarBeet"
+  ],
+  "healing": [
+   "Blightberry",
+   "Fertilia",
+   "Lazulia",
+   "Melon",
+   "MilkWart",
+   "Tearstalks"
+  ],
+  "blue": [
+   "BlueGlowshroom",
+   "BlueOrchid",
+   "Blueberry",
+   "CobaltOreBerry",
+   "Dayflower",
+   "Diareed",
+   "Flax",
+   "Glowflower",
+   "Indigo",
+   "Lazulia",
+   "Sapphirum",
+   "Skyberry",
+   "ThauminiteOreBerry",
+   "WaterArtichoke"
+  ],
+  "mushroom": [
+   "BlueGlowshroom",
+   "BrownMushroom",
+   "Corium",
+   "EggPlant",
+   "Fertilia",
+   "Glowshroom",
+   "GreenGlowshroom",
+   "PurpleGlowshroom",
+   "RedMushroom"
+  ],
+  "light": [
+   "BlueGlowshroom",
+   "Glowflower",
+   "Glowheat",
+   "GlowingCoral",
+   "Glowshroom",
+   "GreenGlowshroom",
+   "PurpleGlowshroom",
+   "RedStraw",
+   "Shimmerleaf",
+   "Thornvine",
+   "Torchberry"
+  ],
+  "red": [
+   "BoPBerry",
+   "Chilly",
+   "EmberMoss",
+   "Eyebulb",
+   "GraniteLily",
+   "Meatrose",
+   "NetherStoneLily",
+   "Netherwart",
+   "PinkTulip",
+   "Poppy",
+   "Pyrolusium",
+   "Raspberry",
+   "RedGraniteLily",
+   "RedMushroom",
+   "RedStraw",
+   "RedTulip",
+   "Rubyne",
+   "Strawberry",
+   "Tomato"
+  ],
+  "crystal": [
+   "BobsYerUncleRanks",
+   "Diareed",
+   "EvilOre",
+   "Glowheat",
+   "Lazulia",
+   "Rubyne",
+   "Sapphirum"
+  ],
+  "tree": [
+   "BonsaiAcacia",
+   "BonsaiBirch",
+   "BonsaiDarkOak",
+   "BonsaiJungle",
+   "BonsaiOak",
+   "BonsaiRubber",
+   "BonsaiSpruce",
+   "Cocoa",
+   "Lemon",
+   "Slimeplant"
+  ],
+  "wood": [
+   "BonsaiAcacia",
+   "BonsaiBirch",
+   "BonsaiDarkOak",
+   "BonsaiJungle",
+   "BonsaiOak",
+   "BonsaiRubber",
+   "BonsaiSpruce",
+   "Liveroot",
+   "Tine"
+  ],
+  "brown": [
+   "BonsaiDarkOak",
+   "BonsaiJungle",
+   "BonsaiOak",
+   "BonsaiRubber",
+   "BonsaiSpruce",
+   "BrownMushroom",
+   "Cocoa",
+   "Coffee",
+   "Corium",
+   "Corpseplant",
+   "Fertilia",
+   "Liveroot",
+   "ManaBean",
+   "Mandrake",
+   "Onion",
+   "SoulSandLily",
+   "Stingberry",
+   "Zomplant"
+  ],
+  "sticky": [
+   "BonsaiRubber",
+   "Slimeplant",
+   "StickyCane"
+  ],
+  "cactus": [
+   "Cactus",
+   "SaguaroCactus"
+  ],
+  "oil": [
+   "Canola",
+   "SoulSandLily"
+  ],
+  "tin": [
+   "Cassitine",
+   "TinOreBerry",
+   "Tine"
+  ],
+  "magic": [
+   "Cinderpearl",
+   "Enderbloom",
+   "GlintWeed",
+   "ManaBean",
+   "Mandrake",
+   "Shimmerleaf",
+   "SpanishMoss",
+   "ThauminiteOreBerry",
+   "ThaumiumOreBerry",
+   "VoidOreBerry"
+  ],
+  "water": [
+   "ClayLily",
+   "GlowingCoral",
+   "Goldfish",
+   "InkBloom",
+   "WaterArtichoke",
+   "Waterlily"
+  ],
+  "bean": [
+   "Cocoa",
+   "Coffee",
+   "ManaBean"
+  ],
+  "copper": [
+   "CopperOreBerry",
+   "Coppon",
+   "Malaxia"
+  ],
+  "cotton": [
+   "Coppon",
+   "Cotton"
+  ],
+  "cow": [
+   "Corium",
+   "Meatrose",
+   "MilkWart"
+  ],
+  "undead": [
+   "Corpseplant",
+   "EssenceOreBerry",
+   "Withereed",
+   "Zomplant"
+  ],
+  "silk": [
+   "Cotton",
+   "Flax",
+   "Hemp",
+   "Spidernip"
+  ],
+  "saltpeter": [
+   "Creeperweed",
+   "SaltyRoot"
+  ],
+  "coal": [
+   "Creeperweed",
+   "Diareed",
+   "Withereed"
+  ],
+  "chicken": [
+   "EggPlant",
+   "Meatrose"
+  ],
+  "climbable": [
+   "EmberMoss",
+   "FloweringVine",
+   "Grape",
+   "Ivy",
+   "Moss",
+   "SpanishMoss",
+   "Thornvine",
+   "Vine"
+  ],
+  "alien": [
+   "EndStoneLily",
+   "Enderbloom"
+  ],
+  "void": [
+   "Enderbloom",
+   "ThauminiteOreBerry",
+   "ThaumiumOreBerry",
+   "VoidOreBerry"
+  ],
+  "iron": [
+   "Ferrofern",
+   "IronOreBerry",
+   "Steeleafranks"
+  ],
+  "fish": [
+   "Goldfish",
+   "Meatrose"
+  ],
+  "twilightForest": [
+   "KnightmetalBerry",
+   "Liveroot",
+   "Moss",
+   "Steeleafranks",
+   "Torchberry"
+  ],
+  "tulip": [
+   "OrangeTulip",
+   "PinkTulip",
+   "PurpleTulip",
+   "RedTulip",
+   "WhiteTulip"
+  ],
+  "lead": [
+   "Plumbilia",
+   "Plumbshade"
+  ]
+ },
+ "soilGloss": {
+  "farmland": "Farmland",
+  "sand": "Sand or sandstone",
+  "soulsand": "Soul sand",
+  "dirtGrass": "Dirt or grass",
+  "mycelium": "Mycelium",
+  "end": "End stone",
+  "stone": "Stone, cobblestone and variants",
+  "netherrack": "Netherrack",
+  "brick": "Brick blocks",
+  "thaumLogs": "Thaumcraft logs",
+  "graveyard": "Graveyard dirt",
+  "slimy": "Slime grass or slimy mud",
+  "gravel": "Gravel",
+  "oilSands": "Oil sands"
+ },
+ "soilShort": {
+  "farmland": "Farmland",
+  "sand": "Sand",
+  "soulsand": "Soul sand",
+  "dirtGrass": "Dirt/grass",
+  "mycelium": "Mycelium",
+  "end": "End stone",
+  "stone": "Stone",
+  "netherrack": "Netherrack",
+  "brick": "Bricks",
+  "thaumLogs": "Thaum logs",
+  "graveyard": "Graveyard dirt",
+  "slimy": "Slime grass",
+  "gravel": "Gravel",
+  "oilSands": "Oil sands"
+ },
+ "soilExpand": {
+  "brick": [
+   "brick"
+  ],
+  "dirtGrass": [
+   "dirtGrass"
+  ],
+  "end": [
+   "end"
+  ],
+  "farmland": [
+   "farmland"
+  ],
+  "gravel": [
+   "gravel"
+  ],
+  "graveyard": [
+   "graveyard"
+  ],
+  "mushroom": [
+   "stone",
+   "dirtGrass",
+   "mycelium"
+  ],
+  "mycelium": [
+   "mycelium"
+  ],
+  "netherMushroom": [
+   "stone",
+   "dirtGrass",
+   "mycelium",
+   "netherrack"
+  ],
+  "netherrack": [
+   "netherrack"
+  ],
+  "oil": [
+   "sand",
+   "gravel",
+   "soulsand",
+   "oilSands"
+  ],
+  "oilSands": [
+   "oilSands"
+  ],
+  "sand": [
+   "sand"
+  ],
+  "slimy": [
+   "slimy"
+  ],
+  "slimyDirt": [
+   "dirtGrass",
+   "slimy"
+  ],
+  "soulsand": [
+   "soulsand"
+  ],
+  "stone": [
+   "stone"
+  ],
+  "sugarcane": [
+   "sand",
+   "dirtGrass"
+  ],
+  "thaumLogs": [
+   "thaumLogs"
+  ]
+ }
+}

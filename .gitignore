@@ -1,0 +1,6 @@
+# unpacked mod jar and raw javap output - regenerate with tools/dump.py
+tools/_jar/
+tools/dump_*.txt
+
+__pycache__/
+*.pyc

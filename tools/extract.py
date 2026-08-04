@@ -1,0 +1,358 @@
+"""Extract crops, pools and mutations from CropsNH bytecode into crops.json."""
+import re, json, os, sys
+import jvparse
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+JAR = os.path.join(HERE, '_jar')
+
+classes = jvparse.parse([os.path.join(HERE, f) for f in (
+    'dump_crops.txt', 'dump_croploader.txt', 'dump_mutationloader.txt',
+    'dump_subsoil.txt', 'dump_soil.txt', 'dump_soiltypes.txt')])
+
+# ---------------------------------------------------------------- language file
+lang = {}
+with open(os.path.join(JAR, 'assets/cropsnh/lang/en_US.lang'), encoding='utf-8', errors='replace') as f:
+    for line in f:
+        if '=' in line and not line.startswith('#'):
+            k, _, v = line.partition('=')
+            lang[k.strip()] = v.strip()
+
+
+def L(key, fallback=None):
+    return lang.get(key, fallback)
+
+
+# ---------------------------------------------------------------- CropLoader: FIELD -> class
+loader = classes['com.gtnewhorizon.cropsnh.loaders.CropLoader']
+loader_code = []
+for sig, lines in loader.methods.items():
+    loader_code.extend(lines)
+
+field_to_class = {}
+pending_new = []
+for line in loader_code:
+    m = re.search(r'new\s+#\d+\s+// class ([\w/$]+)', line)
+    if m:
+        pending_new.append(m.group(1).replace('/', '.'))
+        continue
+    m = re.search(r'putstatic\s+#\d+\s+// Field [\w/$]*CropsNHCrops\.([\w$]+):', line)
+    if m and pending_new:
+        field_to_class[m.group(1)] = pending_new[-1]
+        pending_new = []
+
+# ---------------------------------------------------------------- class hierarchy
+def chain(clsname):
+    out = []
+    seen = set()
+    while clsname and clsname in classes and clsname not in seen:
+        seen.add(clsname)
+        out.append(classes[clsname])
+        clsname = classes[clsname].sup
+    return out
+
+
+def resolve_int(clsname, method, default=None):
+    for k in chain(clsname):
+        code = k.code(method)
+        if not code:
+            continue
+        for line in code:
+            m = re.search(r'(?:bipush|sipush)\s+(-?\d+)', line)
+            if m:
+                return int(m.group(1))
+            m = re.search(r'ldc\w*\s+#\d+\s+// int (-?\d+)', line)
+            if m:
+                return int(m.group(1))
+            m = re.search(r'\biconst_(m?\d)\b', line)
+            if m:
+                return -1 if m.group(1) == 'm1' else int(m.group(1))
+    return default
+
+
+def resolve_soil(clsname):
+    for k in chain(clsname):
+        code = k.code('getSoilTypes')
+        if code:
+            f = jvparse.fieldrefs(code, 'CropsNHSoilTypes')
+            if f:
+                return f
+    return ['farmland']
+
+
+CTOR_CACHE = {}
+
+
+def ctor_code(clsname):
+    """Constructor bytecode of the class plus all of its superclasses."""
+    if clsname in CTOR_CACHE:
+        return CTOR_CACHE[clsname]
+    out = []
+    for k in chain(clsname):
+        simple = k.name.rsplit('.', 1)[-1]
+        out.extend(k.code(simple, simple.split('$')[-1]))
+    CTOR_CACHE[clsname] = out
+    return out
+
+
+# ---------------------------------------------------------------- crop properties
+def light_reqs(code):
+    """(maxLight, minLight) read from the light requirement constructor args."""
+    res = {}
+    joined = list(code)
+    for i, line in enumerate(joined):
+        m = re.search(r'Method [\w/$]*(Max|Min)LightLevelGrowthRequirement\."<init>":\(I\)V', line)
+        if not m:
+            continue
+        val = None
+        for back in range(i - 1, max(-1, i - 6), -1):
+            mm = re.search(r'(?:bipush|sipush)\s+(-?\d+)', joined[back])
+            if mm:
+                val = int(mm.group(1)); break
+            mm = re.search(r'\biconst_(\d)\b', joined[back])
+            if mm:
+                val = int(mm.group(1)); break
+        res[m.group(1).lower()] = val
+    return res.get('max'), res.get('min')
+
+
+crops = {}
+for field, clsname in sorted(field_to_class.items()):
+    if field in ('Weed', 'Migrator'):
+        continue
+    code = ctor_code(clsname)
+    internal = field[0].lower() + field[1:]
+    display = L(f'cropsnh_crops.{internal}')
+    if display is None:
+        # last resort: the first string literal in the class constructor
+        own = classes[clsname].code(clsname.rsplit('.', 1)[-1])
+        for s in jvparse.strings(own):
+            if L(f'cropsnh_crops.{s}'):
+                internal, display = s, L(f'cropsnh_crops.{s}')
+                break
+    subsoil = jvparse.fieldrefs(code, 'CropsNHSubSoilTypes')
+    for line in code:
+        m = re.search(r'// String (\w+)$', line)
+    # addSubSoilRequirement(String) - rare variant
+    maxl, minl = light_reqs(code)
+    crops[field] = {
+        'id': field,
+        'internal': internal,
+        'name': display or re.sub(r'(?<!^)(?=[A-Z])', ' ', field),
+        'cls': clsname,
+        'tier': resolve_int(clsname, 'getTier', 1),
+        'soil': resolve_soil(clsname),
+        'subsoil': sorted(set(subsoil)),
+        'maxLight': maxl,
+        'minLight': minl,
+        'growth': resolve_int(clsname, 'getGrowthDuration'),
+        'pools': [],
+        'flavour': L(f'cropsnh_crops.{internal}.flavour'),
+    }
+
+# ---------------------------------------------------------------- MutationLoader
+ml = classes['com.gtnewhorizon.cropsnh.loaders.MutationLoader']
+ml_code = []
+for sig, lines in ml.methods.items():
+    ml_code.extend(lines)
+
+mutations = []
+stack = []          # queue of CropsNHCrops.* arguments
+strbuf = []
+i = 0
+while i < len(ml_code):
+    line = ml_code[i]
+    m = re.search(r'getstatic\s+#\d+\s+// Field [\w/$]*CropsNHCrops\.([\w$]+):', line)
+    if m:
+        stack.append(m.group(1)); i += 1; continue
+    m = re.search(r'ldc\w*\s+#\d+\s+// String (.+)$', line)
+    if m:
+        strbuf.append(m.group(1)); i += 1; continue
+    # pool registration: register(ICropCard, String[])
+    if 'MutationRegistry.register:(Lcom/gtnewhorizon/cropsnh/api/ICropCard;[Ljava/lang/String;)V' in line:
+        if stack:
+            crop = stack.pop()
+            if crop in crops:
+                crops[crop]['pools'] = strbuf[:]
+        strbuf = []; i += 1; continue
+    # mutation constructor
+    m = re.search(r'Method [\w/$]*CropMutation\."<init>":\((Lcom/gtnewhorizon/cropsnh/api/ICropCard;)+\)V', line)
+    if m:
+        n = line.count('Lcom/gtnewhorizon/cropsnh/api/ICropCard;')
+        args = stack[-n:] if n <= len(stack) else stack[:]
+        del stack[len(stack) - len(args):]
+        mutations.append({'out': args[0], 'parents': args[1:], 'req': [], 'machineOnly': False})
+        strbuf = []; i += 1; continue
+    if 'CropMutation.addSubSoilRequirement:(Ljava/lang/String;)' in line:
+        if mutations and strbuf:
+            mutations[-1]['req'].append(strbuf[-1])
+        strbuf = []; i += 1; continue
+    if 'CropMutation.machineOnly:()' in line:
+        if mutations:
+            mutations[-1]['machineOnly'] = True
+        i += 1; continue
+    if 'CropMutation.removeExistingSubSoilRequirements' in line:
+        if mutations:
+            mutations[-1]['noInheritedSubSoil'] = True
+        i += 1; continue
+    if 'CropMutation.register:()V' in line:
+        stack = []; strbuf = []; i += 1; continue
+    i += 1
+
+# ---------------------------------------------------------------- SubSoilRequirementLoader
+ssl = classes.get('com.gtnewhorizon.cropsnh.loaders.SubSoilRequirementLoader')
+subsoil_info = {}
+if ssl:
+    code = []
+    for sig, lines in ssl.methods.items():
+        code.extend(lines)
+    cur = None
+    str_arr_start = None          # index of the last `anewarray java/lang/String`
+    for idx, line in enumerate(code):
+        m = re.search(r'// Field [\w/$]*CropsNHSubSoilTypes\.([\w$]+):', line)
+        if m:
+            cur = m.group(1)
+            subsoil_info.setdefault(cur, {'oredict': [], 'materials': [], 'modBlocks': []})
+            continue
+        if cur is None:
+            continue
+        if 'anewarray' in line and 'class java/lang/String' in line:
+            str_arr_start = idx
+            continue
+        m = re.search(r'// Field [\w/$]*Materials\.([\w$]+):', line)
+        if m:
+            subsoil_info[cur]['materials'].append(m.group(1))
+            continue
+        # addOreDict(String...) - strings from the most recent String[] array
+        if 'SubSoilRequirement.addOreDict:([Ljava/lang/String;)' in line and str_arr_start is not None:
+            subsoil_info[cur]['oredict'] += jvparse.strings(code[str_arr_start:idx])
+            str_arr_start = None
+            continue
+        # addBlockAndOreDict() with no args -> block<Name> / ore<Name> ore dict entries
+        if 'SubSoilRequirement.addBlockAndOreDict:()' in line:
+            cap = cur[0].upper() + cur[1:]
+            subsoil_info[cur]['oredict'] += [f'block{cap}', f'ore{cap}']
+            continue
+        if 'SubSoilRequirement.addBlockAndOreDict:([Ljava/lang/String;)' in line and str_arr_start is not None:
+            for s in jvparse.strings(code[str_arr_start:idx]):
+                cap = s[0].upper() + s[1:]
+                subsoil_info[cur]['oredict'] += [f'block{cap}', f'ore{cap}']
+            str_arr_start = None
+            continue
+        # ModUtils.getBlock("name") -> a block from another mod
+        m = re.search(r'// String (.+)$', line)
+        if m and idx + 1 < len(code) and 'ModUtils.getBlock' in code[idx + 1]:
+            subsoil_info[cur]['modBlocks'].append(m.group(1))
+
+    for v in subsoil_info.values():
+        for k in v:
+            v[k] = sorted(set(v[k]))
+
+# descriptions from the language file
+subsoil_desc = {}
+for k, v in lang.items():
+    if k.startswith('cropsnh_growthReq.subSoil.'):
+        subsoil_desc[k.split('.')[-1]] = v
+
+pool_names = {k.split('.', 1)[1]: v for k, v in lang.items() if k.startswith('cropsnh_mutationPool.')}
+
+# ---------------------------------------------------------------- pools -> members
+pool_members = {}
+for c in crops.values():
+    for p in c['pools']:
+        pool_members.setdefault(p, []).append(c['id'])
+# MutationRegistry.pruneMutationPools() drops pools with fewer than 2 members
+pool_members = {p: sorted(v) for p, v in pool_members.items() if len(v) >= 2}
+for c in crops.values():
+    c['pools'] = [p for p in c['pools'] if p in pool_members]
+
+# ---------------------------------------------------------------- soils (top block)
+# Some lists are unions of other lists (CompoundSoilList). We rebuild them from the
+# static initialiser bytecode rather than guessing what e.g. "netherMushroom" means.
+soil_parts = {}
+_st = classes.get('com.gtnewhorizon.cropsnh.api.CropsNHSoilTypes')
+if _st:
+    st_lines = []
+    for sig, lines in _st.methods.items():
+        st_lines.extend(lines)
+    buf, pending = [], []
+    for line in st_lines:
+        m = re.search(r'getstatic\s+#\d+\s+// Field ([\w$]+):Lcom/gtnewhorizon/cropsnh/api/ISoilList;', line)
+        if m:
+            buf.append(m.group(1)); continue
+        if 'CompoundSoilList."<init>"' in line:
+            pending, buf = buf[:], []
+            continue
+        m = re.search(r'putstatic\s+#\d+\s+// Field ([\w$]+):Lcom/gtnewhorizon/cropsnh/api/ISoilList;', line)
+        if m:
+            if pending:
+                soil_parts[m.group(1)] = pending
+                pending = []
+            buf = []
+
+
+def flatten(key, seen=None):
+    seen = set() if seen is None else seen
+    if key in seen:
+        return []
+    seen.add(key)
+    if key not in soil_parts:
+        return [key]
+    out = []
+    for p in soil_parts[key]:
+        for f in flatten(p, seen):
+            if f not in out:
+                out.append(f)
+    return out
+
+
+# labels for BASE lists only; unions are assembled from these at render time
+soil_gloss = {
+    'farmland':   'Farmland',
+    'sand':       'Sand or sandstone',
+    'soulsand':   'Soul sand',
+    'dirtGrass':  'Dirt or grass',
+    'mycelium':   'Mycelium',
+    'end':        'End stone',
+    'stone':      'Stone, cobblestone and variants',
+    'netherrack': 'Netherrack',
+    'brick':      'Brick blocks',
+    'thaumLogs':  'Thaumcraft logs',
+    'graveyard':  'Graveyard dirt',
+    'slimy':      'Slime grass or slimy mud',
+    'gravel':     'Gravel',
+    'oilSands':   'Oil sands',
+}
+soil_short = {
+    'farmland': 'Farmland', 'sand': 'Sand', 'soulsand': 'Soul sand',
+    'dirtGrass': 'Dirt/grass', 'mycelium': 'Mycelium', 'end': 'End stone',
+    'stone': 'Stone', 'netherrack': 'Netherrack', 'brick': 'Bricks',
+    'thaumLogs': 'Thaum logs', 'graveyard': 'Graveyard dirt',
+    'slimy': 'Slime grass', 'gravel': 'Gravel', 'oilSands': 'Oil sands',
+}
+# sorted, because Python randomises string hashing per process and an unsorted
+# set here would make every rebuild produce a byte-different index.html
+soil_expand = {k: flatten(k) for k in sorted(set(list(soil_gloss) + list(soil_parts)))}
+
+out = {
+    'crops': crops,
+    'mutations': mutations,
+    'subsoil': subsoil_info,
+    'subsoilDesc': subsoil_desc,
+    'poolNames': pool_names,
+    'poolMembers': pool_members,
+    'soilGloss': soil_gloss,
+    'soilShort': soil_short,
+    'soilExpand': soil_expand,
+}
+OUT = os.path.join(HERE, os.pardir, 'data', 'crops.json')
+os.makedirs(os.path.dirname(OUT), exist_ok=True)
+with open(OUT, 'w', encoding='utf-8') as f:
+    json.dump(out, f, indent=1, ensure_ascii=False)
+
+print(f'crops             {len(crops)}')
+print(f'recipes           {len(mutations)}')
+print(f'mutation pools    {len(pool_members)}')
+print(f'sub-soil types    {len(subsoil_info)}')
+print(f'recipe-only crops {sum(1 for c in crops.values() if not c["pools"])}')
+print(f'\nwrote {os.path.relpath(OUT, os.path.join(HERE, os.pardir))}')
+print('now run:  python tools/build.py')
