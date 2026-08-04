@@ -88,7 +88,7 @@ identically, except that the hosted copy cannot save files because browsers bloc
 embedded frames.
 
 Ticked seeds live in `localStorage`, which is per-origin. The hosted page and a local copy keep
-separate lists. Use **Backup** in the sidebar to move a list between them.
+separate lists. Open **Manage list** in the sidebar to move a list between them.
 
 ---
 
