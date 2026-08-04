@@ -70,35 +70,13 @@ Built against **CropsNH 2.0.101**, as shipped in the GTNH 2.9 daily builds (nigh
 In that version: 179 crops, 172 recipes, 66 pools.
 
 Nothing else in the pack registers crops with CropsNH, so the list is complete rather than a
-selection. If a future version adds or changes crops, regenerate the data with the steps below
-instead of editing anything by hand.
+selection. When a new CropsNH version lands the data is regenerated from the new jar rather than
+edited by hand - see [tools/](tools/) if you want to do that yourself.
 
 Two things worth knowing about the data:
 
 - **21 crops belong to no pool.** Those can only ever come from their exact recipe.
 - **Some crops have no recipe.** Barley for one - you find those in the world, you cannot breed them.
-
----
-
-## Regenerating for a newer CropsNH
-
-You need Python 3 and a **JDK** (a JRE will not do, `javap` only ships with the JDK).
-
-```
-python tools/dump.py path/to/cropsnh-X.Y.Z.jar
-python tools/extract.py
-python tools/build.py
-```
-
-`dump.py` unpacks the jar and disassembles the classes the extractor needs. `extract.py` parses
-that into `data/crops.json`. `build.py` inlines the JSON into `tools/page.src.html` and writes
-`index.html`. The unpacked jar and the raw disassembly stay out of git.
-
-`dump.py` looks for `javap` on `PATH`, then `JAVA_HOME`, then the usual JDK install locations
-including the one Prism Launcher downloads.
-
-To change the page itself, edit `tools/page.src.html` and re-run `build.py`. Do not edit
-`index.html` directly, it is generated.
 
 ---
 
