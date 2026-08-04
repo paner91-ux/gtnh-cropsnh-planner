@@ -178,6 +178,13 @@ h1, h2, h3 { font-family: var(--face-display); font-weight: 600; text-wrap: bala
 .seed .nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .seed .mark { flex: none; font-family: var(--face-data); font-size: 10px; color: var(--ore); }
 
+.raillegend {
+  display: flex; align-items: baseline; gap: 6px;
+  margin: 6px 0 0; padding: 0 4px;
+  font-size: 11.5px; line-height: 1.4; color: var(--ink-faint);
+}
+.raillegend .mark { font-family: var(--face-data); font-size: 10px; color: var(--ore); }
+
 /* ---------------------------------------------------------- views */
 .views { padding-top: 18px; min-width: 0; }
 
@@ -428,6 +435,7 @@ footer.note code { font-family: var(--face-data); }
         <button class="btn" id="undo" type="button" hidden>Undo</button>
       </div>
       <div class="seedlist" id="seedlist"></div>
+      <p class="raillegend"><span class="mark">&#9670;</span> needs a specific block under the soil</p>
 
       <details class="backup">
         <summary>Backup</summary>
@@ -702,7 +710,7 @@ function renderRail() {
       const mark = c.subsoil.length ? "◆" : "";
       html += `<button class="seed" type="button" role="checkbox" data-id="${c.id}" aria-pressed="${owned.has(c.id)}">
         <span class="box"></span><span class="nm">${esc(c.name)}</span>
-        <span class="mark" title="needs a specific block under the soil">${mark}</span></button>`;
+        <span class="mark" title="needs a specific under block, see the crop for which one">${mark}</span></button>`;
     }
     html += `</div>`;
   }
