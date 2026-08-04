@@ -246,10 +246,9 @@ p, li { text-wrap: pretty; }
   color: var(--ink-faint); margin-left: 5px;
 }
 
-/* Wide enough to sit comfortably under the tables these notes introduce. A
-   tighter measure reads better in isolation but looks like a broken column
-   next to a table three times its width.                                    */
-.viewnote { color: var(--ink-faint); font-size: 13px; margin: 12px 0 16px; max-width: 110ch; }
+/* No measure of its own: everything in the content column shares one right
+   edge, so a note never looks like a broken column beside its own table.    */
+.viewnote { color: var(--ink-faint); font-size: 13px; margin: 12px 0 16px; }
 .viewnote code { font-family: var(--face-data); font-size: 12px; }
 
 .empty {
@@ -349,7 +348,7 @@ p, li { text-wrap: pretty; }
 .step .made { font-family: var(--face-display); font-size: 16px; font-weight: 600; }
 
 /* ---------------------------------------------------------- tips */
-.tips { display: flex; flex-direction: column; gap: 26px; max-width: 780px; }
+.tips { display: flex; flex-direction: column; gap: 26px; }
 .tipgroup > h3 {
   font-family: var(--face-display); font-size: 19px;
   padding-bottom: 5px; border-bottom: 1px solid var(--ink); margin-bottom: 2px;
