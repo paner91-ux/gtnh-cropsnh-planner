@@ -165,27 +165,40 @@ h1, h2, h3 { font-family: var(--face-display); font-weight: 600; text-wrap: bala
 }
 .tierhead::after { content: ""; flex: 1; }
 
-.seed {
-  display: flex; align-items: center; gap: 8px; width: 100%;
-  padding: 3px 4px; cursor: pointer; text-align: left;
-  font: inherit; font-size: 13.5px; color: var(--ink);
-  background: none; border: 0; border-bottom: 1px solid transparent;
-}
+/* A row is a container, not a button: ticking and opening the panel are two
+   separate actions and a button cannot legally nest inside another one.     */
+.seed { display: flex; align-items: center; gap: 6px; padding: 0 2px 0 4px; }
 .seed:hover { background: var(--paper-2); }
-.seed:focus-visible { outline: 2px solid var(--leaf); outline-offset: -2px; }
-.seed .box {
+
+.seed-tick {
+  display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0;
+  padding: 3px 0; cursor: pointer; text-align: left;
+  font: inherit; font-size: 13.5px; color: var(--ink);
+  background: none; border: 0;
+}
+.seed-tick:focus-visible { outline: 2px solid var(--leaf); outline-offset: -2px; }
+.seed-tick .box {
   flex: none; width: 13px; height: 13px; border: 1px solid var(--ink-faint);
   border-radius: 1px; position: relative;
 }
-.seed[aria-pressed="true"] .box { background: var(--leaf); border-color: var(--leaf); }
-.seed[aria-pressed="true"] .box::after {
+.seed-tick[aria-pressed="true"] .box { background: var(--leaf); border-color: var(--leaf); }
+.seed-tick[aria-pressed="true"] .box::after {
   content: ""; position: absolute; inset: 2px 2px 3px 2px;
   border-left: 2px solid var(--paper); border-bottom: 2px solid var(--paper);
   transform: rotate(-45deg);
 }
-.seed[aria-pressed="true"] .nm { font-weight: 600; }
-.seed .nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.seed-tick[aria-pressed="true"] .nm { font-weight: 600; }
+.seed-tick .nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .seed .mark { flex: none; font-family: var(--face-data); font-size: 10px; color: var(--ore); }
+
+.seed-info {
+  flex: none; width: 16px; height: 16px; padding: 0; cursor: pointer;
+  font-family: var(--face-display); font-size: 11px; font-style: italic; line-height: 1;
+  color: var(--ink-faint); background: none;
+  border: 1px solid var(--rule); border-radius: 50%;
+}
+.seed-info:hover { color: var(--paper); background: var(--leaf); border-color: var(--leaf); }
+.seed-info:focus-visible { outline: 2px solid var(--leaf); outline-offset: 1px; }
 
 .raillegend {
   display: flex; align-items: baseline; gap: 6px;
@@ -193,6 +206,12 @@ h1, h2, h3 { font-family: var(--face-display); font-weight: 600; text-wrap: bala
   font-size: 11.5px; line-height: 1.4; color: var(--ink-faint);
 }
 .raillegend .mark { font-family: var(--face-data); font-size: 10px; color: var(--ore); }
+.raillegend .legend-i {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 15px; height: 15px; flex: none;
+  font-family: var(--face-display); font-size: 10px; font-style: italic; line-height: 1;
+  color: var(--ink-faint); border: 1px solid var(--rule); border-radius: 50%;
+}
 
 /* ---------------------------------------------------------- views */
 .views { padding-top: 18px; min-width: 0; }
@@ -469,6 +488,7 @@ footer.note code { font-family: var(--face-data); }
       </div>
       <div class="seedlist" id="seedlist"></div>
       <p class="raillegend"><span class="mark">&#9670;</span> needs a specific block under the soil</p>
+      <p class="raillegend"><span class="legend-i">i</span> opens the details panel</p>
 
       <details class="backup">
         <summary>Backup</summary>
@@ -750,9 +770,14 @@ function renderRail() {
     html += `<div class="tiergroup"><div class="tierhead">Tier ${tier}</div>`;
     for (const c of cs) {
       const mark = c.subsoil.length ? "◆" : "";
-      html += `<button class="seed" type="button" role="checkbox" data-id="${c.id}" aria-pressed="${owned.has(c.id)}">
-        <span class="box"></span><span class="nm">${esc(c.name)}</span>
-        <span class="mark" title="needs a specific under block, see the crop for which one">${mark}</span></button>`;
+      html += `<div class="seed">
+        <button class="seed-tick" type="button" role="checkbox" data-id="${c.id}" aria-pressed="${owned.has(c.id)}">
+          <span class="box"></span><span class="nm">${esc(c.name)}</span>
+        </button>
+        <span class="mark" title="needs a specific under block, see the crop for which one">${mark}</span>
+        <button class="seed-info" type="button" data-crop="${c.id}"
+          title="Details for ${esc(c.name)}" aria-label="Details for ${esc(c.name)}">i</button>
+      </div>`;
     }
     html += `</div>`;
   }
@@ -1276,7 +1301,7 @@ function toggle(id) {
 }
 
 document.addEventListener("click", e => {
-  const seed = e.target.closest(".seed");
+  const seed = e.target.closest(".seed-tick");
   if (seed) { toggle(seed.dataset.id); return; }
   const pair = e.target.closest("[data-pair]");
   if (pair) { [pairA, pairB] = pair.dataset.pair.split("|"); render(); return; }
