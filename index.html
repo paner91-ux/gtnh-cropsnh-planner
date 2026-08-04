@@ -247,6 +247,12 @@ h1, h2, h3 { font-family: var(--face-display); font-weight: 600; text-wrap: bala
 .parents b { font-weight: 600; color: var(--ink); }
 .parents .plus { color: var(--ink-faint); margin: 0 3px; }
 .parents .miss { color: var(--ore); font-weight: 600; }
+/* dotted underline keeps a dense parent list readable while still reading as clickable */
+.parents .inline-crop { font: inherit; text-decoration-style: dotted; }
+.parents .inline-crop:hover { text-decoration-style: solid; text-decoration-color: var(--leaf); }
+.parents .inline-crop.own { font-weight: 600; color: var(--ink); }
+.parents .inline-crop.miss { color: var(--ore); font-weight: 600; text-decoration-color: color-mix(in srgb, var(--ore) 50%, transparent); }
+.parents .inline-crop.miss:hover { text-decoration-color: var(--ore); }
 
 .chips { display: flex; flex-wrap: wrap; gap: 5px; }
 .chip {
@@ -522,6 +528,15 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;",
 const nm = id => C[id] ? C[id].name : id;
 const pct = p => (p * 100).toFixed(2) + "%";
 
+/* Every crop name anywhere on the page opens its detail panel. */
+const cropLink = (id, cls) =>
+  `<button class="inline-crop${cls ? " " + cls : ""}" type="button" data-crop="${id}">${esc(nm(id))}</button>`;
+
+/* parents of a recipe, marking which ones you are missing */
+const parentLinks = ids => ids
+  .map(p => cropLink(p, owned.has(p) ? "own" : "miss"))
+  .join(`<span class="plus">+</span>`);
+
 function save() {
   if (storage) { try { storage.setItem(LS, JSON.stringify([...owned])); } catch (e) {} }
   syncCode();
@@ -731,9 +746,7 @@ function renderRail() {
 /* ---------------------------------------------------------- views */
 function cardFor(m) {
   const c = C[m.out];
-  const parents = m.parents.map(p =>
-    owned.has(p) ? `<b>${esc(nm(p))}</b>` : `<span class="miss">${esc(nm(p))}</span>`
-  ).join(`<span class="plus">+</span>`);
+  const parents = parentLinks(m.parents);
   const mach = m.machineOnly
     ? `<span class="chip mach"><span class="k">only in</span>Crop Breeder</span>` : "";
   return `<article class="card">
@@ -785,11 +798,11 @@ function renderPool() {
   /* --- cloning branch --- */
   html += `<div class="branch">50% - copy of a parent</div><div class="tablescroll"><table class="odds">`;
   if (o.same) {
-    html += `<tr><td class="nm">${esc(A.name)}</td><td class="num">50.00%<span class="bar" style="width:100%"></span></td>
+    html += `<tr><td class="nm">${cropLink(pairA)}</td><td class="num">50.00%<span class="bar" style="width:100%"></span></td>
       <td class="via">both neighbours are the same crop</td></tr>`;
   } else {
-    html += `<tr><td class="nm">${esc(A.name)}</td><td class="num">25.00%<span class="bar" style="width:50%"></span></td><td class="via">clone of a neighbour</td></tr>
-      <tr><td class="nm">${esc(B.name)}</td><td class="num">25.00%<span class="bar" style="width:50%"></span></td><td class="via">clone of a neighbour</td></tr>`;
+    html += `<tr><td class="nm">${cropLink(pairA)}</td><td class="num">25.00%<span class="bar" style="width:50%"></span></td><td class="via">clone of a neighbour</td></tr>
+      <tr><td class="nm">${cropLink(pairB)}</td><td class="num">25.00%<span class="bar" style="width:50%"></span></td><td class="via">clone of a neighbour</td></tr>`;
   }
   html += `</table></div>`;
 
@@ -1052,9 +1065,7 @@ function renderPath() {
     for (const m of recipes) {
       const missing = m.parents.filter(p => !owned.has(p));
       html += `<div class="step"><div class="idx">-</div><div class="body">
-        <div class="parents">${m.parents.map(p => owned.has(p)
-          ? `<b>${esc(nm(p))}</b>`
-          : `<span class="miss">${esc(nm(p))}</span>`).join(`<span class="plus">+</span>`)}</div>
+        <div class="parents">${parentLinks(m.parents)}</div>
         <div class="linkrow">${missing.map(p => {
           const inPools = (C[p].pools || []).length;
           const state = have.has(p)
@@ -1078,7 +1089,7 @@ function renderPath() {
       <div class="body">
         <div class="made"><button class="inline-crop" type="button" data-crop="${m.out}">${esc(nm(m.out))}</button>
           <span class="tier">T${c ? c.tier : "?"}</span></div>
-        <div class="parents">${m.parents.map(p => esc(nm(p))).join(`<span class="plus">+</span>`)}</div>
+        <div class="parents">${parentLinks(m.parents)}</div>
         ${reqChips(c)}
         ${m.machineOnly ? `<div class="chips"><span class="chip mach"><span class="k">only in</span>Crop Breeder</span></div>` : ""}
       </div></div>`;
@@ -1138,7 +1149,7 @@ function openDrawer(id) {
     <div class="dsec"><h3>Used as a parent (${used.length})</h3>
       <div class="linkrow">${used.length
         ? used.map(m => `<span><button class="inline-crop" type="button" data-crop="${m.out}">${esc(nm(m.out))}</button>
-            <span style="color:var(--ink-faint);font-size:12px"> ← ${m.parents.map(p => esc(nm(p))).join(" + ")}</span></span>`).join("")
+            <span style="color:var(--ink-faint);font-size:12px"> ← ${m.parents.map(p => cropLink(p)).join(" + ")}</span></span>`).join("")
         : `<span style="color:var(--ink-faint)">Nowhere.</span>`}</div>
     </div>`;
 
