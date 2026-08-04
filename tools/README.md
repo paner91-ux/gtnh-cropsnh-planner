@@ -28,6 +28,11 @@ including the one Prism Launcher downloads. The unpacked jar and the raw disasse
 The build is reproducible: the same jar always produces a byte-identical `index.html`, so a diff on
 that file means the data genuinely changed.
 
+## Changing the favicon
+
+Edit `favicon.svg` and run `build.py`. It is base64-encoded into the page head as a data URI, so
+`index.html` stays a single self-contained file with no external requests.
+
 ## Changing the page
 
 Edit `page.src.html`, then run `build.py`. That file holds the whole page - markup, styles, script

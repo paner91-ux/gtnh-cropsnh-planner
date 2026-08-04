@@ -2,6 +2,7 @@
 
 Usage:  python tools/build.py
 """
+import base64
 import json
 import os
 
@@ -26,8 +27,14 @@ if '__DATA__' not in src:
 
 body = src.replace('__DATA__', json.dumps(data, ensure_ascii=False, separators=(',', ':')))
 
+# favicon goes in as a data URI so index.html stays a single self-contained file
+with open(os.path.join(HERE, 'favicon.svg'), encoding='utf-8') as f:
+    icon = base64.b64encode(f.read().encode()).decode()
+
 page = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
         '<meta name="viewport" content="width=device-width,initial-scale=1">\n'
+        f'<link rel="icon" href="data:image/svg+xml;base64,{icon}">\n'
+        '<meta name="theme-color" content="#3D7A33">\n'
         '</head>\n<body>\n' + body + '\n</body>\n</html>\n')
 
 out = os.path.join(ROOT, 'index.html')
