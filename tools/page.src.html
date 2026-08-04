@@ -460,6 +460,16 @@ h1, h2, h3 { font-family: var(--face-display); font-weight: 600; text-wrap: bala
 .inline-crop:hover { text-decoration-color: var(--leaf); }
 .inline-crop:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2px; }
 
+/* pool names open their panel the same way crop names do, but they sit in
+   muted table cells, so they take the cell's colour instead of forcing ink */
+.inline-pool {
+  font: inherit; background: none; border: 0; padding: 0; cursor: pointer;
+  color: inherit; text-align: left;
+  text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px;
+}
+.inline-pool:hover { color: var(--ink); text-decoration-color: var(--leaf); }
+.inline-pool:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2px; }
+
 .scrim {
   position: fixed; inset: 0; z-index: 19; background: rgba(20, 23, 15, .34);
   opacity: 0; pointer-events: none; transition: opacity .18s ease;
@@ -652,6 +662,12 @@ const parentLinks = ids => ids
   .map(p => cropLink(p, owned.has(p) ? "own" : "miss"))
   .join(`<span class="plus">+</span>`);
 
+/* Every pool name anywhere on the page opens its panel. Takes the pool key,
+   never the display name - the two differ and only the key can be looked up. */
+const poolLink = key => POOLM[key]
+  ? `<button class="inline-pool" type="button" data-pool="${key}">${esc(DATA.poolNames[key] || key)}</button>`
+  : esc(key);
+
 function save() {
   if (storage) { try { storage.setItem(LS, JSON.stringify([...owned])); } catch (e) {} }
   syncCode();
@@ -811,7 +827,8 @@ function oddsFor(a, b) {
   } else {
     for (const p of pools) {
       const mem = POOLM[p];
-      for (const id of mem) add(id, 0.5 * (1 / pools.length) * (1 / mem.length), DATA.poolNames[p] || p);
+      // the pool KEY, so the table can link it; the display name is resolved on render
+      for (const id of mem) add(id, 0.5 * (1 / pools.length) * (1 / mem.length), p);
     }
   }
   /* crops you already have sink to the bottom; within each block, best odds first */
@@ -945,12 +962,12 @@ function renderPool() {
     return html;
   }
 
-  const poolTxt = o.pools.map(p => `${DATA.poolNames[p] || p} (${POOLM[p].length})`).join(", ");
+  const poolTxt = o.pools.map(p => `${poolLink(p)} (${POOLM[p].length})`).join(", ");
   const showLight = o.rows.some(r => lightReq(C[r.id]));   // column only when it applies
   html += `<div class="branch">50% - draw from pools</div>
     <p class="viewnote">${o.same
       ? `Two identical crops match <b>every</b> pool ${esc(A.name)} belongs to: `
-      : `Shared pools: `}<b>${esc(poolTxt)}</b>.
+      : `Shared pools: `}<b>${poolTxt}</b>.
       The pool is drawn uniformly - a small pool is worth as much as a large one, it just spreads over fewer crops.</p>
     <p class="viewnote"><b>Top block</b> is the one directly under the crop stick, <b>under block</b> is one deeper.
       A result whose ground you have not built simply never gets planted, so setting those two blocks up for the
@@ -965,7 +982,7 @@ function renderPool() {
     html += `<tr${have ? ` class="dead"` : ""}>
       <td class="nm"><button class="inline-crop" type="button" data-crop="${r.id}">${esc(c.name)}</button>${have ? ` <span class="tier">have</span>` : ""}</td>
       <td class="num">${pct(r.p)}<span class="bar" style="width:${(r.p / max * 100).toFixed(1)}%"></span></td>
-      <td class="via">${esc([...r.via].join(", "))}</td>
+      <td class="via">${[...r.via].map(poolLink).join(", ")}</td>
       <td class="via">${esc(topBlockShort(c))}</td>
       <td class="via"${u ? ` style="color:var(--ore)"` : ""}>${u ? esc(u) : "anything"}</td>
       ${showLight ? `<td class="via"${lightReq(c) ? ` style="color:var(--ore)"` : ""}>${esc(lightReq(c) || "any")}</td>` : ""}
