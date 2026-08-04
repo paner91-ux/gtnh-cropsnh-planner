@@ -1213,7 +1213,7 @@ function renderFlow() {
     `<option value="${c.id}">${esc(c.name)}${owned.has(c.id) ? " ✓" : ""}</option>`).join("");
   let html = `<section class="tipgroup">
     <h3>Getting started</h3>
-    <p class="lead">Seven steps from one crop to a working breeding setup. Everything further down this page is detail on one of them.</p>
+    <p class="lead">Seven steps from one crop to a working breeding setup. The sections below explain the mechanics behind them.</p>
     <ol class="flow-steps">`;
   FLOW.forEach((s, i) => {
     html += `<li class="flow-step"><span class="flow-n">${i + 1}</span><div class="flow-body">
