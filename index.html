@@ -1178,41 +1178,41 @@ const TIPS = [
 /* The whole game loop as one chain. Steps that claim something about the mod
    carry the same why box as a tip; the navigational ones do not.           */
 const FLOW = [
-  { t: "Pick any one crop",
-    d: "It genuinely does not matter which. Barley, Wheat, whatever you already hold. This first plant is a tool, not a goal." },
+  { t: "Pick any crop",
+    d: "Barley, Wheat, whatever you already have. The choice does not affect anything later." },
 
-  { t: "Take that one plant to 31/31/31",
-    d: "Growth, Gain and Resistance all stop at 31, and nothing else you do matters until one plant is there. You climb by copying the plant onto itself over and over, keeping the best copy each round. You only ever have to do this once, for one crop.",
+  { t: "Take it to 31/31/31",
+    d: "Growth, Gain and Resistance each cap at 31. Do this before anything else, and only once - one plant of one crop is enough.",
     w: "<em>variateStat()</em> takes the average of every parent that counted - integer division - then adds a roll drawn uniformly between the <em>Breeding Range Low</em> and <em>High</em> configs, -2 to +4 by default. A negative roll is replaced with zero <b>only</b> when every counted parent still holds fertiliser, so a fertilised copy can equal its parent but never fall below it. The total is finally clamped into 1…31 by <em>Constants.MIN_SEED_STAT</em> and <em>MAX_SEED_STAT</em>.",
     cycle: {
       h: "repeat until all three read 31",
       w: "<em>Plant Lens</em> is an item in the mod, tooltip \"Inspects crops\". Right-clicking a crop prints the seed name, then <em>Stats -- Growth / Gain / Resistance</em>, then <em>Soil -- Fertilizer / Water / Weed-EX</em>, plus a warning line if the plant is sick or a growth requirement is unmet. One look covers both the numbers and whether the stick is actually still fed.",
       items: [
-        "Plant it, and keep <b>fertiliser</b> in that plant's own stick the whole time. That is the single thing that removes every downward roll - water only speeds growth up, it plays no part in the stat roll.",
-        "Stand a <b>double crop stick</b> beside it and wait for a copy to appear on it.",
-        "Scan the copy with a <b>Plant Lens</b>. It reads out Growth, Gain and Resistance, and the stick's fertiliser and water at the same time.",
-        "If the numbers went up, <b>that plant is your new base</b>. Clear the old one out before the next round - the roll starts from the <i>average</i> of the neighbours that actually counted, so a weaker plant of the same crop left standing drags the result back down."
+        "Plant it. Keep <b>fertiliser</b> in its stick at all times - that is what removes the downward rolls. Water only affects growth speed.",
+        "Put a <b>double crop stick</b> next to it and wait for a copy to appear.",
+        "Check the copy with a <b>Plant Lens</b>.",
+        "If the numbers went up, breed from that plant instead and remove the old one. Weaker plants of the same crop left nearby pull the average down."
       ]
     } },
 
-  { t: "Do it once more, to end up with two",
-    d: "Same rig, same wait - but this time you are not chasing better numbers, you just want a second plant. A fertilised copy of a 31/31/31 parent comes out at exactly 31/31/31, because the roll can no longer move it in either direction.",
+  { t: "Make a second copy",
+    d: "Run the cycle above once more. A fertilised copy of a 31/31/31 plant is always 31/31/31, so this one needs no checking.",
     w: "The average of a single 31/31/31 parent is 31. Upward rolls hit the clamp at 31 and downward rolls are already removed by the fertiliser check, so 31/31/31 is the only reachable result." },
 
-  { t: "Left-click both plants to take the seeds",
-    d: "At resistance 31 the seed is guaranteed, which is the real reason step 2 comes first. You now hold two identical maxed seeds.",
+  { t: "Left-click both plants for the seeds",
+    d: "At resistance 31 the seed always drops. Below 31 it can be destroyed along with the plant, which is why step 2 comes first.",
     w: "<em>onLeftClick()</em> calls <em>doPlayerHarvest(player, true)</em>, which drops whatever <em>getSeedDrop()</em> returns. That method is gated on <em>passesResistanceCheck()</em>, namely <em>resistance &gt; random(0…30)</em>, so only 31 never fails. A failed roll is not a retry either: the same method ends with an unconditional <em>clear()</em> whenever the remove flag is set, so the plant is gone and you get nothing." },
 
   { t: "Plant them one block apart, double crop stick in the gap",
-    d: "Seed, stick, seed. Build the ground <i>under the middle stick</i> for the crop you are hoping to see - the parents only need ground that suits their own crop, not the target's. That is the whole rig; it rolls on its own from here.",
+    d: "Seed, stick, seed. The middle stick's ground decides what can appear on it, so build that for the crop you want. The parents only need ground valid for their own crop. It runs on its own from here.",
     w: "The soil and sub-soil checks run against the breeding stick's own coordinates. Neighbours are read for their crop, their stats, how grown they are and whether their own stick still holds fertiliser, never for what they are standing on. <em>attemptBreeding()</em> then opens with a roll against the <em>Breeding Chance</em> config, default 3, and returns immediately on two results out of three." },
 
-  { t: "Check what those two can actually make",
-    d: "Two of the same crop can never trigger a recipe, but they open every mutation pool that crop belongs to - the widest spread available. Pick your starter below to see the full list with odds.",
+  { t: "Check what the pair can produce",
+    d: "Two of the same crop never trigger a recipe, but they match every pool that crop belongs to. Pick it below for the full list of results and their odds.",
     pick: true },
 
-  { t: "Tick every new seed and go again",
-    d: "The more seeds you hold, the more real recipes come into reach, and whenever a mutation is rolled at all, recipes beat pool luck. Ready now lists the ones where you already hold both parents.",
+  { t: "Tick each new seed and repeat",
+    d: "More seeds means more recipes within reach, and recipes beat pool draws whenever a mutation is rolled at all.",
     ready: true,
     w: "Recipes are looked up from the parents present and one is drawn before any pool draw happens. Pools are only consulted when there is no matching recipe, or when the matched recipe's own conditions fail." },
 ];
@@ -1221,8 +1221,8 @@ function renderFlow() {
   const opts = allSorted.map(c =>
     `<option value="${c.id}">${esc(c.name)}${owned.has(c.id) ? " ✓" : ""}</option>`).join("");
   let html = `<section class="tipgroup">
-    <h3>The whole loop, start to finish</h3>
-    <p class="lead">Seven steps from one random plant to a working breeding base. Everything further down this page is detail on one of them.</p>
+    <h3>Getting started</h3>
+    <p class="lead">Seven steps from one crop to a working breeding setup. Everything further down this page is detail on one of them.</p>
     <ol class="flow-steps">`;
   FLOW.forEach((s, i) => {
     html += `<li class="flow-step"><span class="flow-n">${i + 1}</span><div class="flow-body">
