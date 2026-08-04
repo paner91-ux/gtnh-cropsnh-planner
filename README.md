@@ -11,6 +11,27 @@ No install, no account, nothing sent anywhere. Your ticked seeds are stored in y
 
 ---
 
+## This is for the new crop system in GTNH 2.9
+
+**CropsNH replaced the old IC2 crops in 2.9.** If you are still on 2.8 or earlier, none of this
+applies to you: different crops, different breeding rules, different everything. Check whether your
+crop sticks come from CropsNH before you start planning against this.
+
+Breeding works genuinely differently now, so old habits and old guides will mislead you. The two
+that catch people out most:
+
+- Crossing no longer needs two *different* plants to improve stats. Two of the same crop next to a
+  double crop stick works, and it behaves differently from two different crops.
+- Which blocks sit under the stick decides what is even allowed to appear there, not just whether
+  the result grows afterwards.
+
+Both are covered in the **Tips & tricks** tab, with the reasoning behind them.
+
+If you are upgrading a world, the mod converts existing IC2, Crops++ and GT5u crops over
+automatically, so you do not need to replant anything by hand.
+
+---
+
 ## What it does
 
 **Ready now** - recipes where you already hold every parent.
@@ -45,7 +66,12 @@ sub-soils and light requirements are all read straight out of the compiled mod:
 | `CropsNHSoilTypes` | how compound soil lists are built out of simpler ones |
 | `en_US.lang` | display names, exactly as they appear in NEI |
 
-Built against **CropsNH 2.0.101**. In that version: 179 crops, 172 recipes, 66 pools.
+Built against **CropsNH 2.0.101**, as shipped in the GTNH 2.9 daily builds (nightly 659).
+In that version: 179 crops, 172 recipes, 66 pools.
+
+Nothing else in the pack registers crops with CropsNH, so the list is complete rather than a
+selection. If a future version adds or changes crops, regenerate the data with the steps below
+instead of editing anything by hand.
 
 Two things worth knowing about the data:
 
