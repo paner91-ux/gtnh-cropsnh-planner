@@ -393,6 +393,23 @@ h1, h2, h3 { font-family: var(--face-display); font-weight: 600; text-wrap: bala
 .flow-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 13px; }
 .flow-pick select { min-width: 190px; font-size: 13px; padding: 5px 8px; }
 
+/* a step you sit in and repeat, as opposed to one you pass through once */
+.flow-cycle {
+  padding: 9px 12px 10px; border: 1px dashed var(--rule);
+  border-radius: 2px; background: var(--paper-2);
+}
+.flow-cycle-h {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 6px;
+  font-family: var(--face-data); font-size: 9.5px;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint);
+}
+.flow-cycle-h span:first-child { flex: 1; min-width: 0; }
+.flow-cycle ol {
+  margin: 0; padding-left: 17px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.flow-cycle li { padding-left: 3px; }
+
 .goview {
   font: inherit; cursor: pointer; padding: 0;
   color: var(--leaf); background: none; border: 0;
@@ -1128,12 +1145,22 @@ const FLOW = [
     d: "It genuinely does not matter which. Barley, Wheat, whatever you already hold. This first plant is a tool, not a goal." },
 
   { t: "Take that one plant to 31/31/31",
-    d: "Growth, Gain and Resistance all stop at 31, and nothing else you do matters until one plant is there. Keep fertiliser in every stick the whole way - that is what stops the numbers sliding backwards. You only ever have to do this once.",
-    w: "<em>Constants.MAX_SEED_STAT</em> is 31 and <em>MIN_SEED_STAT</em> is 1; <em>SeedStats</em> clamps all three values into that range. Each stat then rolls a change between the <em>Breeding Range Low</em> and <em>High</em> configs, -2 to +4 by default, and a negative roll is clamped away only while every counted parent still holds fertiliser." },
+    d: "Growth, Gain and Resistance all stop at 31, and nothing else you do matters until one plant is there. You climb by copying the plant onto itself over and over, keeping the best copy each round. You only ever have to do this once, for one crop.",
+    w: "<em>variateStat()</em> takes the average of every parent that counted - integer division - then adds a roll drawn uniformly between the <em>Breeding Range Low</em> and <em>High</em> configs, -2 to +4 by default. A negative roll is replaced with zero <b>only</b> when every counted parent still holds fertiliser, so a fertilised copy can equal its parent but never fall below it. The total is finally clamped into 1…31 by <em>Constants.MIN_SEED_STAT</em> and <em>MAX_SEED_STAT</em>.",
+    cycle: {
+      h: "repeat until all three read 31",
+      w: "<em>Plant Lens</em> is an item in the mod, tooltip \"Inspects crops\". Its readout is exactly <em>Stats -- Growth / Gain / Resistance</em> plus <em>Soil -- Fertilizer / Water / Weed-EX</em>, so one look covers both the numbers and whether the stick is actually still fed.",
+      items: [
+        "Plant it, and keep <b>fertiliser and water</b> in the stick the whole time. That is the single thing that removes every downward roll.",
+        "Stand a <b>double crop stick</b> beside it and wait for a copy to appear on it.",
+        "Scan the copy with a <b>Plant Lens</b>. It reads out Growth, Gain and Resistance, and the stick's fertiliser and water at the same time.",
+        "If the numbers went up, <b>that plant is your new base</b>. Clear the old one out before the next round - the roll starts from the <i>average</i> of everything standing next to the stick, so a weaker plant left in place drags the result back down."
+      ]
+    } },
 
-  { t: "Clone it with a double crop stick",
-    d: "Stand a double stick next to the finished plant and wait. Half of every successful attempt simply copies a neighbour, and a fertilised copy of a 31/31/31 parent cannot come out worse than its parent.",
-    w: "New stats start from the average of the counted parents - here a single 31/31/31 plant, so the average is 31. Upward rolls hit the same clamp at 31 and downward rolls are removed by the fertiliser check, which leaves 31/31/31 as the only possible result." },
+  { t: "Do it once more, to end up with two",
+    d: "Same rig, same wait - but this time you are not chasing better numbers, you just want a second plant. A fertilised copy of a 31/31/31 parent comes out at exactly 31/31/31, because the roll can no longer move it in either direction.",
+    w: "The average of a single 31/31/31 parent is 31. Upward rolls hit the clamp at 31 and downward rolls are already removed by the fertiliser check, so 31/31/31 is the only reachable result." },
 
   { t: "Left-click both plants to take the seeds",
     d: "At resistance 31 the seed is guaranteed, which is the real reason step 2 comes first. You now hold two identical maxed seeds.",
@@ -1165,6 +1192,10 @@ function renderFlow() {
       <div class="flow-head"><p><b>${s.t}</b></p>${s.w ? `<span class="why"><button class="why-btn" type="button">why</button>
         <span class="why-pop" role="note">${s.w}</span></span>` : ""}</div>
       <p>${s.d}</p>`;
+    if (s.cycle) html += `<div class="flow-cycle">
+      <div class="flow-cycle-h"><span>&#8635; ${s.cycle.h}</span>${s.cycle.w ? `<span class="why"><button class="why-btn" type="button">why</button>
+        <span class="why-pop" role="note">${s.cycle.w}</span></span>` : ""}</div>
+      <ol>${s.cycle.items.map(i => `<li>${i}</li>`).join("")}</ol></div>`;
     if (s.pick) html += `<div class="flow-pick"><label>Two of <select class="field" id="flowPick"><option value="">-</option>${opts}</select></label></div>`;
     if (s.ready) html += `<p><button class="goview" type="button" data-goview="ready">Open Ready now</button></p>`;
     html += `</div></li>`;
