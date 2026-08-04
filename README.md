@@ -76,7 +76,7 @@ edited by hand - see [tools/](tools/) if you want to do that yourself.
 Two things worth knowing about the data:
 
 - **21 crops belong to no pool.** Those can only ever come from their exact recipe.
-- **Some crops have no recipe.** Barley for one - you find those in the world, you cannot breed them.
+- **7 crops have no recipe at all**, among them Wheat, Potato and Carrot. Those are starting points: you find them in the world, you cannot breed your way to them.
 
 ---
 
