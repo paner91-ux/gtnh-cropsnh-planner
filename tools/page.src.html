@@ -366,6 +366,24 @@ h1, h2, h3 { font-family: var(--face-display); font-weight: 600; text-wrap: bala
 .dl dd { margin: 0; }
 
 .linkrow { display: flex; flex-direction: column; gap: 5px; font-size: 13.5px; }
+
+/* pools a crop belongs to, and the contents of one pool */
+.poolchips { display: flex; flex-wrap: wrap; gap: 5px; }
+.poolchip {
+  font: inherit; font-size: 12.5px; cursor: pointer;
+  display: inline-flex; align-items: baseline; gap: 5px;
+  padding: 3px 8px; color: var(--ink); background: var(--paper-2);
+  border: 1px solid var(--rule); border-radius: 2px;
+}
+.poolchip:hover { background: var(--paper-3); border-color: var(--leaf); }
+.poolchip:focus-visible { outline: 2px solid var(--leaf); outline-offset: 1px; }
+
+.poollist { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 2px 10px; }
+.poolrow { display: flex; align-items: baseline; gap: 5px; padding: 2px 0; min-width: 0; }
+.poolrow .inline-crop { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.poolrow .inline-crop.own { font-weight: 600; color: var(--ink); }
+.poolrow .inline-crop.miss { color: var(--ore); }
+.poolrow.have { opacity: .72; }
 .inline-crop {
   font: inherit; background: none; border: 0; padding: 0; cursor: pointer; color: var(--ink);
   text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px;
@@ -1090,7 +1108,72 @@ function renderPath() {
 }
 
 /* ---------------------------------------------------------- drawer */
-function openDrawer(id) {
+/* The drawer shows either a crop or a pool, and you can walk between them,
+   so it keeps a small history to give a working back step.                  */
+let drawerStack = [];
+
+function showCrop(id) { if (C[id]) { drawerStack.push({ t: "crop", id }); paintDrawer(); } }
+function showPool(key) { if (POOLM[key]) { drawerStack.push({ t: "pool", id: key }); paintDrawer(); } }
+function drawerBack() {
+  drawerStack.pop();
+  drawerStack.length ? paintDrawer() : closeDrawer();
+}
+function paintDrawer() {
+  const top = drawerStack[drawerStack.length - 1];
+  if (!top) return closeDrawer();
+  top.t === "pool" ? renderPoolDrawer(top.id) : renderCropDrawer(top.id);
+  $("drawer").dataset.open = "true";
+  $("drawer").setAttribute("aria-hidden", "false");
+  $("scrim").dataset.open = "true";
+  $("closeDrawer").onclick = closeDrawer;
+  const back = $("drawerBack");
+  if (back) back.onclick = drawerBack;
+}
+
+function backButton() {
+  if (drawerStack.length < 2) return "";
+  const prev = drawerStack[drawerStack.length - 2];
+  const label = prev.t === "pool" ? (DATA.poolNames[prev.id] || prev.id) : nm(prev.id);
+  return `<button class="btn" type="button" id="drawerBack">&larr; ${esc(label)}</button>`;
+}
+
+/* pool view: what is in it, split by what you already hold */
+function renderPoolDrawer(key) {
+  const members = POOLM[key] || [];
+  const mine = members.filter(id => owned.has(id));
+  const rest = members.filter(id => !owned.has(id));
+  const byName = ids => ids.slice().sort((a, b) => nm(a).localeCompare(nm(b)));
+  const row = id => {
+    const c = C[id];
+    return `<div class="poolrow${owned.has(id) ? " have" : ""}">
+      ${cropLink(id, owned.has(id) ? "own" : "miss")}
+      <span class="tier">T${c.tier}</span>
+      ${c.subsoil.length ? `<span class="mark" title="needs a specific block under the soil">&#9670;</span>` : ""}
+    </div>`;
+  };
+
+  $("drawer").innerHTML = `
+    <div class="drawer-top">
+      <h2>${esc(DATA.poolNames[key] || key)}</h2>
+      ${backButton()}
+      <button class="btn close" type="button" id="closeDrawer">Close</button>
+    </div>
+    <p class="flav" style="font-style:normal">Mutation pool with <b>${members.length}</b> crops in it.
+      Two parents that both belong to this pool can draw any one of them, each equally likely.
+      You already hold <b>${mine.length}</b>.</p>
+
+    <div class="dsec"><h3>Not yours yet (${rest.length})</h3>
+      <div class="poollist">${rest.length ? byName(rest).map(row).join("")
+        : `<span style="color:var(--ink-faint);font-size:13px">You have every crop in this pool.</span>`}</div>
+    </div>
+
+    <div class="dsec"><h3>Already yours (${mine.length})</h3>
+      <div class="poollist">${mine.length ? byName(mine).map(row).join("")
+        : `<span style="color:var(--ink-faint);font-size:13px">None of these are ticked yet.</span>`}</div>
+    </div>`;
+}
+
+function renderCropDrawer(id) {
   const c = C[id]; if (!c) return;
   const from = MUT.filter(m => m.out === id);
   const used = MUT.filter(m => m.parents.includes(id));
@@ -1105,6 +1188,7 @@ function openDrawer(id) {
   $("drawer").innerHTML = `
     <div class="drawer-top">
       <h2>${esc(c.name)}</h2>
+      ${backButton()}
       <button class="btn close" type="button" id="closeDrawer">Close</button>
     </div>
     ${c.flavour ? `<p class="flav">${esc(c.flavour)}</p>` : ""}
@@ -1125,16 +1209,21 @@ function openDrawer(id) {
     </div>
 
     <div class="dsec"><h3>Mutation pools (${c.pools.length})</h3>
-      <div class="linkrow">${c.pools.length
-        ? c.pools.map(p => `<span>${esc(DATA.poolNames[p] || p)} <span class="tier">${POOLM[p] ? POOLM[p].length : 0}</span></span>`).join("")
-        : `<span style="color:var(--ink-faint)">None - this crop can only be obtained from a recipe.</span>`}</div>
+      ${c.pools.length ? `<p class="flav" style="font-style:normal;margin-bottom:8px">Any two parents that
+        share one of these can draw this crop at random. Open a pool to see everything else in it.</p>` : ""}
+      <div class="poolchips">${c.pools.length
+        ? c.pools.map(p => `<button class="poolchip" type="button" data-pool="${p}">${esc(DATA.poolNames[p] || p)}
+            <span class="tier">${POOLM[p] ? POOLM[p].length : 0}</span></button>`).join("")
+        : `<span style="color:var(--ink-faint);font-size:13px">None - this crop can only be obtained from a recipe.</span>`}</div>
     </div>
 
     <div class="dsec"><h3>How to get it (${from.length})</h3>
       <div class="linkrow">${from.length
         ? from.map(m => `<span>${m.parents.map(p =>
             `<button class="inline-crop" type="button" data-crop="${p}">${esc(nm(p))}</button>`).join(" + ")}${m.machineOnly ? " <span class=\"tier\">Crop Breeder</span>" : ""}</span>`).join("")
-        : `<span style="color:var(--ink-faint)">No recipe - pools only.</span>`}</div>
+        : `<span style="color:var(--ink-faint)">No recipe.${c.pools.length
+            ? ` Only ever from a pool draw, see the ${c.pools.length} pool${c.pools.length > 1 ? "s" : ""} above.`
+            : ` Not from a pool either, so this one is found in the world.`}</span>`}</div>
     </div>
 
     <div class="dsec"><h3>Used as a parent (${used.length})</h3>
@@ -1144,13 +1233,10 @@ function openDrawer(id) {
         : `<span style="color:var(--ink-faint)">Nowhere.</span>`}</div>
     </div>`;
 
-  $("drawer").dataset.open = "true";
-  $("drawer").setAttribute("aria-hidden", "false");
-  $("scrim").dataset.open = "true";
-  $("closeDrawer").onclick = closeDrawer;
-  $("toggleOwn").onclick = () => { toggle(id); openDrawer(id); };
+  $("toggleOwn").onclick = () => { toggle(id); paintDrawer(); };
 }
 function closeDrawer() {
+  drawerStack = [];
   $("drawer").dataset.open = "false";
   $("drawer").setAttribute("aria-hidden", "true");
   $("scrim").dataset.open = "false";
@@ -1185,8 +1271,10 @@ document.addEventListener("click", e => {
   if (seed) { toggle(seed.dataset.id); return; }
   const pair = e.target.closest("[data-pair]");
   if (pair) { [pairA, pairB] = pair.dataset.pair.split("|"); render(); return; }
+  const pool = e.target.closest("[data-pool]");
+  if (pool) { showPool(pool.dataset.pool); return; }
   const crop = e.target.closest("[data-crop]");
-  if (crop) { openDrawer(crop.dataset.crop); return; }
+  if (crop) { showCrop(crop.dataset.crop); return; }
   if (e.target.id === "clearPair") { pairA = pairB = ""; render(); return; }
   const tab = e.target.closest(".tab");
   if (tab) { view = tab.dataset.view; render(); return; }
