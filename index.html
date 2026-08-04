@@ -138,8 +138,6 @@ h1, h2, h3 { font-family: var(--face-display); font-weight: 600; text-wrap: bala
 }
 .field:focus-visible { outline: 2px solid var(--leaf); outline-offset: 1px; }
 
-.rail-tools { display: flex; gap: 6px; margin: 8px 0 10px; flex-wrap: wrap; }
-
 .btn {
   font: inherit; font-size: 12px; padding: 4px 9px; cursor: pointer;
   color: var(--ink-soft); background: var(--paper-2);
@@ -149,6 +147,7 @@ h1, h2, h3 { font-family: var(--face-display); font-weight: 600; text-wrap: bala
 .btn:focus-visible { outline: 2px solid var(--leaf); outline-offset: 1px; }
 
 .seedlist {
+  margin-top: 10px;
   max-height: 62vh; overflow-y: auto; overflow-x: hidden;
   border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
 }
@@ -427,22 +426,28 @@ h1, h2, h3 { font-family: var(--face-display); font-weight: 600; text-wrap: bala
 
 .own-toggle { margin-top: 14px; }
 
-/* ---------------------------------------------------------- backup */
-.backup { margin-top: 14px; }
-.backup > summary {
+/* ------------------------------------------------- manage-list panel */
+/* Clear, Undo and the backup box all rewrite the whole tick list, so they
+   live together behind one fold instead of cluttering the rail.          */
+.railpanel { margin-top: 14px; }
+.railpanel > summary {
   cursor: pointer; list-style: none;
   font-family: var(--face-data); font-size: 10px; letter-spacing: .09em;
   text-transform: uppercase; color: var(--ink-faint);
   padding: 5px 0; display: flex; align-items: center; gap: 6px;
 }
-.backup > summary::-webkit-details-marker { display: none; }
-.backup > summary::before { content: "▸"; font-size: 9px; }
-.backup[open] > summary::before { content: "▾"; }
-.backup > summary:hover { color: var(--ink); }
-.backup > summary:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2px; }
+.railpanel > summary::-webkit-details-marker { display: none; }
+.railpanel > summary::before { content: "▸"; font-size: 9px; }
+.railpanel[open] > summary::before { content: "▾"; }
+.railpanel > summary:hover { color: var(--ink); }
+.railpanel > summary:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2px; }
 
-.backup-body { display: flex; flex-direction: column; gap: 7px; padding: 4px 0 2px; }
-.backup-body p { margin: 0; font-size: 12px; color: var(--ink-faint); }
+.railpanel-body { display: flex; flex-direction: column; gap: 7px; padding: 4px 0 2px; }
+.railpanel-body p { margin: 0; font-size: 12px; color: var(--ink-faint); }
+.railpanel-body hr {
+  width: 100%; height: 0; margin: 3px 0;
+  border: 0; border-top: 1px solid var(--rule);
+}
 #code {
   width: 100%; min-height: 86px; resize: vertical;
   font-family: var(--face-data); font-size: 11px; line-height: 1.45;
@@ -450,7 +455,7 @@ h1, h2, h3 { font-family: var(--face-display); font-weight: 600; text-wrap: bala
   border: 1px solid var(--rule); border-radius: 2px; padding: 6px 8px;
 }
 #code:focus-visible { outline: 2px solid var(--leaf); outline-offset: 1px; }
-.backup-btns { display: flex; flex-wrap: wrap; gap: 6px; }
+.railpanel-btns { display: flex; flex-wrap: wrap; gap: 6px; }
 .status { font-size: 12px; min-height: 1.4em; }
 .status[data-kind="ok"] { color: var(--leaf); }
 .status[data-kind="warn"] { color: var(--ore); }
@@ -482,20 +487,21 @@ footer.note code { font-family: var(--face-data); }
         <span class="tally" id="tally">0</span>
       </div>
       <input class="field" id="search" type="search" placeholder="Search crops…" autocomplete="off">
-      <div class="rail-tools">
-        <button class="btn" id="clearAll" type="button">Clear</button>
-        <button class="btn" id="undo" type="button" hidden>Undo</button>
-      </div>
       <div class="seedlist" id="seedlist"></div>
       <p class="raillegend"><span class="mark">&#9670;</span> needs a specific block under the soil</p>
       <p class="raillegend"><span class="legend-i">i</span> opens the details panel</p>
 
-      <details class="backup">
-        <summary>Backup</summary>
-        <div class="backup-body">
+      <details class="railpanel">
+        <summary>Manage list</summary>
+        <div class="railpanel-body">
+          <div class="railpanel-btns">
+            <button class="btn" id="clearAll" type="button">Clear all ticks</button>
+            <button class="btn" id="undo" type="button" hidden>Undo</button>
+          </div>
+          <hr>
           <p>Your ticks live in this browser. The hosted page and a local copy keep separate stores - use this box to move the list between them.</p>
           <textarea id="code" spellcheck="false" aria-label="Seed list code"></textarea>
-          <div class="backup-btns">
+          <div class="railpanel-btns">
             <button class="btn" id="btnCopy" type="button">Copy</button>
             <button class="btn" id="btnLoad" type="button">Load from box</button>
             <button class="btn" id="btnFile" type="button" hidden>Download file</button>
@@ -526,7 +532,7 @@ footer.note code { font-family: var(--face-data); }
     Extracted from the bytecode of <code>cropsnh-2.0.101.jar</code> - recipes, pools, soils, sub-soils and light
     requirements come straight out of <code>MutationLoader</code>, <code>CropLoader</code> and
     <code>SubSoilRequirementLoader</code>. No other mod in this instance registers crops with CropsNH, so the list is
-    complete. Ticks are stored in this browser and survive page updates; move them elsewhere with <b>Backup</b>.
+    complete. Ticks are stored in this browser and survive page updates; move them elsewhere from <b>Manage list</b>.
   </footer>
 </div>
 
@@ -619,7 +625,7 @@ function applyImport(text) {
   snapshot();
   owned = new Set(known);
   save(); render();
-  status(`Loaded ${known.length} crops` + (unknown > 0 ? ` · skipped ${unknown} unknown` : "") + " · Undo is in the rail", "ok");
+  status(`Loaded ${known.length} crops` + (unknown > 0 ? ` · skipped ${unknown} unknown` : "") + " · Undo is at the top of this panel", "ok");
 }
 
 /* ---------------------------------------------------------- requirements */
@@ -1320,7 +1326,7 @@ $("search").addEventListener("input", e => { filter = e.target.value; renderRail
 $("clearAll").onclick = () => {
   if (!owned.size) return;
   snapshot(); owned.clear(); save(); render();
-  status(`Cleared ${undoState.length} crops - Undo is next to Clear.`, "warn");
+  status(`Cleared ${undoState.length} crops - Undo is right above.`, "warn");
 };
 
 $("undo").onclick = () => {
