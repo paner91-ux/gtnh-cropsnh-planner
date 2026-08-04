@@ -102,6 +102,11 @@ body {
 
 h1, h2, h3 { font-family: var(--face-display); font-weight: 600; text-wrap: balance; margin: 0; }
 
+/* Body copy sits on a 68ch measure, which is right for reading but leaves the
+   browser free to strand a word or two on the last line. `pretty` lets it look
+   ahead and spread the breaks instead; browsers without it wrap as before.   */
+p, li { text-wrap: pretty; }
+
 .wrap { max-width: 1440px; margin: 0 auto; padding: 0 20px 72px; }
 
 /* ---------------------------------------------------------- masthead */
@@ -943,7 +948,7 @@ function renderNear() {
 function renderPool() {
   const opts = sel => allSorted.map(c =>
     `<option value="${c.id}"${sel === c.id ? " selected" : ""}>${esc(c.name)}${owned.has(c.id) ? " ✓" : ""}</option>`).join("");
-  let html = `<p class="viewnote">What can come out of a double crop stick between two mature crops. Figures are the chance <b>per successful breeding attempt</b> (one fires on roughly every third growth tick). Picking the same crop twice is allowed - it is the most common setup.</p>
+  let html = `<p class="viewnote">What can come out of a double crop stick between two mature crops. Figures are the chance <b>per successful breeding attempt</b>, and one fires on roughly every third growth tick. The same crop twice is allowed, and is the most common setup.</p>
     <div class="pairpick">
       <label>Parent A<select class="field" id="selA"><option value="">-</option>${opts(pairA)}</select></label>
       <label>Parent B<select class="field" id="selB"><option value="">-</option>${opts(pairB)}</select></label>
