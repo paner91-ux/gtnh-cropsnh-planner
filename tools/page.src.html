@@ -338,11 +338,26 @@ p, li { text-wrap: pretty; }
 .pairpick label { display: flex; flex-direction: column; gap: 3px; font-size: 12px; color: var(--ink-faint); }
 .pairpick select { min-width: 180px; }
 
-/* pairs you have already looked at - sits tight under the two dropdowns,
-   since it is the faster way to do the same thing they do */
-.recent { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: -8px 0 18px; }
+/* pairs you have already looked at, and the ones you keep - both sit tight
+   under the two dropdowns, since they do the same job faster */
+.pairrow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.pairrow.recent { margin: -8px 0 0; }
+.pairrow.saved { margin-top: 6px; }
+.pairrow:last-of-type { margin-bottom: 18px; }
+
+/* the pill holds two controls - pick the pair, or keep it - so it is a
+   wrapper and the padding lives on the buttons inside it */
+.pairchip { padding: 0; gap: 0; align-items: center; }
+.pairchip .pname, .pairchip .star {
+  font: inherit; background: none; border: 0; color: inherit; cursor: pointer; padding: 3px 4px;
+}
+.pairchip .pname { padding-left: 8px; }
+.pairchip .star { padding-right: 7px; color: var(--ink-faint); font-size: 13px; line-height: 1; }
+.pairchip .star.on { color: var(--leaf); }
+.pairchip .star:hover { color: var(--leaf); }
+.pairchip .pname:focus-visible, .pairchip .star:focus-visible { outline: 2px solid var(--leaf); outline-offset: -2px; }
 .pairchip.on { background: var(--leaf-bg); color: var(--leaf); border-color: var(--leaf); }
-.pairchip.more { color: var(--ink-faint); }
+.morechip { color: var(--ink-faint); }
 
 .odds { width: 100%; border-collapse: collapse; font-size: 13.5px; }
 .odds th {
@@ -753,12 +768,31 @@ if (storage) {
 }
 let pairsOpen = false;                    // the rest of the list, this session only
 
+/* Pairs worth keeping. Recent drops the oldest entry as you work, which is
+   wrong for the two or three pairs a plot is actually built around, so those
+   get pinned by hand and stay until you unpin them. New ones go on the end:
+   a kept list that reorders itself is a list you have to read every time. */
+const LS_SAVED = "cropsnh-saved-v1";
+let savedPairs = [];
+if (storage) {
+  try {
+    savedPairs = JSON.parse(storage.getItem(LS_SAVED) || "[]")
+      .filter(k => { const [a, b] = String(k).split("|"); return C[a] && C[b]; });
+  } catch (e) {}
+}
+
 function recordPair(a, b) {
   if (!a || !b) return;
   const k = pairKey(a, b);
   if (recentPairs[0] === k) return;       // already at the front, nothing moves
   recentPairs = [k, ...recentPairs.filter(x => x !== k)].slice(0, PAIRS_KEEP);
   if (storage) { try { storage.setItem(LS_PAIRS, JSON.stringify(recentPairs)); } catch (e) {} }
+}
+
+function toggleSave(k) {
+  savedPairs = savedPairs.includes(k) ? savedPairs.filter(x => x !== k) : [...savedPairs, k];
+  if (storage) { try { storage.setItem(LS_SAVED, JSON.stringify(savedPairs)); } catch (e) {} }
+  render();
 }
 
 /* every way of choosing parents goes through here, so none of them skips history */
@@ -1060,21 +1094,36 @@ function renderNear() {
     <div class="grid">${markFirst(list).map(m => cardFor(m)).join("")}</div>`;
 }
 
-/* Five most recent pairs, the other five behind a toggle. Chips carry the
+/* One pill: the name picks the pair, the star keeps it. The name carries the
    same data-pair the best-pairs table does, so one handler serves both. */
-function recentStrip() {
-  if (!recentPairs.length) return "";
+function pairPill(k, cur) {
+  const [a, b] = k.split("|");
+  const kept = savedPairs.includes(k);
+  return `<span class="poolchip pairchip${k === cur ? " on" : ""}">
+    <button class="pname" type="button" data-pair="${k}"${k === cur ? ` aria-current="true"` : ""}>${
+      esc(nm(a))}${a === b ? " ×2" : ` + ${esc(nm(b))}`}</button>
+    <button class="star${kept ? " on" : ""}" type="button" data-star="${k}" aria-pressed="${kept}"
+      title="${kept ? "Remove from saved" : "Save this pair"}">${kept ? "★" : "☆"}</button>
+  </span>`;
+}
+
+/* Five most recent pairs with the other five behind a toggle, then the kept
+   ones underneath. Either row is left out entirely when it has nothing. */
+function pairStrips() {
   const cur = pairA && pairB ? pairKey(pairA, pairB) : "";
-  const shown = pairsOpen ? recentPairs : recentPairs.slice(0, PAIRS_SHOWN);
-  const hidden = recentPairs.length - PAIRS_SHOWN;
-  const chip = k => {
-    const [a, b] = k.split("|");
-    return `<button class="poolchip pairchip${k === cur ? " on" : ""}" type="button" data-pair="${a}|${b}"${
-      k === cur ? ` aria-current="true"` : ""}>${esc(nm(a))}${a === b ? " ×2" : ` + ${esc(nm(b))}`}</button>`;
-  };
-  return `<div class="recent"><span class="lbl">Recent</span>${shown.map(chip).join("")}${
-    hidden > 0 ? `<button class="poolchip pairchip more" type="button" id="morePairs">${
-      pairsOpen ? "Show fewer" : `+${hidden} more`}</button>` : ""}</div>`;
+  let h = "";
+  if (recentPairs.length) {
+    const shown = pairsOpen ? recentPairs : recentPairs.slice(0, PAIRS_SHOWN);
+    const hidden = recentPairs.length - PAIRS_SHOWN;
+    h += `<div class="pairrow recent"><span class="lbl">Recent</span>${
+      shown.map(k => pairPill(k, cur)).join("")}${
+      hidden > 0 ? `<button class="poolchip morechip" type="button" id="morePairs">${
+        pairsOpen ? "Show fewer" : `+${hidden} more`}</button>` : ""}</div>`;
+  }
+  if (savedPairs.length)
+    h += `<div class="pairrow saved"><span class="lbl">Saved</span>${
+      savedPairs.map(k => pairPill(k, cur)).join("")}</div>`;
+  return h;
 }
 
 function renderPool() {
@@ -1085,7 +1134,7 @@ function renderPool() {
       <label>Parent A<select class="field" id="selA"><option value="">-</option>${opts(pairA)}</select></label>
       <label>Parent B<select class="field" id="selB"><option value="">-</option>${opts(pairB)}</select></label>
       ${pairA || pairB ? `<button class="btn" id="clearPair" type="button">Clear pair</button>` : ""}
-    </div>${recentStrip()}`;
+    </div>${pairStrips()}`;
 
   const o = oddsFor(pairA, pairB);
   if (!o) return html + renderBestPairs();
@@ -1683,6 +1732,8 @@ function readHash() {
 document.addEventListener("click", e => {
   const seed = e.target.closest(".seed-tick");
   if (seed) { toggle(seed.dataset.id); return; }
+  const star = e.target.closest("[data-star]");
+  if (star) { toggleSave(star.dataset.star); return; }
   const pair = e.target.closest("[data-pair]");
   if (pair) { setPair(...pair.dataset.pair.split("|")); render(); return; }
   const pool = e.target.closest("[data-pool]");
