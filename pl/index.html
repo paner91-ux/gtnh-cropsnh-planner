@@ -705,6 +705,7 @@ footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2p
         <button class="tab" type="button" role="tab" data-view="pool">Ruletka pul</button>
         <button class="tab" type="button" role="tab" data-view="path">Droga do celu</button>
         <button class="tab" type="button" role="tab" data-view="tips">Porady i sztuczki</button>
+        <button class="tab" type="button" role="tab" data-view="about">O tej stronie</button>
       </div>
       <div id="view"></div>
     </main>
@@ -712,15 +713,14 @@ footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2p
 
   <footer class="note">
     <div class="foot-main">
-      <p>Odczytane z bajtkodu <code>cropsnh-2.0.101.jar</code> w wersji z GTNH 2.9 - przepisy, pule, gleby, podglebia i wymagania światła pochodzą wprost z <code>MutationLoader</code>, <code>CropLoader</code> i <code>SubSoilRequirementLoader</code>, nie z wiki. Żaden inny mod w paczce nie rejestruje roślin w CropsNH, więc powyższa lista to komplet, a nie wybór.</p>
-      <p>Zaznaczenia są przechowywane w tej przeglądarce i nigdzie indziej. Strona nie wysyła żadnych zapytań na zewnątrz i działa bez internetu - listę przeniesiesz między kopiami przez <b>Zarządzaj listą</b> w panelu bocznym.</p>
+      <p>Planer krzyżowania roślin CropsNH w GregTech: New Horizons, odczytany z kodu samego moda, a nie z wiki. Twoje zaznaczenia zostają w tej przeglądarce, a strona działa bez internetu.</p>
     </div>
     <div class="foot-side">
       <p class="foot-links">
         <a href="https://github.com/paner91-ux/gtnh-cropsnh-planner" target="_blank" rel="noopener noreferrer">Kod na GitHubie</a>
         <a href="https://github.com/paner91-ux/gtnh-cropsnh-planner/issues" target="_blank" rel="noopener noreferrer">Zgłoś błąd</a>
       </p>
-      <p><a href="https://github.com/GTNewHorizons/CropsNH" target="_blank" rel="noopener noreferrer">CropsNH</a> tworzą C0bra5 i zespół GTNH, na bazie AgriCraft. To nieoficjalne narzędzie fanowskie, niezwiązane z zespołem GTNH ani przez niego nieautoryzowane. Kod planera na licencji MIT.</p>
+      <p><button class="goview" type="button" data-goview="about">O tej stronie</button></p>
     </div>
   </footer>
 </div>
@@ -1475,15 +1475,27 @@ function tipGroup(g, id) {
    These jump by script rather than by href: an anchor would put its own
    fragment in the url, and the url already carries the view state.        */
 function renderTips() {
-  const secs = [{ id: "sec-app", h: APP.h }, { id: "sec-flow", h: `Od czego zacząć` }]
+  const secs = [{ id: "sec-flow", h: `Od czego zacząć` }]
     .concat(TIPS.map((g, i) => ({ id: `sec-${i}`, h: g.h })));
   const index = `<nav class="tipindex" aria-label="Sekcje na tej stronie">${
     secs.map(s => `<button type="button" data-jump="${s.id}">${s.h}</button>`).join("")}</nav>`;
 
-  let html = `<p class="viewnote">Wszystko tutaj zostało odczytane z kodu samej paczki, a nie zebrane z doświadczenia, więc powinno się zgadzać dokładnie. Najedź na <span class="why-btn" style="cursor:default">skąd</span> przy dowolnej linii, żeby zobaczyć źródło.</p>${index}<div class="tips">`
-    + tipGroup(APP, "sec-app") + renderFlow();
+  let html = `<p class="viewnote">Wszystko tutaj zostało odczytane z kodu samej paczki, a nie zebrane z doświadczenia, więc powinno się zgadzać dokładnie. Najedź na <span class="why-btn" style="cursor:default">skąd</span> przy dowolnej linii, żeby zobaczyć źródło.</p>${index}<div class="tips">` + renderFlow();
   TIPS.forEach((g, i) => { html += tipGroup(g, `sec-${i}`); });
   return html + `</div>`;
+}
+
+/* What this page is and how to work it. Nothing here has a source in the mod,
+   which is exactly why it does not belong in Tips & tricks.               */
+function renderAbout() {
+  return `<p class="viewnote">Czym jest to narzędzie, jak się nim posługiwać i skąd biorą się jego liczby. Zakładka <b>Porady i sztuczki</b> to druga połowa: tamta jest o modzie i każda linia w niej wskazuje metodę, z której została odczytana.</p><div class="tips">`
+    + tipGroup(APP, "sec-app")
+    + `<section class="tipgroup"><h3>Skąd pochodzą dane</h3>
+        <p class="lead">Odczytane z bajtkodu <code>cropsnh-2.0.101.jar</code> w wersji z GTNH 2.9 - przepisy, pule, gleby, podglebia i wymagania światła pochodzą wprost z <code>MutationLoader</code>, <code>CropLoader</code> i <code>SubSoilRequirementLoader</code>, nie z wiki. Żaden inny mod w paczce nie rejestruje roślin w CropsNH, więc powyższa lista to komplet, a nie wybór.</p></section>
+      <section class="tipgroup"><h3>Co strona przechowuje</h3>
+        <p class="lead">Zaznaczenia są przechowywane w tej przeglądarce i nigdzie indziej. Strona nie wysyła żadnych zapytań na zewnątrz i działa bez internetu - listę przeniesiesz między kopiami przez <b>Zarządzaj listą</b> w panelu bocznym.</p></section>
+      <section class="tipgroup"><h3>Autorzy i licencja</h3>
+        <p class="lead"><a href="https://github.com/GTNewHorizons/CropsNH" target="_blank" rel="noopener noreferrer">CropsNH</a> tworzą C0bra5 i zespół GTNH, na bazie AgriCraft. To nieoficjalne narzędzie fanowskie, niezwiązane z zespołem GTNH ani przez niego nieautoryzowane. Kod planera na licencji MIT.</p></section></div>`;
 }
 
 function renderPath() {
@@ -1702,7 +1714,8 @@ function render() {
     view === "ready" ? renderReady() :
     view === "near" ? renderNear() :
     view === "pool" ? renderPool() :
-    view === "tips" ? renderTips() : renderPath();
+    view === "tips" ? renderTips() :
+    view === "about" ? renderAbout() : renderPath();
 
   const sa = $("selA"), sb = $("selB"), st = $("selTarget"), fp = $("flowPick");
   if (sa) sa.onchange = e => { setPair(e.target.value, pairB); render(); };
@@ -1727,7 +1740,7 @@ function toggle(id) {
 /* The hash carries the whole view, so a link lands on exactly what you were
    looking at. Written with replaceState: sharing works without every tab
    click becoming a history entry. Nothing here leaves the browser.       */
-const VIEWS = ["ready", "near", "pool", "path", "tips"];
+const VIEWS = ["ready", "near", "pool", "path", "tips", "about"];
 let readingHash = false;
 
 function writeHash() {

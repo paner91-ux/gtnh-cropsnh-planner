@@ -690,6 +690,7 @@ footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2p
         <button class="tab" type="button" role="tab" data-view="pool">{{tab.pool}}</button>
         <button class="tab" type="button" role="tab" data-view="path">{{tab.path}}</button>
         <button class="tab" type="button" role="tab" data-view="tips">{{tab.tips}}</button>
+        <button class="tab" type="button" role="tab" data-view="about">{{tab.about}}</button>
       </div>
       <div id="view"></div>
     </main>
@@ -697,15 +698,14 @@ footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2p
 
   <footer class="note">
     <div class="foot-main">
-      <p>{{foot.data}}</p>
-      <p>{{foot.privacy}}</p>
+      <p>{{foot.short}}</p>
     </div>
     <div class="foot-side">
       <p class="foot-links">
         <a href="https://github.com/paner91-ux/gtnh-cropsnh-planner" target="_blank" rel="noopener noreferrer">{{foot.source}}</a>
         <a href="https://github.com/paner91-ux/gtnh-cropsnh-planner/issues" target="_blank" rel="noopener noreferrer">{{foot.issues}}</a>
       </p>
-      <p>{{foot.credit}}</p>
+      <p><button class="goview" type="button" data-goview="about">{{foot.more}}</button></p>
     </div>
   </footer>
 </div>
@@ -1460,15 +1460,27 @@ function tipGroup(g, id) {
    These jump by script rather than by href: an anchor would put its own
    fragment in the url, and the url already carries the view state.        */
 function renderTips() {
-  const secs = [{ id: "sec-app", h: APP.h }, { id: "sec-flow", h: `{{flow.title}}` }]
+  const secs = [{ id: "sec-flow", h: `{{flow.title}}` }]
     .concat(TIPS.map((g, i) => ({ id: `sec-${i}`, h: g.h })));
   const index = `<nav class="tipindex" aria-label="{{tips.indexLabel}}">${
     secs.map(s => `<button type="button" data-jump="${s.id}">${s.h}</button>`).join("")}</nav>`;
 
-  let html = `<p class="viewnote">{{tips.note}}</p>${index}<div class="tips">`
-    + tipGroup(APP, "sec-app") + renderFlow();
+  let html = `<p class="viewnote">{{tips.note}}</p>${index}<div class="tips">` + renderFlow();
   TIPS.forEach((g, i) => { html += tipGroup(g, `sec-${i}`); });
   return html + `</div>`;
+}
+
+/* What this page is and how to work it. Nothing here has a source in the mod,
+   which is exactly why it does not belong in Tips & tricks.               */
+function renderAbout() {
+  return `<p class="viewnote">{{about.note}}</p><div class="tips">`
+    + tipGroup(APP, "sec-app")
+    + `<section class="tipgroup"><h3>{{about.dataH}}</h3>
+        <p class="lead">{{foot.data}}</p></section>
+      <section class="tipgroup"><h3>{{about.privacyH}}</h3>
+        <p class="lead">{{foot.privacy}}</p></section>
+      <section class="tipgroup"><h3>{{about.creditH}}</h3>
+        <p class="lead">{{foot.credit}}</p></section></div>`;
 }
 
 function renderPath() {
@@ -1687,7 +1699,8 @@ function render() {
     view === "ready" ? renderReady() :
     view === "near" ? renderNear() :
     view === "pool" ? renderPool() :
-    view === "tips" ? renderTips() : renderPath();
+    view === "tips" ? renderTips() :
+    view === "about" ? renderAbout() : renderPath();
 
   const sa = $("selA"), sb = $("selB"), st = $("selTarget"), fp = $("flowPick");
   if (sa) sa.onchange = e => { setPair(e.target.value, pairB); render(); };
@@ -1712,7 +1725,7 @@ function toggle(id) {
 /* The hash carries the whole view, so a link lands on exactly what you were
    looking at. Written with replaceState: sharing works without every tab
    click becoming a history entry. Nothing here leaves the browser.       */
-const VIEWS = ["ready", "near", "pool", "path", "tips"];
+const VIEWS = ["ready", "near", "pool", "path", "tips", "about"];
 let readingHash = false;
 
 function writeHash() {

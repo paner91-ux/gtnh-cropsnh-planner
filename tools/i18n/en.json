@@ -304,5 +304,12 @@
   "app.i6": "<b>Manage list, under the seed list,</b> copies your ticks out as text and back in - the way to move a list between this page and an offline copy, or to keep a backup.",
   "app.i7": "<b>The address bar follows what you are looking at,</b> so a link you send opens on the same tab, the same pair and the same open panel, and F5 keeps you where you were.",
   "app.i8": "<b>The language links sit at the top right</b> and carry your place across, so switching does not send you back to the first tab.",
-  "app.i9": "<b>Your ticks never leave the browser.</b> The page makes no requests to anywhere, which also means it works with the network off and that each copy keeps its own list."
+  "app.i9": "<b>Your ticks never leave the browser.</b> The page makes no requests to anywhere, which also means it works with the network off and that each copy keeps its own list.",
+  "tab.about": "About this page",
+  "about.note": "What this tool is, how to work it, and where its numbers come from. The <b>Tips &amp; tricks</b> tab is the other half: that one is about the mod, and every line in it names the method it was read from.",
+  "about.dataH": "Where the data comes from",
+  "about.privacyH": "What the page stores",
+  "about.creditH": "Credit and licence",
+  "foot.short": "A planner for CropsNH breeding in GregTech: New Horizons, read out of the mod's own code rather than from a wiki. Your ticks stay in this browser and the page works offline.",
+  "foot.more": "About this page"
 }

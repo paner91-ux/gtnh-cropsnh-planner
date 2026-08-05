@@ -6,8 +6,12 @@ Tick off the seeds you own and it tells you what you can breed next, the exact o
 outcome, and which two blocks have to be under the crop stick for the result to be planted at all.
 
 **Live version:** https://paner91-ux.github.io/gtnh-cropsnh-planner/
+&nbsp;·&nbsp; **Po polsku:** https://paner91-ux.github.io/gtnh-cropsnh-planner/pl/
 
 No install, no account, nothing sent anywhere. Your ticked seeds are stored in your own browser.
+
+Every feature is explained on the page itself, in
+[**About this page**](https://paner91-ux.github.io/gtnh-cropsnh-planner/#v=about).
 
 ---
 
@@ -45,11 +49,18 @@ With nothing selected it ranks the best pairs from your own seeds by the chance 
 
 **Route to a goal** - the shortest chain of recipes from what you own to any crop you want.
 
-**Tips & tricks** - 38 mechanics written in plain language, each with a `why` box explaining where
-in the mod's code it comes from.
+**Tips & tricks** - a seven step walkthrough plus 41 mechanics in plain language, each with a `why`
+box naming the method in the mod's code it was read from.
+
+**About this page** - what the tool can do, where its numbers come from, and what it stores. Kept
+separate from Tips & tricks on purpose: that tab promises a source in the mod for every line, and
+notes about this page have none.
 
 Every crop links to a panel with its tier, growth time, mutation pools, the recipes that produce
 it, and everything it is a parent for.
+
+The page is in English and Polish. The address bar follows what you are looking at, so a link opens
+on the same tab, the same pair and the same open panel, and switching language keeps your place.
 
 ---
 
