@@ -3,7 +3,8 @@
 A single-page planner for crop breeding in **GregTech: New Horizons**.
 
 Tick off the seeds you own and it tells you what you can breed next, the exact odds of each
-outcome, and which two blocks have to be under the crop stick for the result to be planted at all.
+outcome, which two blocks have to be under the crop stick for the result to be planted at all, and
+which biome to build the farm in.
 
 **Live version:** https://paner91-ux.github.io/gtnh-cropsnh-planner/
 &nbsp;·&nbsp; **Po polsku:** https://paner91-ux.github.io/gtnh-cropsnh-planner/pl/
@@ -80,7 +81,7 @@ sub-soils and light requirements are all read straight out of the compiled mod:
 | `CropLoader` + the crop classes | tier, growth time, soil, sub-soil, light requirements |
 | `SubSoilRequirementLoader` | which blocks and ore dictionary entries count as each sub-soil |
 | `CropsNHSoilTypes` | how compound soil lists are built out of simpler ones |
-| `en_US.lang` | display names, exactly as they appear in NEI |
+| `en_US.lang` | display names, exactly as they appear in NEI, and the biome tag names |
 
 Built against **CropsNH 2.0.101**, as shipped in the GTNH 2.9 daily builds (nightly 659).
 In that version: 179 crops, 172 recipes, 66 pools.
@@ -95,10 +96,11 @@ Nothing else in the pack registers crops with CropsNH, so the list is complete r
 selection. When a new CropsNH version lands the data is regenerated from the new jar rather than
 edited by hand - see [tools/](tools/) if you want to do that yourself.
 
-Two things worth knowing about the data:
+Three things worth knowing about the data:
 
 - **21 crops belong to no pool.** Those can only ever come from their exact recipe.
 - **7 crops have no recipe at all**, among them Wheat, Potato and Carrot. Those are starting points: you find them in the world, you cannot breed your way to them.
+- **17 crops cannot reach the full biome bonus anywhere in this pack.** No biome carries two of their tags, so +14 is the most a location is ever worth to them.
 
 ---
 
