@@ -1,6 +1,7 @@
 {
   "lang.name": "English",
   "lang.code": "en",
+  "nav.lang": "Language",
 
   "meta.title": "GTNH Crop Breeding Planner (CropsNH)",
   "meta.description": "Plan CropsNH breeding in GregTech: New Horizons 2.9. Tick the seeds you hold and see what you can make next, the odds for any pair of parents, and the route to a goal crop. Read straight out of the mod.",

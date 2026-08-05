@@ -3,12 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GTNH Crop Breeding Planner (CropsNH)</title>
+<meta name="description" content="Plan CropsNH breeding in GregTech: New Horizons 2.9. Tick the seeds you hold and see what you can make next, the odds for any pair of parents, and the route to a goal crop. Read straight out of the mod.">
+<link rel="canonical" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/">
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNyIgZmlsbD0iIzNEN0EzMyIvPjxwYXRoIGQ9Ik0xNiAyN1YxNCIgc3Ryb2tlPSIjRThFNEQ3IiBzdHJva2Utd2lkdGg9IjIuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTE2IDE3QzEwIDE3IDcgMTMgNyA4YzYgMCA5IDQgOSA5eiIgZmlsbD0iI0U4RTRENyIvPjxwYXRoIGQ9Ik0xNiAyMWM2IDAgOS00IDktOS02IDAtOSA0LTkgOXoiIGZpbGw9IiNFOEU0RDciLz48L3N2Zz4=">
 <meta name="theme-color" content="#3D7A33">
 </head>
 <body>
-<title>GTNH Crop Breeding Planner (CropsNH)</title>
-
 <style>
 :root {
   --ink:        #14170F;
@@ -120,6 +121,13 @@ p, li { text-wrap: pretty; }
   margin-left: auto; font-family: var(--face-data); font-size: 11px;
   color: var(--ink-faint); letter-spacing: .02em;
 }
+.langs { display: flex; gap: 10px; font-size: 12px; }
+.langs a {
+  color: var(--ink-faint); text-decoration: underline;
+  text-decoration-color: var(--rule); text-underline-offset: 3px;
+}
+.langs a:hover { color: var(--ink); text-decoration-color: var(--leaf); }
+.langs a[aria-current] { color: var(--ink); font-weight: 600; text-decoration: none; }
 
 /* ---------------------------------------------------------- layout */
 .cols { display: grid; grid-template-columns: var(--rail) minmax(0, 1fr); gap: 32px; align-items: start; }
@@ -1714,6 +1722,9 @@ function writeHash() {
   const top = drawerStack[drawerStack.length - 1];
   if (top) q.set(top.t === "crop" ? "crop" : "mpool", top.id);
   const h = "#" + q.toString();
+  /* the other languages of this page are the same page, so switching keeps
+     the tab, the pair and the open panel you are looking at */
+  for (const a of document.querySelectorAll(".langs a")) a.hash = h;
   if (h === location.hash) return;
   // file:// rejects replaceState in some browsers; the page must still work
   try { history.replaceState(null, "", h); } catch (e) {}

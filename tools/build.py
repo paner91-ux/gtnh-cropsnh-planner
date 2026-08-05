@@ -15,11 +15,66 @@ import re
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, os.pardir)
 
+SITE = 'https://paner91-ux.github.io/gtnh-cropsnh-planner/'
+
 KEY = re.compile(r'\{\{([A-Za-z0-9_.]+)\}\}')
 # values are dropped into JS template literals, so these have to survive intact
 INTERP = re.compile(r'\$\{[^{}]*\}')
 # keys build.py uses itself instead of substituting them into the template
-HEAD_KEYS = {'lang.name', 'lang.code', 'meta.title', 'meta.description'}
+HEAD_KEYS = {'lang.name', 'lang.code', 'meta.title', 'meta.description', 'nav.lang'}
+
+
+def order(codes):
+    """English first: it is the source text and the canonical page."""
+    return ['en'] + sorted(c for c in codes if c != 'en')
+
+
+def url_of(code):
+    return SITE if code == 'en' else f'{SITE}{code}/'
+
+
+def path_from(here, there):
+    """Every language but English sits one directory down, and only one."""
+    if here == there:
+        return './'
+    if there == 'en':
+        return '../'
+    return f'{there}/' if here == 'en' else f'../{there}/'
+
+
+def head(code, cats):
+    """Catalogue values are HTML as written, so only the quote needs escaping."""
+    cat = cats[code]
+    others = len(cats) > 1
+    alt = ''
+    if others:
+        for c in order(cats):
+            alt += f'<link rel="alternate" hreflang="{c}" href="{url_of(c)}">\n'
+        alt += f'<link rel="alternate" hreflang="x-default" href="{url_of("en")}">\n'
+    return (f'<title>{cat["meta.title"]}</title>\n'
+            f'<meta name="description" content="{cat["meta.description"].replace(chr(34), "&quot;")}">\n'
+            f'<link rel="canonical" href="{url_of(code)}">\n' + alt)
+
+
+def langnav(code, cats):
+    """Left out entirely while there is only one language to offer."""
+    if len(cats) < 2:
+        return ''
+    links = ''.join(
+        f'<a href="{path_from(code, c)}" hreflang="{c}" lang="{c}"'
+        f'{" aria-current=" + chr(34) + "page" + chr(34) if c == code else ""}'
+        f'>{cats[c]["lang.name"]}</a>'
+        for c in order(cats))
+    return f'<nav class="langs" aria-label="{cats[code]["nav.lang"]}">{links}</nav>'
+
+
+def sitemap(cats):
+    alt = ''.join(f'\n    <xhtml:link rel="alternate" hreflang="{c}" href="{url_of(c)}"/>'
+                  for c in order(cats)) if len(cats) > 1 else ''
+    urls = ''.join(f'  <url>\n    <loc>{url_of(c)}</loc>{alt}\n  </url>\n' for c in order(cats))
+    return ('<?xml version="1.0" encoding="utf-8"?>\n'
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'
+            '        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' + urls + '</urlset>\n')
 
 
 def load_catalogues():
@@ -92,13 +147,15 @@ blob = json.dumps(data, ensure_ascii=False, separators=(',', ':'))
 with open(os.path.join(HERE, 'favicon.svg'), encoding='utf-8') as f:
     icon = base64.b64encode(f.read().encode()).decode()
 
-# English first, so its line of output reads as the main one
-for code in ['en'] + sorted(k for k in cats if k != 'en'):
+for code in order(cats):
     cat = cats[code]
     # an untranslated string falls back to English rather than showing its key
     text = KEY.sub(lambda m: cat.get(m.group(1), base[m.group(1)]), src)
+    nav = langnav(code, cats)
+    text = re.sub(r'[ \t]*__LANGS__\n', f'    {nav}\n' if nav else '', text)
     page = (f'<!doctype html>\n<html lang="{code}">\n<head>\n<meta charset="utf-8">\n'
             '<meta name="viewport" content="width=device-width,initial-scale=1">\n'
+            + head(code, cats) +
             f'<link rel="icon" href="data:image/svg+xml;base64,{icon}">\n'
             '<meta name="theme-color" content="#3D7A33">\n'
             '</head>\n<body>\n' + text.replace('__DATA__', blob) + '\n</body>\n</html>\n')
@@ -111,5 +168,8 @@ for code in ['en'] + sorted(k for k in cats if k != 'en'):
     done = sum(1 for k in base if k in cat)
     where = os.path.relpath(out, ROOT).replace(os.sep, '/')
     print(f'{where:<16}{len(page):>9,} bytes  {code}  {done}/{len(base)} strings')
+
+with open(os.path.join(ROOT, 'sitemap.xml'), 'w', encoding='utf-8') as f:
+    f.write(sitemap(cats))
 
 print(f'{"":<16}{len(data["crops"])} crops, {len(data["mutations"])} recipes')
