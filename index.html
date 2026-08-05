@@ -1719,9 +1719,11 @@ function writeHash() {
   try { history.replaceState(null, "", h); } catch (e) {}
 }
 
+/* Returns whether the url had anything to say, so the first load can tell
+   whether the page still needs a render of its own. */
 function readHash() {
   const q = new URLSearchParams(location.hash.slice(1));
-  if (!q.get("v") && !q.get("crop")) return;
+  if (!q.get("v") && !q.get("crop")) return false;
   readingHash = true;
   const v = q.get("v"), a = q.get("a"), b = q.get("b"), t = q.get("t");
   if (VIEWS.includes(v)) view = v;
@@ -1736,6 +1738,7 @@ function readHash() {
   if (crop && C[crop]) showCrop(crop);
   else if (mp && POOLM[mp]) showPool(mp);
   else closeDrawer();
+  return true;
 }
 
 document.addEventListener("click", e => {
@@ -1854,9 +1857,11 @@ if (!storage) {
 }
 
 $("src").textContent = `${byName.length} crops · ${MUT.length} recipes · ${Object.keys(POOLM).length} pools`;
-render();
+/* The url is read before anything is drawn, because render() writes the url:
+   rendering first would replace the link you arrived on with #v=ready, so a
+   shared link or a reload always landed on the default view. */
+if (!readHash()) render();
 syncCode();
-readHash();                                    // a shared link lands on its view
 window.addEventListener("hashchange", readHash);
 </script>
 
