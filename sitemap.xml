@@ -3,5 +3,12 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://paner91-ux.github.io/gtnh-cropsnh-planner/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/pl/"/>
+  </url>
+  <url>
+    <loc>https://paner91-ux.github.io/gtnh-cropsnh-planner/pl/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/pl/"/>
   </url>
 </urlset>

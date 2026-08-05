@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="pl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GTNH Crop Breeding Planner (CropsNH)</title>
-<meta name="description" content="Plan CropsNH breeding in GregTech: New Horizons 2.9. Tick the seeds you hold and see what you can make next, the odds for any pair of parents, and the route to a goal crop. Read straight out of the mod.">
-<link rel="canonical" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/">
+<title>Planer krzyżowania roślin GTNH (CropsNH)</title>
+<meta name="description" content="Zaplanuj krzyżowanie roślin CropsNH w GregTech: New Horizons 2.9. Zaznacz nasiona, które masz, i zobacz, co możesz wyhodować dalej, jakie są szanse dla dowolnej pary rodziców i jaka droga prowadzi do wybranej rośliny. Dane wprost z moda.">
+<link rel="canonical" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/pl/">
 <link rel="alternate" hreflang="en" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/">
 <link rel="alternate" hreflang="pl" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/pl/">
 <link rel="alternate" hreflang="x-default" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/">
@@ -639,43 +639,43 @@ footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2p
 
 <div class="wrap">
   <header class="masthead">
-    <h1>CropsNH - Breeding Planner</h1>
+    <h1>CropsNH - planer krzyżowania</h1>
     <span class="sub">GregTech: New Horizons</span>
     <span class="src" id="src"></span>
-    <nav class="langs" aria-label="Language"><a href="./" hreflang="en" lang="en" aria-current="page">English</a><a href="pl/" hreflang="pl" lang="pl">Polski</a></nav>
+    <nav class="langs" aria-label="Język"><a href="../" hreflang="en" lang="en">English</a><a href="./" hreflang="pl" lang="pl" aria-current="page">Polski</a></nav>
   </header>
 
   <div class="cols">
     <aside class="rail">
       <div class="rail-head">
-        <h2>Your seeds</h2>
+        <h2>Twoje nasiona</h2>
         <span class="tally" id="tally">0</span>
       </div>
       <div class="progress" id="progress" role="progressbar"
            aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
-           aria-label="Share of all crops you hold"><span class="progress-fill" id="progressFill"></span></div>
-      <input class="field" id="search" type="search" placeholder="Search crops…" autocomplete="off">
+           aria-label="Jaką część wszystkich roślin masz"><span class="progress-fill" id="progressFill"></span></div>
+      <input class="field" id="search" type="search" placeholder="Szukaj rośliny…" autocomplete="off">
       <div class="seedlist" id="seedlist"></div>
-      <p class="raillegend"><span class="mark">&#9670;</span> needs a specific block under the soil</p>
-      <p class="raillegend"><span class="legend-i">i</span> opens the details panel</p>
+      <p class="raillegend"><span class="mark">&#9670;</span> wymaga określonego bloku pod glebą</p>
+      <p class="raillegend"><span class="legend-i">i</span> otwiera panel szczegółów</p>
 
       <details class="railpanel">
-        <summary>Manage list</summary>
+        <summary>Zarządzaj listą</summary>
         <div class="railpanel-body">
           <div class="railpanel-btns">
-            <button class="btn" id="clearAll" type="button">Clear all ticks</button>
-            <button class="btn" id="undo" type="button" hidden>Undo</button>
+            <button class="btn" id="clearAll" type="button">Odznacz wszystko</button>
+            <button class="btn" id="undo" type="button" hidden>Cofnij</button>
           </div>
           <hr>
-          <p>Your ticks live in this browser. The hosted page and a local copy keep separate stores - use this box to move the list between them.</p>
-          <textarea id="code" spellcheck="false" aria-label="Seed list code"></textarea>
+          <p>Zaznaczenia są zapisane w tej przeglądarce. Strona w sieci i kopia na dysku mają osobne pamięci - tym polem przenosisz listę między nimi.</p>
+          <textarea id="code" spellcheck="false" aria-label="Kod listy nasion"></textarea>
           <div class="railpanel-btns">
-            <button class="btn" id="btnCopy" type="button">Copy</button>
-            <button class="btn" id="btnLoad" type="button">Load from box</button>
-            <button class="btn" id="btnFile" type="button" hidden>Download file</button>
-            <button class="btn" id="btnOpen" type="button">Open file</button>
+            <button class="btn" id="btnCopy" type="button">Kopiuj</button>
+            <button class="btn" id="btnLoad" type="button">Wczytaj z pola</button>
+            <button class="btn" id="btnFile" type="button" hidden>Pobierz plik</button>
+            <button class="btn" id="btnOpen" type="button">Otwórz plik</button>
           </div>
-          <p id="dlnote" hidden>This page runs in a sandboxed frame, so it cannot write files. Use <b>Copy</b> and paste the text somewhere safe - the offline copy of this page can download instead.</p>
+          <p id="dlnote" hidden>Ta strona działa w ramce z ograniczeniami i nie może zapisywać plików. Użyj <b>Kopiuj</b> i wklej tekst w bezpieczne miejsce - kopia strony na dysku potrafi pobierać.</p>
           <div class="status" id="status" role="status"></div>
           <input type="file" id="filein" accept=".json,application/json,text/plain" hidden>
         </div>
@@ -686,11 +686,11 @@ footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2p
 
     <main class="views">
       <div class="tabs" role="tablist">
-        <button class="tab" type="button" role="tab" data-view="ready">Ready now<span class="n" id="n-ready"></span></button>
-        <button class="tab" type="button" role="tab" data-view="near">One parent short<span class="n" id="n-near"></span></button>
-        <button class="tab" type="button" role="tab" data-view="pool">Pool roulette</button>
-        <button class="tab" type="button" role="tab" data-view="path">Route to a goal</button>
-        <button class="tab" type="button" role="tab" data-view="tips">Tips &amp; tricks</button>
+        <button class="tab" type="button" role="tab" data-view="ready">Do zrobienia od ręki<span class="n" id="n-ready"></span></button>
+        <button class="tab" type="button" role="tab" data-view="near">Brakuje jednego rodzica<span class="n" id="n-near"></span></button>
+        <button class="tab" type="button" role="tab" data-view="pool">Ruletka pul</button>
+        <button class="tab" type="button" role="tab" data-view="path">Droga do celu</button>
+        <button class="tab" type="button" role="tab" data-view="tips">Porady i sztuczki</button>
       </div>
       <div id="view"></div>
     </main>
@@ -698,15 +698,15 @@ footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2p
 
   <footer class="note">
     <div class="foot-main">
-      <p>Extracted from the bytecode of <code>cropsnh-2.0.101.jar</code>, as shipped in GTNH 2.9 - recipes, pools, soils, sub-soils and light requirements come straight out of <code>MutationLoader</code>, <code>CropLoader</code> and <code>SubSoilRequirementLoader</code>, not from a wiki. Nothing else in the pack registers crops with CropsNH, so the list above is the whole set rather than a selection.</p>
-      <p>Your ticks are stored in this browser and nowhere else. The page makes no external requests and works offline - move a list between copies from <b>Manage list</b> in the sidebar.</p>
+      <p>Odczytane z bajtkodu <code>cropsnh-2.0.101.jar</code> w wersji z GTNH 2.9 - przepisy, pule, gleby, podglebia i wymagania światła pochodzą wprost z <code>MutationLoader</code>, <code>CropLoader</code> i <code>SubSoilRequirementLoader</code>, nie z wiki. Żaden inny mod w paczce nie rejestruje roślin w CropsNH, więc powyższa lista to komplet, a nie wybór.</p>
+      <p>Zaznaczenia są przechowywane w tej przeglądarce i nigdzie indziej. Strona nie wysyła żadnych zapytań na zewnątrz i działa bez internetu - listę przeniesiesz między kopiami przez <b>Zarządzaj listą</b> w panelu bocznym.</p>
     </div>
     <div class="foot-side">
       <p class="foot-links">
-        <a href="https://github.com/paner91-ux/gtnh-cropsnh-planner" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
-        <a href="https://github.com/paner91-ux/gtnh-cropsnh-planner/issues" target="_blank" rel="noopener noreferrer">Report a mistake</a>
+        <a href="https://github.com/paner91-ux/gtnh-cropsnh-planner" target="_blank" rel="noopener noreferrer">Kod na GitHubie</a>
+        <a href="https://github.com/paner91-ux/gtnh-cropsnh-planner/issues" target="_blank" rel="noopener noreferrer">Zgłoś błąd</a>
       </p>
-      <p><a href="https://github.com/GTNewHorizons/CropsNH" target="_blank" rel="noopener noreferrer">CropsNH</a> is by C0bra5 and the GTNH Team, built on AgriCraft. This is an unofficial fan tool, not affiliated with or endorsed by the GTNH team. Planner code is MIT.</p>
+      <p><a href="https://github.com/GTNewHorizons/CropsNH" target="_blank" rel="noopener noreferrer">CropsNH</a> tworzą C0bra5 i zespół GTNH, na bazie AgriCraft. To nieoficjalne narzędzie fanowskie, niezwiązane z zespołem GTNH ani przez niego nieautoryzowane. Kod planera na licencji MIT.</p>
     </div>
   </footer>
 </div>
@@ -864,14 +864,14 @@ function applyImport(text) {
   } catch (e) {
     ids = text.split(/[\s,;]+/);            // a plain list of names works too
   }
-  if (!Array.isArray(ids)) { status(`Unrecognised format - paste a code from this tool.`, "warn"); return; }
+  if (!Array.isArray(ids)) { status(`Nieznany format - wklej kod z tego narzędzia.`, "warn"); return; }
   const known = ids.map(String).map(s => s.trim()).filter(id => C[id]);
   const unknown = ids.length - known.length;
-  if (!known.length) { status(`Found no known crops in that - nothing was changed.`, "warn"); return; }
+  if (!known.length) { status(`Nie znalazłem tam żadnej znanej rośliny - nic nie zostało zmienione.`, "warn"); return; }
   snapshot();
   owned = new Set(known);
   save(); render();
-  status(`Loaded ${known.length} crops` + (unknown > 0 ? ` · skipped ${unknown} unknown` : "") + ` · Undo is at the top of this panel`, "ok");
+  status(`Wczytano ${known.length} roślin` + (unknown > 0 ? ` · pominięto ${unknown} nieznanych` : "") + ` · Cofnij jest na górze tego panelu`, "ok");
 }
 
 /* ---------------------------------------------------------- requirements */
@@ -888,7 +888,7 @@ function topParts(crop) {
 }
 function topBlock(crop) {
   const p = topParts(crop);
-  return p.map(s => DATA.soilGloss[s] || s).join(`, or `);
+  return p.map(s => DATA.soilGloss[s] || s).join(` albo `);
 }
 function topBlockShort(crop) {
   const p = topParts(crop);
@@ -898,8 +898,8 @@ function underBlock(crop) {
   return crop.subsoil.length ? crop.subsoil.map(subLabel).join(" / ") : "";
 }
 function lightReq(crop) {
-  if (crop.maxLight !== null) return `max ${crop.maxLight} - dark`;
-  if (crop.minLight !== null && crop.minLight > 9) return `min ${crop.minLight}`;
+  if (crop.maxLight !== null) return `maks. ${crop.maxLight} - ciemno`;
+  if (crop.minLight !== null && crop.minLight > 9) return `min. ${crop.minLight}`;
   return "";
 }
 
@@ -907,19 +907,19 @@ function lightReq(crop) {
    marker, which belongs on the same row as the rest of the requirements. */
 function reqChips(crop, extra) {
   if (!crop) return "";
-  const out = [`<span class="chip soil"><span class="k">top block</span>${esc(topBlockShort(crop))}</span>`];
+  const out = [`<span class="chip soil"><span class="k">blok wierzchni</span>${esc(topBlockShort(crop))}</span>`];
   const u = underBlock(crop);
   out.push(u
-    ? `<span class="chip sub"><span class="k">under block</span>${esc(u)}</span>`
-    : `<span class="chip none"><span class="k">under block</span>anything</span>`);
+    ? `<span class="chip sub"><span class="k">blok pod spodem</span>${esc(u)}</span>`
+    : `<span class="chip none"><span class="k">blok pod spodem</span>cokolwiek</span>`);
   const l = lightReq(crop);
-  if (l) out.push(`<span class="chip light"><span class="k">light</span>${esc(l)}</span>`);
+  if (l) out.push(`<span class="chip light"><span class="k">światło</span>${esc(l)}</span>`);
   if (extra) out.push(extra);
   return `<div class="chips">${out.join("")}</div>`;
 }
 
 const machChip = m => m.machineOnly
-  ? `<span class="chip mach"><span class="k">only in</span>Crop Breeder</span>` : "";
+  ? `<span class="chip mach"><span class="k">tylko w</span>Crop Breeder</span>` : "";
 
 /* Same facts as reqChips, same labels, without the boxes - see .pneed. */
 function reqPlain(crop) {
@@ -927,13 +927,13 @@ function reqPlain(crop) {
   const g = (k, v, ore) =>
     `<span class="g"><span class="k">${k}</span><span${ore ? ` class="ore"` : ""}>${esc(v)}</span></span>`;
   const u = underBlock(crop), l = lightReq(crop);
-  return `<div class="pneed">${g(`top`, topBlockShort(crop))}${g(`under`, u || `anything`, !!u)}${
-    l ? g(`light`, l, true) : ""}</div>`;
+  return `<div class="pneed">${g(`wierzch`, topBlockShort(crop))}${g(`spód`, u || `cokolwiek`, !!u)}${
+    l ? g(`światło`, l, true) : ""}</div>`;
 }
 
 /* result, its ground, then each parent with its own ground */
 function parentRows(m) {
-  return `<div class="pgroup"><span class="lbl">from</span>${m.parents.map(p => `
+  return `<div class="pgroup"><span class="lbl">z</span>${m.parents.map(p => `
     <div class="prow">${cropLink(p, owned.has(p) ? "own" : "miss")}
       ${reqPlain(C[p])}</div>`).join("")}</div>`;
 }
@@ -1049,21 +1049,21 @@ function renderRail() {
 
   let html = "";
   for (const [tier, cs] of [...groups.entries()].sort((x, y) => x[0] - y[0])) {
-    html += `<div class="tiergroup"><div class="tierhead">Tier ${tier}</div>`;
+    html += `<div class="tiergroup"><div class="tierhead">Poziom ${tier}</div>`;
     for (const c of cs) {
       const mark = c.subsoil.length ? "◆" : "";
       html += `<div class="seed">
         <button class="seed-tick" type="button" role="checkbox" data-id="${c.id}" aria-pressed="${owned.has(c.id)}">
           <span class="box"></span><span class="nm">${esc(c.name)}</span>
         </button>
-        <span class="mark" title="needs a specific under block, see the crop for which one">${mark}</span>
+        <span class="mark" title="wymaga określonego bloku pod glebą, sprawdź w szczegółach rośliny którego">${mark}</span>
         <button class="seed-info" type="button" data-crop="${c.id}"
-          title="Details for ${esc(c.name)}" aria-label="Details for ${esc(c.name)}">i</button>
+          title="Szczegóły: ${esc(c.name)}" aria-label="Szczegóły: ${esc(c.name)}">i</button>
       </div>`;
     }
     html += `</div>`;
   }
-  $("seedlist").innerHTML = html || `<div class="empty">No matches</div>`;
+  $("seedlist").innerHTML = html || `<div class="empty">Brak wyników</div>`;
   const share = owned.size / byName.length * 100;
   $("tally").innerHTML = `${owned.size} / ${byName.length} <b>${Math.round(share)}%</b>`;
   $("progress").setAttribute("aria-valuenow", Math.round(share));
@@ -1077,7 +1077,7 @@ function cardFor(m) {
   const c = C[m.out];
   const key = markKey(m), on = marked.has(key);
   return `<article class="card${on ? " marked" : ""}" data-key="${esc(key)}"
-      title="${on ? `Marked as what you are building - click to clear` : `Click to mark this as what you are building`}">
+      title="${on ? `Oznaczone jako to, nad czym pracujesz - kliknij, żeby zdjąć` : `Kliknij, żeby oznaczyć to jako to, nad czym pracujesz`}">
     <div class="card-top">
       <button class="card-out" type="button" data-crop="${m.out}">${esc(nm(m.out))}</button>
       <span class="tier">T${c ? c.tier : "?"}</span>
@@ -1089,17 +1089,17 @@ function cardFor(m) {
 
 function renderReady() {
   const list = readyList();
-  if (!owned.size) return `<div class="empty">Tick off what you have in the rail on the left.</div>`;
-  if (!list.length) return `<div class="empty">No new recipe is fully covered by this set.<br>Try <b>One parent short</b> or the <b>Pool roulette</b>.</div>`;
-  return `<p class="viewnote">Recipes where you already hold every parent. Put the parents around a double crop stick, and make sure the ground under the stick satisfies the result's requirements - otherwise the attempt is discarded silently. Click a card to mark what you are building; marked ones stay at the front.</p>
+  if (!owned.size) return `<div class="empty">Zaznacz po lewej to, co masz.</div>`;
+  if (!list.length) return `<div class="empty">Żaden nowy przepis nie jest w całości pokryty tym zestawem.<br>Zajrzyj do <b>Brakuje jednego rodzica</b> albo do <b>Ruletki pul</b>.</div>`;
+  return `<p class="viewnote">Przepisy, do których masz już wszystkich rodziców. Ustaw rodziców wokół podwójnego patyka i sprawdź, czy ziemia pod patykiem spełnia wymagania wyniku - inaczej próba przepada bez słowa. Kliknij kafelek, żeby oznaczyć to, nad czym pracujesz; oznaczone zostają z przodu.</p>
     <div class="grid">${markFirst(list).map(m => cardFor(m)).join("")}</div>`;
 }
 
 function renderNear() {
   const list = nearList();
-  if (!owned.size) return `<div class="empty">Tick off what you have in the rail on the left.</div>`;
-  if (!list.length) return `<div class="empty">No recipe is exactly one parent away.</div>`;
-  return `<p class="viewnote">One crop short, shown in <span style="color:var(--ore);font-weight:600">rust</span>. Click a name to see where the missing parent comes from, or the card itself to mark it.</p>
+  if (!owned.size) return `<div class="empty">Zaznacz po lewej to, co masz.</div>`;
+  if (!list.length) return `<div class="empty">Żadnemu przepisowi nie brakuje dokładnie jednego rodzica.</div>`;
+  return `<p class="viewnote">Brakuje jednej rośliny, zaznaczonej na <span style="color:var(--ore);font-weight:600">rdzawo</span>. Kliknij nazwę, żeby zobaczyć skąd wziąć brakującego rodzica, albo sam kafelek, żeby go oznaczyć.</p>
     <div class="grid">${markFirst(list).map(m => cardFor(m)).join("")}</div>`;
 }
 
@@ -1112,7 +1112,7 @@ function pairPill(k, cur) {
     <button class="pname" type="button" data-pair="${k}"${k === cur ? ` aria-current="true"` : ""}>${
       esc(nm(a))}${a === b ? " ×2" : ` + ${esc(nm(b))}`}</button>
     <button class="star${kept ? " on" : ""}" type="button" data-star="${k}" aria-pressed="${kept}"
-      title="${kept ? `Remove from saved` : `Save this pair`}">${kept ? "★" : "☆"}</button>
+      title="${kept ? `Usuń z zapisanych` : `Zapisz tę parę`}">${kept ? "★" : "☆"}</button>
   </span>`;
 }
 
@@ -1124,13 +1124,13 @@ function pairStrips() {
   if (recentPairs.length) {
     const shown = pairsOpen ? recentPairs : recentPairs.slice(0, PAIRS_SHOWN);
     const hidden = recentPairs.length - PAIRS_SHOWN;
-    h += `<div class="pairrow recent"><span class="lbl">Recent</span>${
+    h += `<div class="pairrow recent"><span class="lbl">Ostatnie</span>${
       shown.map(k => pairPill(k, cur)).join("")}${
       hidden > 0 ? `<button class="poolchip morechip" type="button" id="morePairs">${
-        pairsOpen ? `Show fewer` : `+${hidden} more`}</button>` : ""}</div>`;
+        pairsOpen ? `Pokaż mniej` : `+${hidden} więcej`}</button>` : ""}</div>`;
   }
   if (savedPairs.length)
-    h += `<div class="pairrow saved"><span class="lbl">Saved</span>${
+    h += `<div class="pairrow saved"><span class="lbl">Zapisane</span>${
       savedPairs.map(k => pairPill(k, cur)).join("")}</div>`;
   return h;
 }
@@ -1138,11 +1138,11 @@ function pairStrips() {
 function renderPool() {
   const opts = sel => allSorted.map(c =>
     `<option value="${c.id}"${sel === c.id ? " selected" : ""}>${esc(c.name)}${owned.has(c.id) ? " ✓" : ""}</option>`).join("");
-  let html = `<p class="viewnote">What can come out of a double crop stick between two mature crops. Figures are the chance <b>per successful breeding attempt</b>, and one fires on roughly every third growth tick. The same crop twice is allowed, and is the most common setup.</p>
+  let html = `<p class="viewnote">Co może wyjść z podwójnego patyka między dwiema dorosłymi roślinami. Liczby to szansa <b>na jedną udaną próbę krzyżowania</b>, a taka próba wypada mniej więcej co trzeci tik wzrostu. Ta sama roślina po obu stronach jest dozwolona i to najczęstszy układ.</p>
     <div class="pairpick">
-      <label>Parent A<select class="field" id="selA"><option value="">-</option>${opts(pairA)}</select></label>
-      <label>Parent B<select class="field" id="selB"><option value="">-</option>${opts(pairB)}</select></label>
-      ${pairA || pairB ? `<button class="btn" id="clearPair" type="button">Clear pair</button>` : ""}
+      <label>Rodzic A<select class="field" id="selA"><option value="">-</option>${opts(pairA)}</select></label>
+      <label>Rodzic B<select class="field" id="selB"><option value="">-</option>${opts(pairB)}</select></label>
+      ${pairA || pairB ? `<button class="btn" id="clearPair" type="button">Wyczyść parę</button>` : ""}
     </div>${pairStrips()}`;
 
   const o = oddsFor(pairA, pairB);
@@ -1151,58 +1151,58 @@ function renderPool() {
   const A = C[pairA], B = C[pairB];
 
   html += o.newCount
-    ? `<p class="viewnote"><b style="color:var(--leaf)">${pct(o.gain)}</b> chance at one of <b>${o.newCount}</b> crops you do not have yet.</p>`
-    : `<p class="viewnote">This pair gives you nothing new - you already have every possible result.</p>`;
+    ? `<p class="viewnote"><b style="color:var(--leaf)">${pct(o.gain)}</b> szansy na jedną z <b>${o.newCount}</b> roślin, których jeszcze nie masz.</p>`
+    : `<p class="viewnote">Ta para nie da ci nic nowego - masz już każdy możliwy wynik.</p>`;
 
   /* --- cloning branch --- */
-  html += `<div class="branch">50% - copy of a parent</div><div class="tablescroll"><table class="odds">`;
+  html += `<div class="branch">50% - kopia rodzica</div><div class="tablescroll"><table class="odds">`;
   if (o.same) {
     html += `<tr><td class="nm">${cropLink(pairA)}</td><td class="num">50.00%<span class="bar" style="width:100%"></span></td>
-      <td class="via">both neighbours are the same crop</td></tr>`;
+      <td class="via">obaj sąsiedzi to ta sama roślina</td></tr>`;
   } else {
-    html += `<tr><td class="nm">${cropLink(pairA)}</td><td class="num">25.00%<span class="bar" style="width:50%"></span></td><td class="via">clone of a neighbour</td></tr>
-      <tr><td class="nm">${cropLink(pairB)}</td><td class="num">25.00%<span class="bar" style="width:50%"></span></td><td class="via">clone of a neighbour</td></tr>`;
+    html += `<tr><td class="nm">${cropLink(pairA)}</td><td class="num">25.00%<span class="bar" style="width:50%"></span></td><td class="via">kopia sąsiada</td></tr>
+      <tr><td class="nm">${cropLink(pairB)}</td><td class="num">25.00%<span class="bar" style="width:50%"></span></td><td class="via">kopia sąsiada</td></tr>`;
   }
   html += `</table></div>`;
 
   /* --- mutation branch --- */
   if (o.det.length) {
-    html += `<div class="branch">50% - deterministic recipe</div>
-      <p class="viewnote">This pair has a specific recipe, so the mutation branch goes there instead of drawing from a pool.
-      ${o.det.length > 1 ? `${o.det.length} recipes match and the engine picks one at random, hence ${pct(0.5 / o.det.length)} each. ` : ""}If the recipe's conditions are not met, that half falls back to a pool draw instead.</p>
+    html += `<div class="branch">50% - konkretny przepis</div>
+      <p class="viewnote">Ta para ma własny przepis, więc gałąź mutacji idzie do niego, zamiast losować z puli.
+      ${o.det.length > 1 ? `Pasuje ${o.det.length} przepisów, a silnik losuje jeden z nich, stąd po ${pct(0.5 / o.det.length)} na każdy. ` : ""}Jeżeli warunki przepisu nie są spełnione, ta połowa spada z powrotem do losowania z puli.</p>
       <div class="grid">${o.det.map(m => cardFor(m)).join("")}</div>`;
     return html;
   }
 
   if (!o.pools.length) {
-    html += `<div class="branch">50% - mutation</div>
+    html += `<div class="branch">50% - mutacja</div>
       <div class="empty">${o.same
-        ? `<b>${esc(A.name)}</b> belongs to no pool - that crop is recipe-only.`
-        : `This pair shares neither a pool nor a recipe.`}<br>The mutation branch always fails - you will only ever get copies of the parents.</div>`;
+        ? `<b>${esc(A.name)}</b> nie należy do żadnej puli - tę roślinę da się dostać wyłącznie z przepisu.`
+        : `Ta para nie dzieli ani puli, ani przepisu.`}<br>Gałąź mutacji zawsze zawodzi - dostaniesz wyłącznie kopie rodziców.</div>`;
     return html;
   }
 
   const poolTxt = o.pools.map(p => `${poolLink(p)} (${POOLM[p].length})`).join(", ");
   const showLight = o.rows.some(r => lightReq(C[r.id]));   // column only when it applies
-  html += `<div class="branch">50% - draw from pools</div>
+  html += `<div class="branch">50% - losowanie z puli</div>
     <p class="viewnote">${o.same
-      ? `Two identical crops match <b>every</b> pool ${esc(A.name)} belongs to: <b>${poolTxt}</b>.`
-      : `Shared pools: <b>${poolTxt}</b>.`} The pool is drawn uniformly - a small pool is worth as much as a large one, it just spreads over fewer crops.</p>
-    <p class="viewnote"><b>Top block</b> is the one directly under the crop stick, <b>under block</b> is one deeper. A result whose ground you have not built simply never gets planted, so setting those two blocks up for the crop you actually want quietly removes most of this table.</p>
+      ? `Dwie identyczne rośliny pasują do <b>każdej</b> puli, do której należy ${esc(A.name)}: <b>${poolTxt}</b>.`
+      : `Wspólne pule: <b>${poolTxt}</b>.`} Pula jest losowana równomiernie - mała pula waży tyle samo co duża, tyle że rozkłada się na mniej roślin.</p>
+    <p class="viewnote"><b>Blok wierzchni</b> to ten bezpośrednio pod patykiem, <b>blok pod spodem</b> leży o jeden głębiej. Wynik, pod który nie przygotowałeś ziemi, po prostu nigdy się nie zasadzi, więc ustawienie tych dwóch bloków pod roślinę, o którą ci chodzi, po cichu usuwa większość tej tabeli.</p>
     <div class="tablescroll"><table class="odds">
-      <tr><th>Result</th><th class="num">Chance</th><th>Pool</th><th>Top block</th><th>Under block</th>${showLight ? `<th>Light</th>` : ""}</tr>`;
+      <tr><th>Wynik</th><th class="num">Szansa</th><th>Pula</th><th>Blok wierzchni</th><th>Blok pod spodem</th>${showLight ? `<th>Światło</th>` : ""}</tr>`;
   const max = Math.max(...o.rows.map(r => r.p));   // rows are no longer ordered by odds
   for (const r of o.rows) {
     const c = C[r.id];
     const have = owned.has(r.id);
     const u = underBlock(c);
     html += `<tr${have ? ` class="dead"` : ""}>
-      <td class="nm"><button class="inline-crop" type="button" data-crop="${r.id}">${esc(c.name)}</button>${have ? ` <span class="tier">have</span>` : ""}</td>
+      <td class="nm"><button class="inline-crop" type="button" data-crop="${r.id}">${esc(c.name)}</button>${have ? ` <span class="tier">mam</span>` : ""}</td>
       <td class="num">${pct(r.p)}<span class="bar" style="width:${(r.p / max * 100).toFixed(1)}%"></span></td>
       <td class="via">${[...r.via].map(poolLink).join(", ")}</td>
       <td class="via">${esc(topBlockShort(c))}</td>
-      <td class="via"${u ? ` style="color:var(--ore)"` : ""}>${u ? esc(u) : `anything`}</td>
-      ${showLight ? `<td class="via"${lightReq(c) ? ` style="color:var(--ore)"` : ""}>${esc(lightReq(c) || `any`)}</td>` : ""}
+      <td class="via"${u ? ` style="color:var(--ore)"` : ""}>${u ? esc(u) : `cokolwiek`}</td>
+      ${showLight ? `<td class="via"${lightReq(c) ? ` style="color:var(--ore)"` : ""}>${esc(lightReq(c) || `dowolne`)}</td>` : ""}
     </tr>`;
   }
   html += `</table></div>`;
@@ -1211,13 +1211,13 @@ function renderPool() {
 
 /* shown when no pair is picked */
 function renderBestPairs() {
-  if (owned.size < 1) return `<div class="empty">Pick two crops above - or tick off what you have on the left and I will rank the best pairs.</div>`;
+  if (owned.size < 1) return `<div class="empty">Wybierz dwie rośliny powyżej - albo zaznacz po lewej to, co masz, a ja uszereguję najlepsze pary.</div>`;
   const best = bestPairs(15);
-  if (!best.length) return `<div class="empty">No pair from your seeds yields anything new. You need a crop from outside the current set.</div>`;
-  let html = `<div class="branch">Best pairs from your seeds</div>
-    <p class="viewnote">Ranked by the total chance of a crop you do not have yet. Click a pair to load its full breakdown.</p>
+  if (!best.length) return `<div class="empty">Żadna para z twoich nasion nie daje nic nowego. Potrzebujesz rośliny spoza obecnego zestawu.</div>`;
+  let html = `<div class="branch">Najlepsze pary z twoich nasion</div>
+    <p class="viewnote">Uszeregowane według łącznej szansy na roślinę, której jeszcze nie masz. Kliknij parę, żeby wczytać jej pełne rozbicie.</p>
     <div class="tablescroll"><table class="odds">
-    <tr><th>Pair</th><th class="num">Chance at something new</th><th class="num">New</th><th>Branch</th></tr>`;
+    <tr><th>Para</th><th class="num">Szansa na coś nowego</th><th class="num">Nowe</th><th>Gałąź</th></tr>`;
   const max = best[0].gain;
   for (const p of best) {
     html += `<tr>
@@ -1234,204 +1234,204 @@ function renderBestPairs() {
    Everything below was read out of the mod's compiled code. The plain
    sentence is the advice; the WHY box is where it comes from.              */
 const TIPS = [
-  { h: `Common mistakes`,
-    lead: `Three setups that fail silently. None of them show an error.`,
+  { h: `Najczęstsze błędy`,
+    lead: `Trzy układy, które zawodzą po cichu. Żaden nie pokazuje błędu.`,
     items: [
-    [`<b>Farmland is not dirt.</b> This is the single most common one. Tilling flips a block between two requirements that share nothing at all: <b>${Object.values(C).filter(c => topParts(c).join() === "farmland").length} crops want farmland</b> and refuse plain dirt, while <b>${Object.values(C).filter(c => topParts(c).join() === "dirtGrass").length} want dirt or grass and nothing else</b>. Check the top block on the card against the block actually under your stick.`,
-     `The two soil lists have no block in common, so a hoe turns a valid spot into an invalid one in whichever direction you were not thinking about. Mind the lookalikes: the farmland list also holds Magic Bees' enchanted earth, Random Things' tilled fertilized dirt and Ztones' clean dirt - and that last one looks exactly like plain dirt while counting as farmland. The dirt list is vanilla dirt and grass plus Chisel's dirt block.`],
-    [`<b>The top block is right and the one underneath is missing.</b> That second block is checked when the mutation happens, not only afterwards for growing. Without it the roll is discarded and nothing is reported. Anything marked <span class="mark">&#9670;</span> in the seed list needs one.`,
-     `<em>SubSoilRequirement</em> reports <em>onlyPreventsHarvest() = false</em>, so the pre-planting check rejects the result outright. It also implements the breeding-requirement interface, whose check simply delegates to the growth check.`],
-    [`<b>Breaking a plant below resistance 31 can destroy the seed.</b> The seed comes back on a roll against resistance, so at 20 you lose it about one time in three. At 31 it is guaranteed. Harvest for produce instead, or push resistance up before you start pulling plants.`,
-     `<em>getSeedDrop()</em> returns null unless <em>passesResistanceCheck()</em> passes, which is <em>resistance &gt; random(0…30)</em>. Only 31 beats every roll. The left-click path calls <em>doPlayerHarvest(player, true)</em>, which clears the stick either way - so a failed roll takes the plant with it.`],
+    [`<b>Farmland to nie dirt.</b> To zdecydowanie najczęstszy z nich. Przekopanie motyką przerzuca blok między dwoma wymaganiami, które nie mają ze sobą nic wspólnego: <b>${Object.values(C).filter(c => topParts(c).join() === "farmland").length} roślin chce farmland</b> i odrzuca zwykły dirt, a <b>${Object.values(C).filter(c => topParts(c).join() === "dirtGrass").length} chce dirt albo grass i nic poza tym</b>. Porównaj blok wierzchni z kafelka z tym, co faktycznie leży pod twoim patykiem.`,
+     `Te dwie listy gleb nie mają ani jednego wspólnego bloku, więc motyka zamienia dobre miejsce w złe, w którąkolwiek stronę akurat nie myślisz. Uwaga na łudząco podobne: na liście farmland są też enchanted earth z Magic Bees, tilled fertilized dirt z Random Things i clean dirt ze Ztones - a ten ostatni wygląda dokładnie jak zwykły dirt, licząc się jako farmland. Lista dirt to waniliowe dirt i grass plus dirt block z Chisela.`],
+    [`<b>Blok wierzchni się zgadza, a tego pod spodem brakuje.</b> Ten drugi blok jest sprawdzany w chwili mutacji, nie dopiero potem przy wzroście. Bez niego losowanie przepada i nic się o tym nie dowiadujesz. Wymaga go wszystko oznaczone <span class="mark">&#9670;</span> na liście nasion.`,
+     `<em>SubSoilRequirement</em> zwraca <em>onlyPreventsHarvest() = false</em>, więc sprawdzenie przed zasadzeniem odrzuca wynik od razu. Klasa implementuje też interfejs wymagań krzyżowania, którego sprawdzenie przekazuje wywołanie wprost do sprawdzenia wzrostu.`],
+    [`<b>Zerwanie rośliny o odporności poniżej 31 potrafi zniszczyć nasiono.</b> Nasiono wraca po udanym rzucie przeciwko odporności, więc przy 20 tracisz je mniej więcej co trzeci raz. Przy 31 jest pewne. Zbieraj plon zamiast wyrywać rośliny albo podnieś odporność, zanim zaczniesz je wyciągać.`,
+     `<em>getSeedDrop()</em> zwraca null, dopóki nie przejdzie <em>passesResistanceCheck()</em>, czyli <em>odporność &gt; random(0…30)</em>. Tylko 31 wygrywa z każdym rzutem. Ścieżka lewego kliknięcia woła <em>doPlayerHarvest(player, true)</em>, które i tak czyści patyk - więc nieudany rzut zabiera roślinę ze sobą.`],
   ]},
 
-  { h: `How one breeding attempt works`,
-    lead: `A double crop stick keeps trying for as long as it stands there. Each attempt is independent of the last.`,
+  { h: `Jak działa jedna próba krzyżowania`,
+    lead: `Podwójny patyk próbuje tak długo, jak długo tam stoi. Każda próba jest niezależna od poprzedniej.`,
     items: [
-    [`A double crop stick only tries to breed on roughly <b>one growth tick in three</b>. Everything below is the chance <i>per attempt</i>, not per tick.`,
-     `<em>attemptBreeding()</em> opens with a roll against the <em>Breeding Chance</em> config (default 3) and returns immediately on two out of three results.`],
-    [`Each attempt splits 50/50. Half the time the stick <b>copies a neighbour</b>, half the time it <b>mutates</b>. Getting copies of the parents over and over is the expected result, not bad luck.`,
-     `<em>getBreedingResult()</em> begins with a 50/50 draw. One result takes the cloning path, which keeps only neighbours grown enough to cross, picks one at random and replants its crop. The other takes the mutation path. If no neighbour is grown enough, the cloning path falls through to the mutation path instead.`],
-    [`If the result cannot be planted on that spot, <b>the roll is discarded</b>. No message, no half-grown plant. The stick stays empty and tries again later, and that same tick still rolls its usual small chance of a weed.`,
-     `<em>attemptBreeding()</em> plants only when both <em>isValidSoilForCrop()</em> and <em>wouldCropBeAbleToGrow()</em> pass for the result. Otherwise it returns false - the same signal a missed breeding roll gives - and that is exactly what lets the weed spawn roll run on the same tick.`],
+    [`Podwójny patyk próbuje krzyżować mniej więcej <b>co trzeci tik wzrostu</b>. Wszystko poniżej to szansa <i>na jedną próbę</i>, nie na tik.`,
+     `<em>attemptBreeding()</em> zaczyna od rzutu przeciwko konfigowi <em>Breeding Chance</em> (domyślnie 3) i przy dwóch wynikach na trzy wychodzi natychmiast.`],
+    [`Każda próba dzieli się po połowie. W połowie przypadków patyk <b>kopiuje sąsiada</b>, w połowie <b>mutuje</b>. Ciągłe kopie rodziców to spodziewany wynik, a nie pech.`,
+     `<em>getBreedingResult()</em> zaczyna od losowania 50/50. Jeden wynik prowadzi ścieżką klonowania, która zostawia tylko sąsiadów wyrośniętych na tyle, by dało się ich skrzyżować, losuje jednego z nich i sadzi jego roślinę. Drugi prowadzi ścieżką mutacji. Jeżeli żaden sąsiad nie jest dość wyrośnięty, ścieżka klonowania przechodzi na ścieżkę mutacji.`],
+    [`Jeżeli wyniku nie da się zasadzić w tym miejscu, <b>losowanie przepada</b>. Bez komunikatu, bez na wpół wyrośniętej rośliny. Patyk zostaje pusty i próbuje później, a ten sam tik nadal losuje swoją zwykłą małą szansę na chwast.`,
+     `<em>attemptBreeding()</em> sadzi tylko wtedy, gdy dla wyniku przechodzą jednocześnie <em>isValidSoilForCrop()</em> i <em>wouldCropBeAbleToGrow()</em>. Inaczej zwraca false - ten sam sygnał co nieudany rzut na krzyżowanie - i właśnie to pozwala losowaniu chwasta odpalić w tym samym tiku.`],
   ]},
 
-  { h: `Steering what comes out`,
-    lead: `You cannot change the odds of a roll, but you can change which results are possible.`,
+  { h: `Sterowanie tym, co wychodzi`,
+    lead: `Szans losowania nie zmienisz, ale możesz zmienić to, jakie wyniki są w ogóle możliwe.`,
     items: [
-    [`<b>Two of the same crop can never produce a recipe result</b>, but they match every pool that crop belongs to. That is the widest range of results available from one pair.`,
-     `The recipe lookup runs the parents through a <em>.distinct()</em> filter first, so two identical crops collapse into one entry and fail the "at least two parents" check. The pool lookup has no such filter, so both entries survive and every pool containing that crop matches.`],
-    [`<b>Two different crops that share a recipe will give that recipe</b>, not a random pool result. Pools only get a look in if the recipe's own conditions are not satisfied.`,
-     `<em>getBreedingResult()</em> asks for matching recipes first. If there are any, one is drawn at random and its conditions checked; only when that check fails does it drop through to the pool draw.`],
-    [`<b>A small pool is worth exactly as much as a large one.</b> The pool is picked first and the crop second, so a 7-crop pool splits its share of the odds seven ways and a 50-crop pool splits the same share fifty ways.`,
-     `The matching pools are collected into a list and one is chosen with a flat random index, then a member of that pool is chosen the same way. Pool size never weights either draw.`],
-    [`A pool only counts if <b>at least two of the parents belong to it</b>.`,
-     `<em>MutationPool.isMatch()</em> walks the parent list counting members and returns true the moment the counter reaches two.`],
-    [`<b>A third crop beside the stick can block the recipe you wanted.</b> Keep only the parents you need next to a breeding stick. A spare grown plant of another crop can stop a recipe you already have both parents for, with no indication that it did.`,
-     `The crops present are sorted by internal id and walked strictly index by index. <em>MutationMap.findMatches()</em> reads entry <em>i</em>, and if there is no branch for it, it returns rather than skipping ahead - so a recipe fires only when its own sorted parents are the leading entries of that list. With A, B and C grown around one stick, a recipe for A + C is never found, because after A the walk demands B. Neighbours below their breeding threshold are filtered out beforehand, so an immature plant cannot block anything.`],
-    [`<b>Use the ground to narrow the pool.</b> Build it for one specific crop and most of the pool cannot be planted there at all, so the few that can appear far more often. This does not raise the overall rate, it only changes which results are possible.`,
-     `This is the same <em>wouldCropBeAbleToGrow()</em> check. Every requirement whose <em>onlyPreventsHarvest()</em> is false stops the result from being planted at all, and the attempt is discarded rather than substituted.`],
+    [`<b>Dwie te same rośliny nigdy nie dadzą wyniku z przepisu</b>, za to pasują do każdej puli, do której ta roślina należy. To najszerszy zakres wyników, jaki da się uzyskać z jednej pary.`,
+     `Wyszukiwanie przepisu najpierw przepuszcza rodziców przez filtr <em>.distinct()</em>, więc dwie identyczne rośliny zlewają się w jeden wpis i nie przechodzą warunku "co najmniej dwoje rodziców". Wyszukiwanie puli nie ma takiego filtra, więc oba wpisy zostają i pasuje każda pula zawierająca tę roślinę.`],
+    [`<b>Dwie różne rośliny mające wspólny przepis dadzą ten przepis</b>, a nie losowy wynik z puli. Pule dochodzą do głosu tylko wtedy, gdy warunki samego przepisu nie są spełnione.`,
+     `<em>getBreedingResult()</em> najpierw pyta o pasujące przepisy. Jeżeli jakieś są, losuje jeden z nich i sprawdza jego warunki; dopiero gdy to sprawdzenie zawiedzie, spada do losowania z puli.`],
+    [`<b>Mała pula waży dokładnie tyle samo co duża.</b> Najpierw losowana jest pula, potem roślina, więc pula o siedmiu roślinach dzieli swoją część szans na siedem, a pula o pięćdziesięciu tę samą część na pięćdziesiąt.`,
+     `Pasujące pule trafiają na listę, z której jedna jest wybierana płaskim losowym indeksem, a potem tak samo wybierany jest jej członek. Rozmiar puli nigdy nie waży żadnego z tych losowań.`],
+    [`Pula liczy się tylko wtedy, gdy <b>należy do niej co najmniej dwoje rodziców</b>.`,
+     `<em>MutationPool.isMatch()</em> przechodzi listę rodziców, licząc członków, i zwraca true w chwili, gdy licznik dojdzie do dwóch.`],
+    [`<b>Trzecia roślina obok patyka potrafi zablokować przepis, o który ci chodziło.</b> Trzymaj przy patyku do krzyżowania tylko tych rodziców, których potrzebujesz. Zbędna wyrośnięta roślina innego gatunku umie zatrzymać przepis, do którego masz już oboje rodziców, i nic tego nie sygnalizuje.`,
+     `Obecne rośliny są sortowane po wewnętrznym identyfikatorze i przechodzone ściśle indeks po indeksie. <em>MutationMap.findMatches()</em> czyta wpis <em>i</em>, a jeżeli nie ma dla niego gałęzi, kończy zamiast przeskoczyć dalej - więc przepis odpala tylko wtedy, gdy jego posortowani rodzice są początkiem tej listy. Przy A, B i C wyrośniętych wokół jednego patyka przepis na A + C nigdy nie zostanie znaleziony, bo po A przejście domaga się B. Sąsiedzi poniżej progu krzyżowania są odfiltrowani wcześniej, więc niedorosła roślina nie zablokuje niczego.`],
+    [`<b>Zawęź pulę samą ziemią.</b> Przygotuj ją pod jedną konkretną roślinę, a większości puli nie da się tam w ogóle zasadzić, więc te nieliczne, które można, pojawiają się znacznie częściej. To nie podnosi ogólnego tempa, zmienia tylko to, jakie wyniki są możliwe.`,
+     `To jest to samo sprawdzenie <em>wouldCropBeAbleToGrow()</em>. Każde wymaganie, którego <em>onlyPreventsHarvest()</em> jest fałszem, w ogóle nie pozwala zasadzić wyniku, a próba przepada zamiast zostać zastąpiona czymś innym.`],
   ]},
 
-  { h: `Where the blocks go`,
-    lead: `Two blocks below the stick are checked, at different depths and against different lists.`,
+  { h: `Gdzie leżą bloki`,
+    lead: `Pod patykiem sprawdzane są dwa bloki, na różnych głębokościach i wobec różnych list.`,
     items: [
-    [`The <b>top block</b> is the one directly under the crop stick. The <b>under block</b> goes one deeper, two blocks below the stick and underneath the top block.`,
-     `<em>isValidSoilForCrop()</em> reads the block at <em>y - 1</em>. <em>SubSoilRequirement.getSubSoil()</em> starts by doing <em>y -= 2</em>.`],
-    [`<b>Ore counts, not just the crafted block.</b> A gold ore block under the soil works as well as a block of gold.`,
-     `Each sub-soil carries a GregTech material, and the check accepts any block whose GregTech association is that material with the <em>block</em> prefix or any prefix starting with <em>ore</em> - so every ore variant counts, not only the storage block. GregTech's own ore blocks are matched straight off their material metadata.`],
-    [`<b>Light rules apply to mutation too.</b> A crop that needs darkness will not appear in daylight under an open sky. Outdoors it only gets a chance at night; under a roof it works at any hour.`,
-     `The requirement reads the actual light level at the stick rather than a sky-access flag, and the minimum and maximum light requirements both report <em>onlyPreventsHarvest() = false</em>, so they gate planting in exactly the same way the sub-soil does.`],
-    [`<b>A few crops accept several different top blocks</b> - ${Object.values(C).filter(c => topParts(c).length > 1).length} of the ${Object.keys(C).length} - so a listing like "Stone / Dirt&#8203;/grass / Mycelium / Netherrack" means any one of them will do, not all four. Glowshroom is one of them. Every other crop accepts exactly one top block.`,
-     `Those few come from soil lists that are unions of other lists rather than lists of blocks. <em>netherMushroom</em> is <em>mushroom</em> plus <em>netherrack</em>, and <em>mushroom</em> is itself <em>stone</em> plus <em>dirt/grass</em> plus <em>mycelium</em>. This page expands those unions instead of showing the internal name.`],
-    [`The parents can stand on <b>completely different ground</b> than the breeding stick. Only the stick's own ground decides what may appear on it.`,
-     `The soil and sub-soil checks are run against the coordinates of the breeding stick alone. Neighbours are read for their crop, their stats, how grown they are and whether their own stick still holds fertiliser - never for what they are standing on.`],
+    [`<b>Blok wierzchni</b> to ten bezpośrednio pod patykiem. <b>Blok pod spodem</b> leży o jeden głębiej, dwa bloki pod patykiem i pod blokiem wierzchnim.`,
+     `<em>isValidSoilForCrop()</em> czyta blok na <em>y - 1</em>. <em>SubSoilRequirement.getSubSoil()</em> zaczyna od <em>y -= 2</em>.`],
+    [`<b>Ruda też się liczy, nie tylko blok z kraftu.</b> Blok rudy złota pod glebą działa tak samo dobrze jak blok złota.`,
+     `Każde podglebie niesie materiał GregTecha, a sprawdzenie przyjmuje dowolny blok, którego skojarzenie w GregTechu to ten materiał z przedrostkiem <em>block</em> albo dowolnym zaczynającym się od <em>ore</em> - więc liczy się każdy wariant rudy, nie tylko blok do przechowywania. Własne rudy GregTecha są dopasowywane wprost po metadanych materiału.`],
+    [`<b>Wymagania światła dotyczą też mutacji.</b> Roślina potrzebująca ciemności nie pojawi się w dzień pod otwartym niebem. Na zewnątrz ma szansę tylko nocą; pod dachem działa o każdej porze.`,
+     `Wymaganie odczytuje faktyczny poziom światła przy patyku, a nie flagę dostępu do nieba, a wymagania minimalnego i maksymalnego światła zwracają <em>onlyPreventsHarvest() = false</em>, więc blokują zasadzenie dokładnie tak samo jak podglebie.`],
+    [`<b>Kilka roślin przyjmuje kilka różnych bloków wierzchnich</b> - ${Object.values(C).filter(c => topParts(c).length > 1).length} z ${Object.keys(C).length} - więc zapis w rodzaju "Stone / Dirt&#8203;/grass / Mycelium / Netherrack" znaczy, że wystarczy dowolny z nich, a nie że potrzeba wszystkich czterech. Glowshroom jest jedną z nich. Każda pozostała roślina przyjmuje dokładnie jeden blok wierzchni.`,
+     `Te nieliczne biorą się z list gleb, które są sumami innych list, a nie listami bloków. <em>netherMushroom</em> to <em>mushroom</em> plus <em>netherrack</em>, a samo <em>mushroom</em> to <em>stone</em> plus <em>dirt/grass</em> plus <em>mycelium</em>. Ta strona rozwija te sumy zamiast pokazywać wewnętrzną nazwę.`],
+    [`Rodzice mogą stać na <b>zupełnie innej ziemi</b> niż patyk do krzyżowania. O tym, co może się na nim pojawić, decyduje wyłącznie ziemia pod samym patykiem.`,
+     `Sprawdzenia gleby i podglebia idą wyłącznie po współrzędnych patyka do krzyżowania. Sąsiedzi są czytani po to, jaką są rośliną, jakie mają staty, jak bardzo są wyrośnięci i czy ich własny patyk ma jeszcze nawóz - nigdy po to, na czym stoją.`],
   ]},
 
-  { h: `Water and fertiliser`,
-    lead: `Both feed a single number the game calls the Nutrient Score, and that number decides how fast anything grows - or whether it grows at all.`,
+  { h: `Woda i nawóz`,
+    lead: `Oba zasilają jedną liczbę, którą gra nazywa Nutrient Score, a ta liczba decyduje o tempie wzrostu wszystkiego - albo o tym, czy w ogóle coś rośnie.`,
     items: [
-    [`<b>A full water tank is worth +10 Nutrient Score, and so is full fertiliser.</b> The base score is 5 and an open sky adds 2. These two are the largest contributions you control.`,
-     `The score is built as: base 5, plus up to 10 for water, plus up to 10 for fertiliser, plus 2 for sky access, plus whichever is larger of a humidity bonus (up to 14) or a liked-biome bonus (up to 28), for a ceiling of 55. Water and fertiliser count in tenths rounded <b>up</b>, so a single stored unit is already worth +1 and 100 gives the full 10.`],
-    [`<b>A higher-tier crop will simply refuse to grow on a dry stick</b> - unless the biome is carrying it. The score a crop needs is twice its tier, and base plus open sky only reaches 7, which covers tier 3 and nothing above it. A wet or liked biome adds score whatever your tanks say, so the same crop that stalls in a desert can grow untended in a jungle.`,
-     `Growth rate compares <em>score × 5</em> against <em>tier × 10</em>, so the requirement is a score of twice the tier. Each point of that scaled difference adds 1% speed, or costs 4% below the line down to a floor of zero - and since one Nutrient Score point is five of them, a score point is worth +5% above the line and -20% below it. Measured against the same crop with both tanks full, in a biome giving no humidity or liked-biome bonus: a tier 3 crop on a dry stick runs at about half speed, a tier 5 at roughly a fifth, and a tier 8 does not grow at all.`],
-    [`<b>Keep both topped up all the time</b> - every growth tick spends a point of each, so they drain constantly. Outdoors, rain refills water for free. Early on the easiest tool by far is the <b>Watering Can from Extra Utilities</b>: hold right-click over the patch and it keeps the whole thing wet.`,
-     `The growth tick decrements the water and fertiliser stores by one each. Rain tops water up 11 points at a time, skipped if the store is already over 100 and capped at 101 - that extra point covers the same tick's own -1, so it settles at exactly 100. (Which tool you use is practical advice. How full you keep it is not: the score scales with the amount stored, so a nearly empty tank is not the same as a full one.)`],
-    [`<b>Before you can produce fertiliser yourself, buy it from a vending machine.</b> It is the cheapest early supply, and a breeding farm consumes it constantly. It raises growth speed and protects your stats at the same time.`,
-     `One store is read by two separate systems: the Nutrient Score takes up to 10 from it, and the stat roll uses it as the condition for clamping away negative results. (Where you buy it is practical advice, not a code detail.)`],
-    [`<b>The enriched versions are worth ten times as much per unit</b> - that goes for fertiliser and for Weed-EX alike. Once you can make them, the same tank lasts ten times longer.`,
-     `Fluids are registered with a potency value. Plain fertiliser is 1 and enriched fertiliser is 10; plain Weed-EX is 1 and GregTech's WeedEX9000 is 10.`],
-    [`<b>Distilled water hydrates twice as well as ordinary water</b>, which matters once you are piping water to the crops.`,
-     `The hydration registry gives ordinary water a potency of 1 and GregTech's distilled water a potency of 2.`],
+    [`<b>Pełny zbiornik wody to +10 do Nutrient Score, a pełny nawóz tyle samo.</b> Podstawa wynosi 5, a otwarte niebo dokłada 2. To dwa największe składniki, na które masz wpływ.`,
+     `Wynik składa się tak: podstawa 5, do tego do 10 za wodę, do 10 za nawóz, 2 za dostęp do nieba i to, co większe z premii za wilgotność (do 14) albo za lubiany biom (do 28), przy suficie 55. Woda i nawóz liczą się w dziesiątych częściach zaokrąglanych <b>w górę</b>, więc pojedyncza zmagazynowana jednostka daje już +1, a 100 daje pełne 10.`],
+    [`<b>Roślina z wyższego poziomu po prostu odmówi wzrostu na suchym patyku</b> - chyba że wyciąga ją biom. Potrzebny wynik to podwojony poziom rośliny, a podstawa z otwartym niebem dochodzi tylko do 7, co pokrywa poziom 3 i nic wyżej. Mokry albo lubiany biom dokłada wynik niezależnie od twoich zbiorników, więc ta sama roślina, która stoi w miejscu na pustyni, w dżungli rośnie bez opieki.`,
+     `Tempo wzrostu porównuje <em>wynik × 5</em> z <em>poziom × 10</em>, więc wymaganiem jest wynik równy podwojonemu poziomowi. Każdy punkt tej przeskalowanej różnicy dokłada 1% tempa albo kosztuje 4% poniżej progu, aż do podłogi na zerze - a że jeden punkt Nutrient Score to pięć takich punktów, punkt wyniku jest wart +5% powyżej progu i -20% poniżej. Mierzone wobec tej samej rośliny z oboma zbiornikami pełnymi, w biomie bez premii za wilgotność ani za lubiany biom: roślina poziomu 3 na suchym patyku idzie mniej więcej o połowę wolniej, poziomu 5 mniej więcej pięć razy wolniej, a poziomu 8 nie rośnie wcale.`],
+    [`<b>Trzymaj oba stale uzupełnione</b> - każdy tik wzrostu zjada po punkcie z każdego, więc drenują się bez przerwy. Na zewnątrz deszcz uzupełnia wodę za darmo. Na początku zdecydowanie najwygodniejszym narzędziem jest <b>Watering Can z Extra Utilities</b>: przytrzymaj prawy przycisk nad poletkiem, a utrzyma całość mokrą.`,
+     `Tik wzrostu zmniejsza zapas wody i nawozu o jeden każdy. Deszcz dolewa wody po 11 punktów naraz, pomijany gdy zapas przekracza 100 i ograniczony do 101 - ten dodatkowy punkt pokrywa własne -1 z tego samego tiku, więc ustala się dokładnie na 100. (To, jakiego narzędzia użyjesz, jest poradą praktyczną. To, jak pełne to trzymasz, już nie: wynik skaluje się z zapasem, więc prawie pusty zbiornik to nie to samo co pełny.)`],
+    [`<b>Zanim zaczniesz produkować nawóz sam, kupuj go w automacie.</b> To najtańsze wczesne źródło, a hodowla zjada go bez przerwy. Podnosi tempo wzrostu i jednocześnie chroni twoje staty.`,
+     `Jeden zapas czytają dwa osobne układy: Nutrient Score bierze z niego do 10, a losowanie statów używa go jako warunku odcięcia ujemnych wyników. (To, gdzie go kupisz, jest poradą praktyczną, a nie szczegółem z kodu.)`],
+    [`<b>Wersje wzbogacone są warte dziesięć razy tyle na jednostkę</b> - dotyczy to zarówno nawozu, jak i Weed-EX. Gdy już umiesz je robić, ten sam zbiornik starcza dziesięć razy dłużej.`,
+     `Płyny są rejestrowane z wartością mocy. Zwykły nawóz ma 1, a wzbogacony 10; zwykły Weed-EX ma 1, a WeedEX9000 z GregTecha 10.`],
+    [`<b>Woda destylowana nawadnia dwa razy lepiej niż zwykła</b>, co zaczyna mieć znaczenie, gdy doprowadzasz wodę do roślin rurami.`,
+     `Rejestr nawodnienia daje zwykłej wodzie moc 1, a wodzie destylowanej z GregTecha moc 2.`],
   ]},
 
-  { h: `Getting good stats`,
-    lead: `Growth, gain and resistance drift a little on every successful cross.`,
+  { h: `Jak wyciągnąć dobre staty`,
+    lead: `Wzrost, plon i odporność drgają po każdym udanym skrzyżowaniu.`,
     items: [
-    [`<b>Fertiliser in every parent stops stats from dropping.</b> One parent running dry restores the negative half of the roll for all three stats.`,
-     `Each stat rolls a change between the <em>Breeding Range Low</em> and <em>High</em> configs, -2 to +4 by default. Only when every counted parent still has fertiliser is a negative roll clamped to zero.`],
-    [`The starting point is the <b>average of the parents that actually counted</b> - not of everything standing around the stick.`,
-     `The average is taken over the filtered parent list: for a copy only the neighbours grown past their crossing threshold and holding the same crop, for a mutation only those past their breeding threshold whose crop is in the recipe's parents or the matched pool. An under-grown neighbour contributes nothing to the average, and its empty fertiliser tank is ignored as well. It is integer division, so fractions are lost each time.`],
+    [`<b>Nawóz w każdym rodzicu powstrzymuje spadki statów.</b> Wystarczy, że jednemu zabraknie, a ujemna połowa losowania wraca dla wszystkich trzech statów.`,
+     `Każdy stat losuje zmianę między konfigami <em>Breeding Range Low</em> i <em>High</em>, domyślnie od -2 do +4. Ujemny wynik jest przycinany do zera tylko wtedy, gdy każdy liczony rodzic ma jeszcze nawóz.`],
+    [`Punktem wyjścia jest <b>średnia z tych rodziców, którzy faktycznie się liczyli</b> - a nie ze wszystkiego, co stoi wokół patyka.`,
+     `Średnia jest liczona z przefiltrowanej listy rodziców: przy kopii tylko z sąsiadów wyrośniętych powyżej progu krzyżowania i mających tę samą roślinę, przy mutacji tylko z tych powyżej progu krzyżowania, których roślina jest wśród rodziców przepisu albo w dopasowanej puli. Niedorosły sąsiad nie wnosi do średniej nic, a jego pusty zbiornik nawozu też jest pomijany. To dzielenie całkowite, więc za każdym razem gubione są ułamki.`],
   ]},
 
-  { h: `Weeds`,
-    lead: `Weeds cannot destroy a grown crop. The risk is to the empty stick between the parents.`,
+  { h: `Chwasty`,
+    lead: `Chwasty nie niszczą wyrośniętej rośliny. Zagrożony jest pusty patyk między rodzicami.`,
     items: [
-    [`<b>Resistance 31 is total immunity, and it covers three separate checks:</b> the plant cannot be overgrown, cannot fall sick, and cannot be trampled. It is the most useful stat to max on anything you intend to leave standing.`,
-     `The disease check is <em>resistance &gt; random(0…30)</em>, which 31 always wins. The overgrowth path and the trample check each have their own explicit "resistance of 31 or more, do nothing" guard.`],
-    [`Below 31, the chance of resisting a disease is <b>resistance ÷ 31</b>. Resistance 20 gives about 65%, resistance 25 about 81%.`,
-     `Same check as above - the roll is uniform over 0…30, so a resistance of r wins r out of 31 times.`],
-    [`<b>Weeds never replace a grown crop.</b> A weed beside a planted crop transfers disease instead, and that is what resistance blocks.`,
-     `Weed planting has only two call sites in the whole mod, and both fire only on a stick holding no crop. When a spreading weed finds an occupied neighbour it calls the disease transfer instead.`],
-    [`<b>The empty stick in the middle is the vulnerable one.</b> If a weed grows there, breeding stops completely. The parents are unaffected, but nothing more will be produced until you clear it.`,
-     `An empty stick rolls the <em>Weed Spawn Chance</em> config (1 in 100 by default) on every growth tick where breeding did not succeed. Once it holds a weed the growth tick takes the "has a crop" branch and never calls <em>attemptBreeding()</em> again.`],
-    [`<b>Weed-EX in the middle stick prevents that</b>, which is what makes a setup safe to leave running unattended.`,
-     `<em>spawnWeed()</em> checks the stored Weed-EX before it plants anything and burns 5 points instead of placing the weed. A full 750-point tank blocks 150 spawns.`],
-    [`<b>A grown Necrobloom with a high growth stat spreads weeds itself.</b> It has to be mature, have a growth stat above 8, and have resistance lower than that growth. With all three met it seeds weeds into the empty sticks around it, so keep it away from a breeding setup.`,
-     `It lowers its weed-spreading threshold to a growth <i>stat</i> of 8, against the default of 24 that ordinary crops use. That is a stat on the 1…31 scale, not a growth stage. Even so it stays stricter than a real weed, which spreads from 50% growth with no stat conditions at all.`],
+    [`<b>Odporność 31 to pełna niewrażliwość i pokrywa trzy osobne sprawdzenia:</b> rośliny nie da się zagłuszyć, nie może zachorować i nie da się jej zadeptać. To najbardziej opłacalny stat do wymaksowania na wszystkim, co zamierzasz zostawić stojące.`,
+     `Sprawdzenie choroby to <em>odporność &gt; random(0…30)</em>, z czym 31 wygrywa zawsze. Ścieżka zagłuszenia i sprawdzenie zadeptania mają każde własne wyraźne zabezpieczenie "odporność 31 lub więcej, nie rób nic".`],
+    [`Poniżej 31 szansa na oparcie się chorobie to <b>odporność ÷ 31</b>. Odporność 20 daje około 65%, odporność 25 około 81%.`,
+     `To samo sprawdzenie co wyżej - rzut jest równomierny na 0…30, więc odporność r wygrywa r razy na 31.`],
+    [`<b>Chwasty nigdy nie zastępują wyrośniętej rośliny.</b> Chwast obok zasadzonej rośliny przenosi zamiast tego chorobę, a to właśnie blokuje odporność.`,
+     `Sadzenie chwastów ma w całym modzie tylko dwa miejsca wywołania i oba odpalają wyłącznie na patyku bez rośliny. Gdy rozprzestrzeniający się chwast trafi na zajętego sąsiada, wywołuje zamiast tego przeniesienie choroby.`],
+    [`<b>Zagrożony jest pusty patyk pośrodku.</b> Jeżeli wyrośnie tam chwast, krzyżowanie zatrzymuje się całkowicie. Rodzicom nic nie jest, ale nic więcej już nie powstanie, dopóki tego nie usuniesz.`,
+     `Pusty patyk losuje konfig <em>Weed Spawn Chance</em> (domyślnie 1 na 100) w każdym tiku wzrostu, w którym krzyżowanie się nie udało. Gdy już trzyma chwast, tik wzrostu wchodzi w gałąź "ma roślinę" i nigdy więcej nie woła <em>attemptBreeding()</em>.`],
+    [`<b>Weed-EX w środkowym patyku temu zapobiega</b> i to właśnie sprawia, że układ można bezpiecznie zostawić bez opieki.`,
+     `<em>spawnWeed()</em> sprawdza zapas Weed-EX, zanim cokolwiek zasadzi, i zamiast postawić chwast spala 5 punktów. Pełny zbiornik na 750 punktów blokuje 150 pojawień.`],
+    [`<b>Wyrośnięty Necrobloom z wysokim statem wzrostu sam rozsiewa chwasty.</b> Musi być dojrzały, mieć wzrost powyżej 8 i odporność niższą od tego wzrostu. Przy wszystkich trzech spełnionych zasiewa chwasty w puste patyki wokół siebie, więc trzymaj go z dala od hodowli.`,
+     `Obniża swój próg rozsiewania chwastów do <i>statu</i> wzrostu 8, wobec domyślnych 24, których używają zwykłe rośliny. To stat na skali 1…31, a nie faza wzrostu. Mimo to zostaje bardziej wymagający niż prawdziwy chwast, który rozsiewa się od 50% wzrostu bez żadnych warunków na staty.`],
   ]},
 
-  { h: `Walking through your farm`,
-    lead: `Moving through a crop field can break the sticks and lose the plants on them.`,
+  { h: `Chodzenie po własnej hodowli`,
+    lead: `Poruszanie się po poletku potrafi połamać patyki i zniszczyć stojące na nich rośliny.`,
     items: [
-    [`<b>Do not sprint across a crop field.</b> Sprinting can break a crop stick and destroy the plant on it, and the higher the tier the more often it happens. A resistance-31 plant is immune, and so is anything standing on tilled Fertilized Dirt, Enchanted Earth or Clean Dirt, which are registered as trample-proof.`,
-     `Sprinting first rolls roughly <em>1 in 100 × 0.95^tier</em> - about 1 in 95 for a tier 1 crop and 1 in 44 for a tier 16 one. Only if that hits does it roll again against resistance, breaking the stick when <em>random(0…30)</em> beats it. So the first figure is the ceiling, not the real rate: a tier 1 crop at resistance 20 actually breaks about 1 collision in 295.`],
-    [`<b>Do not land on crops from a height.</b> Any drop over three quarters of a block can break the stick, and from 1.75 blocks it always does.`,
-     `Landing triggers a check once the fall distance passes 0.75. The chance of breaking is the fall distance minus 0.75, so at 1.75 blocks the roll can no longer fail.`],
-    [`<b>Crouch to walk past crops that damage you.</b> Ore berries, Bamboo, Thornvine and Cactus deal half a heart on contact. Sneaking skips the damage entirely.`,
-     `The collision handler applies the crop's contact damage only when the entity is not sneaking. Those four crop types are the ones that declare a damage value above zero, all of them 1.0.`],
+    [`<b>Nie biegaj sprintem po poletku.</b> Sprint potrafi złamać patyk i zniszczyć rosnącą na nim roślinę, a im wyższy poziom rośliny, tym częściej to się zdarza. Roślina o odporności 31 jest niewrażliwa, tak samo jak wszystko stojące na przekopanych Fertilized Dirt, Enchanted Earth albo Clean Dirt, które są zarejestrowane jako odporne na zadeptanie.`,
+     `Sprint najpierw losuje mniej więcej <em>1 na 100 × 0,95^poziom</em> - około 1 na 95 dla rośliny poziomu 1 i 1 na 44 dla poziomu 16. Dopiero gdy to trafi, losuje ponownie przeciwko odporności i łamie patyk, gdy <em>random(0…30)</em> ją przebije. Więc ta pierwsza liczba to sufit, a nie faktyczne tempo: roślina poziomu 1 przy odporności 20 łamie się realnie mniej więcej raz na 295 zderzeń.`],
+    [`<b>Nie spadaj na rośliny z wysokości.</b> Każdy upadek powyżej trzech czwartych bloku może złamać patyk, a od 1,75 bloku łamie zawsze.`,
+     `Lądowanie uruchamia sprawdzenie, gdy dystans upadku przekroczy 0,75. Szansa na złamanie to dystans upadku minus 0,75, więc przy 1,75 bloku rzut nie może już zawieść.`],
+    [`<b>Przy roślinach, które ranią, przechodź w kucki.</b> Ore berries, Bamboo, Thornvine i Cactus zadają pół serca przy dotknięciu. Skradanie pomija obrażenia całkowicie.`,
+     `Obsługa kolizji zadaje obrażenia od dotknięcia rośliny tylko wtedy, gdy istota się nie skrada. Te cztery rodzaje roślin to jedyne, które deklarują obrażenia powyżej zera, wszystkie po 1,0.`],
   ]},
 
-  { h: `Odd corners`,
-    lead: `Deliberate oddities in the mod.`,
+  { h: `Dziwne zakamarki`,
+    lead: `Celowe osobliwości w modzie.`,
     items: [
-    [`<b>Walking into a Goldfish plant makes it scream.</b> A fully grown one plays at five times normal volume and a much lower pitch, so it carries a long way. A young one is quiet. Crouching skips it.`,
-     `The collision handler skips the crop's hook entirely for a sneaking entity, and the scream only fires for players. Once mature it plays at volume 5.0 and pitch 0.5, against the 1.0 of an ordinary sound. Before maturity the volume is 3.0 scaled by growth and the pitch is 4.0 minus growth.`],
-    [`<b>It also screams at random while it is still growing</b>, roughly once every 512 growth ticks per plant. A fully grown patch is silent unless stepped on.`,
-     `The random scream is rolled from the growth tick, which only runs while the plant is actually growing: it draws a number under 512 and screams on exactly 42. That also means the random one is always the quiet version - the loud scream only comes from being stepped on. Two configs cover this: one silences crop sounds entirely, another leaves the random screams but stops the stepped-on one.`],
-    [`<b>Trollplant takes an absurd catalyst to duplicate.</b> Five screws made of Fool's Ruby, an item with no other use. Two clay bricks or eight IC2 scrap work as well.`,
-     `Its constructor registers three duplication catalysts: two vanilla bricks, five of the <em>screwFoolsRuby</em> ore dictionary entry, and eight IC2 scrap. Its flavour text is "Trololololol, lololol, lololol!".`],
+    [`<b>Wejście w Goldfish plant sprawia, że roślina krzyczy.</b> W pełni wyrośnięta odtwarza dźwięk pięć razy głośniej i dużo niżej, więc niesie się daleko. Młoda jest cicha. Skradanie to pomija.`,
+     `Obsługa kolizji pomija zaczep rośliny w całości dla skradającej się istoty, a krzyk odpala wyłącznie dla graczy. Po dojrzeniu leci z głośnością 5,0 i wysokością 0,5, wobec 1,0 zwykłego dźwięku. Przed dojrzeniem głośność to 3,0 przeskalowane wzrostem, a wysokość to 4,0 minus wzrost.`],
+    [`<b>Krzyczy też losowo, dopóki rośnie</b>, mniej więcej raz na 512 tików wzrostu na roślinę. W pełni wyrośnięte poletko milczy, o ile na nie nie wejdziesz.`,
+     `Losowy krzyk jest losowany z tiku wzrostu, który chodzi tylko wtedy, gdy roślina faktycznie rośnie: losuje liczbę poniżej 512 i krzyczy dokładnie na 42. To znaczy też, że losowy krzyk jest zawsze tą cichą wersją - głośny bierze się wyłącznie z wejścia na roślinę. Pokrywają to dwa konfigi: jeden wycisza dźwięki roślin całkowicie, drugi zostawia losowe krzyki, ale wyłącza ten po nadepnięciu.`],
+    [`<b>Trollplant wymaga absurdalnego katalizatora do powielenia.</b> Pięciu śrub z Fool's Ruby, przedmiotu bez żadnego innego zastosowania. Dwie gliniane cegły albo osiem scrapu z IC2 działają tak samo.`,
+     `Jej konstruktor rejestruje trzy katalizatory powielania: dwie waniliowe cegły, pięć wpisu <em>screwFoolsRuby</em> ze słownika rud i osiem scrapu z IC2. Jej tekst opisowy to "Trololololol, lololol, lololol!".`],
   ]},
 
-  { h: `Where crops come from`,
-    lead: `Not every crop can be bred, and not every crop can turn up by chance.`,
+  { h: `Skąd biorą się rośliny`,
+    lead: `Nie każdą roślinę da się wyhodować i nie każda może trafić się przypadkiem.`,
     items: [
-    [`<b>Some crops belong to no pool at all.</b> With two exceptions those can only come from their exact recipe; random crossing will never produce one. Gaia Wart and Primordial Berry have neither a pool nor a recipe, so the world is their only source.`,
-     `In this pack ${Object.values(C).filter(c => !c.pools.length).length} of the ${Object.keys(C).length} crops are registered into no pool. The crop drawer lists this under Mutation pools.`],
-    [`<b>Seven crops have no recipe at all.</b> Wheat, Potato, Carrot, Dandelion, Poppy, Gaia Wart and Primordial Berry. Nothing breeds into them, so every chain starts from one of these.`,
-     `Exactly seven crops never appear as the output of any recipe, so they can only come from world generation, mobs or loot. Five of them can also turn up in a pool draw; Gaia Wart and Primordial Berry sit in no pool either. Everything else in the pack can be bred if you can get hold of its parents.`],
-    [`A recipe with three or four parents needs that <b>many grown crops around one stick</b>. A stick has four sides, so four parents is the limit.`,
-     `Only the four horizontal neighbours are read, and every one of a recipe's parents has to be standing there and grown enough at the same moment.`],
+    [`<b>Część roślin nie należy do żadnej puli.</b> Poza dwoma wyjątkami takie mogą pochodzić wyłącznie ze swojego dokładnego przepisu; losowe krzyżowanie nigdy ich nie da. Gaia Wart i Primordial Berry nie mają ani puli, ani przepisu, więc ich jedynym źródłem jest świat.`,
+     `W tej paczce ${Object.values(C).filter(c => !c.pools.length).length} z ${Object.keys(C).length} roślin nie jest zarejestrowanych w żadnej puli. Panel rośliny pokazuje to w sekcji Pule mutacji.`],
+    [`<b>Siedem roślin nie ma żadnego przepisu.</b> Wheat, Potato, Carrot, Dandelion, Poppy, Gaia Wart i Primordial Berry. Nic się w nie nie krzyżuje, więc każdy ciąg zaczyna się od jednej z nich.`,
+     `Dokładnie siedem roślin nigdy nie występuje jako wynik żadnego przepisu, więc mogą pochodzić tylko z generowania świata, od mobów albo z łupów. Pięć z nich może też wypaść z losowania puli; Gaia Wart i Primordial Berry nie są w żadnej puli. Całą resztę w paczce da się wyhodować, jeżeli zdobędziesz jej rodziców.`],
+    [`Przepis o trzech albo czterech rodzicach wymaga <b>tylu wyrośniętych roślin wokół jednego patyka</b>. Patyk ma cztery boki, więc czworo rodziców to granica.`,
+     `Czytane są wyłącznie cztery sąsiednie pola w poziomie i każdy rodzic z przepisu musi tam stać, dostatecznie wyrośnięty, w tej samej chwili.`],
   ]},
 ];
 
 /* The whole game loop as one chain. Steps that claim something about the mod
    carry the same why box as a tip; the navigational ones do not.           */
 const FLOW = [
-  { t: `Pick any crop`,
-    d: `Barley, Wheat, whatever you already have. The choice does not affect anything later.` },
+  { t: `Wybierz dowolną roślinę`,
+    d: `Barley, Wheat, cokolwiek już masz. Ten wybór nie wpływa na nic później.` },
 
-  { t: `Take it to 31/31/31`,
-    d: `Growth, Gain and Resistance each cap at 31. Do this before anything else, and only once - one plant of one crop is enough.`,
-    w: `<em>variateStat()</em> takes the average of every parent that counted - integer division - then adds a roll drawn uniformly between the <em>Breeding Range Low</em> and <em>High</em> configs, -2 to +4 by default. A negative roll is replaced with zero <b>only</b> when every counted parent still holds fertiliser, so a fertilised copy can equal its parent but never fall below it. The total is finally clamped into 1…31 by <em>Constants.MIN_SEED_STAT</em> and <em>MAX_SEED_STAT</em>.`,
+  { t: `Doprowadź ją do 31/31/31`,
+    d: `Wzrost, plon i odporność kończą się na 31. Zrób to przed czymkolwiek innym i tylko raz - wystarczy jedna roślina jednego gatunku.`,
+    w: `<em>variateStat()</em> bierze średnią ze wszystkich rodziców, którzy się liczyli - dzielenie całkowite - a potem dodaje rzut losowany równomiernie między konfigami <em>Breeding Range Low</em> i <em>High</em>, domyślnie od -2 do +4. Ujemny rzut jest zastępowany zerem <b>tylko</b> wtedy, gdy każdy liczony rodzic ma jeszcze nawóz, więc nawożona kopia może dorównać rodzicowi, ale nigdy nie spadnie poniżej. Suma jest na koniec przycinana do 1…31 przez <em>Constants.MIN_SEED_STAT</em> i <em>MAX_SEED_STAT</em>.`,
     cycle: {
-      h: `repeat until all three read 31`,
-      w: `<em>Plant Lens</em> is an item in the mod, tooltip "Inspects crops". Right-clicking a crop prints the seed name, then <em>Stats -- Growth / Gain / Resistance</em>, then <em>Soil -- Fertilizer / Water / Weed-EX</em>, plus a warning line if the plant is sick or a growth requirement is unmet. One look covers both the numbers and whether the stick is actually still fed.`,
+      h: `powtarzaj, aż wszystkie trzy pokażą 31`,
+      w: `<em>Plant Lens</em> to przedmiot w modzie, z opisem "Inspects crops". Kliknięcie prawym na roślinie wypisuje nazwę nasiona, potem <em>Stats -- Growth / Gain / Resistance</em>, potem <em>Soil -- Fertilizer / Water / Weed-EX</em>, a do tego linię ostrzeżenia, jeżeli roślina choruje albo któreś wymaganie wzrostu nie jest spełnione. Jedno spojrzenie pokrywa i liczby, i to, czy patyk jest faktycznie nadal zasilany.`,
       items: [
-        `Plant it. Keep <b>fertiliser</b> in its stick at all times - that is what removes the downward rolls. Water only affects growth speed.`,
-        `Put a <b>double crop stick</b> next to it and wait for a copy to appear.`,
-        `Check the copy with a <b>Plant Lens</b>.`,
-        `If the numbers went up, breed from that plant instead and remove the old one. Weaker plants of the same crop left nearby pull the average down.`
+        `Zasadź ją. Trzymaj w jej patyku <b>nawóz</b> przez cały czas - to on usuwa ujemne rzuty. Woda wpływa tylko na tempo wzrostu.`,
+        `Postaw obok <b>podwójny patyk</b> i poczekaj, aż pojawi się kopia.`,
+        `Sprawdź kopię <b>Plant Lensem</b>.`,
+        `Jeżeli liczby poszły w górę, krzyżuj dalej z tej rośliny, a starą usuń. Słabsze rośliny tego samego gatunku zostawione obok ciągną średnią w dół.`
       ]
     } },
 
-  { t: `Make a second copy`,
-    d: `Run the cycle above once more. A fertilised copy of a 31/31/31 plant is always 31/31/31, so this one needs no checking.`,
-    w: `The average of a single 31/31/31 parent is 31. Upward rolls hit the clamp at 31 and downward rolls are already removed by the fertiliser check, so 31/31/31 is the only reachable result.` },
+  { t: `Zrób drugą kopię`,
+    d: `Przejdź powyższy cykl jeszcze raz. Nawożona kopia rośliny 31/31/31 zawsze wychodzi 31/31/31, więc tej nie trzeba już sprawdzać.`,
+    w: `Średnia z jednego rodzica 31/31/31 to 31. Rzuty w górę trafiają w ograniczenie na 31, a rzuty w dół są już usunięte przez sprawdzenie nawozu, więc 31/31/31 jest jedynym osiągalnym wynikiem.` },
 
-  { t: `Left-click both plants for the seeds`,
-    d: `At resistance 31 the seed always drops. Below 31 it can be destroyed along with the plant, which is why step 2 comes first.`,
-    w: `<em>onLeftClick()</em> calls <em>doPlayerHarvest(player, true)</em>, which drops whatever <em>getSeedDrop()</em> returns. That method is gated on <em>passesResistanceCheck()</em>, namely <em>resistance &gt; random(0…30)</em>, so only 31 never fails. A failed roll is not a retry either: the same method ends with an unconditional <em>clear()</em> whenever the remove flag is set, so the plant is gone and you get nothing.` },
+  { t: `Kliknij obie rośliny lewym, żeby zebrać nasiona`,
+    d: `Przy odporności 31 nasiono wypada zawsze. Poniżej 31 może zostać zniszczone razem z rośliną i dlatego krok 2 jest pierwszy.`,
+    w: `<em>onLeftClick()</em> woła <em>doPlayerHarvest(player, true)</em>, które wyrzuca to, co zwróci <em>getSeedDrop()</em>. Ta metoda jest zablokowana przez <em>passesResistanceCheck()</em>, czyli <em>odporność &gt; random(0…30)</em>, więc tylko 31 nigdy nie zawodzi. Nieudany rzut nie oznacza też kolejnej próby: ta sama metoda kończy się bezwarunkowym <em>clear()</em>, gdy ustawiona jest flaga usunięcia, więc rośliny nie ma, a ty nie dostajesz nic.` },
 
-  { t: `Plant them one block apart, double crop stick in the gap`,
-    d: `Seed, double stick, seed. The middle stick's ground decides what can appear on it, so build that for the crop you want. The parents only need ground valid for their own crop.`,
-    w: `The soil and sub-soil checks run against the breeding stick's own coordinates. Neighbours are read for their crop, their stats, how grown they are and whether their own stick still holds fertiliser, never for what they are standing on. <em>attemptBreeding()</em> then opens with a roll against the <em>Breeding Chance</em> config, default 3, and returns immediately on two results out of three.` },
+  { t: `Zasadź je w odstępie jednego bloku, podwójny patyk w przerwie`,
+    d: `Nasiono, podwójny patyk, nasiono. O tym, co może się pojawić na środkowym patyku, decyduje ziemia pod nim, więc przygotuj ją pod roślinę, którą chcesz. Rodzicom wystarczy ziemia dobra dla nich samych.`,
+    w: `Sprawdzenia gleby i podglebia idą po współrzędnych samego patyka do krzyżowania. Sąsiedzi są czytani po to, jaką są rośliną, jakie mają staty, jak bardzo są wyrośnięci i czy ich własny patyk ma jeszcze nawóz, nigdy po to, na czym stoją. <em>attemptBreeding()</em> zaczyna potem od rzutu przeciwko konfigowi <em>Breeding Chance</em>, domyślnie 3, i przy dwóch wynikach na trzy wychodzi natychmiast.` },
 
-  { t: `Check what the pair can produce`,
-    d: `Two of the same crop never trigger a recipe, but they match every pool that crop belongs to. Pick it below for the full list of results and their odds.`,
+  { t: `Sprawdź, co może dać ta para`,
+    d: `Dwie te same rośliny nigdy nie uruchomią przepisu, ale pasują do każdej puli, do której ta roślina należy. Wybierz ją poniżej, żeby zobaczyć pełną listę wyników i ich szanse.`,
     pick: true },
 
-  { t: `Tick each new seed and repeat`,
-    d: `More seeds means more recipes within reach, and recipes beat pool draws whenever a mutation is rolled at all.`,
+  { t: `Zaznacz każde nowe nasiono i powtarzaj`,
+    d: `Więcej nasion to więcej przepisów w zasięgu, a przepisy biją losowanie z puli za każdym razem, gdy w ogóle wypadnie mutacja.`,
     ready: true,
-    w: `Recipes are looked up from the parents present and one is drawn before any pool draw happens. Pools are only consulted when there is no matching recipe, or when the matched recipe's own conditions fail.` },
+    w: `Przepisy są wyszukiwane po obecnych rodzicach i jeden z nich jest losowany, zanim dojdzie do jakiegokolwiek losowania z puli. Pule są brane pod uwagę tylko wtedy, gdy nie ma pasującego przepisu albo gdy warunki dopasowanego przepisu zawiodą.` },
 ];
 
 function renderFlow() {
   const opts = allSorted.map(c =>
     `<option value="${c.id}">${esc(c.name)}${owned.has(c.id) ? " ✓" : ""}</option>`).join("");
   let html = `<section class="tipgroup">
-    <h3>Getting started</h3>
-    <p class="lead">Seven steps from one crop to a working breeding setup. The sections below explain the mechanics behind them.</p>
+    <h3>Od czego zacząć</h3>
+    <p class="lead">Siedem kroków od jednej rośliny do działającej hodowli. Sekcje poniżej tłumaczą mechanikę, która za tym stoi.</p>
     <ol class="flow-steps">`;
   FLOW.forEach((s, i) => {
     html += `<li class="flow-step"><span class="flow-n">${i + 1}</span><div class="flow-body">
-      <div class="flow-head"><p><b>${s.t}</b></p>${s.w ? `<span class="why"><button class="why-btn" type="button">why</button>
+      <div class="flow-head"><p><b>${s.t}</b></p>${s.w ? `<span class="why"><button class="why-btn" type="button">skąd</button>
         <span class="why-pop" role="note">${s.w}</span></span>` : ""}</div>
       <p>${s.d}</p>`;
     if (s.cycle) html += `<div class="flow-cycle">
-      <div class="flow-cycle-h"><span>&#8635; ${s.cycle.h}</span>${s.cycle.w ? `<span class="why"><button class="why-btn" type="button">why</button>
+      <div class="flow-cycle-h"><span>&#8635; ${s.cycle.h}</span>${s.cycle.w ? `<span class="why"><button class="why-btn" type="button">skąd</button>
         <span class="why-pop" role="note">${s.cycle.w}</span></span>` : ""}</div>
       <ol>${s.cycle.items.map(i => `<li>${i}</li>`).join("")}</ol></div>`;
-    if (s.pick) html += `<div class="flow-pick"><label>Two of <select class="field" id="flowPick"><option value="">-</option>${opts}</select></label></div>`;
-    if (s.ready) html += `<p><button class="goview" type="button" data-goview="ready">Open Ready now</button></p>`;
+    if (s.pick) html += `<div class="flow-pick"><label>Dwie sztuki: <select class="field" id="flowPick"><option value="">-</option>${opts}</select></label></div>`;
+    if (s.ready) html += `<p><button class="goview" type="button" data-goview="ready">Otwórz Do zrobienia od ręki</button></p>`;
     html += `</div></li>`;
   });
   return html + `</ol></section>`;
 }
 
 function renderTips() {
-  let html = `<p class="viewnote">Everything here was read out of the pack's own code rather than collected from experience, so it should hold exactly. Hover <span class="why-btn" style="cursor:default">why</span> on any line to see where it comes from.</p><div class="tips">` + renderFlow();
+  let html = `<p class="viewnote">Wszystko tutaj zostało odczytane z kodu samej paczki, a nie zebrane z doświadczenia, więc powinno się zgadzać dokładnie. Najedź na <span class="why-btn" style="cursor:default">skąd</span> przy dowolnej linii, żeby zobaczyć źródło.</p><div class="tips">` + renderFlow();
   for (const g of TIPS) {
     html += `<section class="tipgroup"><h3>${g.h}</h3>`;
     if (g.lead) html += `<p class="lead">${g.lead}</p>`;
@@ -1439,7 +1439,7 @@ function renderTips() {
     for (const [text, why] of g.items) {
       html += `<li class="tip"><div class="tip-line">
         <p>${text}</p>
-        <span class="why"><button class="why-btn" type="button">why</button>
+        <span class="why"><button class="why-btn" type="button">skąd</button>
           <span class="why-pop" role="note">${why}</span></span>
       </div></li>`;
     }
@@ -1450,8 +1450,8 @@ function renderTips() {
 
 function renderPath() {
   if (!owned.size) {
-    return `<p class="viewnote">This works out a chain of recipes from the crops you already hold to one you want.</p>
-      <div class="empty">Tick off what you have in the rail on the left first.<br>With nothing ticked there is no starting point, so every goal would come back unreachable.</div>`;
+    return `<p class="viewnote">To wylicza ciąg przepisów od roślin, które już masz, do tej, którą chcesz.</p>
+      <div class="empty">Najpierw zaznacz po lewej to, co masz.<br>Bez żadnego zaznaczenia nie ma punktu wyjścia, więc każdy cel wyszedłby jako nieosiągalny.</div>`;
   }
 
   const { have } = reachable();
@@ -1462,29 +1462,29 @@ function renderPath() {
     (have.has(c.id) ? reachableOpts : blockedOpts).push(opt);
   }
 
-  let html = `<p class="viewnote">A chain of recipes from what you hold to the crop you want. It only follows exact recipes, so a crop that comes out of a pool draw will not have a route here even though you can still get it.</p>
-    <div class="pairpick"><label>Goal<select class="field" id="selTarget" style="min-width:280px">
+  let html = `<p class="viewnote">Ciąg przepisów od tego, co masz, do rośliny, którą chcesz. Idzie wyłącznie po konkretnych przepisach, więc roślina, która wypada z losowania puli, nie będzie tu miała drogi, choć nadal da się ją zdobyć.</p>
+    <div class="pairpick"><label>Cel<select class="field" id="selTarget" style="min-width:280px">
       <option value="">-</option>
-      ${reachableOpts.length ? `<optgroup label="Reachable now (${reachableOpts.length})">${reachableOpts.join("")}</optgroup>` : ""}
-      ${blockedOpts.length ? `<optgroup label="Needs something you do not have yet (${blockedOpts.length})">${blockedOpts.join("")}</optgroup>` : ""}
+      ${reachableOpts.length ? `<optgroup label="Osiągalne teraz (${reachableOpts.length})">${reachableOpts.join("")}</optgroup>` : ""}
+      ${blockedOpts.length ? `<optgroup label="Wymaga czegoś, czego jeszcze nie masz (${blockedOpts.length})">${blockedOpts.join("")}</optgroup>` : ""}
     </select></label></div>`;
 
   if (!target) {
     return html + (reachableOpts.length
-      ? `<div class="empty">Pick a goal. <b>${reachableOpts.length}</b> crops are reachable from what you hold right now.</div>`
-      : `<div class="empty">Nothing is reachable by recipe from your current set yet.<br>Tick off more of what you actually own, or use the <b>Pool roulette</b> to find a first new crop.</div>`);
+      ? `<div class="empty">Wybierz cel. <b>${reachableOpts.length}</b> roślin jest osiągalnych z tego, co masz w tej chwili.</div>`
+      : `<div class="empty">Z obecnego zestawu nic nie jest jeszcze osiągalne przepisem.<br>Zaznacz więcej z tego, co faktycznie masz, albo poszukaj pierwszej nowej rośliny w <b>Ruletce pul</b>.</div>`);
   }
-  if (owned.has(target)) return html + `<div class="empty">You already have it.</div>`;
+  if (owned.has(target)) return html + `<div class="empty">Już to masz.</div>`;
 
   const steps = planFor(target);
   if (!steps) {
     const recipes = MUT.filter(x => x.out === target);
     if (!recipes.length) {
-      return html + `<div class="empty"><b>${esc(nm(target))}</b> has no recipe at all. It only ever comes out of a pool draw or from the world, so there is no chain to follow. See the <b>Pool roulette</b>.</div>`;
+      return html + `<div class="empty"><b>${esc(nm(target))}</b> nie ma żadnego przepisu. Wypada wyłącznie z losowania puli albo ze świata, więc nie ma tu żadnego ciągu do prześledzenia. Zajrzyj do <b>Ruletki pul</b>.</div>`;
     }
     // one level of "what exactly is in the way", with each blocker's own status
-    const made = recipes.length === 1 ? `this recipe` : `any of these ${recipes.length} recipes`;
-    html += `<p class="viewnote"><b>${esc(nm(target))}</b> cannot be reached by recipe yet. It is made by ${made}, with the parts you are missing in <span style="color:var(--ore);font-weight:600">rust</span>:</p><div class="steps">`;
+    const made = recipes.length === 1 ? `ten przepis` : `dowolny z tych ${recipes.length} przepisów`;
+    html += `<p class="viewnote"><b>${esc(nm(target))}</b> nie jest jeszcze osiągalne przepisem. Robi to ${made}, a brakujące części są na <span style="color:var(--ore);font-weight:600">rdzawo</span>:</p><div class="steps">`;
     for (const m of recipes) {
       const missing = m.parents.filter(p => !owned.has(p));
       html += `<div class="step"><div class="idx">-</div><div class="body">
@@ -1492,10 +1492,10 @@ function renderPath() {
         <div class="linkrow">${missing.map(p => {
           const inPools = (C[p].pools || []).length;
           const state = have.has(p)
-            ? `reachable by recipe, set it as the goal first`
+            ? `osiągalne przepisem, ustaw to najpierw jako cel`
             : (MUT.some(x => x.out === p)
-                ? (inPools ? `no route yet, but it is in ${inPools} pool${inPools > 1 ? "s" : ""}` : `no route yet and it is in no pool, so it needs its own recipe chain`)
-                : `has no recipe, you have to find it in the world`);
+                ? (inPools ? `brak drogi, ale występuje w tylu pulach: ${inPools}` : `brak drogi i nie ma tego w żadnej puli, więc potrzebuje własnego ciągu przepisów`)
+                : `nie ma przepisu, trzeba to znaleźć w świecie`);
           return `<span style="font-size:12.5px;color:var(--ink-faint)">
             <button class="inline-crop" type="button" data-crop="${p}">${esc(nm(p))}</button> - ${state}</span>`;
         }).join("")}</div>
@@ -1562,7 +1562,7 @@ function renderPoolDrawer(key) {
     return `<div class="poolrow${owned.has(id) ? " have" : ""}">
       ${cropLink(id, owned.has(id) ? "own" : "miss")}
       <span class="tier">T${c.tier}</span>
-      ${c.subsoil.length ? `<span class="mark" title="needs a specific block under the soil">&#9670;</span>` : ""}
+      ${c.subsoil.length ? `<span class="mark" title="wymaga określonego bloku pod glebą">&#9670;</span>` : ""}
     </div>`;
   };
 
@@ -1570,18 +1570,18 @@ function renderPoolDrawer(key) {
     <div class="drawer-top">
       <h2>${esc(DATA.poolNames[key] || key)}</h2>
       ${backButton()}
-      <button class="btn close" type="button" id="closeDrawer">Close</button>
+      <button class="btn close" type="button" id="closeDrawer">Zamknij</button>
     </div>
-    <p class="flav" style="font-style:normal">Mutation pool with <b>${members.length}</b> crops in it. Two parents that both belong to this pool can draw any one of them, each equally likely. You already hold <b>${mine.length}</b>.</p>
+    <p class="flav" style="font-style:normal">Pula mutacji z <b>${members.length}</b> roślinami. Dwoje rodziców należących do tej puli może wylosować dowolną z nich, każdą tak samo prawdopodobnie. Masz już <b>${mine.length}</b>.</p>
 
-    <div class="dsec"><h3>Not yours yet (${rest.length})</h3>
+    <div class="dsec"><h3>Jeszcze nie twoje (${rest.length})</h3>
       <div class="poollist">${rest.length ? byName(rest).map(row).join("")
-        : `<span style="color:var(--ink-faint);font-size:13px">You have every crop in this pool.</span>`}</div>
+        : `<span style="color:var(--ink-faint);font-size:13px">Masz każdą roślinę z tej puli.</span>`}</div>
     </div>
 
-    <div class="dsec"><h3>Already yours (${mine.length})</h3>
+    <div class="dsec"><h3>Już twoje (${mine.length})</h3>
       <div class="poollist">${mine.length ? byName(mine).map(row).join("")
-        : `<span style="color:var(--ink-faint);font-size:13px">None of these are ticked yet.</span>`}</div>
+        : `<span style="color:var(--ink-faint);font-size:13px">Żadna z nich nie jest jeszcze zaznaczona.</span>`}</div>
     </div>`;
 }
 
@@ -1592,7 +1592,7 @@ function renderCropDrawer(id) {
   const sub = c.subsoil.map(k => {
     const info = DATA.subsoil[k] || {};
     const acc = [...(info.oredict || []), ...(info.modBlocks || [])];
-    return `<dt>Under block</dt><dd>${esc(DATA.subsoilDesc[k] || k)}` +
+    return `<dt>Blok pod spodem</dt><dd>${esc(DATA.subsoilDesc[k] || k)}` +
       (acc.length ? `<br><span style="font-family:var(--face-data);font-size:12px;color:var(--ink-faint)">${esc(acc.join(", "))}</span>` : "") +
       `</dd>`;
   }).join("");
@@ -1601,46 +1601,46 @@ function renderCropDrawer(id) {
     <div class="drawer-top">
       <h2>${esc(c.name)}</h2>
       ${backButton()}
-      <button class="btn close" type="button" id="closeDrawer">Close</button>
+      <button class="btn close" type="button" id="closeDrawer">Zamknij</button>
     </div>
     ${c.flavour ? `<p class="flav">${esc(c.flavour)}</p>` : ""}
 
-    <div class="dsec"><h3>Growing conditions</h3>
-      <p class="flav" style="font-style:normal;margin-bottom:8px">Crop stick on top, <b>top block</b> directly under it, <b>under block</b> one deeper.</p>
+    <div class="dsec"><h3>Warunki wzrostu</h3>
+      <p class="flav" style="font-style:normal;margin-bottom:8px">Patyk na wierzchu, <b>blok wierzchni</b> bezpośrednio pod nim, <b>blok pod spodem</b> o jeden głębiej.</p>
       <dl class="dl">
-        <dt>Tier</dt><dd>${c.tier}</dd>
-        <dt>Top block</dt><dd>${topParts(c).length > 1
-          ? `any one of:<br>` + topParts(c).map(s => `· ${esc(DATA.soilGloss[s] || s)}`).join("<br>")
+        <dt>Poziom</dt><dd>${c.tier}</dd>
+        <dt>Blok wierzchni</dt><dd>${topParts(c).length > 1
+          ? `dowolny z:<br>` + topParts(c).map(s => `· ${esc(DATA.soilGloss[s] || s)}`).join("<br>")
           : esc(topBlock(c))}</dd>
-        ${c.subsoil.length ? sub : `<dt>Under block</dt><dd>anything - no requirement</dd>`}
-        ${c.maxLight !== null ? `<dt>Light</dt><dd>max ${c.maxLight} - needs to be dark</dd>` : ""}
-        ${c.minLight !== null ? `<dt>Light</dt><dd>min ${c.minLight}</dd>` : ""}
-        <dt>Growth time</dt><dd>${c.growth ?? "-"}</dd>
+        ${c.subsoil.length ? sub : `<dt>Blok pod spodem</dt><dd>cokolwiek - bez wymagań</dd>`}
+        ${c.maxLight !== null ? `<dt>Światło</dt><dd>maks. ${c.maxLight} - musi być ciemno</dd>` : ""}
+        ${c.minLight !== null ? `<dt>Światło</dt><dd>min. ${c.minLight}</dd>` : ""}
+        <dt>Czas wzrostu</dt><dd>${c.growth ?? "-"}</dd>
       </dl>
-      <button class="btn own-toggle" type="button" id="toggleOwn">${owned.has(id) ? `✓ Have it - untick` : `Add to my seeds`}</button>
+      <button class="btn own-toggle" type="button" id="toggleOwn">${owned.has(id) ? `✓ Mam - odznacz` : `Dodaj do moich nasion`}</button>
     </div>
 
-    <div class="dsec"><h3>Mutation pools (${c.pools.length})</h3>
-      ${c.pools.length ? `<p class="flav" style="font-style:normal;margin-bottom:8px">Any two parents that share one of these can draw this crop at random. Open a pool to see everything else in it.</p>` : ""}
+    <div class="dsec"><h3>Pule mutacji (${c.pools.length})</h3>
+      ${c.pools.length ? `<p class="flav" style="font-style:normal;margin-bottom:8px">Dowolna dwójka rodziców dzieląca jedną z nich może wylosować tę roślinę. Otwórz pulę, żeby zobaczyć co jeszcze w niej jest.</p>` : ""}
       <div class="poolchips">${c.pools.length
         ? c.pools.map(p => `<button class="poolchip" type="button" data-pool="${p}">${esc(DATA.poolNames[p] || p)}
             <span class="tier">${POOLM[p] ? POOLM[p].length : 0}</span></button>`).join("")
-        : `<span style="color:var(--ink-faint);font-size:13px">None - this crop can only be obtained from a recipe.</span>`}</div>
+        : `<span style="color:var(--ink-faint);font-size:13px">Żadne - tę roślinę da się zdobyć wyłącznie z przepisu.</span>`}</div>
     </div>
 
-    <div class="dsec"><h3>How to get it (${from.length})</h3>
+    <div class="dsec"><h3>Jak to zdobyć (${from.length})</h3>
       <div class="linkrow">${from.length
         ? from.map(m => `<span class="parents">${parentLinks(m.parents)}${m.machineOnly ? ` <span class="tier">Crop Breeder</span>` : ""}</span>`).join("")
-        : `<span style="color:var(--ink-faint)">No recipe.${c.pools.length
-            ? ` Only ever from a pool draw, see the ${c.pools.length} pool${c.pools.length > 1 ? "s" : ""} above.`
-            : ` Not from a pool either, so this one is found in the world.`}</span>`}</div>
+        : `<span style="color:var(--ink-faint)">Brak przepisu.${c.pools.length
+            ? ` Wyłącznie z losowania puli, zobacz pule powyżej: ${c.pools.length}.`
+            : ` Nie ma tego też w żadnej puli, więc tę roślinę znajduje się w świecie.`}</span>`}</div>
     </div>
 
-    <div class="dsec"><h3>Used as a parent (${used.length})</h3>
+    <div class="dsec"><h3>Używane jako rodzic (${used.length})</h3>
       <div class="linkrow">${used.length
         ? used.map(m => `<span>${cropLink(m.out, owned.has(m.out) ? "own" : "miss")}
             <span class="parents" style="font-size:12px"> ← ${parentLinks(m.parents)}</span></span>`).join("")
-        : `<span style="color:var(--ink-faint)">Nowhere.</span>`}</div>
+        : `<span style="color:var(--ink-faint)">Nigdzie.</span>`}</div>
     </div>`;
 
   $("toggleOwn").onclick = () => { toggle(id); paintDrawer(); };
@@ -1766,13 +1766,13 @@ $("search").addEventListener("keydown", e => {
   if (!first) return;
   filter = ""; e.target.value = "";
   toggle(first.id);                       // toggle() saves and re-renders
-  status(owned.has(first.id) ? `Added ${first.name}` : `Removed ${first.name}`, "ok");
+  status(owned.has(first.id) ? `Dodano ${first.name}` : `Usunięto ${first.name}`, "ok");
 });
 
 $("clearAll").onclick = () => {
   if (!owned.size) return;
   snapshot(); owned.clear(); save(); render();
-  status(`Cleared ${undoState.length} crops - Undo is right above.`, "warn");
+  status(`Odznaczono ${undoState.length} roślin - Cofnij jest tuż wyżej.`, "warn");
 };
 
 $("undo").onclick = () => {
@@ -1781,7 +1781,7 @@ $("undo").onclick = () => {
   snapshot();                       // so Undo can be undone
   owned = new Set(back);
   save(); render();
-  status(`Restored ${owned.size} crops.`, "ok");
+  status(`Przywrócono ${owned.size} roślin.`, "ok");
 };
 
 /* --- export / import --- */
@@ -1790,10 +1790,10 @@ $("btnCopy").onclick = async () => {
   box.value = currentCode();
   try {
     await navigator.clipboard.writeText(box.value);
-    status(`Copied to clipboard.`, "ok");
+    status(`Skopiowano do schowka.`, "ok");
   } catch (e) {
     box.focus(); box.select();
-    status(`Clipboard is blocked - the box is selected, press Ctrl+C.`, "warn");
+    status(`Schowek jest zablokowany - tekst jest zaznaczony, naciśnij Ctrl+C.`, "warn");
   }
 };
 
@@ -1813,9 +1813,9 @@ $("btnFile").onclick = () => {
     a.href = url; a.download = `cropsnh-seeds-${stamp}.json`;
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 2000);
-    status(`Sent cropsnh-seeds-${stamp}.json to your downloads.`, "ok");
+    status(`Wysłano cropsnh-seeds-${stamp}.json do pobranych.`, "ok");
   } catch (e) {
-    status(`The browser refused the download - use Copy instead.`, "warn");
+    status(`Przeglądarka odmówiła pobrania - użyj Kopiuj.`, "warn");
   }
 };
 
@@ -1825,7 +1825,7 @@ $("filein").onchange = e => {
   if (!f) return;
   const r = new FileReader();
   r.onload = () => { $("code").value = r.result; applyImport(r.result); };
-  r.onerror = () => status(`Could not read that file.`, "warn");
+  r.onerror = () => status(`Nie udało się odczytać tego pliku.`, "warn");
   r.readAsText(f);
   e.target.value = "";
 };
@@ -1842,11 +1842,11 @@ if (!storage) {
   const w = $("storagewarn");
   w.hidden = false;
   w.textContent = embedded
-    ? `This browser will not let the page store anything, so your ticks disappear on reload. Press Copy and keep the text somewhere before you close the tab.`
-    : `This browser will not let the page store anything, so your ticks disappear on reload. Take a copy with Download file or Copy before you close it.`;
+    ? `Ta przeglądarka nie pozwala stronie niczego zapisać, więc zaznaczenia znikną po odświeżeniu. Naciśnij Kopiuj i zachowaj tekst, zanim zamkniesz kartę.`
+    : `Ta przeglądarka nie pozwala stronie niczego zapisać, więc zaznaczenia znikną po odświeżeniu. Zrób kopię przez Pobierz plik albo Kopiuj, zanim ją zamkniesz.`;
 }
 
-$("src").textContent = `${byName.length} crops · ${MUT.length} recipes · ${Object.keys(POOLM).length} pools`;
+$("src").textContent = `${byName.length} roślin · ${MUT.length} przepisów · ${Object.keys(POOLM).length} pul`;
 /* The url is read before anything is drawn, because render() writes the url:
    rendering first would replace the link you arrived on with #v=ready, so a
    shared link or a reload always landed on the default view. */
