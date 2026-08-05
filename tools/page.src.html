@@ -689,6 +689,7 @@ footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2p
         <button class="tab" type="button" role="tab" data-view="near">{{tab.near}}<span class="n" id="n-near"></span></button>
         <button class="tab" type="button" role="tab" data-view="pool">{{tab.pool}}</button>
         <button class="tab" type="button" role="tab" data-view="path">{{tab.path}}</button>
+        <button class="tab" type="button" role="tab" data-view="biome">{{tab.biome}}</button>
         <button class="tab" type="button" role="tab" data-view="tips">{{tab.tips}}</button>
         <button class="tab" type="button" role="tab" data-view="about">{{tab.about}}</button>
       </div>
@@ -716,6 +717,17 @@ footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2p
 <script>
 const DATA = __DATA__;
 const C = DATA.crops, MUT = DATA.mutations, POOLM = DATA.poolMembers;
+/* Biome tags are Forge's, so this table is read from Forge and the mods that
+   add biomes rather than from CropsNH - see the About tab.                  */
+const BIOMES = DATA.biomes || {};
+const biomeNm = t => (DATA.biomeNames && DATA.biomeNames[t]) || t;
+/* every biome carrying a tag, and every crop that likes it */
+const biomesWith = t => Object.keys(BIOMES).filter(b => BIOMES[b].tags.includes(t)).sort();
+const cropsLiking = t => Object.values(C).filter(c => c.biomes.includes(t))
+  .sort((a, b) => a.name.localeCompare(b.name));
+/* how many of a crop's tags this biome carries, which is what the score caps at 2 */
+const matchCount = (crop, biome) =>
+  crop.biomes.filter(t => (BIOMES[biome] || { tags: [] }).tags.includes(t)).length;
 
 const byName = Object.values(C).sort((a, b) => a.tier - b.tier || a.name.localeCompare(b.name));
 const allSorted = Object.values(C).sort((a, b) => a.name.localeCompare(b.name));
@@ -814,6 +826,10 @@ const pct = p => (p * 100).toFixed(2) + "%";
 /* Every crop name anywhere on the page opens its detail panel. */
 const cropLink = (id, cls) =>
   `<button class="inline-crop${cls ? " " + cls : ""}" type="button" data-crop="${id}">${esc(nm(id))}</button>`;
+
+/* Every biome tag anywhere on the page opens the list of biomes carrying it. */
+const tagLink = t =>
+  `<button class="inline-pool" type="button" data-tag="${t}">${esc(biomeNm(t))}</button>`;
 
 /* parents of a recipe, marking which ones you are missing */
 const parentLinks = ids => ids
@@ -1465,6 +1481,33 @@ function tipGroup(g, id) {
 /* Eleven sections is a long scroll, so it opens with a list of what is here.
    These jump by script rather than by href: an anchor would put its own
    fragment in the url, and the url already carries the view state.        */
+/* Biomes the other way round: find a place, see what it is worth growing there.
+   Filtered by the same box the seed list uses, kept in its own variable.   */
+let biomeFilter = "";
+function renderBiomes() {
+  const q = biomeFilter.trim().toLowerCase();
+  const names = Object.keys(BIOMES).sort();
+  const hits = names.filter(b => !q || b.toLowerCase().includes(q)
+    || BIOMES[b].tags.some(t => biomeNm(t).toLowerCase().includes(q)));
+  const row = b => {
+    const e = BIOMES[b];
+    const two = Object.values(C).filter(c => matchCount(c, b) >= 2).length;
+    return `<tr>
+      <td class="nm"><button class="inline-crop" type="button" data-biome="${esc(b)}">${esc(b)}</button></td>
+      <td class="via">${e.tags.map(tagLink).join(", ")}</td>
+      <td class="num">${two}</td>
+      <td class="via">${esc(e.from)}</td>
+    </tr>`;
+  };
+  return `<p class="viewnote">{{biomes.note}}</p>
+    <div class="pairpick"><label>{{biomes.search}}<input class="field" id="biomeSearch" type="search"
+      style="min-width:280px" value="${esc(biomeFilter)}" autocomplete="off"></label></div>
+    ${hits.length ? `<div class="tablescroll"><table class="odds">
+      <tr><th>{{biomes.thName}}</th><th>{{biomes.thTags}}</th><th class="num">{{biomes.thBest}}</th><th>{{biomes.thFrom}}</th></tr>
+      ${hits.map(row).join("")}</table></div>`
+      : `<div class="empty">{{biomes.noMatch}}</div>`}`;
+}
+
 function renderTips() {
   const secs = [{ id: "sec-flow", h: `{{flow.title}}` }]
     .concat(TIPS.map((g, i) => ({ id: `sec-${i}`, h: g.h })));
@@ -1482,7 +1525,8 @@ function renderAbout() {
   return `<p class="viewnote">{{about.note}}</p><div class="tips">`
     + tipGroup(APP, "sec-app")
     + `<section class="tipgroup"><h3>{{about.dataH}}</h3>
-        <p class="lead">{{foot.data}}</p></section>
+        <p class="lead">{{foot.data}}</p>
+        <p class="lead">{{about.biomeData}}</p></section>
       <section class="tipgroup"><h3>{{about.privacyH}}</h3>
         <p class="lead">{{foot.privacy}}</p></section>
       <section class="tipgroup"><h3>{{about.creditH}}</h3>
@@ -1568,6 +1612,8 @@ let drawerStack = [];
 
 function showCrop(id) { if (C[id]) { drawerStack.push({ t: "crop", id }); paintDrawer(); } }
 function showPool(key) { if (POOLM[key]) { drawerStack.push({ t: "pool", id: key }); paintDrawer(); } }
+function showTag(t) { if (DATA.biomeNames && DATA.biomeNames[t]) { drawerStack.push({ t: "tag", id: t }); paintDrawer(); } }
+function showBiome(b) { if (BIOMES[b]) { drawerStack.push({ t: "biome", id: b }); paintDrawer(); } }
 function drawerBack() {
   drawerStack.pop();
   drawerStack.length ? paintDrawer() : closeDrawer();
@@ -1575,7 +1621,9 @@ function drawerBack() {
 function paintDrawer() {
   const top = drawerStack[drawerStack.length - 1];
   if (!top) return closeDrawer();
-  top.t === "pool" ? renderPoolDrawer(top.id) : renderCropDrawer(top.id);
+  top.t === "pool" ? renderPoolDrawer(top.id) :
+  top.t === "tag" ? renderTagDrawer(top.id) :
+  top.t === "biome" ? renderBiomeDrawer(top.id) : renderCropDrawer(top.id);
   $("drawer").dataset.open = "true";
   $("drawer").setAttribute("aria-hidden", "false");
   $("scrim").dataset.open = "true";
@@ -1588,7 +1636,9 @@ function paintDrawer() {
 function backButton() {
   if (drawerStack.length < 2) return "";
   const prev = drawerStack[drawerStack.length - 2];
-  const label = prev.t === "pool" ? (DATA.poolNames[prev.id] || prev.id) : nm(prev.id);
+  const label = prev.t === "pool" ? (DATA.poolNames[prev.id] || prev.id)
+    : prev.t === "tag" ? biomeNm(prev.id)
+    : prev.t === "biome" ? prev.id : nm(prev.id);
   return `<button class="btn" type="button" id="drawerBack">&larr; ${esc(label)}</button>`;
 }
 
@@ -1626,6 +1676,58 @@ function renderPoolDrawer(key) {
     </div>`;
 }
 
+/* One tag: where it occurs and what wants it. */
+function renderTagDrawer(t) {
+  const bs = biomesWith(t), cs = cropsLiking(t);
+  $("drawer").innerHTML = `
+    <div class="drawer-top">
+      <h2>${esc(biomeNm(t))}</h2>
+      ${backButton()}
+      <button class="btn close" type="button" id="closeDrawer">{{drawer.close}}</button>
+    </div>
+    <p class="flav" style="font-style:normal">{{tag.intro}}</p>
+
+    <div class="dsec"><h3>{{tag.biomes}}</h3>
+      <div class="poollist">${bs.length ? bs.map(b =>
+        `<div class="poolrow"><button class="inline-crop" type="button" data-biome="${esc(b)}">${esc(b)}</button>
+          <span class="tier">${BIOMES[b].tags.length}</span></div>`).join("")
+        : `<span style="color:var(--ink-faint);font-size:13px">{{tag.noBiomes}}</span>`}</div>
+    </div>
+
+    <div class="dsec"><h3>{{tag.crops}}</h3>
+      <div class="poollist">${cs.map(c =>
+        `<div class="poolrow${owned.has(c.id) ? " have" : ""}">${cropLink(c.id, owned.has(c.id) ? "own" : "miss")}
+          <span class="tier">T${c.tier}</span></div>`).join("")}</div>
+    </div>`;
+}
+
+/* One biome: its tags, and what grows better there. */
+function renderBiomeDrawer(b) {
+  const e = BIOMES[b] || { tags: [] };
+  const rank = n => Object.values(C).filter(c => matchCount(c, b) === n)
+    .sort((x, y) => x.name.localeCompare(y.name));
+  const two = rank(2).concat(Object.values(C).filter(c => matchCount(c, b) > 2)
+    .sort((x, y) => x.name.localeCompare(y.name)));
+  const one = rank(1);
+  const list = cs => cs.length
+    ? cs.map(c => `<div class="poolrow${owned.has(c.id) ? " have" : ""}">${
+        cropLink(c.id, owned.has(c.id) ? "own" : "miss")}<span class="tier">T${c.tier}</span></div>`).join("")
+    : `<span style="color:var(--ink-faint);font-size:13px">{{biome.none}}</span>`;
+  $("drawer").innerHTML = `
+    <div class="drawer-top">
+      <h2>${esc(b)}</h2>
+      ${backButton()}
+      <button class="btn close" type="button" id="closeDrawer">{{drawer.close}}</button>
+    </div>
+    <p class="flav" style="font-style:normal">{{biome.intro}}</p>
+    <div class="dsec"><h3>{{biome.tags}}</h3>
+      <div class="poolchips">${e.tags.map(t =>
+        `<button class="poolchip" type="button" data-tag="${t}">${esc(biomeNm(t))}</button>`).join("")}</div>
+    </div>
+    <div class="dsec"><h3>{{biome.best}}</h3><div class="poollist">${list(two)}</div></div>
+    <div class="dsec"><h3>{{biome.good}}</h3><div class="poollist">${list(one)}</div></div>`;
+}
+
 function renderCropDrawer(id) {
   const c = C[id]; if (!c) return;
   const from = MUT.filter(m => m.out === id);
@@ -1658,7 +1760,7 @@ function renderCropDrawer(id) {
         ${c.minLight !== null ? `<dt>{{th.light}}</dt><dd>{{drawer.lightMin}}</dd>` : ""}
         <dt>{{drawer.growth}}</dt><dd>${c.growth ?? "-"}</dd>
         ${c.biomes && c.biomes.length ? `<dt>{{drawer.likes}}</dt><dd>${
-          esc(c.biomes.map(b => DATA.biomeNames[b] || b).join(", "))}<br>
+          c.biomes.map(tagLink).join(", ")}<br>
           <span style="font-size:12px;color:var(--ink-faint)">{{drawer.likesNote}}</span></dd>` : ""}
       </dl>
       <button class="btn own-toggle" type="button" id="toggleOwn">${owned.has(id) ? `{{drawer.untick}}` : `{{drawer.tick}}`}</button>
@@ -1708,9 +1810,17 @@ function render() {
     view === "ready" ? renderReady() :
     view === "near" ? renderNear() :
     view === "pool" ? renderPool() :
+    view === "biome" ? renderBiomes() :
     view === "tips" ? renderTips() :
     view === "about" ? renderAbout() : renderPath();
 
+  const bs = $("biomeSearch");
+  if (bs) bs.oninput = e => {
+    biomeFilter = e.target.value;
+    const at = document.activeElement === e.target;
+    render();
+    if (at) { const n = $("biomeSearch"); if (n) { n.focus(); n.value = biomeFilter; } }
+  };
   const sa = $("selA"), sb = $("selB"), st = $("selTarget"), fp = $("flowPick");
   if (sa) sa.onchange = e => { setPair(e.target.value, pairB); render(); };
   if (sb) sb.onchange = e => { setPair(pairA, e.target.value); render(); };
@@ -1734,7 +1844,7 @@ function toggle(id) {
 /* The hash carries the whole view, so a link lands on exactly what you were
    looking at. Written with replaceState: sharing works without every tab
    click becoming a history entry. Nothing here leaves the browser.       */
-const VIEWS = ["ready", "near", "pool", "path", "tips", "about"];
+const VIEWS = ["ready", "near", "pool", "path", "biome", "tips", "about"];
 let readingHash = false;
 
 function writeHash() {
@@ -1744,7 +1854,7 @@ function writeHash() {
   if (view === "pool") { if (pairA) q.set("a", pairA); if (pairB) q.set("b", pairB); }
   if (view === "path" && target) q.set("t", target);
   const top = drawerStack[drawerStack.length - 1];
-  if (top) q.set(top.t === "crop" ? "crop" : "mpool", top.id);
+  if (top) q.set({ crop: "crop", pool: "mpool", tag: "tag", biome: "biome" }[top.t], top.id);
   const h = "#" + q.toString();
   /* the other languages of this page are the same page, so switching keeps
      the tab, the pair and the open panel you are looking at */
@@ -1758,7 +1868,7 @@ function writeHash() {
    whether the page still needs a render of its own. */
 function readHash() {
   const q = new URLSearchParams(location.hash.slice(1));
-  if (!q.get("v") && !q.get("crop")) return false;
+  if (!q.get("v") && !q.get("crop") && !q.get("biome") && !q.get("tag")) return false;
   readingHash = true;
   const v = q.get("v"), a = q.get("a"), b = q.get("b"), t = q.get("t");
   if (VIEWS.includes(v)) view = v;
@@ -1769,9 +1879,11 @@ function readHash() {
   readingHash = false;
   render();
   drawerStack = [];
-  const crop = q.get("crop"), mp = q.get("mpool");
+  const crop = q.get("crop"), mp = q.get("mpool"), tg = q.get("tag"), bi = q.get("biome");
   if (crop && C[crop]) showCrop(crop);
   else if (mp && POOLM[mp]) showPool(mp);
+  else if (tg) showTag(tg);
+  else if (bi) showBiome(bi);
   else closeDrawer();
   return true;
 }
@@ -1783,6 +1895,10 @@ document.addEventListener("click", e => {
   if (star) { toggleSave(star.dataset.star); return; }
   const pair = e.target.closest("[data-pair]");
   if (pair) { setPair(...pair.dataset.pair.split("|")); render(); return; }
+  const tag = e.target.closest("[data-tag]");
+  if (tag) { showTag(tag.dataset.tag); return; }
+  const biome = e.target.closest("[data-biome]");
+  if (biome) { showBiome(biome.dataset.biome); return; }
   const pool = e.target.closest("[data-pool]");
   if (pool) { showPool(pool.dataset.pool); return; }
   const crop = e.target.closest("[data-crop]");

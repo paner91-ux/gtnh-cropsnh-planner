@@ -49,7 +49,12 @@ With nothing selected it ranks the best pairs from your own seeds by the chance 
 
 **Route to a goal** - the shortest chain of recipes from what you own to any crop you want.
 
-**Tips & tricks** - a seven step walkthrough plus 41 mechanics in plain language, each with a `why`
+**Biomes** - which biome to build in. A crop that matches two of a biome's tags gets +28 Nutrient
+Score, more than half the ceiling, and nothing in the game tells you which biomes carry which tags.
+Browsable both ways: from a crop's tags to the biomes that have them, and from a biome to the crops
+worth growing there.
+
+**Tips & tricks** - a seven step walkthrough plus 43 mechanics in plain language, each with a `why`
 box naming the method in the mod's code it was read from.
 
 **About this page** - what the tool can do, where its numbers come from, and what it stores. Kept
@@ -79,6 +84,12 @@ sub-soils and light requirements are all read straight out of the compiled mod:
 
 Built against **CropsNH 2.0.101**, as shipped in the GTNH 2.9 daily builds (nightly 659).
 In that version: 179 crops, 172 recipes, 66 pools.
+
+The **Biomes** tab is the one exception. Biome tags are Forge's, and each biome is registered by
+whichever mod added it, so `tools/biomes.py` reads them out of Minecraft, Biomes O' Plenty, Twilight
+Forest, RWG and Thaumcraft - every mod in this pack that registers any. 159 biomes. Same method,
+different jars: a mod that adds biomes without registering tags will not appear, and the script says
+so rather than quietly dropping them.
 
 Nothing else in the pack registers crops with CropsNH, so the list is complete rather than a
 selection. When a new CropsNH version lands the data is regenerated from the new jar rather than

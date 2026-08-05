@@ -127,6 +127,13 @@ def check(code, cat, base, used, warn):
 with open(os.path.join(ROOT, 'data', 'crops.json'), encoding='utf-8') as f:
     data = json.load(f)
 
+# biome tags come from Forge and the mods that add biomes, not from CropsNH,
+# so they are extracted separately and merged in here
+bpath = os.path.join(ROOT, 'data', 'biomes.json')
+if os.path.exists(bpath):
+    with open(bpath, encoding='utf-8') as f:
+        data['biomes'] = json.load(f)['biomes']
+
 # fields the page never reads
 for c in data['crops'].values():
     c.pop('cls', None)

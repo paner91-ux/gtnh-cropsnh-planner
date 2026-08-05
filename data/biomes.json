@@ -1,0 +1,1333 @@
+{
+ "biomes": {
+  "Alps": {
+   "tags": [
+    "COLD",
+    "MOUNTAIN",
+    "SNOWY"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Alps Forest": {
+   "tags": [
+    "COLD",
+    "FOREST",
+    "MOUNTAIN",
+    "SNOWY"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Arctic": {
+   "tags": [
+    "COLD",
+    "DEAD",
+    "SNOWY",
+    "WASTELAND"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Bamboo Forest": {
+   "tags": [
+    "DENSE",
+    "FOREST",
+    "JUNGLE",
+    "LUSH"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Bayou": {
+   "tags": [
+    "LUSH",
+    "SWAMP",
+    "WATER",
+    "WET"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Beach": {
+   "tags": [
+    "BEACH"
+   ],
+   "from": "minecraft"
+  },
+  "Birch Forest": {
+   "tags": [
+    "FOREST"
+   ],
+   "from": "minecraft"
+  },
+  "Birch Forest Hills": {
+   "tags": [
+    "FOREST",
+    "HILLS"
+   ],
+   "from": "minecraft"
+  },
+  "Bog": {
+   "tags": [
+    "DEAD",
+    "FOREST",
+    "SWAMP",
+    "WET"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Boneyard": {
+   "tags": [
+    "NETHER",
+    "SPOOKY",
+    "WASTELAND"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Boreal Forest": {
+   "tags": [
+    "CONIFEROUS",
+    "DENSE",
+    "FOREST",
+    "LUSH"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Brushland": {
+   "tags": [
+    "DRY",
+    "HOT",
+    "PLAINS",
+    "SAVANNA"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Canyon": {
+   "tags": [
+    "DRY",
+    "HILLS",
+    "HOT",
+    "MOUNTAIN",
+    "SANDY",
+    "SPARSE"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Canyon Ravine": {
+   "tags": [
+    "DRY",
+    "HILLS",
+    "HOT",
+    "SANDY"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Chaparral": {
+   "tags": [
+    "PLAINS",
+    "SPARSE"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Cherry Blossom Grove": {
+   "tags": [
+    "FOREST",
+    "LUSH",
+    "MAGICAL"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Cold Beach": {
+   "tags": [
+    "BEACH",
+    "COLD",
+    "SNOWY"
+   ],
+   "from": "minecraft"
+  },
+  "Cold Forest": {
+   "tags": [
+    "COLD",
+    "CONIFEROUS",
+    "DENSE",
+    "FOREST",
+    "HILLS"
+   ],
+   "from": "RWG"
+  },
+  "Cold Ocean": {
+   "tags": [
+    "BEACH",
+    "COLD",
+    "CONIFEROUS",
+    "FOREST",
+    "OCEAN"
+   ],
+   "from": "RWG"
+  },
+  "Cold Plains": {
+   "tags": [
+    "COLD",
+    "WASTELAND"
+   ],
+   "from": "RWG"
+  },
+  "Cold River": {
+   "tags": [
+    "COLD",
+    "CONIFEROUS",
+    "FOREST",
+    "RIVER"
+   ],
+   "from": "RWG"
+  },
+  "Cold Taiga": {
+   "tags": [
+    "COLD",
+    "CONIFEROUS",
+    "FOREST",
+    "SNOWY"
+   ],
+   "from": "minecraft"
+  },
+  "Cold Taiga Hills": {
+   "tags": [
+    "COLD",
+    "CONIFEROUS",
+    "FOREST",
+    "HILLS",
+    "SNOWY"
+   ],
+   "from": "minecraft"
+  },
+  "Coniferous Forest": {
+   "tags": [
+    "CONIFEROUS",
+    "DENSE",
+    "FOREST",
+    "HILLS"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Coral Reef": {
+   "tags": [
+    "WATER"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Corrupted Sands": {
+   "tags": [
+    "NETHER",
+    "SANDY",
+    "SPOOKY"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Crag": {
+   "tags": [
+    "DEAD",
+    "DRY",
+    "MOUNTAIN",
+    "SPOOKY",
+    "WASTELAND"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Dark Forest": {
+   "tags": [
+    "DENSE",
+    "FOREST",
+    "SPOOKY"
+   ],
+   "from": "TwilightForest"
+  },
+  "Dark Forest Center": {
+   "tags": [
+    "DENSE",
+    "FOREST",
+    "MAGICAL",
+    "SPOOKY"
+   ],
+   "from": "TwilightForest"
+  },
+  "Dead Forest": {
+   "tags": [
+    "DEAD",
+    "FOREST",
+    "SPARSE",
+    "SPOOKY"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Dead Swamp": {
+   "tags": [
+    "DEAD",
+    "SPARSE",
+    "SPOOKY",
+    "SWAMP"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Deciduous Forest": {
+   "tags": [
+    "DENSE",
+    "DRY",
+    "FOREST"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Deep Mushroom Forest": {
+   "tags": [
+    "FOREST",
+    "MUSHROOM"
+   ],
+   "from": "TwilightForest"
+  },
+  "Deep Ocean": {
+   "tags": [
+    "OCEAN"
+   ],
+   "from": "minecraft"
+  },
+  "Dense Twilight Forest": {
+   "tags": [
+    "DENSE",
+    "FOREST"
+   ],
+   "from": "TwilightForest"
+  },
+  "Desert": {
+   "tags": [
+    "DRY",
+    "HOT",
+    "SANDY"
+   ],
+   "from": "minecraft"
+  },
+  "DesertHills": {
+   "tags": [
+    "DRY",
+    "HILLS",
+    "HOT",
+    "SANDY"
+   ],
+   "from": "minecraft"
+  },
+  "Eerie biome id": {
+   "tags": [
+    "MAGICAL",
+    "SPOOKY"
+   ],
+   "from": "Thaumcraft"
+  },
+  "Eldritch Lands biome id": {
+   "tags": [
+    "END",
+    "MAGICAL",
+    "SPOOKY"
+   ],
+   "from": "Thaumcraft"
+  },
+  "Enchanted Forest": {
+   "tags": [
+    "FOREST",
+    "MAGICAL"
+   ],
+   "from": "TwilightForest"
+  },
+  "Extreme Hills": {
+   "tags": [
+    "HILLS",
+    "MOUNTAIN"
+   ],
+   "from": "minecraft"
+  },
+  "Extreme Hills Edge": {
+   "tags": [
+    "MOUNTAIN"
+   ],
+   "from": "minecraft"
+  },
+  "Extreme Hills+": {
+   "tags": [
+    "FOREST",
+    "MOUNTAIN",
+    "SPARSE"
+   ],
+   "from": "minecraft"
+  },
+  "Fen": {
+   "tags": [
+    "DEAD",
+    "FOREST",
+    "SWAMP",
+    "WET"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Fire Swamp": {
+   "tags": [
+    "HOT",
+    "SWAMP",
+    "WASTELAND"
+   ],
+   "from": "TwilightForest"
+  },
+  "Firefly Forest": {
+   "tags": [
+    "FOREST",
+    "LUSH"
+   ],
+   "from": "TwilightForest"
+  },
+  "Flower Field": {
+   "tags": [
+    "LUSH",
+    "PLAINS"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Forest": {
+   "tags": [
+    "FOREST"
+   ],
+   "from": "minecraft"
+  },
+  "ForestHills": {
+   "tags": [
+    "FOREST",
+    "HILLS"
+   ],
+   "from": "minecraft"
+  },
+  "Frost Forest": {
+   "tags": [
+    "COLD",
+    "FOREST",
+    "SNOWY",
+    "SPARSE"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "FrozenOcean": {
+   "tags": [
+    "COLD",
+    "OCEAN",
+    "SNOWY"
+   ],
+   "from": "minecraft"
+  },
+  "FrozenRiver": {
+   "tags": [
+    "COLD",
+    "RIVER",
+    "SNOWY"
+   ],
+   "from": "minecraft"
+  },
+  "Fungi Forest": {
+   "tags": [
+    "FOREST",
+    "LUSH",
+    "MAGICAL",
+    "MUSHROOM",
+    "SWAMP",
+    "WET"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Garden": {
+   "tags": [
+    "LUSH",
+    "MAGICAL",
+    "PLAINS"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Glacier": {
+   "tags": [
+    "COLD",
+    "DEAD",
+    "HILLS",
+    "SNOWY"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Grassland": {
+   "tags": [
+    "HILLS",
+    "LUSH",
+    "PLAINS",
+    "SPARSE",
+    "SWAMP"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Grove": {
+   "tags": [
+    "DENSE",
+    "FOREST",
+    "LUSH",
+    "PLAINS"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Heathland": {
+   "tags": [
+    "DRY",
+    "PLAINS",
+    "SAVANNA"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Hell": {
+   "tags": [
+    "DRY",
+    "HOT",
+    "NETHER"
+   ],
+   "from": "minecraft"
+  },
+  "Highland": {
+   "tags": [
+    "HILLS",
+    "MOUNTAIN",
+    "SPARSE"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Highlands Center": {
+   "tags": [
+    "DEAD",
+    "DRY",
+    "MESA",
+    "WASTELAND"
+   ],
+   "from": "TwilightForest"
+  },
+  "Hot Desert": {
+   "tags": [
+    "DRY",
+    "HOT",
+    "SANDY"
+   ],
+   "from": "RWG"
+  },
+  "Hot Forest": {
+   "tags": [
+    "HOT",
+    "PLAINS",
+    "SAVANNA",
+    "SPARSE"
+   ],
+   "from": "RWG"
+  },
+  "Hot Ocean": {
+   "tags": [
+    "BEACH",
+    "DRY",
+    "HOT",
+    "OCEAN",
+    "SANDY"
+   ],
+   "from": "RWG"
+  },
+  "Hot Plains": {
+   "tags": [
+    "HOT",
+    "PLAINS",
+    "SAVANNA",
+    "SPARSE"
+   ],
+   "from": "RWG"
+  },
+  "Hot River": {
+   "tags": [
+    "DRY",
+    "HOT",
+    "RIVER",
+    "SANDY"
+   ],
+   "from": "RWG"
+  },
+  "Ice Mountains": {
+   "tags": [
+    "COLD",
+    "MOUNTAIN",
+    "SNOWY"
+   ],
+   "from": "minecraft"
+  },
+  "Ice Ocean": {
+   "tags": [
+    "BEACH",
+    "COLD",
+    "OCEAN",
+    "SNOWY"
+   ],
+   "from": "RWG"
+  },
+  "Ice Plains": {
+   "tags": [
+    "COLD",
+    "SNOWY",
+    "WASTELAND"
+   ],
+   "from": "minecraft"
+  },
+  "Ice River": {
+   "tags": [
+    "COLD",
+    "RIVER",
+    "SNOWY"
+   ],
+   "from": "RWG"
+  },
+  "Jade Cliffs": {
+   "tags": [
+    "DENSE",
+    "FOREST",
+    "MOUNTAIN"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Jungle": {
+   "tags": [
+    "DENSE",
+    "HOT",
+    "JUNGLE",
+    "WET"
+   ],
+   "from": "minecraft"
+  },
+  "Jungle (RWG)": {
+   "tags": [
+    "HOT",
+    "JUNGLE",
+    "WET"
+   ],
+   "from": "RWG"
+  },
+  "JungleEdge": {
+   "tags": [
+    "FOREST",
+    "HOT",
+    "JUNGLE",
+    "WET"
+   ],
+   "from": "minecraft"
+  },
+  "JungleHills": {
+   "tags": [
+    "DENSE",
+    "HILLS",
+    "HOT",
+    "JUNGLE",
+    "WET"
+   ],
+   "from": "minecraft"
+  },
+  "Kelp Forest": {
+   "tags": [
+    "FOREST",
+    "WATER"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Lavender Fields": {
+   "tags": [
+    "LUSH",
+    "PLAINS",
+    "SPARSE"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Lush Desert": {
+   "tags": [
+    "DRY",
+    "HOT",
+    "LUSH",
+    "SANDY",
+    "SAVANNA"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Lush Swamp": {
+   "tags": [
+    "LUSH",
+    "SWAMP",
+    "WATER",
+    "WET"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Magical Forest biome id": {
+   "tags": [
+    "FOREST",
+    "MAGICAL"
+   ],
+   "from": "Thaumcraft"
+  },
+  "Mangrove": {
+   "tags": [
+    "FOREST",
+    "LUSH",
+    "WATER",
+    "WET"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Maple Woods": {
+   "tags": [
+    "COLD",
+    "FOREST"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Marsh": {
+   "tags": [
+    "LUSH",
+    "SPARSE",
+    "SWAMP",
+    "WATER",
+    "WET"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Meadow": {
+   "tags": [
+    "FOREST",
+    "LUSH",
+    "PLAINS"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Meadow Forest": {
+   "tags": [
+    "FOREST",
+    "LUSH",
+    "PLAINS"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Mega Taiga": {
+   "tags": [
+    "COLD",
+    "CONIFEROUS",
+    "FOREST"
+   ],
+   "from": "minecraft"
+  },
+  "Mega Taiga Hills": {
+   "tags": [
+    "COLD",
+    "CONIFEROUS",
+    "FOREST",
+    "HILLS"
+   ],
+   "from": "minecraft"
+  },
+  "Mesa": {
+   "tags": [
+    "MESA",
+    "SANDY"
+   ],
+   "from": "minecraft"
+  },
+  "Mesa Plateau": {
+   "tags": [
+    "MESA",
+    "SANDY"
+   ],
+   "from": "minecraft"
+  },
+  "Mesa Plateau F": {
+   "tags": [
+    "MESA",
+    "SANDY",
+    "SPARSE"
+   ],
+   "from": "minecraft"
+  },
+  "Moor": {
+   "tags": [
+    "HILLS",
+    "SPARSE",
+    "SWAMP",
+    "WET"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Mountain": {
+   "tags": [
+    "DRY",
+    "FOREST",
+    "MOUNTAIN"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Mushroom Forest": {
+   "tags": [
+    "FOREST",
+    "MUSHROOM"
+   ],
+   "from": "TwilightForest"
+  },
+  "MushroomIsland": {
+   "tags": [
+    "MUSHROOM"
+   ],
+   "from": "minecraft"
+  },
+  "MushroomIslandShore": {
+   "tags": [
+    "BEACH",
+    "MUSHROOM"
+   ],
+   "from": "minecraft"
+  },
+  "Mystic Grove": {
+   "tags": [
+    "FOREST",
+    "LUSH",
+    "MAGICAL",
+    "WET"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Oak Savanna": {
+   "tags": [
+    "FOREST",
+    "SPARSE"
+   ],
+   "from": "TwilightForest"
+  },
+  "Oasis": {
+   "tags": [
+    "DRY",
+    "HOT",
+    "JUNGLE",
+    "LUSH",
+    "SANDY"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Ocean": {
+   "tags": [
+    "OCEAN"
+   ],
+   "from": "minecraft"
+  },
+  "Ocean Oasis": {
+   "tags": [
+    "BEACH",
+    "HOT",
+    "JUNGLE",
+    "OCEAN",
+    "WET"
+   ],
+   "from": "RWG"
+  },
+  "Ominous Woods": {
+   "tags": [
+    "DEAD",
+    "FOREST",
+    "MAGICAL",
+    "SPOOKY",
+    "SWAMP"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Orchard": {
+   "tags": [
+    "FOREST",
+    "LUSH",
+    "PLAINS",
+    "SPARSE"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Outback": {
+   "tags": [
+    "DRY",
+    "HOT",
+    "PLAINS",
+    "SANDY",
+    "SAVANNA"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Phantasmagoric Inferno": {
+   "tags": [
+    "NETHER",
+    "SPOOKY"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Plains": {
+   "tags": [
+    "PLAINS"
+   ],
+   "from": "minecraft"
+  },
+  "Plains (RWG)": {
+   "tags": [
+    "PLAINS"
+   ],
+   "from": "RWG"
+  },
+  "Prairie": {
+   "tags": [
+    "DRY",
+    "PLAINS",
+    "SPARSE"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Quagmire": {
+   "tags": [
+    "DEAD",
+    "SPOOKY",
+    "SWAMP",
+    "WASTELAND",
+    "WET"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Rainforest": {
+   "tags": [
+    "DENSE",
+    "FOREST",
+    "HILLS",
+    "JUNGLE",
+    "LUSH",
+    "WET"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Redwood": {
+   "tags": [
+    "COLD",
+    "CONIFEROUS",
+    "FOREST"
+   ],
+   "from": "RWG"
+  },
+  "Redwood Forest": {
+   "tags": [
+    "CONIFEROUS",
+    "DENSE",
+    "FOREST"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "River": {
+   "tags": [
+    "RIVER"
+   ],
+   "from": "minecraft"
+  },
+  "River Oasis": {
+   "tags": [
+    "HOT",
+    "JUNGLE",
+    "RIVER",
+    "WET"
+   ],
+   "from": "RWG"
+  },
+  "Roofed Forest": {
+   "tags": [
+    "DENSE",
+    "FOREST",
+    "SPOOKY"
+   ],
+   "from": "minecraft"
+  },
+  "Sacred Springs": {
+   "tags": [
+    "DENSE",
+    "FOREST",
+    "LUSH",
+    "MAGICAL",
+    "MOUNTAIN",
+    "WET"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Savanna": {
+   "tags": [
+    "HOT",
+    "PLAINS",
+    "SAVANNA",
+    "SPARSE"
+   ],
+   "from": "minecraft"
+  },
+  "Savanna Plateau": {
+   "tags": [
+    "HOT",
+    "PLAINS",
+    "SAVANNA",
+    "SPARSE"
+   ],
+   "from": "minecraft"
+  },
+  "Scrubland": {
+   "tags": [
+    "DRY",
+    "HOT",
+    "PLAINS",
+    "SAVANNA",
+    "SPARSE"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Seasonal Forest": {
+   "tags": [
+    "DENSE",
+    "FOREST",
+    "LUSH"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Shield": {
+   "tags": [
+    "CONIFEROUS",
+    "FOREST",
+    "WATER",
+    "WET"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Shrubland": {
+   "tags": [
+    "DRY",
+    "PLAINS",
+    "SPARSE"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Silkglades": {
+   "tags": [
+    "DEAD",
+    "FOREST",
+    "SPOOKY",
+    "SWAMP"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Sky": {
+   "tags": [
+    "COLD",
+    "DRY",
+    "END"
+   ],
+   "from": "minecraft"
+  },
+  "Sludgepit": {
+   "tags": [
+    "DEAD",
+    "FOREST",
+    "SPOOKY",
+    "SWAMP",
+    "WASTELAND",
+    "WET"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Snow Desert": {
+   "tags": [
+    "COLD",
+    "SNOWY",
+    "WASTELAND"
+   ],
+   "from": "RWG"
+  },
+  "Snow Forest": {
+   "tags": [
+    "COLD",
+    "CONIFEROUS",
+    "FOREST",
+    "SNOWY"
+   ],
+   "from": "RWG"
+  },
+  "Snowy Coniferous Forest": {
+   "tags": [
+    "COLD",
+    "CONIFEROUS",
+    "DENSE",
+    "FOREST",
+    "HILLS",
+    "SNOWY"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Snowy Forest": {
+   "tags": [
+    "COLD",
+    "CONIFEROUS",
+    "FOREST",
+    "SNOWY"
+   ],
+   "from": "TwilightForest"
+  },
+  "Spruce Woods": {
+   "tags": [
+    "CONIFEROUS",
+    "DENSE",
+    "FOREST",
+    "LUSH"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Steppe": {
+   "tags": [
+    "DEAD",
+    "DRY",
+    "HOT",
+    "PLAINS",
+    "SANDY",
+    "SAVANNA",
+    "SPARSE"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Stone Beach": {
+   "tags": [
+    "BEACH"
+   ],
+   "from": "minecraft"
+  },
+  "Swampland": {
+   "tags": [
+    "SWAMP",
+    "WET"
+   ],
+   "from": "minecraft"
+  },
+  "Taiga": {
+   "tags": [
+    "COLD",
+    "CONIFEROUS",
+    "FOREST"
+   ],
+   "from": "minecraft"
+  },
+  "TaigaHills": {
+   "tags": [
+    "COLD",
+    "CONIFEROUS",
+    "FOREST",
+    "HILLS"
+   ],
+   "from": "minecraft"
+  },
+  "Taint biome id": {
+   "tags": [
+    "MAGICAL",
+    "WASTELAND"
+   ],
+   "from": "Thaumcraft"
+  },
+  "Temperate Ocean": {
+   "tags": [
+    "BEACH",
+    "COLD",
+    "FOREST",
+    "OCEAN"
+   ],
+   "from": "RWG"
+  },
+  "Temperate Rainforest": {
+   "tags": [
+    "CONIFEROUS",
+    "FOREST",
+    "HILLS",
+    "LUSH",
+    "WET"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Temperate River": {
+   "tags": [
+    "COLD",
+    "FOREST",
+    "RIVER"
+   ],
+   "from": "RWG"
+  },
+  "Thicket": {
+   "tags": [
+    "DEAD",
+    "DENSE",
+    "DRY",
+    "FOREST",
+    "PLAINS"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Thornlands": {
+   "tags": [
+    "DEAD",
+    "DRY",
+    "HILLS",
+    "WASTELAND"
+   ],
+   "from": "TwilightForest"
+  },
+  "Tropical Island": {
+   "tags": [
+    "HOT",
+    "JUNGLE",
+    "WET"
+   ],
+   "from": "RWG"
+  },
+  "Tropical Rainforest": {
+   "tags": [
+    "DENSE",
+    "HOT",
+    "JUNGLE",
+    "LUSH",
+    "WET"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Tropics": {
+   "tags": [
+    "BEACH",
+    "JUNGLE",
+    "LUSH",
+    "WATER",
+    "WET"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Tundra": {
+   "tags": [
+    "COLD",
+    "DEAD",
+    "DRY",
+    "SPARSE",
+    "WASTELAND"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Twilight Clearing": {
+   "tags": [
+    "PLAINS",
+    "SPARSE"
+   ],
+   "from": "TwilightForest"
+  },
+  "Twilight Forest": {
+   "tags": [
+    "FOREST"
+   ],
+   "from": "TwilightForest"
+  },
+  "Twilight Glacier": {
+   "tags": [
+    "COLD",
+    "SNOWY",
+    "WASTELAND"
+   ],
+   "from": "TwilightForest"
+  },
+  "Twilight Highlands": {
+   "tags": [
+    "CONIFEROUS",
+    "FOREST",
+    "MOUNTAIN"
+   ],
+   "from": "TwilightForest"
+  },
+  "Twilight Lake": {
+   "tags": [
+    "OCEAN"
+   ],
+   "from": "TwilightForest"
+  },
+  "Twilight Stream": {
+   "tags": [
+    "RIVER"
+   ],
+   "from": "TwilightForest"
+  },
+  "Twilight Swamp": {
+   "tags": [
+    "SWAMP",
+    "WET"
+   ],
+   "from": "TwilightForest"
+  },
+  "Undergarden": {
+   "tags": [
+    "JUNGLE",
+    "NETHER",
+    "SPOOKY"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Visceral Heap": {
+   "tags": [
+    "NETHER",
+    "SPOOKY"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Volcano": {
+   "tags": [
+    "DRY",
+    "HOT",
+    "MOUNTAIN",
+    "WASTELAND"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Wasteland": {
+   "tags": [
+    "DEAD",
+    "SPARSE",
+    "SPOOKY",
+    "WASTELAND"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Wet Ocean": {
+   "tags": [
+    "BEACH",
+    "HOT",
+    "JUNGLE",
+    "OCEAN",
+    "WET"
+   ],
+   "from": "RWG"
+  },
+  "Wet River": {
+   "tags": [
+    "HOT",
+    "JUNGLE",
+    "RIVER",
+    "WET"
+   ],
+   "from": "RWG"
+  },
+  "Wetland": {
+   "tags": [
+    "DENSE",
+    "FOREST",
+    "LUSH",
+    "SWAMP",
+    "WET"
+   ],
+   "from": "BiomesOPlenty"
+  },
+  "Woodland": {
+   "tags": [
+    "DENSE",
+    "DRY",
+    "FOREST"
+   ],
+   "from": "BiomesOPlenty"
+  }
+ }
+}
