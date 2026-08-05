@@ -919,7 +919,7 @@ function reqChips(crop, extra) {
 }
 
 const machChip = m => m.machineOnly
-  ? `<span class="chip mach"><span class="k">tylko w</span>Crop Breeder</span>` : "";
+  ? `<span class="chip mach" title="Ten przepis działa wyłącznie w maszynie Crop Breeder, nigdy na patyku"><span class="k">tylko w</span>Crop Breeder</span>` : "";
 
 /* Same facts as reqChips, same labels, without the boxes - see .pneed. */
 function reqPlain(crop) {
@@ -1362,6 +1362,8 @@ const TIPS = [
      `Dokładnie siedem roślin nigdy nie występuje jako wynik żadnego przepisu, więc mogą pochodzić tylko z generowania świata, od mobów albo z łupów. Pięć z nich może też wypaść z losowania puli; Gaia Wart i Primordial Berry nie są w żadnej puli. Całą resztę w paczce da się wyhodować, jeżeli zdobędziesz jej rodziców.`],
     [`Przepis o trzech albo czterech rodzicach wymaga <b>tylu wyrośniętych roślin wokół jednego patyka</b>. Patyk ma cztery boki, więc czworo rodziców to granica.`,
      `Czytane są wyłącznie cztery sąsiednie pola w poziomie i każdy rodzic z przepisu musi tam stać, dostatecznie wyrośnięty, w tej samej chwili.`],
+    [`<b>Przepis oznaczony <em>tylko w Crop Breeder</em> nigdy nie odpali na patyku.</b> Oznaczenie siedzi na przepisie, a nie na roślinie, więc samo w sobie nie znaczy, że rośliny nie da się zdobyć. W tej paczce i tak na to wychodzi: takich przepisów jest ${MUT.filter(m => m.machineOnly).length}, a w ${MUT.filter(m => m.machineOnly && !MUT.some(x => x.out === m.out && !x.machineOnly) && !C[m.out].pools.length).length} przypadkach roślina nie ma innego przepisu ani nie należy do żadnej puli, więc maszyna jest jej jedynym źródłem.`,
+     `<em>machineOnly()</em> dokłada <em>MachineOnlyBreedingRequirement</em>, którego <em>canBreed()</em> zwraca false, nie patrząc na nic. Wymagania są filtrowane po interfejsie: patyk pyta tylko te implementujące <em>IWorldBreedingRequirement</em>, a maszyna tylko <em>IMachineBreedingRequirement</em>, i to wymaganie implementuje wyłącznie pierwszy z nich, więc maszyna go w ogóle nie widzi. Na patyku przepis nie spełnia warunków jak każdy inny, co znaczy, że ta połowa próby spada do losowania z puli.`],
   ]},
 ];
 

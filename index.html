@@ -919,7 +919,7 @@ function reqChips(crop, extra) {
 }
 
 const machChip = m => m.machineOnly
-  ? `<span class="chip mach"><span class="k">only in</span>Crop Breeder</span>` : "";
+  ? `<span class="chip mach" title="This recipe only runs in the Crop Breeder machine, never on a crop stick"><span class="k">only in</span>Crop Breeder</span>` : "";
 
 /* Same facts as reqChips, same labels, without the boxes - see .pneed. */
 function reqPlain(crop) {
@@ -1362,6 +1362,8 @@ const TIPS = [
      `Exactly seven crops never appear as the output of any recipe, so they can only come from world generation, mobs or loot. Five of them can also turn up in a pool draw; Gaia Wart and Primordial Berry sit in no pool either. Everything else in the pack can be bred if you can get hold of its parents.`],
     [`A recipe with three or four parents needs that <b>many grown crops around one stick</b>. A stick has four sides, so four parents is the limit.`,
      `Only the four horizontal neighbours are read, and every one of a recipe's parents has to be standing there and grown enough at the same moment.`],
+    [`<b>A recipe marked <em>only in Crop Breeder</em> never fires on a crop stick.</b> The mark is on the recipe, not on the crop, so on its own it does not mean the crop is out of reach. In this pack it works out that way anyway: ${MUT.filter(m => m.machineOnly).length} recipes carry the mark, and for ${MUT.filter(m => m.machineOnly && !MUT.some(x => x.out === m.out && !x.machineOnly) && !C[m.out].pools.length).length} of them the crop has no other recipe and belongs to no pool, so the machine really is its only source.`,
+     `<em>machineOnly()</em> attaches a <em>MachineOnlyBreedingRequirement</em>, whose <em>canBreed()</em> returns false without looking at anything. Requirements are filtered by interface: the crop stick asks only those implementing <em>IWorldBreedingRequirement</em> and the machine only <em>IMachineBreedingRequirement</em>, and this one implements the first alone, so the machine never sees it. On a stick the recipe fails its conditions like any other, which means that half of the attempt falls back to a pool draw.`],
   ]},
 ];
 

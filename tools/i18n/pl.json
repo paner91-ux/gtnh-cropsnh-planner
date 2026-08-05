@@ -289,5 +289,8 @@
   "warn.noStorageFramed": "Ta przeglądarka nie pozwala stronie niczego zapisać, więc zaznaczenia znikną po odświeżeniu. Naciśnij Kopiuj i zachowaj tekst, zanim zamkniesz kartę.",
   "warn.noStorage": "Ta przeglądarka nie pozwala stronie niczego zapisać, więc zaznaczenia znikną po odświeżeniu. Zrób kopię przez Pobierz plik albo Kopiuj, zanim ją zamkniesz.",
   "rail.tier": "Poziom ${tier}",
-  "rail.details": "Szczegóły: ${esc(c.name)}"
+  "rail.details": "Szczegóły: ${esc(c.name)}",
+  "chip.onlyTitle": "Ten przepis działa wyłącznie w maszynie Crop Breeder, nigdy na patyku",
+  "tips.g10.i4": "<b>Przepis oznaczony <em>tylko w Crop Breeder</em> nigdy nie odpali na patyku.</b> Oznaczenie siedzi na przepisie, a nie na roślinie, więc samo w sobie nie znaczy, że rośliny nie da się zdobyć. W tej paczce i tak na to wychodzi: takich przepisów jest ${MUT.filter(m => m.machineOnly).length}, a w ${MUT.filter(m => m.machineOnly && !MUT.some(x => x.out === m.out && !x.machineOnly) && !C[m.out].pools.length).length} przypadkach roślina nie ma innego przepisu ani nie należy do żadnej puli, więc maszyna jest jej jedynym źródłem.",
+  "tips.g10.i4w": "<em>machineOnly()</em> dokłada <em>MachineOnlyBreedingRequirement</em>, którego <em>canBreed()</em> zwraca false, nie patrząc na nic. Wymagania są filtrowane po interfejsie: patyk pyta tylko te implementujące <em>IWorldBreedingRequirement</em>, a maszyna tylko <em>IMachineBreedingRequirement</em>, i to wymaganie implementuje wyłącznie pierwszy z nich, więc maszyna go w ogóle nie widzi. Na patyku przepis nie spełnia warunków jak każdy inny, co znaczy, że ta połowa próby spada do losowania z puli."
 }

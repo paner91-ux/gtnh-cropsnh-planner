@@ -289,5 +289,8 @@
   "warn.noStorageFramed": "This browser will not let the page store anything, so your ticks disappear on reload. Press Copy and keep the text somewhere before you close the tab.",
   "warn.noStorage": "This browser will not let the page store anything, so your ticks disappear on reload. Take a copy with Download file or Copy before you close it.",
   "rail.tier": "Tier ${tier}",
-  "rail.details": "Details for ${esc(c.name)}"
+  "rail.details": "Details for ${esc(c.name)}",
+  "chip.onlyTitle": "This recipe only runs in the Crop Breeder machine, never on a crop stick",
+  "tips.g10.i4": "<b>A recipe marked <em>only in Crop Breeder</em> never fires on a crop stick.</b> The mark is on the recipe, not on the crop, so on its own it does not mean the crop is out of reach. In this pack it works out that way anyway: ${MUT.filter(m => m.machineOnly).length} recipes carry the mark, and for ${MUT.filter(m => m.machineOnly && !MUT.some(x => x.out === m.out && !x.machineOnly) && !C[m.out].pools.length).length} of them the crop has no other recipe and belongs to no pool, so the machine really is its only source.",
+  "tips.g10.i4w": "<em>machineOnly()</em> attaches a <em>MachineOnlyBreedingRequirement</em>, whose <em>canBreed()</em> returns false without looking at anything. Requirements are filtered by interface: the crop stick asks only those implementing <em>IWorldBreedingRequirement</em> and the machine only <em>IMachineBreedingRequirement</em>, and this one implements the first alone, so the machine never sees it. On a stick the recipe fails its conditions like any other, which means that half of the attempt falls back to a pool draw."
 }

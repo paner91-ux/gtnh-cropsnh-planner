@@ -904,7 +904,7 @@ function reqChips(crop, extra) {
 }
 
 const machChip = m => m.machineOnly
-  ? `<span class="chip mach"><span class="k">{{chip.only}}</span>{{word.breeder}}</span>` : "";
+  ? `<span class="chip mach" title="{{chip.onlyTitle}}"><span class="k">{{chip.only}}</span>{{word.breeder}}</span>` : "";
 
 /* Same facts as reqChips, same labels, without the boxes - see .pneed. */
 function reqPlain(crop) {
@@ -1347,6 +1347,8 @@ const TIPS = [
      `{{tips.g10.i2w}}`],
     [`{{tips.g10.i3}}`,
      `{{tips.g10.i3w}}`],
+    [`{{tips.g10.i4}}`,
+     `{{tips.g10.i4w}}`],
   ]},
 ];
 
