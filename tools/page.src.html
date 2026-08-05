@@ -929,9 +929,15 @@ function bestPairs(limit) {
 }
 
 /* ---------------------------------------------------------- rail */
-function renderRail() {
+/* byName is sorted by tier then name and the groups render in tier order, so
+   entry 0 here is the first row on screen - which is what Enter ticks.     */
+function railList() {
   const q = filter.trim().toLowerCase();
-  const list = byName.filter(c => !q || c.name.toLowerCase().includes(q) || c.id.toLowerCase().includes(q));
+  return byName.filter(c => !q || c.name.toLowerCase().includes(q) || c.id.toLowerCase().includes(q));
+}
+
+function renderRail() {
+  const list = railList();
   const groups = new Map();
   for (const c of list) (groups.get(c.tier) || groups.set(c.tier, []).get(c.tier)).push(c);
 
@@ -1405,6 +1411,7 @@ function paintDrawer() {
   $("closeDrawer").onclick = closeDrawer;
   const back = $("drawerBack");
   if (back) back.onclick = drawerBack;
+  writeHash();
 }
 
 function backButton() {
@@ -1516,6 +1523,7 @@ function closeDrawer() {
   $("drawer").dataset.open = "false";
   $("drawer").setAttribute("aria-hidden", "true");
   $("scrim").dataset.open = "false";
+  writeHash();
 }
 
 /* ---------------------------------------------------------- render */
@@ -1542,11 +1550,51 @@ function render() {
     view = "pool";
     render();
   };
+  writeHash();
 }
 
 function toggle(id) {
   owned.has(id) ? owned.delete(id) : owned.add(id);
   save(); render();
+}
+
+/* ---------------------------------------------------------- url state */
+/* The hash carries the whole view, so a link lands on exactly what you were
+   looking at. Written with replaceState: sharing works without every tab
+   click becoming a history entry. Nothing here leaves the browser.       */
+const VIEWS = ["ready", "near", "pool", "path", "tips"];
+let readingHash = false;
+
+function writeHash() {
+  if (readingHash) return;
+  const q = new URLSearchParams();
+  q.set("v", view);
+  if (view === "pool") { if (pairA) q.set("a", pairA); if (pairB) q.set("b", pairB); }
+  if (view === "path" && target) q.set("t", target);
+  const top = drawerStack[drawerStack.length - 1];
+  if (top) q.set(top.t === "crop" ? "crop" : "mpool", top.id);
+  const h = "#" + q.toString();
+  if (h === location.hash) return;
+  // file:// rejects replaceState in some browsers; the page must still work
+  try { history.replaceState(null, "", h); } catch (e) {}
+}
+
+function readHash() {
+  const q = new URLSearchParams(location.hash.slice(1));
+  if (!q.get("v") && !q.get("crop")) return;
+  readingHash = true;
+  const v = q.get("v"), a = q.get("a"), b = q.get("b"), t = q.get("t");
+  if (VIEWS.includes(v)) view = v;
+  if (a && C[a]) pairA = a;
+  if (b && C[b]) pairB = b;
+  if (t && C[t]) target = t;
+  readingHash = false;
+  render();
+  drawerStack = [];
+  const crop = q.get("crop"), mp = q.get("mpool");
+  if (crop && C[crop]) showCrop(crop);
+  else if (mp && POOLM[mp]) showPool(mp);
+  else closeDrawer();
 }
 
 document.addEventListener("click", e => {
@@ -1568,6 +1616,18 @@ document.addEventListener("click", e => {
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeDrawer(); });
 
 $("search").addEventListener("input", e => { filter = e.target.value; renderRail(); });
+
+/* Enter ticks the top match and clears the box, so a run of seeds can be
+   entered without leaving the keyboard.                                   */
+$("search").addEventListener("keydown", e => {
+  if (e.key !== "Enter") return;
+  e.preventDefault();
+  const first = railList()[0];
+  if (!first) return;
+  filter = ""; e.target.value = "";
+  toggle(first.id);                       // toggle() saves and re-renders
+  status(`${owned.has(first.id) ? "Added" : "Removed"} ${first.name}`, "ok");
+});
 
 $("clearAll").onclick = () => {
   if (!owned.size) return;
@@ -1649,4 +1709,6 @@ if (!storage) {
 $("src").textContent = `${byName.length} crops · ${MUT.length} recipes · ${Object.keys(POOLM).length} pools`;
 render();
 syncCode();
+readHash();                                    // a shared link lands on its view
+window.addEventListener("hashchange", readHash);
 </script>
