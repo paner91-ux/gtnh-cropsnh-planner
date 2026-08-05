@@ -414,7 +414,21 @@ p, li { text-wrap: pretty; }
 .step .made { font-family: var(--face-display); font-size: 16px; font-weight: 600; }
 
 /* ---------------------------------------------------------- tips */
+/* eleven sections is a long page, so it opens with what is on it */
+.tipindex {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin: 0 0 22px; padding-bottom: 16px; border-bottom: 1px solid var(--rule);
+}
+.tipindex button {
+  font: inherit; font-size: 12px; cursor: pointer; padding: 3px 9px;
+  color: var(--ink); background: var(--paper-2);
+  border: 1px solid var(--rule); border-radius: 2px;
+}
+.tipindex button:hover { background: var(--paper-3); border-color: var(--leaf); }
+.tipindex button:focus-visible { outline: 2px solid var(--leaf); outline-offset: 1px; }
+
 .tips { display: flex; flex-direction: column; gap: 26px; }
+.tipgroup { scroll-margin-top: 14px; }
 .tipgroup > h3 {
   font-family: var(--face-display); font-size: 19px;
   padding-bottom: 5px; border-bottom: 1px solid var(--ink); margin-bottom: 2px;
@@ -1233,6 +1247,15 @@ function renderBestPairs() {
 /* ---------------------------------------------------------- tips
    Everything below was read out of the mod's compiled code. The plain
    sentence is the advice; the WHY box is where it comes from.              */
+const APP = {
+  h: `Using this page`,
+  lead: `Nine things about the tool rather than the mod. Nothing here needs a source.`,
+  items: [
+    [`<b>Every crop name on this page opens a panel.</b> Soil, under block, light, the pools it sits in, every recipe that makes it and everything it is a parent for.`], [`<b>Type in the search box and press Enter</b> to tick the top match and clear the box, so a handful of seeds goes in without touching the mouse.`], [`<b>Pool roulette remembers the last ten pairs you looked at</b> and offers the five most recent under the pickers, which beats rebuilding a pair from two dropdowns every time.`], [`<b>The star on a pair keeps it</b> in a Saved row of its own, so the two or three pairs a plot is built around stay put while Recent rolls over.`], [`<b>Click a card to mark what you are building.</b> It gets a green edge and moves to the front of the grid, which is the difference between glancing at a second monitor and reading it.`],
+    [`<b>Manage list, under the seed list,</b> copies your ticks out as text and back in - the way to move a list between this page and an offline copy, or to keep a backup.`], [`<b>The address bar follows what you are looking at,</b> so a link you send opens on the same tab, the same pair and the same open panel, and F5 keeps you where you were.`], [`<b>The language links sit at the top right</b> and carry your place across, so switching does not send you back to the first tab.`], [`<b>Your ticks never leave the browser.</b> The page makes no requests to anywhere, which also means it works with the network off and that each copy keeps its own list.`],
+  ]
+};
+
 const TIPS = [
   { h: `Common mistakes`,
     lead: `Three setups that fail silently. None of them show an error.`,
@@ -1412,7 +1435,7 @@ const FLOW = [
 function renderFlow() {
   const opts = allSorted.map(c =>
     `<option value="${c.id}">${esc(c.name)}${owned.has(c.id) ? " ✓" : ""}</option>`).join("");
-  let html = `<section class="tipgroup">
+  let html = `<section class="tipgroup" id="sec-flow">
     <h3>Getting started</h3>
     <p class="lead">Seven steps from one crop to a working breeding setup. The sections below explain the mechanics behind them.</p>
     <ol class="flow-steps">`;
@@ -1432,21 +1455,34 @@ function renderFlow() {
   return html + `</ol></section>`;
 }
 
-function renderTips() {
-  let html = `<p class="viewnote">Everything here was read out of the pack's own code rather than collected from experience, so it should hold exactly. Hover <span class="why-btn" style="cursor:default">why</span> on any line to see where it comes from.</p><div class="tips">` + renderFlow();
-  for (const g of TIPS) {
-    html += `<section class="tipgroup"><h3>${g.h}</h3>`;
-    if (g.lead) html += `<p class="lead">${g.lead}</p>`;
-    html += `<ul class="tiplist">`;
-    for (const [text, why] of g.items) {
-      html += `<li class="tip"><div class="tip-line">
-        <p>${text}</p>
-        <span class="why"><button class="why-btn" type="button">why</button>
-          <span class="why-pop" role="note">${why}</span></span>
-      </div></li>`;
-    }
-    html += `</ul></section>`;
+/* A tip with no why box is one that has no source in the mod - the ones about
+   this page itself. Everything else has to name where it comes from.       */
+function tipGroup(g, id) {
+  let html = `<section class="tipgroup" id="${id}"><h3>${g.h}</h3>`;
+  if (g.lead) html += `<p class="lead">${g.lead}</p>`;
+  html += `<ul class="tiplist">`;
+  for (const [text, why] of g.items) {
+    html += `<li class="tip"><div class="tip-line">
+      <p>${text}</p>
+      ${why ? `<span class="why"><button class="why-btn" type="button">why</button>
+        <span class="why-pop" role="note">${why}</span></span>` : ""}
+    </div></li>`;
   }
+  return html + `</ul></section>`;
+}
+
+/* Eleven sections is a long scroll, so it opens with a list of what is here.
+   These jump by script rather than by href: an anchor would put its own
+   fragment in the url, and the url already carries the view state.        */
+function renderTips() {
+  const secs = [{ id: "sec-app", h: APP.h }, { id: "sec-flow", h: `Getting started` }]
+    .concat(TIPS.map((g, i) => ({ id: `sec-${i}`, h: g.h })));
+  const index = `<nav class="tipindex" aria-label="Sections on this page">${
+    secs.map(s => `<button type="button" data-jump="${s.id}">${s.h}</button>`).join("")}</nav>`;
+
+  let html = `<p class="viewnote">Everything here was read out of the pack's own code rather than collected from experience, so it should hold exactly. Hover <span class="why-btn" style="cursor:default">why</span> on any line to see where it comes from.</p>${index}<div class="tips">`
+    + tipGroup(APP, "sec-app") + renderFlow();
+  TIPS.forEach((g, i) => { html += tipGroup(g, `sec-${i}`); });
   return html + `</div>`;
 }
 
@@ -1744,6 +1780,8 @@ document.addEventListener("click", e => {
   if (pool) { showPool(pool.dataset.pool); return; }
   const crop = e.target.closest("[data-crop]");
   if (crop) { showCrop(crop.dataset.crop); return; }
+  const jump = e.target.closest("[data-jump]");
+  if (jump) { $(jump.dataset.jump)?.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
   const goview = e.target.closest("[data-goview]");
   if (goview) { view = goview.dataset.goview; render(); return; }
   /* last, so every button inside a card wins over marking it */

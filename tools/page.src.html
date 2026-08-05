@@ -399,7 +399,21 @@ p, li { text-wrap: pretty; }
 .step .made { font-family: var(--face-display); font-size: 16px; font-weight: 600; }
 
 /* ---------------------------------------------------------- tips */
+/* eleven sections is a long page, so it opens with what is on it */
+.tipindex {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin: 0 0 22px; padding-bottom: 16px; border-bottom: 1px solid var(--rule);
+}
+.tipindex button {
+  font: inherit; font-size: 12px; cursor: pointer; padding: 3px 9px;
+  color: var(--ink); background: var(--paper-2);
+  border: 1px solid var(--rule); border-radius: 2px;
+}
+.tipindex button:hover { background: var(--paper-3); border-color: var(--leaf); }
+.tipindex button:focus-visible { outline: 2px solid var(--leaf); outline-offset: 1px; }
+
 .tips { display: flex; flex-direction: column; gap: 26px; }
+.tipgroup { scroll-margin-top: 14px; }
 .tipgroup > h3 {
   font-family: var(--face-display); font-size: 19px;
   padding-bottom: 5px; border-bottom: 1px solid var(--ink); margin-bottom: 2px;
@@ -1218,6 +1232,15 @@ function renderBestPairs() {
 /* ---------------------------------------------------------- tips
    Everything below was read out of the mod's compiled code. The plain
    sentence is the advice; the WHY box is where it comes from.              */
+const APP = {
+  h: `{{app.h}}`,
+  lead: `{{app.lead}}`,
+  items: [
+    [`{{app.i1}}`], [`{{app.i2}}`], [`{{app.i3}}`], [`{{app.i4}}`], [`{{app.i5}}`],
+    [`{{app.i6}}`], [`{{app.i7}}`], [`{{app.i8}}`], [`{{app.i9}}`],
+  ]
+};
+
 const TIPS = [
   { h: `{{tips.g1.h}}`,
     lead: `{{tips.g1.lead}}`,
@@ -1397,7 +1420,7 @@ const FLOW = [
 function renderFlow() {
   const opts = allSorted.map(c =>
     `<option value="${c.id}">${esc(c.name)}${owned.has(c.id) ? " ✓" : ""}</option>`).join("");
-  let html = `<section class="tipgroup">
+  let html = `<section class="tipgroup" id="sec-flow">
     <h3>{{flow.title}}</h3>
     <p class="lead">{{flow.lead}}</p>
     <ol class="flow-steps">`;
@@ -1417,21 +1440,34 @@ function renderFlow() {
   return html + `</ol></section>`;
 }
 
-function renderTips() {
-  let html = `<p class="viewnote">{{tips.note}}</p><div class="tips">` + renderFlow();
-  for (const g of TIPS) {
-    html += `<section class="tipgroup"><h3>${g.h}</h3>`;
-    if (g.lead) html += `<p class="lead">${g.lead}</p>`;
-    html += `<ul class="tiplist">`;
-    for (const [text, why] of g.items) {
-      html += `<li class="tip"><div class="tip-line">
-        <p>${text}</p>
-        <span class="why"><button class="why-btn" type="button">{{word.why}}</button>
-          <span class="why-pop" role="note">${why}</span></span>
-      </div></li>`;
-    }
-    html += `</ul></section>`;
+/* A tip with no why box is one that has no source in the mod - the ones about
+   this page itself. Everything else has to name where it comes from.       */
+function tipGroup(g, id) {
+  let html = `<section class="tipgroup" id="${id}"><h3>${g.h}</h3>`;
+  if (g.lead) html += `<p class="lead">${g.lead}</p>`;
+  html += `<ul class="tiplist">`;
+  for (const [text, why] of g.items) {
+    html += `<li class="tip"><div class="tip-line">
+      <p>${text}</p>
+      ${why ? `<span class="why"><button class="why-btn" type="button">{{word.why}}</button>
+        <span class="why-pop" role="note">${why}</span></span>` : ""}
+    </div></li>`;
   }
+  return html + `</ul></section>`;
+}
+
+/* Eleven sections is a long scroll, so it opens with a list of what is here.
+   These jump by script rather than by href: an anchor would put its own
+   fragment in the url, and the url already carries the view state.        */
+function renderTips() {
+  const secs = [{ id: "sec-app", h: APP.h }, { id: "sec-flow", h: `{{flow.title}}` }]
+    .concat(TIPS.map((g, i) => ({ id: `sec-${i}`, h: g.h })));
+  const index = `<nav class="tipindex" aria-label="{{tips.indexLabel}}">${
+    secs.map(s => `<button type="button" data-jump="${s.id}">${s.h}</button>`).join("")}</nav>`;
+
+  let html = `<p class="viewnote">{{tips.note}}</p>${index}<div class="tips">`
+    + tipGroup(APP, "sec-app") + renderFlow();
+  TIPS.forEach((g, i) => { html += tipGroup(g, `sec-${i}`); });
   return html + `</div>`;
 }
 
@@ -1729,6 +1765,8 @@ document.addEventListener("click", e => {
   if (pool) { showPool(pool.dataset.pool); return; }
   const crop = e.target.closest("[data-crop]");
   if (crop) { showCrop(crop.dataset.crop); return; }
+  const jump = e.target.closest("[data-jump]");
+  if (jump) { $(jump.dataset.jump)?.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
   const goview = e.target.closest("[data-goview]");
   if (goview) { view = goview.dataset.goview; render(); return; }
   /* last, so every button inside a card wins over marking it */

@@ -292,5 +292,17 @@
   "rail.details": "Szczegóły: ${esc(c.name)}",
   "chip.onlyTitle": "Ten przepis działa wyłącznie w maszynie Crop Breeder, nigdy na patyku",
   "tips.g10.i4": "<b>Przepis oznaczony <em>tylko w Crop Breeder</em> nigdy nie odpali na patyku.</b> Oznaczenie siedzi na przepisie, a nie na roślinie, więc samo w sobie nie znaczy, że rośliny nie da się zdobyć. W tej paczce i tak na to wychodzi: takich przepisów jest ${MUT.filter(m => m.machineOnly).length}, a w ${MUT.filter(m => m.machineOnly && !MUT.some(x => x.out === m.out && !x.machineOnly) && !C[m.out].pools.length).length} przypadkach roślina nie ma innego przepisu ani nie należy do żadnej puli, więc maszyna jest jej jedynym źródłem.",
-  "tips.g10.i4w": "<em>machineOnly()</em> dokłada <em>MachineOnlyBreedingRequirement</em>, którego <em>canBreed()</em> zwraca false, nie patrząc na nic. Wymagania są filtrowane po interfejsie: patyk pyta tylko te implementujące <em>IWorldBreedingRequirement</em>, a maszyna tylko <em>IMachineBreedingRequirement</em>, i to wymaganie implementuje wyłącznie pierwszy z nich, więc maszyna go w ogóle nie widzi. Na patyku przepis nie spełnia warunków jak każdy inny, co znaczy, że ta połowa próby spada do losowania z puli."
+  "tips.g10.i4w": "<em>machineOnly()</em> dokłada <em>MachineOnlyBreedingRequirement</em>, którego <em>canBreed()</em> zwraca false, nie patrząc na nic. Wymagania są filtrowane po interfejsie: patyk pyta tylko te implementujące <em>IWorldBreedingRequirement</em>, a maszyna tylko <em>IMachineBreedingRequirement</em>, i to wymaganie implementuje wyłącznie pierwszy z nich, więc maszyna go w ogóle nie widzi. Na patyku przepis nie spełnia warunków jak każdy inny, co znaczy, że ta połowa próby spada do losowania z puli.",
+  "tips.indexLabel": "Sekcje na tej stronie",
+  "app.h": "Jak korzystać z tej strony",
+  "app.lead": "Dziewięć rzeczy o samym narzędziu, nie o modzie. Żadna z nich nie potrzebuje źródła.",
+  "app.i1": "<b>Każda nazwa rośliny na tej stronie otwiera panel.</b> Gleba, blok pod spodem, światło, pule, w których siedzi, każdy przepis, który ją robi, i wszystko, czego jest rodzicem.",
+  "app.i2": "<b>Wpisz coś w wyszukiwarkę i naciśnij Enter</b>, żeby zaznaczyć pierwszy wynik i wyczyścić pole - kilka nasion wprowadzisz bez dotykania myszy.",
+  "app.i3": "<b>Ruletka pul pamięta dziesięć ostatnich par</b>, a pięć najnowszych pokazuje pod listami wyboru, co jest szybsze niż składanie pary z dwóch list za każdym razem.",
+  "app.i4": "<b>Gwiazdka przy parze ją zapisuje</b> do osobnego rzędu, więc te dwie czy trzy pary, wokół których zbudowana jest hodowla, zostają na miejscu, choć Ostatnie się przewijają.",
+  "app.i5": "<b>Kliknij kafelek, żeby oznaczyć to, nad czym pracujesz.</b> Dostaje zieloną obwódkę i idzie na początek listy, co robi różnicę między zerknięciem na drugi monitor a czytaniem go.",
+  "app.i6": "<b>Zarządzaj listą, pod listą nasion,</b> wypisuje twoje zaznaczenia jako tekst i wczytuje je z powrotem - tak przenosisz listę między tą stroną a kopią na dysku albo robisz kopię zapasową.",
+  "app.i7": "<b>Adres w przeglądarce podąża za tym, co oglądasz</b>, więc wysłany link otwiera tę samą zakładkę, tę samą parę i ten sam otwarty panel, a F5 zostawia cię tam, gdzie byłeś.",
+  "app.i8": "<b>Odnośniki do języków są w prawym górnym rogu</b> i przenoszą twoje miejsce, więc przełączenie nie odsyła cię do pierwszej zakładki.",
+  "app.i9": "<b>Twoje zaznaczenia nie opuszczają przeglądarki.</b> Strona nie wysyła zapytań donikąd, co znaczy też, że działa bez sieci i że każda kopia ma własną listę."
 }
