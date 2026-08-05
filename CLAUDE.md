@@ -41,6 +41,13 @@ label invented from the identifier `netherMushroom` (it is really a union of fou
 a test). Verify against the bytecode and cite the method. If something cannot be verified, say in
 the text that it is practical advice rather than a fact from the code.
 
+**A plausible-looking `cls` is not proof the right class was read.** All eight bonsai shipped with
+`soil: farmland` when the mod says `dirtGrass`, because the loader constructs the crop first and its
+arguments after it, so the last `new` before the field store was an `ItemStack`. Nothing failed - the
+wrong class simply answered every question with a default. When crop data looks odd, check `cls`
+first: it should always be a `com.gtnewhorizon.cropsnh` crop class. `extract.py` now warns when a
+tier came from the fallback instead of the bytecode; treat that warning as work to do, not noise.
+
 ## Conventions
 
 - The page and all repo files are **English**. The author is Polish; chat can be Polish, the product

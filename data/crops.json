@@ -464,15 +464,15 @@
    "id": "BonsaiAcacia",
    "internal": "bonsaiAcacia",
    "name": "Acacia Bonsai",
-   "cls": "net.minecraft.item.ItemStack",
+   "cls": "com.gtnewhorizon.cropsnh.crops.abstracts.CropBonsai",
    "tier": 1,
    "soil": [
-    "farmland"
+    "dirtGrass"
    ],
    "subsoil": [],
    "maxLight": null,
    "minLight": null,
-   "growth": null,
+   "growth": 1200,
    "pools": [
     "orange",
     "tree",
@@ -485,15 +485,15 @@
    "id": "BonsaiBirch",
    "internal": "bonsaiBirch",
    "name": "Birch Bonsai",
-   "cls": "net.minecraft.item.ItemStack",
+   "cls": "com.gtnewhorizon.cropsnh.crops.abstracts.CropBonsai",
    "tier": 1,
    "soil": [
-    "farmland"
+    "dirtGrass"
    ],
    "subsoil": [],
    "maxLight": null,
    "minLight": null,
-   "growth": null,
+   "growth": 1200,
    "pools": [
     "white",
     "tree",
@@ -506,15 +506,15 @@
    "id": "BonsaiDarkOak",
    "internal": "bonsaiDarkOak",
    "name": "Dark Oak Bonsai",
-   "cls": "net.minecraft.item.ItemStack",
+   "cls": "com.gtnewhorizon.cropsnh.crops.abstracts.CropBonsai",
    "tier": 1,
    "soil": [
-    "farmland"
+    "dirtGrass"
    ],
    "subsoil": [],
    "maxLight": null,
    "minLight": null,
-   "growth": null,
+   "growth": 1200,
    "pools": [
     "brown",
     "tree",
@@ -529,15 +529,15 @@
    "id": "BonsaiJungle",
    "internal": "bonsaiJungle",
    "name": "Jungle Bonsai",
-   "cls": "net.minecraft.item.ItemStack",
+   "cls": "com.gtnewhorizon.cropsnh.crops.abstracts.CropBonsai",
    "tier": 1,
    "soil": [
-    "farmland"
+    "dirtGrass"
    ],
    "subsoil": [],
    "maxLight": null,
    "minLight": null,
-   "growth": null,
+   "growth": 1200,
    "pools": [
     "brown",
     "tree",
@@ -550,15 +550,15 @@
    "id": "BonsaiOak",
    "internal": "bonsaiOak",
    "name": "Oak Bonsai",
-   "cls": "net.minecraft.item.ItemStack",
+   "cls": "com.gtnewhorizon.cropsnh.crops.abstracts.CropBonsai",
    "tier": 1,
    "soil": [
-    "farmland"
+    "dirtGrass"
    ],
    "subsoil": [],
    "maxLight": null,
    "minLight": null,
-   "growth": null,
+   "growth": 1200,
    "pools": [
     "brown",
     "tree",
@@ -572,15 +572,15 @@
    "id": "BonsaiRubber",
    "internal": "bonsaiRubber",
    "name": "Rubber Bonsai",
-   "cls": "java.awt.Color",
+   "cls": "com.gtnewhorizon.cropsnh.crops.abstracts.CropBonsai",
    "tier": 1,
    "soil": [
-    "farmland"
+    "dirtGrass"
    ],
    "subsoil": [],
    "maxLight": null,
    "minLight": null,
-   "growth": null,
+   "growth": 1200,
    "pools": [
     "brown",
     "tree",
@@ -593,15 +593,15 @@
    "id": "BonsaiSlimy",
    "internal": "bonsaiSlimy",
    "name": "Slimy Bonsai",
-   "cls": "java.awt.Color",
+   "cls": "com.gtnewhorizon.cropsnh.crops.TiC.CropSlimyBonsai",
    "tier": 1,
    "soil": [
-    "farmland"
+    "slimyDirt"
    ],
    "subsoil": [],
    "maxLight": null,
    "minLight": null,
-   "growth": null,
+   "growth": 1200,
    "pools": [],
    "flavour": null
   },
@@ -609,15 +609,15 @@
    "id": "BonsaiSpruce",
    "internal": "bonsaiSpruce",
    "name": "Spruce Bonsai",
-   "cls": "net.minecraft.item.ItemStack",
+   "cls": "com.gtnewhorizon.cropsnh.crops.abstracts.CropBonsai",
    "tier": 1,
    "soil": [
-    "farmland"
+    "dirtGrass"
    ],
    "subsoil": [],
    "maxLight": null,
    "minLight": null,
-   "growth": null,
+   "growth": 1200,
    "pools": [
     "brown",
     "tree",

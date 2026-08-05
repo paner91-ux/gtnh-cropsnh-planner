@@ -37,7 +37,14 @@ for line in loader_code:
         continue
     m = re.search(r'putstatic\s+#\d+\s+// Field [\w/$]*CropsNHCrops\.([\w$]+):', line)
     if m and pending_new:
-        field_to_class[m.group(1)] = pending_new[-1]
+        # The crop object is constructed first and its constructor arguments after it,
+        # so the last `new` before the store is usually a Color or an ItemStack, not
+        # the crop. Take the most recent CropsNH class instead: that skips the
+        # arguments, and it also survives a crop that is registered without a field.
+        own = [c for c in pending_new if c.startswith('com.gtnewhorizon.cropsnh')]
+        if not own:
+            raise SystemExit('brak klasy CropsNH przed polem ' + m.group(1))
+        field_to_class[m.group(1)] = own[-1]
         pending_new = []
 
 # ---------------------------------------------------------------- class hierarchy
@@ -49,6 +56,11 @@ def chain(clsname):
         out.append(classes[clsname])
         clsname = classes[clsname].sup
     return out
+
+
+# crops whose tier no class in the chain states as a constant, so the default
+# below is a guess rather than a reading - see the report at the end
+guessed_tier = []
 
 
 def resolve_int(clsname, method, default=None):
@@ -115,6 +127,16 @@ def light_reqs(code):
     return res.get('max'), res.get('min')
 
 
+def tier_of(field, clsname):
+    """getTier() reading an instance field means the value is a constructor
+    argument, which this extractor does not walk. Fall back, but say so."""
+    t = resolve_int(clsname, 'getTier')
+    if t is None:
+        guessed_tier.append(field)
+        return 1
+    return t
+
+
 crops = {}
 for field, clsname in sorted(field_to_class.items()):
     if field in ('Weed', 'Migrator'):
@@ -139,7 +161,7 @@ for field, clsname in sorted(field_to_class.items()):
         'internal': internal,
         'name': display or re.sub(r'(?<!^)(?=[A-Z])', ' ', field),
         'cls': clsname,
-        'tier': resolve_int(clsname, 'getTier', 1),
+        'tier': tier_of(field, clsname),
         'soil': resolve_soil(clsname),
         'subsoil': sorted(set(subsoil)),
         'maxLight': maxl,
@@ -354,5 +376,10 @@ print(f'recipes           {len(mutations)}')
 print(f'mutation pools    {len(pool_members)}')
 print(f'sub-soil types    {len(subsoil_info)}')
 print(f'recipe-only crops {sum(1 for c in crops.values() if not c["pools"])}')
+if guessed_tier:
+    print(f'\nWARNING: no class states the tier as a constant, assumed 1 for '
+          f'{len(guessed_tier)}: {", ".join(guessed_tier)}')
+    print('         read the constructor argument in the loader and check by hand')
+
 print(f'\nwrote {os.path.relpath(OUT, os.path.join(HERE, os.pardir))}')
 print('now run:  python tools/build.py')
