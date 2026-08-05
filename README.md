@@ -51,9 +51,10 @@ With nothing selected it ranks the best pairs from your own seeds by the chance 
 **Route to a goal** - the shortest chain of recipes from what you own to any crop you want.
 
 **Biomes** - which biome to build in. A crop that matches two of a biome's tags gets +28 Nutrient
-Score, more than half the ceiling, and nothing in the game tells you which biomes carry which tags.
-Browsable both ways: from a crop's tags to the biomes that have them, and from a biome to the crops
-worth growing there.
+Score, more than half the ceiling. In game you can read a biome's tags with Nature's Compass and a
+crop's tags in NEI, but nothing joins the two, so working out where a particular crop does best
+means checking biomes one at a time. This does the join: from a crop's tags to the biomes that
+carry them, and from a biome to the crops worth growing there.
 
 **Tips & tricks** - a seven step walkthrough plus 43 mechanics in plain language, each with a `why`
 box naming the method in the mod's code it was read from.
