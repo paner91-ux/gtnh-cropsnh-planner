@@ -1074,17 +1074,17 @@ function cardFor(m) {
 
 function renderReady() {
   const list = readyList();
-  if (!owned.size) return `<div class="empty">Tick off what you have in the rail on the left.</div>`;
-  if (!list.length) return `<div class="empty">No new recipe is fully covered by this set.<br>Try <b>One parent short</b> or the <b>Pool roulette</b>.</div>`;
-  return `<p class="viewnote">Recipes where you already hold every parent. Put the parents around a double crop stick, and make sure the ground under the stick satisfies the result's requirements - otherwise the attempt is discarded silently. Click a card to mark what you are building; marked ones stay at the front.</p>
+  if (!owned.size) return `<div class="empty">{{empty.tickFirst}}</div>`;
+  if (!list.length) return `<div class="empty">{{empty.readyNone}}</div>`;
+  return `<p class="viewnote">{{ready.note}}</p>
     <div class="grid">${markFirst(list).map(m => cardFor(m)).join("")}</div>`;
 }
 
 function renderNear() {
   const list = nearList();
-  if (!owned.size) return `<div class="empty">Tick off what you have in the rail on the left.</div>`;
-  if (!list.length) return `<div class="empty">No recipe is exactly one parent away.</div>`;
-  return `<p class="viewnote">One crop short, shown in <span style="color:var(--ore);font-weight:600">rust</span>. Click a name to see where the missing parent comes from, or the card itself to mark it.</p>
+  if (!owned.size) return `<div class="empty">{{empty.tickFirst}}</div>`;
+  if (!list.length) return `<div class="empty">{{empty.nearNone}}</div>`;
+  return `<p class="viewnote">{{near.note}}</p>
     <div class="grid">${markFirst(list).map(m => cardFor(m)).join("")}</div>`;
 }
 
@@ -1097,7 +1097,7 @@ function pairPill(k, cur) {
     <button class="pname" type="button" data-pair="${k}"${k === cur ? ` aria-current="true"` : ""}>${
       esc(nm(a))}${a === b ? " ×2" : ` + ${esc(nm(b))}`}</button>
     <button class="star${kept ? " on" : ""}" type="button" data-star="${k}" aria-pressed="${kept}"
-      title="${kept ? "Remove from saved" : "Save this pair"}">${kept ? "★" : "☆"}</button>
+      title="${kept ? `{{pair.unsave}}` : `{{pair.save}}`}">${kept ? "★" : "☆"}</button>
   </span>`;
 }
 
@@ -1109,13 +1109,13 @@ function pairStrips() {
   if (recentPairs.length) {
     const shown = pairsOpen ? recentPairs : recentPairs.slice(0, PAIRS_SHOWN);
     const hidden = recentPairs.length - PAIRS_SHOWN;
-    h += `<div class="pairrow recent"><span class="lbl">Recent</span>${
+    h += `<div class="pairrow recent"><span class="lbl">{{pair.recent}}</span>${
       shown.map(k => pairPill(k, cur)).join("")}${
       hidden > 0 ? `<button class="poolchip morechip" type="button" id="morePairs">${
-        pairsOpen ? "Show fewer" : `+${hidden} more`}</button>` : ""}</div>`;
+        pairsOpen ? `{{pair.fewer}}` : `{{pair.more}}`}</button>` : ""}</div>`;
   }
   if (savedPairs.length)
-    h += `<div class="pairrow saved"><span class="lbl">Saved</span>${
+    h += `<div class="pairrow saved"><span class="lbl">{{pair.saved}}</span>${
       savedPairs.map(k => pairPill(k, cur)).join("")}</div>`;
   return h;
 }
@@ -1123,11 +1123,11 @@ function pairStrips() {
 function renderPool() {
   const opts = sel => allSorted.map(c =>
     `<option value="${c.id}"${sel === c.id ? " selected" : ""}>${esc(c.name)}${owned.has(c.id) ? " ✓" : ""}</option>`).join("");
-  let html = `<p class="viewnote">What can come out of a double crop stick between two mature crops. Figures are the chance <b>per successful breeding attempt</b>, and one fires on roughly every third growth tick. The same crop twice is allowed, and is the most common setup.</p>
+  let html = `<p class="viewnote">{{pool.note}}</p>
     <div class="pairpick">
-      <label>Parent A<select class="field" id="selA"><option value="">-</option>${opts(pairA)}</select></label>
-      <label>Parent B<select class="field" id="selB"><option value="">-</option>${opts(pairB)}</select></label>
-      ${pairA || pairB ? `<button class="btn" id="clearPair" type="button">Clear pair</button>` : ""}
+      <label>{{pool.parentA}}<select class="field" id="selA"><option value="">-</option>${opts(pairA)}</select></label>
+      <label>{{pool.parentB}}<select class="field" id="selB"><option value="">-</option>${opts(pairB)}</select></label>
+      ${pairA || pairB ? `<button class="btn" id="clearPair" type="button">{{pool.clear}}</button>` : ""}
     </div>${pairStrips()}`;
 
   const o = oddsFor(pairA, pairB);
@@ -1136,63 +1136,58 @@ function renderPool() {
   const A = C[pairA], B = C[pairB];
 
   html += o.newCount
-    ? `<p class="viewnote"><b style="color:var(--leaf)">${pct(o.gain)}</b> chance at one of <b>${o.newCount}</b> crops you do not have yet.</p>`
-    : `<p class="viewnote">This pair gives you nothing new - you already have every possible result.</p>`;
+    ? `<p class="viewnote">{{pool.gain}}</p>`
+    : `<p class="viewnote">{{pool.noGain}}</p>`;
 
   /* --- cloning branch --- */
-  html += `<div class="branch">50% - copy of a parent</div><div class="tablescroll"><table class="odds">`;
+  html += `<div class="branch">{{pool.branchClone}}</div><div class="tablescroll"><table class="odds">`;
   if (o.same) {
     html += `<tr><td class="nm">${cropLink(pairA)}</td><td class="num">50.00%<span class="bar" style="width:100%"></span></td>
-      <td class="via">both neighbours are the same crop</td></tr>`;
+      <td class="via">{{pool.cloneSame}}</td></tr>`;
   } else {
-    html += `<tr><td class="nm">${cropLink(pairA)}</td><td class="num">25.00%<span class="bar" style="width:50%"></span></td><td class="via">clone of a neighbour</td></tr>
-      <tr><td class="nm">${cropLink(pairB)}</td><td class="num">25.00%<span class="bar" style="width:50%"></span></td><td class="via">clone of a neighbour</td></tr>`;
+    html += `<tr><td class="nm">${cropLink(pairA)}</td><td class="num">25.00%<span class="bar" style="width:50%"></span></td><td class="via">{{pool.cloneOne}}</td></tr>
+      <tr><td class="nm">${cropLink(pairB)}</td><td class="num">25.00%<span class="bar" style="width:50%"></span></td><td class="via">{{pool.cloneOne}}</td></tr>`;
   }
   html += `</table></div>`;
 
   /* --- mutation branch --- */
   if (o.det.length) {
-    html += `<div class="branch">50% - deterministic recipe</div>
-      <p class="viewnote">This pair has a specific recipe, so the mutation branch goes there instead of drawing from a pool.
-      ${o.det.length > 1 ? `${o.det.length} recipes match and the engine picks one at random, hence ${pct(0.5 / o.det.length)} each. ` : ""}
-      If the recipe's conditions are not met, that half falls back to a pool draw instead.</p>
+    html += `<div class="branch">{{pool.branchRecipe}}</div>
+      <p class="viewnote">{{pool.recipeNote}}
+      ${o.det.length > 1 ? `{{pool.recipeTie}} ` : ""}{{pool.recipeFallback}}</p>
       <div class="grid">${o.det.map(m => cardFor(m)).join("")}</div>`;
     return html;
   }
 
   if (!o.pools.length) {
-    html += `<div class="branch">50% - mutation</div>
+    html += `<div class="branch">{{pool.branchMutation}}</div>
       <div class="empty">${o.same
-        ? `<b>${esc(A.name)}</b> belongs to no pool - that crop is recipe-only.`
-        : `This pair shares neither a pool nor a recipe.`}<br>
-        The mutation branch always fails - you will only ever get copies of the parents.</div>`;
+        ? `{{pool.noPoolSame}}`
+        : `{{pool.noPoolShared}}`}<br>{{pool.noPoolTail}}</div>`;
     return html;
   }
 
   const poolTxt = o.pools.map(p => `${poolLink(p)} (${POOLM[p].length})`).join(", ");
   const showLight = o.rows.some(r => lightReq(C[r.id]));   // column only when it applies
-  html += `<div class="branch">50% - draw from pools</div>
+  html += `<div class="branch">{{pool.branchDraw}}</div>
     <p class="viewnote">${o.same
-      ? `Two identical crops match <b>every</b> pool ${esc(A.name)} belongs to: `
-      : `Shared pools: `}<b>${poolTxt}</b>.
-      The pool is drawn uniformly - a small pool is worth as much as a large one, it just spreads over fewer crops.</p>
-    <p class="viewnote"><b>Top block</b> is the one directly under the crop stick, <b>under block</b> is one deeper.
-      A result whose ground you have not built simply never gets planted, so setting those two blocks up for the
-      crop you actually want quietly removes most of this table.</p>
+      ? `{{pool.sharedSame}}`
+      : `{{pool.shared}}`} {{pool.drawNote}}</p>
+    <p class="viewnote">{{pool.blockNote}}</p>
     <div class="tablescroll"><table class="odds">
-      <tr><th>Result</th><th class="num">Chance</th><th>Pool</th><th>Top block</th><th>Under block</th>${showLight ? `<th>Light</th>` : ""}</tr>`;
+      <tr><th>{{th.result}}</th><th class="num">{{th.chance}}</th><th>{{th.pool}}</th><th>{{th.topBlock}}</th><th>{{th.underBlock}}</th>${showLight ? `<th>{{th.light}}</th>` : ""}</tr>`;
   const max = Math.max(...o.rows.map(r => r.p));   // rows are no longer ordered by odds
   for (const r of o.rows) {
     const c = C[r.id];
     const have = owned.has(r.id);
     const u = underBlock(c);
     html += `<tr${have ? ` class="dead"` : ""}>
-      <td class="nm"><button class="inline-crop" type="button" data-crop="${r.id}">${esc(c.name)}</button>${have ? ` <span class="tier">have</span>` : ""}</td>
+      <td class="nm"><button class="inline-crop" type="button" data-crop="${r.id}">${esc(c.name)}</button>${have ? ` <span class="tier">{{word.have}}</span>` : ""}</td>
       <td class="num">${pct(r.p)}<span class="bar" style="width:${(r.p / max * 100).toFixed(1)}%"></span></td>
       <td class="via">${[...r.via].map(poolLink).join(", ")}</td>
       <td class="via">${esc(topBlockShort(c))}</td>
-      <td class="via"${u ? ` style="color:var(--ore)"` : ""}>${u ? esc(u) : "anything"}</td>
-      ${showLight ? `<td class="via"${lightReq(c) ? ` style="color:var(--ore)"` : ""}>${esc(lightReq(c) || "any")}</td>` : ""}
+      <td class="via"${u ? ` style="color:var(--ore)"` : ""}>${u ? esc(u) : `{{word.anything}}`}</td>
+      ${showLight ? `<td class="via"${lightReq(c) ? ` style="color:var(--ore)"` : ""}>${esc(lightReq(c) || `{{word.any}}`)}</td>` : ""}
     </tr>`;
   }
   html += `</table></div>`;
@@ -1201,13 +1196,13 @@ function renderPool() {
 
 /* shown when no pair is picked */
 function renderBestPairs() {
-  if (owned.size < 1) return `<div class="empty">Pick two crops above - or tick off what you have on the left and I will rank the best pairs.</div>`;
+  if (owned.size < 1) return `<div class="empty">{{best.pickFirst}}</div>`;
   const best = bestPairs(15);
-  if (!best.length) return `<div class="empty">No pair from your seeds yields anything new. You need a crop from outside the current set.</div>`;
-  let html = `<div class="branch">Best pairs from your seeds</div>
-    <p class="viewnote">Ranked by the total chance of a crop you do not have yet. Click a pair to load its full breakdown.</p>
+  if (!best.length) return `<div class="empty">{{best.none}}</div>`;
+  let html = `<div class="branch">{{best.title}}</div>
+    <p class="viewnote">{{best.note}}</p>
     <div class="tablescroll"><table class="odds">
-    <tr><th>Pair</th><th class="num">Chance at something new</th><th class="num">New</th><th>Branch</th></tr>`;
+    <tr><th>{{th.pair}}</th><th class="num">{{th.chanceNew}}</th><th class="num">{{th.new}}</th><th>{{th.branch}}</th></tr>`;
   const max = best[0].gain;
   for (const p of best) {
     html += `<tr>

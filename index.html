@@ -1108,7 +1108,7 @@ function pairPill(k, cur) {
     <button class="pname" type="button" data-pair="${k}"${k === cur ? ` aria-current="true"` : ""}>${
       esc(nm(a))}${a === b ? " ×2" : ` + ${esc(nm(b))}`}</button>
     <button class="star${kept ? " on" : ""}" type="button" data-star="${k}" aria-pressed="${kept}"
-      title="${kept ? "Remove from saved" : "Save this pair"}">${kept ? "★" : "☆"}</button>
+      title="${kept ? `Remove from saved` : `Save this pair`}">${kept ? "★" : "☆"}</button>
   </span>`;
 }
 
@@ -1123,7 +1123,7 @@ function pairStrips() {
     h += `<div class="pairrow recent"><span class="lbl">Recent</span>${
       shown.map(k => pairPill(k, cur)).join("")}${
       hidden > 0 ? `<button class="poolchip morechip" type="button" id="morePairs">${
-        pairsOpen ? "Show fewer" : `+${hidden} more`}</button>` : ""}</div>`;
+        pairsOpen ? `Show fewer` : `+${hidden} more`}</button>` : ""}</div>`;
   }
   if (savedPairs.length)
     h += `<div class="pairrow saved"><span class="lbl">Saved</span>${
@@ -1165,8 +1165,7 @@ function renderPool() {
   if (o.det.length) {
     html += `<div class="branch">50% - deterministic recipe</div>
       <p class="viewnote">This pair has a specific recipe, so the mutation branch goes there instead of drawing from a pool.
-      ${o.det.length > 1 ? `${o.det.length} recipes match and the engine picks one at random, hence ${pct(0.5 / o.det.length)} each. ` : ""}
-      If the recipe's conditions are not met, that half falls back to a pool draw instead.</p>
+      ${o.det.length > 1 ? `${o.det.length} recipes match and the engine picks one at random, hence ${pct(0.5 / o.det.length)} each. ` : ""}If the recipe's conditions are not met, that half falls back to a pool draw instead.</p>
       <div class="grid">${o.det.map(m => cardFor(m)).join("")}</div>`;
     return html;
   }
@@ -1175,8 +1174,7 @@ function renderPool() {
     html += `<div class="branch">50% - mutation</div>
       <div class="empty">${o.same
         ? `<b>${esc(A.name)}</b> belongs to no pool - that crop is recipe-only.`
-        : `This pair shares neither a pool nor a recipe.`}<br>
-        The mutation branch always fails - you will only ever get copies of the parents.</div>`;
+        : `This pair shares neither a pool nor a recipe.`}<br>The mutation branch always fails - you will only ever get copies of the parents.</div>`;
     return html;
   }
 
@@ -1184,12 +1182,9 @@ function renderPool() {
   const showLight = o.rows.some(r => lightReq(C[r.id]));   // column only when it applies
   html += `<div class="branch">50% - draw from pools</div>
     <p class="viewnote">${o.same
-      ? `Two identical crops match <b>every</b> pool ${esc(A.name)} belongs to: `
-      : `Shared pools: `}<b>${poolTxt}</b>.
-      The pool is drawn uniformly - a small pool is worth as much as a large one, it just spreads over fewer crops.</p>
-    <p class="viewnote"><b>Top block</b> is the one directly under the crop stick, <b>under block</b> is one deeper.
-      A result whose ground you have not built simply never gets planted, so setting those two blocks up for the
-      crop you actually want quietly removes most of this table.</p>
+      ? `Two identical crops match <b>every</b> pool ${esc(A.name)} belongs to: <b>${poolTxt}</b>.`
+      : `Shared pools: <b>${poolTxt}</b>.`} The pool is drawn uniformly - a small pool is worth as much as a large one, it just spreads over fewer crops.</p>
+    <p class="viewnote"><b>Top block</b> is the one directly under the crop stick, <b>under block</b> is one deeper. A result whose ground you have not built simply never gets planted, so setting those two blocks up for the crop you actually want quietly removes most of this table.</p>
     <div class="tablescroll"><table class="odds">
       <tr><th>Result</th><th class="num">Chance</th><th>Pool</th><th>Top block</th><th>Under block</th>${showLight ? `<th>Light</th>` : ""}</tr>`;
   const max = Math.max(...o.rows.map(r => r.p));   // rows are no longer ordered by odds
@@ -1202,8 +1197,8 @@ function renderPool() {
       <td class="num">${pct(r.p)}<span class="bar" style="width:${(r.p / max * 100).toFixed(1)}%"></span></td>
       <td class="via">${[...r.via].map(poolLink).join(", ")}</td>
       <td class="via">${esc(topBlockShort(c))}</td>
-      <td class="via"${u ? ` style="color:var(--ore)"` : ""}>${u ? esc(u) : "anything"}</td>
-      ${showLight ? `<td class="via"${lightReq(c) ? ` style="color:var(--ore)"` : ""}>${esc(lightReq(c) || "any")}</td>` : ""}
+      <td class="via"${u ? ` style="color:var(--ore)"` : ""}>${u ? esc(u) : `anything`}</td>
+      ${showLight ? `<td class="via"${lightReq(c) ? ` style="color:var(--ore)"` : ""}>${esc(lightReq(c) || `any`)}</td>` : ""}
     </tr>`;
   }
   html += `</table></div>`;
