@@ -286,13 +286,22 @@ p, li { text-wrap: pretty; }
 }
 
 /* Parents get their own ground, because building the rig means preparing
-   three plots. Same labelled chips as the result: a bare list of block
-   names cannot say which one is the top block and which goes under it.  */
+   three plots. They keep the labels the chips have - a bare list of block
+   names cannot say which is the top block - but drop the boxes: chips for
+   every parent as well as the result buried the card in chrome. Chips stay
+   on the result alone, which is also the ground that has to be exact.    */
 .pgroup {
-  display: flex; flex-direction: column; gap: 9px;
+  display: flex; flex-direction: column; gap: 7px;
   padding-top: 8px; border-top: 1px solid var(--rule);
 }
-.prow { display: flex; flex-direction: column; gap: 4px; align-items: start; }
+.prow { display: flex; flex-direction: column; gap: 1px; align-items: start; }
+.pneed { font-family: var(--face-data); font-size: 11px; line-height: 1.55; color: var(--ink-soft); }
+.pneed .g { margin-right: 13px; }
+.pneed .k {
+  font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--ink-faint); margin-right: 4px; white-space: nowrap;
+}
+.pneed .ore { color: var(--ore); }
 
 .parents { font-size: 13px; color: var(--ink-soft); }
 .parents b { font-weight: 600; color: var(--ink); }
@@ -815,11 +824,21 @@ function reqChips(crop, extra) {
 const machChip = m => m.machineOnly
   ? `<span class="chip mach"><span class="k">only in</span>Crop Breeder</span>` : "";
 
+/* Same facts as reqChips, same labels, without the boxes - see .pneed. */
+function reqPlain(crop) {
+  if (!crop) return "";
+  const g = (k, v, ore) =>
+    `<span class="g"><span class="k">${k}</span><span${ore ? ` class="ore"` : ""}>${esc(v)}</span></span>`;
+  const u = underBlock(crop), l = lightReq(crop);
+  return `<div class="pneed">${g("top", topBlockShort(crop))}${g("under", u || "anything", !!u)}${
+    l ? g("light", l, true) : ""}</div>`;
+}
+
 /* result, its ground, then each parent with its own ground */
 function parentRows(m) {
   return `<div class="pgroup"><span class="lbl">from</span>${m.parents.map(p => `
     <div class="prow">${cropLink(p, owned.has(p) ? "own" : "miss")}
-      ${reqChips(C[p])}</div>`).join("")}</div>`;
+      ${reqPlain(C[p])}</div>`).join("")}</div>`;
 }
 
 function subLabel(key) {
