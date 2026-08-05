@@ -280,13 +280,24 @@ p, li { text-wrap: pretty; }
   border: 1px solid var(--rule); border-radius: 2px; padding: 0 4px;
 }
 
-/* A row that names what it holds, so a card cannot be read backwards: the
-   title is the result, "from" is the parents, "needs" is the result's ground. */
-.labelled { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
-.labelled > .lbl {
-  flex: none; font-family: var(--face-data); font-size: 9.5px;
+.lbl {
+  font-family: var(--face-data); font-size: 9.5px;
   letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint);
 }
+
+/* Parents listed one per line with their own ground, because building the
+   rig means preparing three plots: one per parent and one for the result. */
+.pgroup {
+  display: flex; flex-direction: column; gap: 4px;
+  padding-top: 8px; border-top: 1px solid var(--rule);
+}
+.prow { display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; }
+.pneed {
+  font-family: var(--face-data); font-size: 11px;
+  color: var(--ink-faint); min-width: 0;
+}
+.pneed .ore { color: var(--ore); }
+.pneed .sep { color: var(--rule); margin: 0 4px; }
 
 .parents { font-size: 13px; color: var(--ink-soft); }
 .parents b { font-weight: 600; color: var(--ink); }
@@ -809,6 +820,25 @@ function reqChips(crop, extra) {
 const machChip = m => m.machineOnly
   ? `<span class="chip mach"><span class="k">only in</span>Crop Breeder</span>` : "";
 
+/* One-line ground summary for a parent. Anything beyond the top block is
+   marked, since that is the part people forget to prepare.               */
+function reqInline(crop) {
+  if (!crop) return "";
+  const bits = [esc(topBlockShort(crop))];
+  const u = underBlock(crop);
+  if (u) bits.push(`<span class="ore">${esc(u)}</span>`);
+  const l = lightReq(crop);
+  if (l) bits.push(`<span class="ore">${esc(l)}</span>`);
+  return bits.join(`<span class="sep">·</span>`);
+}
+
+/* result, its ground, then each parent with its own ground */
+function parentRows(m) {
+  return `<div class="pgroup"><span class="lbl">from</span>${m.parents.map(p => `
+    <div class="prow">${cropLink(p, owned.has(p) ? "own" : "miss")}
+      <span class="pneed">${reqInline(C[p])}</span></div>`).join("")}</div>`;
+}
+
 function subLabel(key) {
   const d = DATA.subsoilDesc[key];
   if (!d) return key;
@@ -945,8 +975,8 @@ function cardFor(m) {
       <button class="card-out" type="button" data-crop="${m.out}">${esc(nm(m.out))}</button>
       <span class="tier">T${c ? c.tier : "?"}</span>
     </div>
-    <div class="labelled"><span class="lbl">from</span><span class="parents">${parentLinks(m.parents)}</span></div>
-    <div class="labelled"><span class="lbl">needs</span>${reqChips(c, machChip(m))}</div>
+    ${reqChips(c, machChip(m))}
+    ${parentRows(m)}
   </article>`;
 }
 
@@ -1353,8 +1383,8 @@ function renderPath() {
       <div class="body">
         <div class="made"><button class="inline-crop" type="button" data-crop="${m.out}">${esc(nm(m.out))}</button>
           <span class="tier">T${c ? c.tier : "?"}</span></div>
-        <div class="labelled"><span class="lbl">from</span><span class="parents">${parentLinks(m.parents)}</span></div>
-        <div class="labelled"><span class="lbl">needs</span>${reqChips(c, machChip(m))}</div>
+        ${reqChips(c, machChip(m))}
+        ${parentRows(m)}
       </div></div>`;
   });
   html += `</div>`;
