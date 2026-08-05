@@ -295,7 +295,7 @@
   "tips.g10.i4w": "<em>machineOnly()</em> dokłada <em>MachineOnlyBreedingRequirement</em>, którego <em>canBreed()</em> zwraca false, nie patrząc na nic. Wymagania są filtrowane po interfejsie: patyk pyta tylko te implementujące <em>IWorldBreedingRequirement</em>, a maszyna tylko <em>IMachineBreedingRequirement</em>, i to wymaganie implementuje wyłącznie pierwszy z nich, więc maszyna go w ogóle nie widzi. Na patyku przepis nie spełnia warunków jak każdy inny, co znaczy, że ta połowa próby spada do losowania z puli.",
   "tips.indexLabel": "Sekcje na tej stronie",
   "app.h": "Jak korzystać z tej strony",
-  "app.lead": "Dziewięć rzeczy o samym narzędziu, nie o modzie. Żadna z nich nie potrzebuje źródła.",
+  "app.lead": "Notatki o samym narzędziu, a nie o modzie. Żadna z nich nie potrzebuje źródła.",
   "app.i1": "<b>Każda nazwa rośliny na tej stronie otwiera panel.</b> Gleba, blok pod spodem, światło, pule, w których siedzi, każdy przepis, który ją robi, i wszystko, czego jest rodzicem.",
   "app.i2": "<b>Wpisz coś w wyszukiwarkę i naciśnij Enter</b>, żeby zaznaczyć pierwszy wynik i wyczyścić pole - kilka nasion wprowadzisz bez dotykania myszy.",
   "app.i3": "<b>Ruletka pul pamięta dziesięć ostatnich par</b>, a pięć najnowszych pokazuje pod listami wyboru, co jest szybsze niż składanie pary z dwóch list za każdym razem.",
@@ -342,5 +342,6 @@
   "drawer.whereFull": "Pełne <b>+28</b> do Nutrient Score - pasują dwa jej tagi:",
   "drawer.whereHalf": "<b>+14</b> - pasuje jeden tag:",
   "drawer.whereNoneFull": "Żaden biom w tej paczce nie ma dwóch jej tagów, więc <b>+14</b> to maksimum, jakie może dostać z biomu.",
-  "drawer.whereOneTag": "Lubi tylko jeden tag, więc biom nigdy nie będzie dla niej wart więcej niż <b>+14</b>."
+  "drawer.whereOneTag": "Lubi tylko jeden tag, więc biom nigdy nie będzie dla niej wart więcej niż <b>+14</b>.",
+  "app.i10": "<b>Tagi <em>Lubi</em> w panelu rośliny są odnośnikami, a panel wymienia biomy warte jej <b>+28</b> i te warte <b>+14</b>.</b> Zakładka <b>Biomy</b> idzie w drugą stronę: szukasz miejsca po nazwie albo po tagu i widzisz, co warto tam hodować."
 }

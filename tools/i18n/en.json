@@ -295,7 +295,7 @@
   "tips.g10.i4w": "<em>machineOnly()</em> attaches a <em>MachineOnlyBreedingRequirement</em>, whose <em>canBreed()</em> returns false without looking at anything. Requirements are filtered by interface: the crop stick asks only those implementing <em>IWorldBreedingRequirement</em> and the machine only <em>IMachineBreedingRequirement</em>, and this one implements the first alone, so the machine never sees it. On a stick the recipe fails its conditions like any other, which means that half of the attempt falls back to a pool draw.",
   "tips.indexLabel": "Sections on this page",
   "app.h": "Using this page",
-  "app.lead": "Nine things about the tool rather than the mod. Nothing here needs a source.",
+  "app.lead": "Notes about the tool rather than about the mod. Nothing here needs a source.",
   "app.i1": "<b>Every crop name on this page opens a panel.</b> Soil, under block, light, the pools it sits in, every recipe that makes it and everything it is a parent for.",
   "app.i2": "<b>Type in the search box and press Enter</b> to tick the top match and clear the box, so a handful of seeds goes in without touching the mouse.",
   "app.i3": "<b>Pool roulette remembers the last ten pairs you looked at</b> and offers the five most recent under the pickers, which beats rebuilding a pair from two dropdowns every time.",
@@ -342,5 +342,6 @@
   "drawer.whereFull": "The full <b>+28</b> Nutrient Score - two of its tags match:",
   "drawer.whereHalf": "<b>+14</b> - one tag matches:",
   "drawer.whereNoneFull": "No biome in this pack carries two of its tags, so <b>+14</b> is the most it can get from a biome.",
-  "drawer.whereOneTag": "It likes a single tag, so a biome can never be worth more than <b>+14</b> to it."
+  "drawer.whereOneTag": "It likes a single tag, so a biome can never be worth more than <b>+14</b> to it.",
+  "app.i10": "<b>A crop's <em>Likes</em> tags are links, and the panel names the biomes worth <b>+28</b> to it and the ones worth <b>+14</b>.</b> The <b>Biomes</b> tab goes the other way: search a place by name or by tag and see what is worth growing there."
 }
