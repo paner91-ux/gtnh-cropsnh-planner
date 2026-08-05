@@ -1547,7 +1547,7 @@ function renderPoolDrawer(key) {
     return `<div class="poolrow${owned.has(id) ? " have" : ""}">
       ${cropLink(id, owned.has(id) ? "own" : "miss")}
       <span class="tier">T${c.tier}</span>
-      ${c.subsoil.length ? `<span class="mark" title="needs a specific block under the soil">&#9670;</span>` : ""}
+      ${c.subsoil.length ? `<span class="mark" title="{{rail.legendSub}}">&#9670;</span>` : ""}
     </div>`;
   };
 
@@ -1555,20 +1555,18 @@ function renderPoolDrawer(key) {
     <div class="drawer-top">
       <h2>${esc(DATA.poolNames[key] || key)}</h2>
       ${backButton()}
-      <button class="btn close" type="button" id="closeDrawer">Close</button>
+      <button class="btn close" type="button" id="closeDrawer">{{drawer.close}}</button>
     </div>
-    <p class="flav" style="font-style:normal">Mutation pool with <b>${members.length}</b> crops in it.
-      Two parents that both belong to this pool can draw any one of them, each equally likely.
-      You already hold <b>${mine.length}</b>.</p>
+    <p class="flav" style="font-style:normal">{{drawer.poolIntro}}</p>
 
-    <div class="dsec"><h3>Not yours yet (${rest.length})</h3>
+    <div class="dsec"><h3>{{drawer.poolRest}}</h3>
       <div class="poollist">${rest.length ? byName(rest).map(row).join("")
-        : `<span style="color:var(--ink-faint);font-size:13px">You have every crop in this pool.</span>`}</div>
+        : `<span style="color:var(--ink-faint);font-size:13px">{{drawer.poolAllOwned}}</span>`}</div>
     </div>
 
-    <div class="dsec"><h3>Already yours (${mine.length})</h3>
+    <div class="dsec"><h3>{{drawer.poolMine}}</h3>
       <div class="poollist">${mine.length ? byName(mine).map(row).join("")
-        : `<span style="color:var(--ink-faint);font-size:13px">None of these are ticked yet.</span>`}</div>
+        : `<span style="color:var(--ink-faint);font-size:13px">{{drawer.poolNoneMine}}</span>`}</div>
     </div>`;
 }
 
@@ -1579,7 +1577,7 @@ function renderCropDrawer(id) {
   const sub = c.subsoil.map(k => {
     const info = DATA.subsoil[k] || {};
     const acc = [...(info.oredict || []), ...(info.modBlocks || [])];
-    return `<dt>Under block</dt><dd>${esc(DATA.subsoilDesc[k] || k)}` +
+    return `<dt>{{th.underBlock}}</dt><dd>${esc(DATA.subsoilDesc[k] || k)}` +
       (acc.length ? `<br><span style="font-family:var(--face-data);font-size:12px;color:var(--ink-faint)">${esc(acc.join(", "))}</span>` : "") +
       `</dd>`;
   }).join("");
@@ -1588,47 +1586,46 @@ function renderCropDrawer(id) {
     <div class="drawer-top">
       <h2>${esc(c.name)}</h2>
       ${backButton()}
-      <button class="btn close" type="button" id="closeDrawer">Close</button>
+      <button class="btn close" type="button" id="closeDrawer">{{drawer.close}}</button>
     </div>
     ${c.flavour ? `<p class="flav">${esc(c.flavour)}</p>` : ""}
 
-    <div class="dsec"><h3>Growing conditions</h3>
-      <p class="flav" style="font-style:normal;margin-bottom:8px">Crop stick on top, <b>top block</b> directly under it, <b>under block</b> one deeper.</p>
+    <div class="dsec"><h3>{{drawer.conditions}}</h3>
+      <p class="flav" style="font-style:normal;margin-bottom:8px">{{drawer.stack}}</p>
       <dl class="dl">
-        <dt>Tier</dt><dd>${c.tier}</dd>
-        <dt>Top block</dt><dd>${topParts(c).length > 1
-          ? `any one of:<br>` + topParts(c).map(s => `· ${esc(DATA.soilGloss[s] || s)}`).join("<br>")
+        <dt>{{drawer.tier}}</dt><dd>${c.tier}</dd>
+        <dt>{{th.topBlock}}</dt><dd>${topParts(c).length > 1
+          ? `{{drawer.anyOneOf}}<br>` + topParts(c).map(s => `· ${esc(DATA.soilGloss[s] || s)}`).join("<br>")
           : esc(topBlock(c))}</dd>
-        ${c.subsoil.length ? sub : `<dt>Under block</dt><dd>anything - no requirement</dd>`}
-        ${c.maxLight !== null ? `<dt>Light</dt><dd>max ${c.maxLight} - needs to be dark</dd>` : ""}
-        ${c.minLight !== null ? `<dt>Light</dt><dd>min ${c.minLight}</dd>` : ""}
-        <dt>Growth time</dt><dd>${c.growth ?? "-"}</dd>
+        ${c.subsoil.length ? sub : `<dt>{{th.underBlock}}</dt><dd>{{drawer.underNone}}</dd>`}
+        ${c.maxLight !== null ? `<dt>{{th.light}}</dt><dd>{{drawer.lightMax}}</dd>` : ""}
+        ${c.minLight !== null ? `<dt>{{th.light}}</dt><dd>{{drawer.lightMin}}</dd>` : ""}
+        <dt>{{drawer.growth}}</dt><dd>${c.growth ?? "-"}</dd>
       </dl>
-      <button class="btn own-toggle" type="button" id="toggleOwn">${owned.has(id) ? "✓ Have it - untick" : "Add to my seeds"}</button>
+      <button class="btn own-toggle" type="button" id="toggleOwn">${owned.has(id) ? `{{drawer.untick}}` : `{{drawer.tick}}`}</button>
     </div>
 
-    <div class="dsec"><h3>Mutation pools (${c.pools.length})</h3>
-      ${c.pools.length ? `<p class="flav" style="font-style:normal;margin-bottom:8px">Any two parents that
-        share one of these can draw this crop at random. Open a pool to see everything else in it.</p>` : ""}
+    <div class="dsec"><h3>{{drawer.pools}}</h3>
+      ${c.pools.length ? `<p class="flav" style="font-style:normal;margin-bottom:8px">{{drawer.poolsNote}}</p>` : ""}
       <div class="poolchips">${c.pools.length
         ? c.pools.map(p => `<button class="poolchip" type="button" data-pool="${p}">${esc(DATA.poolNames[p] || p)}
             <span class="tier">${POOLM[p] ? POOLM[p].length : 0}</span></button>`).join("")
-        : `<span style="color:var(--ink-faint);font-size:13px">None - this crop can only be obtained from a recipe.</span>`}</div>
+        : `<span style="color:var(--ink-faint);font-size:13px">{{drawer.noPools}}</span>`}</div>
     </div>
 
-    <div class="dsec"><h3>How to get it (${from.length})</h3>
+    <div class="dsec"><h3>{{drawer.howToGet}}</h3>
       <div class="linkrow">${from.length
-        ? from.map(m => `<span class="parents">${parentLinks(m.parents)}${m.machineOnly ? " <span class=\"tier\">Crop Breeder</span>" : ""}</span>`).join("")
-        : `<span style="color:var(--ink-faint)">No recipe.${c.pools.length
-            ? ` Only ever from a pool draw, see the ${c.pools.length} pool${c.pools.length > 1 ? "s" : ""} above.`
-            : ` Not from a pool either, so this one is found in the world.`}</span>`}</div>
+        ? from.map(m => `<span class="parents">${parentLinks(m.parents)}${m.machineOnly ? ` <span class="tier">{{word.breeder}}</span>` : ""}</span>`).join("")
+        : `<span style="color:var(--ink-faint)">{{drawer.noRecipe}}${c.pools.length
+            ? ` {{drawer.noRecipePools}}`
+            : ` {{drawer.noRecipeWild}}`}</span>`}</div>
     </div>
 
-    <div class="dsec"><h3>Used as a parent (${used.length})</h3>
+    <div class="dsec"><h3>{{drawer.usedAs}}</h3>
       <div class="linkrow">${used.length
         ? used.map(m => `<span>${cropLink(m.out, owned.has(m.out) ? "own" : "miss")}
             <span class="parents" style="font-size:12px"> ← ${parentLinks(m.parents)}</span></span>`).join("")
-        : `<span style="color:var(--ink-faint)">Nowhere.</span>`}</div>
+        : `<span style="color:var(--ink-faint)">{{drawer.nowhere}}</span>`}</div>
     </div>`;
 
   $("toggleOwn").onclick = () => { toggle(id); paintDrawer(); };

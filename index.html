@@ -1568,9 +1568,7 @@ function renderPoolDrawer(key) {
       ${backButton()}
       <button class="btn close" type="button" id="closeDrawer">Close</button>
     </div>
-    <p class="flav" style="font-style:normal">Mutation pool with <b>${members.length}</b> crops in it.
-      Two parents that both belong to this pool can draw any one of them, each equally likely.
-      You already hold <b>${mine.length}</b>.</p>
+    <p class="flav" style="font-style:normal">Mutation pool with <b>${members.length}</b> crops in it. Two parents that both belong to this pool can draw any one of them, each equally likely. You already hold <b>${mine.length}</b>.</p>
 
     <div class="dsec"><h3>Not yours yet (${rest.length})</h3>
       <div class="poollist">${rest.length ? byName(rest).map(row).join("")
@@ -1615,12 +1613,11 @@ function renderCropDrawer(id) {
         ${c.minLight !== null ? `<dt>Light</dt><dd>min ${c.minLight}</dd>` : ""}
         <dt>Growth time</dt><dd>${c.growth ?? "-"}</dd>
       </dl>
-      <button class="btn own-toggle" type="button" id="toggleOwn">${owned.has(id) ? "✓ Have it - untick" : "Add to my seeds"}</button>
+      <button class="btn own-toggle" type="button" id="toggleOwn">${owned.has(id) ? `✓ Have it - untick` : `Add to my seeds`}</button>
     </div>
 
     <div class="dsec"><h3>Mutation pools (${c.pools.length})</h3>
-      ${c.pools.length ? `<p class="flav" style="font-style:normal;margin-bottom:8px">Any two parents that
-        share one of these can draw this crop at random. Open a pool to see everything else in it.</p>` : ""}
+      ${c.pools.length ? `<p class="flav" style="font-style:normal;margin-bottom:8px">Any two parents that share one of these can draw this crop at random. Open a pool to see everything else in it.</p>` : ""}
       <div class="poolchips">${c.pools.length
         ? c.pools.map(p => `<button class="poolchip" type="button" data-pool="${p}">${esc(DATA.poolNames[p] || p)}
             <span class="tier">${POOLM[p] ? POOLM[p].length : 0}</span></button>`).join("")
@@ -1629,7 +1626,7 @@ function renderCropDrawer(id) {
 
     <div class="dsec"><h3>How to get it (${from.length})</h3>
       <div class="linkrow">${from.length
-        ? from.map(m => `<span class="parents">${parentLinks(m.parents)}${m.machineOnly ? " <span class=\"tier\">Crop Breeder</span>" : ""}</span>`).join("")
+        ? from.map(m => `<span class="parents">${parentLinks(m.parents)}${m.machineOnly ? ` <span class="tier">Crop Breeder</span>` : ""}</span>`).join("")
         : `<span style="color:var(--ink-faint)">No recipe.${c.pools.length
             ? ` Only ever from a pool draw, see the ${c.pools.length} pool${c.pools.length > 1 ? "s" : ""} above.`
             : ` Not from a pool either, so this one is found in the world.`}</span>`}</div>
