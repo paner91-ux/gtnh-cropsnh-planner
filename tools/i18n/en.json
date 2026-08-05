@@ -14,5 +14,28 @@
   "tab.near": "One parent short",
   "tab.pool": "Pool roulette",
   "tab.path": "Route to a goal",
-  "tab.tips": "Tips &amp; tricks"
+  "tab.tips": "Tips &amp; tricks",
+
+  "rail.title": "Your seeds",
+  "rail.progressLabel": "Share of all crops you hold",
+  "rail.search": "Search crops…",
+  "rail.legendSub": "needs a specific block under the soil",
+  "rail.legendInfo": "opens the details panel",
+
+  "manage.summary": "Manage list",
+  "manage.clear": "Clear all ticks",
+  "manage.undo": "Undo",
+  "manage.about": "Your ticks live in this browser. The hosted page and a local copy keep separate stores - use this box to move the list between them.",
+  "manage.codeLabel": "Seed list code",
+  "manage.copy": "Copy",
+  "manage.load": "Load from box",
+  "manage.download": "Download file",
+  "manage.open": "Open file",
+  "manage.dlnote": "This page runs in a sandboxed frame, so it cannot write files. Use <b>Copy</b> and paste the text somewhere safe - the offline copy of this page can download instead.",
+
+  "foot.data": "Extracted from the bytecode of <code>cropsnh-2.0.101.jar</code>, as shipped in GTNH 2.9 - recipes, pools, soils, sub-soils and light requirements come straight out of <code>MutationLoader</code>, <code>CropLoader</code> and <code>SubSoilRequirementLoader</code>, not from a wiki. Nothing else in the pack registers crops with CropsNH, so the list above is the whole set rather than a selection.",
+  "foot.privacy": "Your ticks are stored in this browser and nowhere else. The page makes no external requests and works offline - move a list between copies from <b>Manage list</b> in the sidebar.",
+  "foot.source": "Source on GitHub",
+  "foot.issues": "Report a mistake",
+  "foot.credit": "<a href=\"https://github.com/GTNewHorizons/CropsNH\" target=\"_blank\" rel=\"noopener noreferrer\">CropsNH</a> is by C0bra5 and the GTNH Team, built on AgriCraft. This is an unofficial fan tool, not affiliated with or endorsed by the GTNH team. Planner code is MIT."
 }
