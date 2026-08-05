@@ -884,7 +884,7 @@ function topParts(crop) {
 }
 function topBlock(crop) {
   const p = topParts(crop);
-  return p.map(s => DATA.soilGloss[s] || s).join(", or ");
+  return p.map(s => DATA.soilGloss[s] || s).join(`, or `);
 }
 function topBlockShort(crop) {
   const p = topParts(crop);
@@ -923,8 +923,8 @@ function reqPlain(crop) {
   const g = (k, v, ore) =>
     `<span class="g"><span class="k">${k}</span><span${ore ? ` class="ore"` : ""}>${esc(v)}</span></span>`;
   const u = underBlock(crop), l = lightReq(crop);
-  return `<div class="pneed">${g("top", topBlockShort(crop))}${g("under", u || "anything", !!u)}${
-    l ? g("light", l, true) : ""}</div>`;
+  return `<div class="pneed">${g(`top`, topBlockShort(crop))}${g(`under`, u || `anything`, !!u)}${
+    l ? g(`light`, l, true) : ""}</div>`;
 }
 
 /* result, its ground, then each parent with its own ground */
@@ -1073,7 +1073,7 @@ function cardFor(m) {
   const c = C[m.out];
   const key = markKey(m), on = marked.has(key);
   return `<article class="card${on ? " marked" : ""}" data-key="${esc(key)}"
-      title="${on ? "Marked as what you are building - click to clear" : "Click to mark this as what you are building"}">
+      title="${on ? `Marked as what you are building - click to clear` : `Click to mark this as what you are building`}">
     <div class="card-top">
       <button class="card-out" type="button" data-crop="${m.out}">${esc(nm(m.out))}</button>
       <span class="tier">T${c ? c.tier : "?"}</span>

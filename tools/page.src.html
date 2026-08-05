@@ -873,7 +873,7 @@ function topParts(crop) {
 }
 function topBlock(crop) {
   const p = topParts(crop);
-  return p.map(s => DATA.soilGloss[s] || s).join(", or ");
+  return p.map(s => DATA.soilGloss[s] || s).join(`{{word.orJoin}}`);
 }
 function topBlockShort(crop) {
   const p = topParts(crop);
@@ -883,8 +883,8 @@ function underBlock(crop) {
   return crop.subsoil.length ? crop.subsoil.map(subLabel).join(" / ") : "";
 }
 function lightReq(crop) {
-  if (crop.maxLight !== null) return `max ${crop.maxLight} - dark`;
-  if (crop.minLight !== null && crop.minLight > 9) return `min ${crop.minLight}`;
+  if (crop.maxLight !== null) return `{{light.max}}`;
+  if (crop.minLight !== null && crop.minLight > 9) return `{{light.min}}`;
   return "";
 }
 
@@ -892,19 +892,19 @@ function lightReq(crop) {
    marker, which belongs on the same row as the rest of the requirements. */
 function reqChips(crop, extra) {
   if (!crop) return "";
-  const out = [`<span class="chip soil"><span class="k">top block</span>${esc(topBlockShort(crop))}</span>`];
+  const out = [`<span class="chip soil"><span class="k">{{chip.top}}</span>${esc(topBlockShort(crop))}</span>`];
   const u = underBlock(crop);
   out.push(u
-    ? `<span class="chip sub"><span class="k">under block</span>${esc(u)}</span>`
-    : `<span class="chip none"><span class="k">under block</span>anything</span>`);
+    ? `<span class="chip sub"><span class="k">{{chip.under}}</span>${esc(u)}</span>`
+    : `<span class="chip none"><span class="k">{{chip.under}}</span>{{word.anything}}</span>`);
   const l = lightReq(crop);
-  if (l) out.push(`<span class="chip light"><span class="k">light</span>${esc(l)}</span>`);
+  if (l) out.push(`<span class="chip light"><span class="k">{{chip.light}}</span>${esc(l)}</span>`);
   if (extra) out.push(extra);
   return `<div class="chips">${out.join("")}</div>`;
 }
 
 const machChip = m => m.machineOnly
-  ? `<span class="chip mach"><span class="k">only in</span>Crop Breeder</span>` : "";
+  ? `<span class="chip mach"><span class="k">{{chip.only}}</span>{{word.breeder}}</span>` : "";
 
 /* Same facts as reqChips, same labels, without the boxes - see .pneed. */
 function reqPlain(crop) {
@@ -912,13 +912,13 @@ function reqPlain(crop) {
   const g = (k, v, ore) =>
     `<span class="g"><span class="k">${k}</span><span${ore ? ` class="ore"` : ""}>${esc(v)}</span></span>`;
   const u = underBlock(crop), l = lightReq(crop);
-  return `<div class="pneed">${g("top", topBlockShort(crop))}${g("under", u || "anything", !!u)}${
-    l ? g("light", l, true) : ""}</div>`;
+  return `<div class="pneed">${g(`{{pneed.top}}`, topBlockShort(crop))}${g(`{{pneed.under}}`, u || `{{word.anything}}`, !!u)}${
+    l ? g(`{{pneed.light}}`, l, true) : ""}</div>`;
 }
 
 /* result, its ground, then each parent with its own ground */
 function parentRows(m) {
-  return `<div class="pgroup"><span class="lbl">from</span>${m.parents.map(p => `
+  return `<div class="pgroup"><span class="lbl">{{card.from}}</span>${m.parents.map(p => `
     <div class="prow">${cropLink(p, owned.has(p) ? "own" : "miss")}
       ${reqPlain(C[p])}</div>`).join("")}</div>`;
 }
@@ -1062,7 +1062,7 @@ function cardFor(m) {
   const c = C[m.out];
   const key = markKey(m), on = marked.has(key);
   return `<article class="card${on ? " marked" : ""}" data-key="${esc(key)}"
-      title="${on ? "Marked as what you are building - click to clear" : "Click to mark this as what you are building"}">
+      title="${on ? `{{card.markedTitle}}` : `{{card.markTitle}}`}">
     <div class="card-top">
       <button class="card-out" type="button" data-crop="${m.out}">${esc(nm(m.out))}</button>
       <span class="tier">T${c ? c.tier : "?"}</span>

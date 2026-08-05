@@ -123,6 +123,20 @@
   "th.new": "New",
   "th.branch": "Branch",
 
+  "card.from": "from",
+  "card.markTitle": "Click to mark this as what you are building",
+  "card.markedTitle": "Marked as what you are building - click to clear",
+
+  "chip.top": "top block",
+  "chip.under": "under block",
+  "chip.light": "light",
+  "chip.only": "only in",
+  "pneed.top": "top",
+  "pneed.under": "under",
+  "pneed.light": "light",
+  "light.max": "max ${crop.maxLight} - dark",
+  "light.min": "min ${crop.minLight}",
+
   "drawer.close": "Close",
   "drawer.poolIntro": "Mutation pool with <b>${members.length}</b> crops in it. Two parents that both belong to this pool can draw any one of them, each equally likely. You already hold <b>${mine.length}</b>.",
   "drawer.poolRest": "Not yours yet (${rest.length})",
@@ -151,6 +165,7 @@
 
   "word.have": "have",
   "word.breeder": "Crop Breeder",
+  "word.orJoin": ", or ",
   "word.anything": "anything",
   "word.any": "any",
 
