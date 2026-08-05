@@ -271,6 +271,14 @@ p, li { text-wrap: pretty; }
   border: 1px solid var(--rule); border-radius: 2px; padding: 0 4px;
 }
 
+/* A row that names what it holds, so a card cannot be read backwards: the
+   title is the result, "from" is the parents, "needs" is the result's ground. */
+.labelled { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.labelled > .lbl {
+  flex: none; font-family: var(--face-data); font-size: 9.5px;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint);
+}
+
 .parents { font-size: 13px; color: var(--ink-soft); }
 .parents b { font-weight: 600; color: var(--ink); }
 .parents .plus { color: var(--ink-faint); margin: 0 3px; }
@@ -774,7 +782,9 @@ function lightReq(crop) {
   return "";
 }
 
-function reqChips(crop) {
+/* `extra` appends a chip built by the caller - used for the Crop Breeder
+   marker, which belongs on the same row as the rest of the requirements. */
+function reqChips(crop, extra) {
   if (!crop) return "";
   const out = [`<span class="chip soil"><span class="k">top block</span>${esc(topBlockShort(crop))}</span>`];
   const u = underBlock(crop);
@@ -783,8 +793,12 @@ function reqChips(crop) {
     : `<span class="chip none"><span class="k">under block</span>anything</span>`);
   const l = lightReq(crop);
   if (l) out.push(`<span class="chip light"><span class="k">light</span>${esc(l)}</span>`);
+  if (extra) out.push(extra);
   return `<div class="chips">${out.join("")}</div>`;
 }
+
+const machChip = m => m.machineOnly
+  ? `<span class="chip mach"><span class="k">only in</span>Crop Breeder</span>` : "";
 
 function subLabel(key) {
   const d = DATA.subsoilDesc[key];
@@ -917,17 +931,13 @@ function renderRail() {
 /* ---------------------------------------------------------- views */
 function cardFor(m) {
   const c = C[m.out];
-  const parents = parentLinks(m.parents);
-  const mach = m.machineOnly
-    ? `<span class="chip mach"><span class="k">only in</span>Crop Breeder</span>` : "";
   return `<article class="card">
     <div class="card-top">
       <button class="card-out" type="button" data-crop="${m.out}">${esc(nm(m.out))}</button>
       <span class="tier">T${c ? c.tier : "?"}</span>
     </div>
-    <div class="parents">${parents}</div>
-    ${reqChips(c)}
-    ${mach ? `<div class="chips">${mach}</div>` : ""}
+    <div class="labelled"><span class="lbl">from</span><span class="parents">${parentLinks(m.parents)}</span></div>
+    <div class="labelled"><span class="lbl">needs</span>${reqChips(c, machChip(m))}</div>
   </article>`;
 }
 
@@ -1334,9 +1344,8 @@ function renderPath() {
       <div class="body">
         <div class="made"><button class="inline-crop" type="button" data-crop="${m.out}">${esc(nm(m.out))}</button>
           <span class="tier">T${c ? c.tier : "?"}</span></div>
-        <div class="parents">${parentLinks(m.parents)}</div>
-        ${reqChips(c)}
-        ${m.machineOnly ? `<div class="chips"><span class="chip mach"><span class="k">only in</span>Crop Breeder</span></div>` : ""}
+        <div class="labelled"><span class="lbl">from</span><span class="parents">${parentLinks(m.parents)}</span></div>
+        <div class="labelled"><span class="lbl">needs</span>${reqChips(c, machChip(m))}</div>
       </div></div>`;
   });
   html += `</div>`;
