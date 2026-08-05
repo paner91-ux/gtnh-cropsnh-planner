@@ -849,14 +849,14 @@ function applyImport(text) {
   } catch (e) {
     ids = text.split(/[\s,;]+/);            // a plain list of names works too
   }
-  if (!Array.isArray(ids)) { status("Unrecognised format - paste a code from this tool.", "warn"); return; }
+  if (!Array.isArray(ids)) { status(`{{msg.badFormat}}`, "warn"); return; }
   const known = ids.map(String).map(s => s.trim()).filter(id => C[id]);
   const unknown = ids.length - known.length;
-  if (!known.length) { status("Found no known crops in that - nothing was changed.", "warn"); return; }
+  if (!known.length) { status(`{{msg.noneKnown}}`, "warn"); return; }
   snapshot();
   owned = new Set(known);
   save(); render();
-  status(`Loaded ${known.length} crops` + (unknown > 0 ? ` · skipped ${unknown} unknown` : "") + " · Undo is at the top of this panel", "ok");
+  status(`{{msg.loaded}}` + (unknown > 0 ? `{{msg.loadedSkipped}}` : "") + `{{msg.loadedUndo}}`, "ok");
 }
 
 /* ---------------------------------------------------------- requirements */
@@ -1048,7 +1048,7 @@ function renderRail() {
     }
     html += `</div>`;
   }
-  $("seedlist").innerHTML = html || `<div class="empty">No matches</div>`;
+  $("seedlist").innerHTML = html || `<div class="empty">{{empty.noMatches}}</div>`;
   const share = owned.size / byName.length * 100;
   $("tally").innerHTML = `${owned.size} / ${byName.length} <b>${Math.round(share)}%</b>`;
   $("progress").setAttribute("aria-valuenow", Math.round(share));
@@ -1764,13 +1764,13 @@ $("search").addEventListener("keydown", e => {
   if (!first) return;
   filter = ""; e.target.value = "";
   toggle(first.id);                       // toggle() saves and re-renders
-  status(`${owned.has(first.id) ? "Added" : "Removed"} ${first.name}`, "ok");
+  status(owned.has(first.id) ? `{{msg.added}}` : `{{msg.removed}}`, "ok");
 });
 
 $("clearAll").onclick = () => {
   if (!owned.size) return;
   snapshot(); owned.clear(); save(); render();
-  status(`Cleared ${undoState.length} crops - Undo is right above.`, "warn");
+  status(`{{msg.cleared}}`, "warn");
 };
 
 $("undo").onclick = () => {
@@ -1779,7 +1779,7 @@ $("undo").onclick = () => {
   snapshot();                       // so Undo can be undone
   owned = new Set(back);
   save(); render();
-  status(`Restored ${owned.size} crops.`, "ok");
+  status(`{{msg.restored}}`, "ok");
 };
 
 /* --- export / import --- */
@@ -1788,10 +1788,10 @@ $("btnCopy").onclick = async () => {
   box.value = currentCode();
   try {
     await navigator.clipboard.writeText(box.value);
-    status("Copied to clipboard.", "ok");
+    status(`{{msg.copied}}`, "ok");
   } catch (e) {
     box.focus(); box.select();
-    status("Clipboard is blocked - the box is selected, press Ctrl+C.", "warn");
+    status(`{{msg.clipboardBlocked}}`, "warn");
   }
 };
 
@@ -1811,9 +1811,9 @@ $("btnFile").onclick = () => {
     a.href = url; a.download = `cropsnh-seeds-${stamp}.json`;
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 2000);
-    status(`Sent cropsnh-seeds-${stamp}.json to your downloads.`, "ok");
+    status(`{{msg.downloaded}}`, "ok");
   } catch (e) {
-    status("The browser refused the download - use Copy instead.", "warn");
+    status(`{{msg.downloadRefused}}`, "warn");
   }
 };
 
@@ -1823,7 +1823,7 @@ $("filein").onchange = e => {
   if (!f) return;
   const r = new FileReader();
   r.onload = () => { $("code").value = r.result; applyImport(r.result); };
-  r.onerror = () => status("Could not read that file.", "warn");
+  r.onerror = () => status(`{{msg.fileUnreadable}}`, "warn");
   r.readAsText(f);
   e.target.value = "";
 };

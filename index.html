@@ -860,14 +860,14 @@ function applyImport(text) {
   } catch (e) {
     ids = text.split(/[\s,;]+/);            // a plain list of names works too
   }
-  if (!Array.isArray(ids)) { status("Unrecognised format - paste a code from this tool.", "warn"); return; }
+  if (!Array.isArray(ids)) { status(`Unrecognised format - paste a code from this tool.`, "warn"); return; }
   const known = ids.map(String).map(s => s.trim()).filter(id => C[id]);
   const unknown = ids.length - known.length;
-  if (!known.length) { status("Found no known crops in that - nothing was changed.", "warn"); return; }
+  if (!known.length) { status(`Found no known crops in that - nothing was changed.`, "warn"); return; }
   snapshot();
   owned = new Set(known);
   save(); render();
-  status(`Loaded ${known.length} crops` + (unknown > 0 ? ` · skipped ${unknown} unknown` : "") + " · Undo is at the top of this panel", "ok");
+  status(`Loaded ${known.length} crops` + (unknown > 0 ? ` · skipped ${unknown} unknown` : "") + ` · Undo is at the top of this panel`, "ok");
 }
 
 /* ---------------------------------------------------------- requirements */
@@ -1775,7 +1775,7 @@ $("search").addEventListener("keydown", e => {
   if (!first) return;
   filter = ""; e.target.value = "";
   toggle(first.id);                       // toggle() saves and re-renders
-  status(`${owned.has(first.id) ? "Added" : "Removed"} ${first.name}`, "ok");
+  status(owned.has(first.id) ? `Added ${first.name}` : `Removed ${first.name}`, "ok");
 });
 
 $("clearAll").onclick = () => {
@@ -1799,10 +1799,10 @@ $("btnCopy").onclick = async () => {
   box.value = currentCode();
   try {
     await navigator.clipboard.writeText(box.value);
-    status("Copied to clipboard.", "ok");
+    status(`Copied to clipboard.`, "ok");
   } catch (e) {
     box.focus(); box.select();
-    status("Clipboard is blocked - the box is selected, press Ctrl+C.", "warn");
+    status(`Clipboard is blocked - the box is selected, press Ctrl+C.`, "warn");
   }
 };
 
@@ -1824,7 +1824,7 @@ $("btnFile").onclick = () => {
     setTimeout(() => URL.revokeObjectURL(url), 2000);
     status(`Sent cropsnh-seeds-${stamp}.json to your downloads.`, "ok");
   } catch (e) {
-    status("The browser refused the download - use Copy instead.", "warn");
+    status(`The browser refused the download - use Copy instead.`, "warn");
   }
 };
 
@@ -1834,7 +1834,7 @@ $("filein").onchange = e => {
   if (!f) return;
   const r = new FileReader();
   r.onload = () => { $("code").value = r.result; applyImport(r.result); };
-  r.onerror = () => status("Could not read that file.", "warn");
+  r.onerror = () => status(`Could not read that file.`, "warn");
   r.readAsText(f);
   e.target.value = "";
 };
