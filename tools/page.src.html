@@ -276,19 +276,14 @@ p, li { text-wrap: pretty; }
   letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint);
 }
 
-/* Parents listed one per line with their own ground, because building the
-   rig means preparing three plots: one per parent and one for the result. */
+/* Parents get their own ground, because building the rig means preparing
+   three plots. Same labelled chips as the result: a bare list of block
+   names cannot say which one is the top block and which goes under it.  */
 .pgroup {
-  display: flex; flex-direction: column; gap: 4px;
+  display: flex; flex-direction: column; gap: 9px;
   padding-top: 8px; border-top: 1px solid var(--rule);
 }
-.prow { display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; }
-.pneed {
-  font-family: var(--face-data); font-size: 11px;
-  color: var(--ink-faint); min-width: 0;
-}
-.pneed .ore { color: var(--ore); }
-.pneed .sep { color: var(--rule); margin: 0 4px; }
+.prow { display: flex; flex-direction: column; gap: 4px; align-items: start; }
 
 .parents { font-size: 13px; color: var(--ink-soft); }
 .parents b { font-weight: 600; color: var(--ink); }
@@ -811,23 +806,11 @@ function reqChips(crop, extra) {
 const machChip = m => m.machineOnly
   ? `<span class="chip mach"><span class="k">only in</span>Crop Breeder</span>` : "";
 
-/* One-line ground summary for a parent. Anything beyond the top block is
-   marked, since that is the part people forget to prepare.               */
-function reqInline(crop) {
-  if (!crop) return "";
-  const bits = [esc(topBlockShort(crop))];
-  const u = underBlock(crop);
-  if (u) bits.push(`<span class="ore">${esc(u)}</span>`);
-  const l = lightReq(crop);
-  if (l) bits.push(`<span class="ore">${esc(l)}</span>`);
-  return bits.join(`<span class="sep">·</span>`);
-}
-
 /* result, its ground, then each parent with its own ground */
 function parentRows(m) {
   return `<div class="pgroup"><span class="lbl">from</span>${m.parents.map(p => `
     <div class="prow">${cropLink(p, owned.has(p) ? "own" : "miss")}
-      <span class="pneed">${reqInline(C[p])}</span></div>`).join("")}</div>`;
+      ${reqChips(C[p])}</div>`).join("")}</div>`;
 }
 
 function subLabel(key) {
