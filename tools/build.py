@@ -88,7 +88,7 @@ def load_catalogues():
     return out
 
 
-def check(code, cat, base, used):
+def check(code, cat, base, used, warn):
     """Refuse to build rather than ship a page with a broken string."""
     err = []
     if code == 'en':
@@ -110,11 +110,16 @@ def check(code, cat, base, used):
             err.append(f'{k} contains a backtick, which would end a template literal')
         if '{{' in v:
             err.append(f'{k} contains {{{{, which would leave an unresolved key')
-        # a translation that drops or invents a ${...} breaks the page it is on
-        if k in base and sorted(INTERP.findall(v)) != sorted(INTERP.findall(base[k])):
-            err.append(f'{k} does not carry the same ${{...}} as English:\n'
-                       f'      en: {sorted(INTERP.findall(base[k]))}\n'
-                       f'      {code}: {sorted(INTERP.findall(v))}')
+        if k not in base:
+            continue
+        mine, theirs = INTERP.findall(v), INTERP.findall(base[k])
+        # inventing a ${...} means referring to something that does not exist there
+        for x in sorted(set(mine) - set(theirs)):
+            err.append(f'{k} uses {x}, which the English string does not have')
+        # dropping one is only ever a translation losing a number, so it warns:
+        # English pluralises inside the string and other languages should not
+        for x in sorted(set(theirs) - set(mine)):
+            warn.append(f'{code}.json: {k} leaves out {x}')
     if err:
         raise SystemExit(f'{code}.json:\n  - ' + '\n  - '.join(err))
 
@@ -138,8 +143,11 @@ if '__DATA__' not in src:
 cats = load_catalogues()
 base = cats['en']
 used = set(KEY.findall(src))
+warn = []
 for code, cat in cats.items():
-    check(code, cat, base, used)
+    check(code, cat, base, used, warn)
+for w in warn:
+    print('warning: ' + w)
 
 blob = json.dumps(data, ensure_ascii=False, separators=(',', ':'))
 

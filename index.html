@@ -1447,8 +1447,7 @@ function renderTips() {
 function renderPath() {
   if (!owned.size) {
     return `<p class="viewnote">This works out a chain of recipes from the crops you already hold to one you want.</p>
-      <div class="empty">Tick off what you have in the rail on the left first.<br>
-      With nothing ticked there is no starting point, so every goal would come back unreachable.</div>`;
+      <div class="empty">Tick off what you have in the rail on the left first.<br>With nothing ticked there is no starting point, so every goal would come back unreachable.</div>`;
   }
 
   const { have } = reachable();
@@ -1459,8 +1458,7 @@ function renderPath() {
     (have.has(c.id) ? reachableOpts : blockedOpts).push(opt);
   }
 
-  let html = `<p class="viewnote">A chain of recipes from what you hold to the crop you want. It only follows
-    exact recipes, so a crop that comes out of a pool draw will not have a route here even though you can still get it.</p>
+  let html = `<p class="viewnote">A chain of recipes from what you hold to the crop you want. It only follows exact recipes, so a crop that comes out of a pool draw will not have a route here even though you can still get it.</p>
     <div class="pairpick"><label>Goal<select class="field" id="selTarget" style="min-width:280px">
       <option value="">-</option>
       ${reachableOpts.length ? `<optgroup label="Reachable now (${reachableOpts.length})">${reachableOpts.join("")}</optgroup>` : ""}
@@ -1470,8 +1468,7 @@ function renderPath() {
   if (!target) {
     return html + (reachableOpts.length
       ? `<div class="empty">Pick a goal. <b>${reachableOpts.length}</b> crops are reachable from what you hold right now.</div>`
-      : `<div class="empty">Nothing is reachable by recipe from your current set yet.<br>
-         Tick off more of what you actually own, or use the <b>Pool roulette</b> to find a first new crop.</div>`);
+      : `<div class="empty">Nothing is reachable by recipe from your current set yet.<br>Tick off more of what you actually own, or use the <b>Pool roulette</b> to find a first new crop.</div>`);
   }
   if (owned.has(target)) return html + `<div class="empty">You already have it.</div>`;
 
@@ -1479,13 +1476,11 @@ function renderPath() {
   if (!steps) {
     const recipes = MUT.filter(x => x.out === target);
     if (!recipes.length) {
-      return html + `<div class="empty"><b>${esc(nm(target))}</b> has no recipe at all. It only ever comes out of a
-        pool draw or from the world, so there is no chain to follow. See the <b>Pool roulette</b>.</div>`;
+      return html + `<div class="empty"><b>${esc(nm(target))}</b> has no recipe at all. It only ever comes out of a pool draw or from the world, so there is no chain to follow. See the <b>Pool roulette</b>.</div>`;
     }
     // one level of "what exactly is in the way", with each blocker's own status
-    html += `<p class="viewnote"><b>${esc(nm(target))}</b> cannot be reached by recipe yet. It is made by
-      ${recipes.length === 1 ? "this recipe" : `any of these ${recipes.length} recipes`}, with the parts you are
-      missing in <span style="color:var(--ore);font-weight:600">rust</span>:</p><div class="steps">`;
+    const made = recipes.length === 1 ? `this recipe` : `any of these ${recipes.length} recipes`;
+    html += `<p class="viewnote"><b>${esc(nm(target))}</b> cannot be reached by recipe yet. It is made by ${made}, with the parts you are missing in <span style="color:var(--ore);font-weight:600">rust</span>:</p><div class="steps">`;
     for (const m of recipes) {
       const missing = m.parents.filter(p => !owned.has(p));
       html += `<div class="step"><div class="idx">-</div><div class="body">
