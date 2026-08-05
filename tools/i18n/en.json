@@ -311,5 +311,7 @@
   "about.privacyH": "What the page stores",
   "about.creditH": "Credit and licence",
   "foot.short": "A planner for CropsNH breeding in GregTech: New Horizons, read out of the mod's own code rather than from a wiki. Your ticks stay in this browser and the page works offline.",
-  "foot.more": "About this page"
+  "foot.more": "About this page",
+  "tips.g4.i6": "<b>Once a plant is grown, the block under it can be taken away.</b> The under block is checked when something is planted and on every growth tick, and a mature plant has no growth ticks left to fail - so one block can serve a whole setup. Grow the parent on it, break it out from underneath, and put it under the breeding stick, which is where the copy has to be able to land. Diareed and its block of diamond is the case where this is worth the walk, but it applies to all ${Object.values(C).filter(c => c.subsoil.length).length} crops marked <span class=\"mark\">&#9670;</span>. Put the block back before you pick the crop: harvesting checks the requirements again.",
+  "tips.g4.i6w": "<em>canGrow()</em> returns false for a mature plant before looking at any requirement, so there is nothing left for a missing sub-soil to stop. Nothing removes the plant either - a stick only breaks itself through <em>onInvalidSoilDetected()</em>, which the block calls after reading <em>y - 1</em> against the crop's soil list, while the sub-soil sits at <em>y - 2</em> and is not part of that check. <em>canCross()</em> asks only for a crop, no weed, and growth past the crossing threshold, so the stripped parent still counts as a parent. <em>canHarvest()</em> does re-run the requirements, which is why the block has to be back for the harvest."
 }
