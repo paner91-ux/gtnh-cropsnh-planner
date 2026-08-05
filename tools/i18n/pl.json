@@ -337,5 +337,10 @@
   "biomes.thBest": "Roślin z +28",
   "biomes.thFrom": "Skąd",
   "biomes.noMatch": "Żaden biom nie pasuje.",
-  "about.biomeData": "Jedna tabela nie pochodzi z CropsNH. Tagi biomów należą do Forge, a każdy biom rejestruje ten mod, który go dodał, więc zakładka <b>Biomy</b> jest odczytana z samego Minecrafta oraz z Biomes O' Plenty, Twilight Forest, RWG i Thaumcraft - modów w tej paczce, które w ogóle coś rejestrują. Odczyt idzie tą samą drogą, ze skompilowanych klas, a nie z wiki, a mod dodający biomy bez rejestrowania tagów po prostu się tu nie pojawi."
+  "about.biomeData": "Jedna tabela nie pochodzi z CropsNH. Tagi biomów należą do Forge, a każdy biom rejestruje ten mod, który go dodał, więc zakładka <b>Biomy</b> jest odczytana z samego Minecrafta oraz z Biomes O' Plenty, Twilight Forest, RWG i Thaumcraft - modów w tej paczce, które w ogóle coś rejestrują. Odczyt idzie tą samą drogą, ze skompilowanych klas, a nie z wiki, a mod dodający biomy bez rejestrowania tagów po prostu się tu nie pojawi.",
+  "drawer.where": "Gdzie rośnie najlepiej",
+  "drawer.whereFull": "Pełne <b>+28</b> do Nutrient Score - pasują dwa jej tagi:",
+  "drawer.whereHalf": "<b>+14</b> - pasuje jeden tag:",
+  "drawer.whereNoneFull": "Żaden biom w tej paczce nie ma dwóch jej tagów, więc <b>+14</b> to maksimum, jakie może dostać z biomu.",
+  "drawer.whereOneTag": "Lubi tylko jeden tag, więc biom nigdy nie będzie dla niej wart więcej niż <b>+14</b>."
 }

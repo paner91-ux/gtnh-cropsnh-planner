@@ -41,6 +41,9 @@ TAG = re.compile(r'// Field net/minecraftforge/common/BiomeDictionary\$Type\.(\w
 BIOME_REF = re.compile(r'getstatic\s+#\d+\s+// Field (?:([\w/$]+)\.)?(\w+):L' + BIOME_T + r';')
 PUT = re.compile(r'putstatic\s+#\d+\s+// Field (?:([\w/$]+)\.)?(\w+):L' + BIOME_T + r';')
 STR = re.compile(r'ldc\w*\s+#\d+\s+// String (.+?)\s*$')
+NEW = re.compile(r'new\s+#\d+\s+// class ([\w/$]+)')
+# setBiomeName, which is where a biome states its own name
+SET_NAME = re.compile(r'// Method (?:func_76735_a|setBiomeName):\(Ljava/lang/String;\)')
 
 
 def javap(cp, cls):
@@ -87,18 +90,42 @@ def read_registrations(lines, owner):
 
 
 def read_names(lines, owner):
-    """owner.field -> display name, from the string sitting next to the store."""
-    out, recent = {}, []
+    """owner.field -> (nearest string, class it was built from).
+
+    The nearest string is right for a mod that passes the display name in at
+    the registration site, and wrong for one that reads a config first -
+    Thaumcraft's fields end up next to "Eerie biome id". So the class is kept
+    too, and asked for its own name afterwards.
+    """
+    out, recent, built = {}, [], []
     for l in lines:
         m = STR.search(l)
         if m:
             recent.append(m.group(1))
             continue
+        m = NEW.search(l)
+        if m:
+            built.append(m.group(1))
+            continue
         m = PUT.search(l)
-        if m and recent:
-            out[f'{m.group(1) or owner}.{m.group(2)}'] = recent[-1]
-            recent = []
+        if m and (recent or built):
+            out[f'{m.group(1) or owner}.{m.group(2)}'] = (
+                recent[-1] if recent else None, built[-1] if built else None)
+            recent, built = [], []
     return out
+
+
+def own_name(lines):
+    """The literal a biome class hands to setBiomeName, if it is a literal."""
+    last = None
+    for l in lines:
+        m = STR.search(l)
+        if m:
+            last = m.group(1)
+            continue
+        if SET_NAME.search(l) and last:
+            return last
+    return None
 
 
 def scan(jar, label, name_hint=None):
@@ -106,13 +133,25 @@ def scan(jar, label, name_hint=None):
     tmp = tempfile.mkdtemp()
     with zipfile.ZipFile(jar) as z:
         z.extractall(tmp)
-    regs, names = [], {}
+    regs, raw = [], {}
     for cls in classes_mentioning(tmp, b'BiomeDictionary'):
         lines = javap(tmp, cls)
         regs.extend(read_registrations(lines, cls.replace('.', '/')))
-        names.update(read_names(lines, cls.replace('.', '/')))
+        raw.update(read_names(lines, cls.replace('.', '/')))
     if name_hint:                       # vanilla keeps its names in one class
-        names.update(read_names(javap(tmp, name_hint), name_hint))
+        raw.update(read_names(javap(tmp, name_hint), name_hint))
+
+    # a biome that names itself beats whatever string happened to sit nearby
+    seen, names = {}, {}
+    for field, (near, cls) in raw.items():
+        if cls:
+            if cls not in seen:
+                seen[cls] = own_name(javap(tmp, cls.replace('/', '.')))
+            if seen[cls]:
+                names[field] = seen[cls]
+                continue
+        if near:
+            names[field] = near
     return regs, names, label
 
 

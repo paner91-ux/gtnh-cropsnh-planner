@@ -337,5 +337,10 @@
   "biomes.thBest": "Crops at +28",
   "biomes.thFrom": "From",
   "biomes.noMatch": "No biome matches that.",
-  "about.biomeData": "One table is not from CropsNH. Biome tags belong to Forge, and each biome is registered by whichever mod added it, so the <b>Biomes</b> tab is read out of Minecraft itself and out of Biomes O' Plenty, Twilight Forest, RWG and Thaumcraft - the mods in this pack that register any. It is read the same way, from the compiled classes rather than from a wiki, and a mod that adds biomes without registering tags simply will not appear."
+  "about.biomeData": "One table is not from CropsNH. Biome tags belong to Forge, and each biome is registered by whichever mod added it, so the <b>Biomes</b> tab is read out of Minecraft itself and out of Biomes O' Plenty, Twilight Forest, RWG and Thaumcraft - the mods in this pack that register any. It is read the same way, from the compiled classes rather than from a wiki, and a mod that adds biomes without registering tags simply will not appear.",
+  "drawer.where": "Where it grows best",
+  "drawer.whereFull": "The full <b>+28</b> Nutrient Score - two of its tags match:",
+  "drawer.whereHalf": "<b>+14</b> - one tag matches:",
+  "drawer.whereNoneFull": "No biome in this pack carries two of its tags, so <b>+14</b> is the most it can get from a biome.",
+  "drawer.whereOneTag": "It likes a single tag, so a biome can never be worth more than <b>+14</b> to it."
 }

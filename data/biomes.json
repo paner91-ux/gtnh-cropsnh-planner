@@ -309,14 +309,14 @@
    ],
    "from": "minecraft"
   },
-  "Eerie biome id": {
+  "Eerie": {
    "tags": [
     "MAGICAL",
     "SPOOKY"
    ],
    "from": "Thaumcraft"
   },
-  "Eldritch Lands biome id": {
+  "Eldritch": {
    "tags": [
     "END",
     "MAGICAL",
@@ -657,7 +657,7 @@
    ],
    "from": "BiomesOPlenty"
   },
-  "Magical Forest biome id": {
+  "Magical Forest": {
    "tags": [
     "FOREST",
     "MAGICAL"
@@ -1120,7 +1120,7 @@
    ],
    "from": "minecraft"
   },
-  "Taint biome id": {
+  "Tainted Land": {
    "tags": [
     "MAGICAL",
     "WASTELAND"

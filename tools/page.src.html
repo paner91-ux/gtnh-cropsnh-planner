@@ -1484,7 +1484,10 @@ function tipGroup(g, id) {
 /* Biomes the other way round: find a place, see what it is worth growing there.
    Filtered by the same box the seed list uses, kept in its own variable.   */
 let biomeFilter = "";
-function renderBiomes() {
+/* Only this half is redrawn while you type. Re-rendering the whole view would
+   replace the input element itself, and a fresh element puts the caret at the
+   start, so every letter after the first landed in front of the last one.  */
+function biomeList() {
   const q = biomeFilter.trim().toLowerCase();
   const names = Object.keys(BIOMES).sort();
   const hits = names.filter(b => !q || b.toLowerCase().includes(q)
@@ -1499,13 +1502,17 @@ function renderBiomes() {
       <td class="via">${esc(e.from)}</td>
     </tr>`;
   };
+  return hits.length ? `<div class="tablescroll"><table class="odds">
+      <tr><th>{{biomes.thName}}</th><th>{{biomes.thTags}}</th><th class="num">{{biomes.thBest}}</th><th>{{biomes.thFrom}}</th></tr>
+      ${hits.map(row).join("")}</table></div>`
+    : `<div class="empty">{{biomes.noMatch}}</div>`;
+}
+
+function renderBiomes() {
   return `<p class="viewnote">{{biomes.note}}</p>
     <div class="pairpick"><label>{{biomes.search}}<input class="field" id="biomeSearch" type="search"
       style="min-width:280px" value="${esc(biomeFilter)}" autocomplete="off"></label></div>
-    ${hits.length ? `<div class="tablescroll"><table class="odds">
-      <tr><th>{{biomes.thName}}</th><th>{{biomes.thTags}}</th><th class="num">{{biomes.thBest}}</th><th>{{biomes.thFrom}}</th></tr>
-      ${hits.map(row).join("")}</table></div>`
-      : `<div class="empty">{{biomes.noMatch}}</div>`}`;
+    <div id="biomeList">${biomeList()}</div>`;
 }
 
 function renderTips() {
@@ -1766,6 +1773,22 @@ function renderCropDrawer(id) {
       <button class="btn own-toggle" type="button" id="toggleOwn">${owned.has(id) ? `{{drawer.untick}}` : `{{drawer.tick}}`}</button>
     </div>
 
+    ${c.biomes && c.biomes.length ? (() => {
+      const full = Object.keys(BIOMES).filter(b => matchCount(c, b) >= 2).sort();
+      const half = Object.keys(BIOMES).filter(b => matchCount(c, b) === 1).sort();
+      const chips = bs => bs.map(b =>
+        `<button class="poolchip" type="button" data-biome="${esc(b)}">${esc(b)}</button>`).join("");
+      return `<div class="dsec"><h3>{{drawer.where}}</h3>
+        ${full.length
+          ? `<p class="flav" style="font-style:normal;margin-bottom:8px">{{drawer.whereFull}}</p>
+             <div class="poolchips">${chips(full)}</div>`
+          : `<p class="flav" style="font-style:normal;margin-bottom:8px">${
+              c.biomes.length < 2 ? `{{drawer.whereOneTag}}` : `{{drawer.whereNoneFull}}`}</p>`}
+        ${half.length ? `<p class="flav" style="font-style:normal;margin:12px 0 8px">{{drawer.whereHalf}}</p>
+          <div class="poolchips">${chips(half)}</div>` : ""}
+      </div>`;
+    })() : ""}
+
     <div class="dsec"><h3>{{drawer.pools}}</h3>
       ${c.pools.length ? `<p class="flav" style="font-style:normal;margin-bottom:8px">{{drawer.poolsNote}}</p>` : ""}
       <div class="poolchips">${c.pools.length
@@ -1817,9 +1840,8 @@ function render() {
   const bs = $("biomeSearch");
   if (bs) bs.oninput = e => {
     biomeFilter = e.target.value;
-    const at = document.activeElement === e.target;
-    render();
-    if (at) { const n = $("biomeSearch"); if (n) { n.focus(); n.value = biomeFilter; } }
+    const box = $("biomeList");                  // the input itself is left alone
+    if (box) box.innerHTML = biomeList();
   };
   const sa = $("selA"), sb = $("selB"), st = $("selTarget"), fp = $("flowPick");
   if (sa) sa.onchange = e => { setPair(e.target.value, pairB); render(); };
