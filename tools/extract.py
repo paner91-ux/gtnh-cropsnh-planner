@@ -29,11 +29,17 @@ for sig, lines in loader.methods.items():
     loader_code.extend(lines)
 
 field_to_class = {}
+loader_biomes = {}          # tags attached by the loader rather than by the crop class
 pending_new = []
+pending_biomes = []
 for line in loader_code:
     m = re.search(r'new\s+#\d+\s+// class ([\w/$]+)', line)
     if m:
         pending_new.append(m.group(1).replace('/', '.'))
+        continue
+    m = re.search(r'// Field [\w/$]*BiomeDictionary\$Type\.([\w$]+):', line)
+    if m:
+        pending_biomes.append(m.group(1))
         continue
     m = re.search(r'putstatic\s+#\d+\s+// Field [\w/$]*CropsNHCrops\.([\w$]+):', line)
     if m and pending_new:
@@ -45,7 +51,9 @@ for line in loader_code:
         if not own:
             raise SystemExit('brak klasy CropsNH przed polem ' + m.group(1))
         field_to_class[m.group(1)] = own[-1]
+        loader_biomes[m.group(1)] = pending_biomes[:]
         pending_new = []
+        pending_biomes = []
 
 # ---------------------------------------------------------------- class hierarchy
 def chain(clsname):
@@ -152,6 +160,9 @@ for field, clsname in sorted(field_to_class.items()):
                 internal, display = s, L(f'cropsnh_crops.{s}')
                 break
     subsoil = jvparse.fieldrefs(code, 'CropsNHSubSoilTypes')
+    # addLikedBiomes() does addAll on a set, so the class chain and the loader
+    # site both contribute rather than one overriding the other
+    biomes = set(jvparse.fieldrefs(code, 'BiomeDictionary$Type')) | set(loader_biomes.get(field, []))
     for line in code:
         m = re.search(r'// String (\w+)$', line)
     # addSubSoilRequirement(String) - rare variant
@@ -164,6 +175,7 @@ for field, clsname in sorted(field_to_class.items()):
         'tier': tier_of(field, clsname),
         'soil': resolve_soil(clsname),
         'subsoil': sorted(set(subsoil)),
+        'biomes': sorted(biomes),
         'maxLight': maxl,
         'minLight': minl,
         'growth': resolve_int(clsname, 'getGrowthDuration'),
@@ -355,6 +367,10 @@ soil_short = {
 # set here would make every rebuild produce a byte-different index.html
 soil_expand = {k: flatten(k) for k in sorted(set(list(soil_gloss) + list(soil_parts)))}
 
+# the mod's own display names for the biome tags, so the page reads like NEI
+biome_names = {t: L(f'cropsnh_tooltip.biomeTag.{t}', t.capitalize())
+               for t in sorted({b for c in crops.values() for b in c['biomes']})}
+
 out = {
     'crops': crops,
     'mutations': mutations,
@@ -365,6 +381,7 @@ out = {
     'soilGloss': soil_gloss,
     'soilShort': soil_short,
     'soilExpand': soil_expand,
+    'biomeNames': biome_names,
 }
 OUT = os.path.join(HERE, os.pardir, 'data', 'crops.json')
 os.makedirs(os.path.dirname(OUT), exist_ok=True)

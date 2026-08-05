@@ -1313,6 +1313,8 @@ const TIPS = [
      `{{tips.g5.i5w}}`],
     [`{{tips.g5.i6}}`,
      `{{tips.g5.i6w}}`],
+    [`{{tips.g5.i7}}`,
+     `{{tips.g5.i7w}}`],
   ]},
 
   { h: `{{tips.g6.h}}`,
@@ -1653,6 +1655,9 @@ function renderCropDrawer(id) {
         ${c.maxLight !== null ? `<dt>{{th.light}}</dt><dd>{{drawer.lightMax}}</dd>` : ""}
         ${c.minLight !== null ? `<dt>{{th.light}}</dt><dd>{{drawer.lightMin}}</dd>` : ""}
         <dt>{{drawer.growth}}</dt><dd>${c.growth ?? "-"}</dd>
+        ${c.biomes && c.biomes.length ? `<dt>{{drawer.likes}}</dt><dd>${
+          esc(c.biomes.map(b => DATA.biomeNames[b] || b).join(", "))}<br>
+          <span style="font-size:12px;color:var(--ink-faint)">{{drawer.likesNote}}</span></dd>` : ""}
       </dl>
       <button class="btn own-toggle" type="button" id="toggleOwn">${owned.has(id) ? `{{drawer.untick}}` : `{{drawer.tick}}`}</button>
     </div>

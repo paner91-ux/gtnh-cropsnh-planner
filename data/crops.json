@@ -10,6 +10,11 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "DRY",
+    "SANDY",
+    "SPARSE"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 600,
@@ -31,6 +36,10 @@
    ],
    "subsoil": [
     "aluminium"
+   ],
+   "biomes": [
+    "COLD",
+    "DRY"
    ],
    "maxLight": 10,
    "minLight": null,
@@ -55,6 +64,10 @@
    "subsoil": [
     "modernAndesite"
    ],
+   "biomes": [
+    "HILLS",
+    "MOUNTAIN"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 600,
@@ -76,6 +89,10 @@
    ],
    "subsoil": [
     "ardite"
+   ],
+   "biomes": [
+    "HOT",
+    "NETHER"
    ],
    "maxLight": 10,
    "minLight": null,
@@ -99,6 +116,10 @@
    ],
    "subsoil": [
     "silver"
+   ],
+   "biomes": [
+    "HOT",
+    "MOUNTAIN"
    ],
    "maxLight": null,
    "minLight": null,
@@ -124,6 +145,10 @@
    "subsoil": [
     "gold"
    ],
+   "biomes": [
+    "MESA",
+    "SANDY"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 3700,
@@ -146,6 +171,11 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "FOREST",
+    "HILLS",
+    "LUSH"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 600,
@@ -165,6 +195,12 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "DENSE",
+    "FOREST",
+    "JUNGLE",
+    "LUSH"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 250,
@@ -186,6 +222,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "DRY",
+    "PLAINS"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 675,
@@ -207,6 +247,10 @@
    ],
    "subsoil": [
     "basalt"
+   ],
+   "biomes": [
+    "HILLS",
+    "MOUNTAIN"
    ],
    "maxLight": null,
    "minLight": null,
@@ -230,6 +274,10 @@
    "subsoil": [
     "aluminiumBauxite"
    ],
+   "biomes": [
+    "COLD",
+    "DRY"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
@@ -246,6 +294,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "SPOOKY",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1100,
@@ -269,6 +321,10 @@
    "subsoil": [
     "blackGranite"
    ],
+   "biomes": [
+    "HILLS",
+    "MOUNTAIN"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 600,
@@ -289,6 +345,11 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "DENSE",
+    "LUSH",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 200,
@@ -310,6 +371,10 @@
     "netherrack"
    ],
    "subsoil": [],
+   "biomes": [
+    "HOT",
+    "NETHER"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 3600,
@@ -335,6 +400,10 @@
     "netherrack"
    ],
    "subsoil": [],
+   "biomes": [
+    "DRY",
+    "NETHER"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 300,
@@ -362,6 +431,11 @@
     "netherMushroom"
    ],
    "subsoil": [],
+   "biomes": [
+    "MAGICAL",
+    "MUSHROOM",
+    "NETHER"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 600,
@@ -385,6 +459,10 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "SWAMP",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 600,
@@ -404,6 +482,11 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "FOREST",
+    "HILLS",
+    "LUSH"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 200,
@@ -425,6 +508,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "DENSE",
+    "FOREST"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 200,
@@ -448,6 +535,10 @@
    "subsoil": [
     "emerald"
    ],
+   "biomes": [
+    "HILLS",
+    "MOUNTAIN"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 3000,
@@ -470,6 +561,12 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "HOT",
+    "PLAINS",
+    "SAVANNA",
+    "SPARSE"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
@@ -491,6 +588,10 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "FOREST",
+    "HILLS"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
@@ -512,6 +613,11 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "DENSE",
+    "FOREST",
+    "SPOOKY"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
@@ -535,6 +641,12 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "DENSE",
+    "HOT",
+    "JUNGLE",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
@@ -556,6 +668,11 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "FOREST",
+    "HILLS",
+    "PLAINS"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
@@ -578,6 +695,10 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "CONIFEROUS",
+    "FOREST"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
@@ -599,6 +720,10 @@
     "slimyDirt"
    ],
    "subsoil": [],
+   "biomes": [
+    "SWAMP",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
@@ -615,6 +740,11 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "CONIFEROUS",
+    "FOREST",
+    "MOUNTAIN"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
@@ -635,6 +765,11 @@
     "mushroom"
    ],
    "subsoil": [],
+   "biomes": [
+    "MUSHROOM",
+    "SWAMP",
+    "WET"
+   ],
    "maxLight": 9,
    "minLight": null,
    "growth": 400,
@@ -655,6 +790,11 @@
     "sand"
    ],
    "subsoil": [],
+   "biomes": [
+    "DRY",
+    "HOT",
+    "SANDY"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 450,
@@ -675,6 +815,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "COLD",
+    "PLAINS"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 450,
@@ -696,6 +840,11 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "HOT",
+    "PLAINS",
+    "SANDY"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 800,
@@ -718,6 +867,11 @@
    ],
    "subsoil": [
     "tin"
+   ],
+   "biomes": [
+    "COLD",
+    "DRY",
+    "SPARSE"
    ],
    "maxLight": null,
    "minLight": null,
@@ -742,6 +896,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "HOT",
+    "LUSH"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 800,
@@ -763,6 +921,11 @@
    ],
    "subsoil": [
     "blaze"
+   ],
+   "biomes": [
+    "DRY",
+    "HOT",
+    "MAGICAL"
    ],
    "maxLight": null,
    "minLight": null,
@@ -786,6 +949,11 @@
    "subsoil": [
     "clay"
    ],
+   "biomes": [
+    "RIVER",
+    "SWAMP",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 850,
@@ -807,6 +975,10 @@
    ],
    "subsoil": [
     "cobalt"
+   ],
+   "biomes": [
+    "DRY",
+    "NETHER"
    ],
    "maxLight": 10,
    "minLight": null,
@@ -830,6 +1002,12 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "DENSE",
+    "JUNGLE",
+    "LUSH",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 1700,
@@ -853,6 +1031,11 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "HOT",
+    "LUSH",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 2800,
@@ -876,6 +1059,11 @@
    ],
    "subsoil": [
     "copper"
+   ],
+   "biomes": [
+    "HOT",
+    "SANDY",
+    "SAVANNA"
    ],
    "maxLight": 10,
    "minLight": null,
@@ -902,6 +1090,11 @@
    "subsoil": [
     "copper"
    ],
+   "biomes": [
+    "HOT",
+    "SANDY",
+    "SAVANNA"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
@@ -925,6 +1118,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "FOREST",
+    "PLAINS"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 800,
@@ -945,6 +1142,10 @@
     "graveyard"
    ],
    "subsoil": [],
+   "biomes": [
+    "DEAD",
+    "SPOOKY"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 800,
@@ -969,6 +1170,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "DRY",
+    "HOT"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 900,
@@ -990,6 +1195,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "DEAD",
+    "SPOOKY"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1000,
@@ -1015,6 +1224,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "HOT",
+    "LUSH"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 800,
@@ -1035,6 +1248,10 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "FOREST",
+    "PLAINS"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 600,
@@ -1054,6 +1271,11 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "COLD",
+    "HILLS",
+    "SPARSE"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 600,
@@ -1075,6 +1297,10 @@
    ],
    "subsoil": [
     "deepslate"
+   ],
+   "biomes": [
+    "HILLS",
+    "MOUNTAIN"
    ],
    "maxLight": null,
    "minLight": null,
@@ -1098,6 +1324,10 @@
    ],
    "subsoil": [
     "diamond"
+   ],
+   "biomes": [
+    "COLD",
+    "SPARSE"
    ],
    "maxLight": null,
    "minLight": null,
@@ -1124,6 +1354,10 @@
    "subsoil": [
     "modernDiorite"
    ],
+   "biomes": [
+    "HILLS",
+    "MOUNTAIN"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 600,
@@ -1143,6 +1377,10 @@
     "netherrack"
    ],
    "subsoil": [],
+   "biomes": [
+    "HOT",
+    "NETHER"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 300,
@@ -1169,6 +1407,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "FOREST",
+    "PLAINS"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 1200,
@@ -1191,6 +1433,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "DRY",
+    "HOT"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1100,
@@ -1216,6 +1462,11 @@
    "subsoil": [
     "endStone"
    ],
+   "biomes": [
+    "COLD",
+    "DRY",
+    "END"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 850,
@@ -1237,6 +1488,10 @@
    ],
    "subsoil": [
     "endStone"
+   ],
+   "biomes": [
+    "COLD",
+    "END"
    ],
    "maxLight": null,
    "minLight": null,
@@ -1262,6 +1517,10 @@
    "subsoil": [
     "skull"
    ],
+   "biomes": [
+    "DEAD",
+    "MAGICAL"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 6000,
@@ -1284,6 +1543,11 @@
     "netherrack"
    ],
    "subsoil": [],
+   "biomes": [
+    "DRY",
+    "HOT",
+    "NETHER"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1600,
@@ -1306,6 +1570,10 @@
     "netherrack"
    ],
    "subsoil": [],
+   "biomes": [
+    "NETHER",
+    "SPOOKY"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 450,
@@ -1329,6 +1597,10 @@
    "subsoil": [
     "iron"
    ],
+   "biomes": [
+    "HILLS",
+    "MOUNTAIN"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 2800,
@@ -1350,6 +1622,11 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "HOT",
+    "SWAMP",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1800,
@@ -1370,6 +1647,12 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "BEACH",
+    "RIVER",
+    "SANDY",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
@@ -1391,6 +1674,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "DENSE",
+    "JUNGLE"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 675,
@@ -1414,6 +1701,10 @@
    "subsoil": [
     "snow"
    ],
+   "biomes": [
+    "COLD",
+    "SNOWY"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1000,
@@ -1431,6 +1722,10 @@
    ],
    "subsoil": [
     "zinc"
+   ],
+   "biomes": [
+    "DRY",
+    "HOT"
    ],
    "maxLight": null,
    "minLight": null,
@@ -1452,6 +1747,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "DRY",
+    "PLAINS"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 450,
@@ -1475,6 +1774,11 @@
    "subsoil": [
     "garnetGem"
    ],
+   "biomes": [
+    "MESA",
+    "SANDY",
+    "SAVANNA"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 850,
@@ -1491,6 +1795,11 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "MAGICAL",
+    "PLAINS",
+    "SANDY"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1100,
@@ -1511,6 +1820,12 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "FOREST",
+    "LUSH",
+    "MAGICAL",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 2000,
@@ -1534,6 +1849,11 @@
    ],
    "subsoil": [
     "glowstone"
+   ],
+   "biomes": [
+    "HOT",
+    "NETHER",
+    "PLAINS"
    ],
    "maxLight": null,
    "minLight": null,
@@ -1561,6 +1881,10 @@
    "subsoil": [
     "glowstone"
    ],
+   "biomes": [
+    "OCEAN",
+    "RIVER"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 450,
@@ -1583,6 +1907,11 @@
     "netherMushroom"
    ],
    "subsoil": [],
+   "biomes": [
+    "MAGICAL",
+    "MUSHROOM",
+    "NETHER"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 600,
@@ -1607,6 +1936,10 @@
    "subsoil": [
     "thorium"
    ],
+   "biomes": [
+    "SPARSE",
+    "WASTELAND"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 3600,
@@ -1624,6 +1957,10 @@
    ],
    "subsoil": [
     "gold"
+   ],
+   "biomes": [
+    "MESA",
+    "SANDY"
    ],
    "maxLight": 10,
    "minLight": null,
@@ -1648,6 +1985,11 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "RIVER",
+    "SPOOKY",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 450,
@@ -1675,6 +2017,10 @@
    "subsoil": [
     "modernGranite"
    ],
+   "biomes": [
+    "HILLS",
+    "MOUNTAIN"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 600,
@@ -1694,6 +2040,11 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "DRY",
+    "HOT",
+    "SPARSE"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 800,
@@ -1716,6 +2067,11 @@
     "netherMushroom"
    ],
    "subsoil": [],
+   "biomes": [
+    "MAGICAL",
+    "MUSHROOM",
+    "NETHER"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 600,
@@ -1739,6 +2095,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "DRY",
+    "SANDY"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 800,
@@ -1760,6 +2120,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "LUSH",
+    "PLAINS"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 2400,
@@ -1780,6 +2144,12 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "COLD",
+    "HILLS",
+    "MOUNTAIN",
+    "PLAINS"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 200,
@@ -1802,6 +2172,10 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "LUSH",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
@@ -1821,6 +2195,10 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "OCEAN",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 600,
@@ -1843,6 +2221,10 @@
    "subsoil": [
     "iridium"
    ],
+   "biomes": [
+    "COLD",
+    "SNOWY"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 7200,
@@ -1860,6 +2242,10 @@
    ],
    "subsoil": [
     "iron"
+   ],
+   "biomes": [
+    "HILLS",
+    "MOUNTAIN"
    ],
    "maxLight": 10,
    "minLight": null,
@@ -1883,6 +2269,12 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "DENSE",
+    "JUNGLE",
+    "MAGICAL",
+    "NETHER"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 450,
@@ -1908,6 +2300,10 @@
    "subsoil": [
     "knightmetal"
    ],
+   "biomes": [
+    "DEAD",
+    "SPOOKY"
+   ],
    "maxLight": 10,
    "minLight": null,
    "growth": 5500,
@@ -1932,6 +2328,10 @@
    "subsoil": [
     "lapis"
    ],
+   "biomes": [
+    "HOT",
+    "SANDY"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 2800,
@@ -1953,6 +2353,11 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "DRY",
+    "HOT",
+    "PLAINS"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 800,
@@ -1974,6 +2379,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "DENSE",
+    "SPOOKY"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 4800,
@@ -1998,6 +2407,10 @@
    "subsoil": [
     "shadowmetal"
    ],
+   "biomes": [
+    "COLD",
+    "MAGICAL"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 23436,
@@ -2015,6 +2428,10 @@
    ],
    "subsoil": [
     "copper"
+   ],
+   "biomes": [
+    "LUSH",
+    "PLAINS"
    ],
    "maxLight": null,
    "minLight": null,
@@ -2038,6 +2455,11 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "COLD",
+    "LUSH",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 200,
@@ -2061,6 +2483,10 @@
    "subsoil": [
     "mixedCrystalCluster"
    ],
+   "biomes": [
+    "FOREST",
+    "MAGICAL"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 2000,
@@ -2081,6 +2507,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "MAGICAL",
+    "SPOOKY"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1100,
@@ -2106,6 +2536,10 @@
    "subsoil": [
     "marble"
    ],
+   "biomes": [
+    "HILLS",
+    "MOUNTAIN"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 600,
@@ -2125,6 +2559,10 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "MAGICAL",
+    "PLAINS"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 4200,
@@ -2148,6 +2586,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "LUSH",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 1200,
@@ -2172,6 +2614,10 @@
    "subsoil": [
     "mica"
    ],
+   "biomes": [
+    "HILLS",
+    "SPARSE"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1800,
@@ -2188,6 +2634,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "LUSH",
+    "PLAINS"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 2400,
@@ -2209,6 +2659,11 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "LUSH",
+    "SWAMP",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 450,
@@ -2230,6 +2685,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "DEAD",
+    "WASTELAND"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1800,
@@ -2253,6 +2712,11 @@
    "subsoil": [
     "netherrack"
    ],
+   "biomes": [
+    "DRY",
+    "HOT",
+    "NETHER"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 600,
@@ -2273,6 +2737,10 @@
     "soulsand"
    ],
    "subsoil": [],
+   "biomes": [
+    "HOT",
+    "NETHER"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 2000,
@@ -2295,6 +2763,10 @@
    "subsoil": [
     "nickel"
    ],
+   "biomes": [
+    "LUSH",
+    "PLAINS"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1000,
@@ -2315,6 +2787,10 @@
     "oil"
    ],
    "subsoil": [],
+   "biomes": [
+    "HOT",
+    "WASTELAND"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
@@ -2333,6 +2809,10 @@
    "subsoil": [
     "olivine"
    ],
+   "biomes": [
+    "DRY",
+    "HILLS"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 400,
@@ -2349,6 +2829,11 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "DRY",
+    "SANDY",
+    "SPARSE"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 800,
@@ -2369,6 +2854,10 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "PLAINS",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 600,
@@ -2391,6 +2880,10 @@
    "subsoil": [
     "osmium"
    ],
+   "biomes": [
+    "OCEAN",
+    "RIVER"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 7200,
@@ -2407,6 +2900,10 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "FOREST",
+    "PLAINS"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 600,
@@ -2426,6 +2923,11 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "JUNGLE",
+    "SWAMP",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 450,
@@ -2445,6 +2947,10 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "PLAINS",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 600,
@@ -2467,6 +2973,10 @@
    "subsoil": [
     "platinum"
    ],
+   "biomes": [
+    "HOT",
+    "SANDY"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 6600,
@@ -2484,6 +2994,10 @@
    ],
    "subsoil": [
     "lead"
+   ],
+   "biomes": [
+    "PLAINS",
+    "SAVANNA"
    ],
    "maxLight": null,
    "minLight": null,
@@ -2509,6 +3023,10 @@
    "subsoil": [
     "lead"
    ],
+   "biomes": [
+    "HOT",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 2800,
@@ -2532,6 +3050,10 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "HILLS",
+    "PLAINS"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 600,
@@ -2551,6 +3073,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "COLD",
+    "PLAINS"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 800,
@@ -2571,6 +3097,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "END",
+    "MAGICAL"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 375000,
@@ -2587,6 +3117,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "PLAINS",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 1000,
@@ -2607,6 +3141,11 @@
     "netherMushroom"
    ],
    "subsoil": [],
+   "biomes": [
+    "MAGICAL",
+    "MUSHROOM",
+    "NETHER"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 600,
@@ -2630,6 +3169,10 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "PLAINS",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 600,
@@ -2652,6 +3195,10 @@
    "subsoil": [
     "manganese"
    ],
+   "biomes": [
+    "HOT",
+    "NETHER"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 2400,
@@ -2672,6 +3219,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "DRY",
+    "PLAINS"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 200,
@@ -2695,6 +3246,10 @@
    "subsoil": [
     "uranium"
    ],
+   "biomes": [
+    "COLD",
+    "HOT"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 4800,
@@ -2712,6 +3267,10 @@
    ],
    "subsoil": [
     "redGranite"
+   ],
+   "biomes": [
+    "HILLS",
+    "MOUNTAIN"
    ],
    "maxLight": null,
    "minLight": null,
@@ -2732,6 +3291,11 @@
     "mushroom"
    ],
    "subsoil": [],
+   "biomes": [
+    "MUSHROOM",
+    "SWAMP",
+    "WET"
+   ],
    "maxLight": 9,
    "minLight": null,
    "growth": 400,
@@ -2753,6 +3317,10 @@
    ],
    "subsoil": [
     "redstone"
+   ],
+   "biomes": [
+    "HOT",
+    "PLAINS"
    ],
    "maxLight": 12,
    "minLight": 5,
@@ -2776,6 +3344,10 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "HOT",
+    "PLAINS"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 600,
@@ -2798,6 +3370,10 @@
    "subsoil": [
     "ruby"
    ],
+   "biomes": [
+    "MOUNTAIN",
+    "RIVER"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 800,
@@ -2818,6 +3394,11 @@
     "sand"
    ],
    "subsoil": [],
+   "biomes": [
+    "DRY",
+    "HOT",
+    "SANDY"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 450,
@@ -2839,6 +3420,11 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "DEAD",
+    "DRY",
+    "SANDY"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1600,
@@ -2861,6 +3447,11 @@
    "subsoil": [
     "sand"
    ],
+   "biomes": [
+    "DRY",
+    "HOT",
+    "SANDY"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 600,
@@ -2881,6 +3472,11 @@
    ],
    "subsoil": [
     "sapphire"
+   ],
+   "biomes": [
+    "COLD",
+    "OCEAN",
+    "WET"
    ],
    "maxLight": null,
    "minLight": null,
@@ -2904,6 +3500,11 @@
    "subsoil": [
     "tungsten"
    ],
+   "biomes": [
+    "COLD",
+    "OCEAN",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 2400,
@@ -2921,6 +3522,10 @@
    ],
    "subsoil": [
     "quicksilver"
+   ],
+   "biomes": [
+    "LUSH",
+    "MAGICAL"
    ],
    "maxLight": null,
    "minLight": null,
@@ -2946,6 +3551,11 @@
    "subsoil": [
     "silver"
    ],
+   "biomes": [
+    "COLD",
+    "SNOWY",
+    "SPOOKY"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 3700,
@@ -2968,6 +3578,10 @@
     "netherrack"
    ],
    "subsoil": [],
+   "biomes": [
+    "DRY",
+    "NETHER"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 300,
@@ -2994,6 +3608,10 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "SWAMP",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
@@ -3017,6 +3635,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "COLD",
+    "SNOWY"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1100,
@@ -3039,6 +3661,11 @@
    ],
    "subsoil": [
     "soulSand"
+   ],
+   "biomes": [
+    "NETHER",
+    "SANDY",
+    "SPOOKY"
    ],
    "maxLight": null,
    "minLight": null,
@@ -3064,6 +3691,11 @@
    "subsoil": [
     "space"
    ],
+   "biomes": [
+    "COLD",
+    "DEAD",
+    "DRY"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 15000,
@@ -3080,6 +3712,12 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "FOREST",
+    "LUSH",
+    "SWAMP",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 675,
@@ -3100,6 +3738,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "LUSH",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 2400,
@@ -3126,6 +3768,10 @@
    "subsoil": [
     "netherStar"
    ],
+   "biomes": [
+    "DEAD",
+    "NETHER"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 7200,
@@ -3144,6 +3790,10 @@
    "subsoil": [
     "naquadah"
    ],
+   "biomes": [
+    "LUSH",
+    "WASTELAND"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 7200,
@@ -3161,6 +3811,10 @@
    ],
    "subsoil": [
     "steeleaf"
+   ],
+   "biomes": [
+    "DEAD",
+    "SPOOKY"
    ],
    "maxLight": null,
    "minLight": null,
@@ -3184,6 +3838,11 @@
     "sugarcane"
    ],
    "subsoil": [],
+   "biomes": [
+    "HOT",
+    "SANDY",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 200,
@@ -3204,6 +3863,10 @@
     "netherrack"
    ],
    "subsoil": [],
+   "biomes": [
+    "HOT",
+    "NETHER"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 300,
@@ -3232,6 +3895,10 @@
    "subsoil": [
     "stone"
    ],
+   "biomes": [
+    "HILLS",
+    "MOUNTAIN"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 600,
@@ -3251,6 +3918,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "LUSH",
+    "PLAINS"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 200,
@@ -3272,6 +3943,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "COLD",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 450,
@@ -3294,6 +3969,10 @@
     "sugarcane"
    ],
    "subsoil": [],
+   "biomes": [
+    "HOT",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 400,
@@ -3314,6 +3993,11 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "HILLS",
+    "HOT",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 2400,
@@ -3334,6 +4018,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "DEAD",
+    "NETHER"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 4800,
@@ -3358,6 +4046,10 @@
    ],
    "subsoil": [
     "thauminite"
+   ],
+   "biomes": [
+    "FOREST",
+    "MAGICAL"
    ],
    "maxLight": 10,
    "minLight": null,
@@ -3384,6 +4076,10 @@
    "subsoil": [
     "thaumium"
    ],
+   "biomes": [
+    "MAGICAL",
+    "SPOOKY"
+   ],
    "maxLight": 10,
    "minLight": null,
    "growth": 3000,
@@ -3409,6 +4105,10 @@
    "subsoil": [
     "sulfur"
    ],
+   "biomes": [
+    "HOT",
+    "NETHER"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
@@ -3430,6 +4130,10 @@
     "netherrack"
    ],
    "subsoil": [],
+   "biomes": [
+    "DRY",
+    "NETHER"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 450,
@@ -3454,6 +4158,10 @@
    ],
    "subsoil": [
     "tin"
+   ],
+   "biomes": [
+    "HILLS",
+    "MOUNTAIN"
    ],
    "maxLight": 10,
    "minLight": null,
@@ -3480,6 +4188,10 @@
    "subsoil": [
     "tin"
    ],
+   "biomes": [
+    "HILLS",
+    "MOUNTAIN"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1000,
@@ -3505,6 +4217,10 @@
    "subsoil": [
     "titanium"
    ],
+   "biomes": [
+    "HOT",
+    "SAVANNA"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1800,
@@ -3521,6 +4237,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "HOT",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 800,
@@ -3542,6 +4262,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "FOREST",
+    "HILLS"
+   ],
    "maxLight": 10,
    "minLight": null,
    "growth": 150,
@@ -3563,6 +4287,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "COLD",
+    "END"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 7200,
@@ -3579,6 +4307,10 @@
     "brick"
    ],
    "subsoil": [],
+   "biomes": [
+    "SPOOKY",
+    "SWAMP"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 4800,
@@ -3596,6 +4328,10 @@
    ],
    "subsoil": [
     "tuff"
+   ],
+   "biomes": [
+    "HILLS",
+    "MOUNTAIN"
    ],
    "maxLight": null,
    "minLight": null,
@@ -3617,6 +4353,11 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "COLD",
+    "PLAINS",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 450,
@@ -3637,6 +4378,11 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "JUNGLE",
+    "LUSH",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 450,
@@ -3658,6 +4404,10 @@
    ],
    "subsoil": [
     "$void"
+   ],
+   "biomes": [
+    "MAGICAL",
+    "WASTELAND"
    ],
    "maxLight": 10,
    "minLight": null,
@@ -3682,6 +4432,11 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "OCEAN",
+    "RIVER",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 1100,
@@ -3704,6 +4459,11 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "RIVER",
+    "SWAMP",
+    "WET"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 450,
@@ -3723,6 +4483,10 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "LUSH",
+    "PLAINS"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 1000,
@@ -3743,6 +4507,10 @@
     "dirtGrass"
    ],
    "subsoil": [],
+   "biomes": [
+    "COLD",
+    "PLAINS"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 600,
@@ -3763,6 +4531,11 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "HOT",
+    "PLAINS",
+    "SANDY"
+   ],
    "maxLight": null,
    "minLight": 9,
    "growth": 450,
@@ -3784,6 +4557,10 @@
    ],
    "subsoil": [
     "coal"
+   ],
+   "biomes": [
+    "DEAD",
+    "SPOOKY"
    ],
    "maxLight": null,
    "minLight": null,
@@ -3808,6 +4585,11 @@
     "farmland"
    ],
    "subsoil": [],
+   "biomes": [
+    "FOREST",
+    "MAGICAL",
+    "SPOOKY"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1100,
@@ -3829,6 +4611,10 @@
     "graveyard"
    ],
    "subsoil": [],
+   "biomes": [
+    "DEAD",
+    "WASTELAND"
+   ],
    "maxLight": null,
    "minLight": null,
    "growth": 1800,
@@ -7196,5 +7982,35 @@
   "thaumLogs": [
    "thaumLogs"
   ]
+ },
+ "biomeNames": {
+  "BEACH": "Beach",
+  "COLD": "Cold",
+  "CONIFEROUS": "Coniferous",
+  "DEAD": "Dead",
+  "DENSE": "Dense",
+  "DRY": "Dry",
+  "END": "End",
+  "FOREST": "Forest",
+  "HILLS": "Hills",
+  "HOT": "Hot",
+  "JUNGLE": "Jungle",
+  "LUSH": "Lush",
+  "MAGICAL": "Magical",
+  "MESA": "Mesa",
+  "MOUNTAIN": "Mountain",
+  "MUSHROOM": "Mushroom",
+  "NETHER": "Nether",
+  "OCEAN": "Ocean",
+  "PLAINS": "Plains",
+  "RIVER": "River",
+  "SANDY": "Sandy",
+  "SAVANNA": "Savanna",
+  "SNOWY": "Snowy",
+  "SPARSE": "Sparse",
+  "SPOOKY": "Spooky",
+  "SWAMP": "Swamp",
+  "WASTELAND": "Wasteland",
+  "WET": "Wet"
  }
 }
