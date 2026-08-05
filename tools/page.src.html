@@ -253,7 +253,18 @@ p, li { text-wrap: pretty; }
 .card {
   background: var(--paper-2); border: 1px solid var(--rule); border-radius: 3px;
   padding: 11px 13px 12px; display: flex; flex-direction: column; gap: 8px;
+  cursor: pointer; position: relative;
 }
+.card:hover { border-color: color-mix(in srgb, var(--ink-faint) 55%, transparent); }
+/* The card you are building. Loud on purpose - the whole point is finding it
+   again on a second monitor without reading any of the others.            */
+.card.marked {
+  background: var(--paper-3); border-color: var(--leaf);
+  box-shadow: inset 3px 0 0 var(--leaf);
+}
+.card.marked .card-out { color: var(--leaf); }
+/* the crop names and chips inside stay their normal pointer targets */
+.card :is(button, a) { cursor: pointer; }
 
 .card-top { display: flex; align-items: baseline; gap: 8px; }
 .card-out {
@@ -696,6 +707,24 @@ if (storage) {
   try { owned = new Set(JSON.parse(storage.getItem(LS) || "[]").filter(id => C[id])); } catch (e) {}
 }
 
+/* Recipes you are working on right now. Marked cards are highlighted and
+   sorted to the front, so the one you are building is never something you
+   have to hunt for on a second monitor. Kept per recipe, not per crop,
+   because one crop can have several recipes.                             */
+const LS_MARK = "cropsnh-marked-v1";
+const markKey = m => `${m.out}|${m.parents.join(",")}`;
+let marked = new Set();
+if (storage) {
+  try { marked = new Set(JSON.parse(storage.getItem(LS_MARK) || "[]")); } catch (e) {}
+}
+function toggleMark(key) {
+  marked.has(key) ? marked.delete(key) : marked.add(key);
+  if (storage) { try { storage.setItem(LS_MARK, JSON.stringify([...marked])); } catch (e) {} }
+  render();
+}
+/* marked first, otherwise the order the view already decided */
+const markFirst = list => [...list].sort((a, b) => marked.has(markKey(b)) - marked.has(markKey(a)));
+
 let view = "ready";
 let filter = "";
 let pairA = "", pairB = "";
@@ -969,7 +998,9 @@ function renderRail() {
 /* ---------------------------------------------------------- views */
 function cardFor(m) {
   const c = C[m.out];
-  return `<article class="card">
+  const key = markKey(m), on = marked.has(key);
+  return `<article class="card${on ? " marked" : ""}" data-key="${esc(key)}"
+      title="${on ? "Marked as what you are building - click to clear" : "Click to mark this as what you are building"}">
     <div class="card-top">
       <button class="card-out" type="button" data-crop="${m.out}">${esc(nm(m.out))}</button>
       <span class="tier">T${c ? c.tier : "?"}</span>
@@ -983,16 +1014,16 @@ function renderReady() {
   const list = readyList();
   if (!owned.size) return `<div class="empty">Tick off what you have in the rail on the left.</div>`;
   if (!list.length) return `<div class="empty">No new recipe is fully covered by this set.<br>Try <b>One parent short</b> or the <b>Pool roulette</b>.</div>`;
-  return `<p class="viewnote">Recipes where you already hold every parent. Put the parents around a double crop stick, and make sure the ground under the stick satisfies the result's requirements - otherwise the attempt is discarded silently.</p>
-    <div class="grid">${list.map(m => cardFor(m)).join("")}</div>`;
+  return `<p class="viewnote">Recipes where you already hold every parent. Put the parents around a double crop stick, and make sure the ground under the stick satisfies the result's requirements - otherwise the attempt is discarded silently. Click a card to mark what you are building; marked ones stay at the front.</p>
+    <div class="grid">${markFirst(list).map(m => cardFor(m)).join("")}</div>`;
 }
 
 function renderNear() {
   const list = nearList();
   if (!owned.size) return `<div class="empty">Tick off what you have in the rail on the left.</div>`;
   if (!list.length) return `<div class="empty">No recipe is exactly one parent away.</div>`;
-  return `<p class="viewnote">One crop short, shown in <span style="color:var(--ore);font-weight:600">rust</span>. Click a result to see where the missing parent comes from.</p>
-    <div class="grid">${list.map(m => cardFor(m)).join("")}</div>`;
+  return `<p class="viewnote">One crop short, shown in <span style="color:var(--ore);font-weight:600">rust</span>. Click a name to see where the missing parent comes from, or the card itself to mark it.</p>
+    <div class="grid">${markFirst(list).map(m => cardFor(m)).join("")}</div>`;
 }
 
 function renderPool() {
@@ -1608,6 +1639,9 @@ document.addEventListener("click", e => {
   if (crop) { showCrop(crop.dataset.crop); return; }
   const goview = e.target.closest("[data-goview]");
   if (goview) { view = goview.dataset.goview; render(); return; }
+  /* last, so every button inside a card wins over marking it */
+  const card = e.target.closest(".card[data-key]");
+  if (card) { toggleMark(card.dataset.key); return; }
   if (e.target.id === "clearPair") { pairA = pairB = ""; render(); return; }
   const tab = e.target.closest(".tab");
   if (tab) { view = tab.dataset.view; render(); return; }
