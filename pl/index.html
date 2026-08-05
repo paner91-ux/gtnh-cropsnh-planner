@@ -947,7 +947,7 @@ function reqPlain(crop) {
 
 /* result, its ground, then each parent with its own ground */
 function parentRows(m) {
-  return `<div class="pgroup"><span class="lbl">z</span>${m.parents.map(p => `
+  return `<div class="pgroup"><span class="lbl">rodzice</span>${m.parents.map(p => `
     <div class="prow">${cropLink(p, owned.has(p) ? "own" : "miss")}
       ${reqPlain(C[p])}</div>`).join("")}</div>`;
 }
