@@ -1,4 +1,4 @@
-<title>GTNH Crop Breeding Planner (CropsNH)</title>
+<title>{{meta.title}}</title>
 
 <style>
 :root {
@@ -619,8 +619,8 @@ footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2p
 
 <div class="wrap">
   <header class="masthead">
-    <h1>CropsNH - Breeding Planner</h1>
-    <span class="sub">GregTech: New Horizons</span>
+    <h1>{{head.h1}}</h1>
+    <span class="sub">{{head.sub}}</span>
     <span class="src" id="src"></span>
   </header>
 
@@ -665,11 +665,11 @@ footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2p
 
     <main class="views">
       <div class="tabs" role="tablist">
-        <button class="tab" type="button" role="tab" data-view="ready">Ready now<span class="n" id="n-ready"></span></button>
-        <button class="tab" type="button" role="tab" data-view="near">One parent short<span class="n" id="n-near"></span></button>
-        <button class="tab" type="button" role="tab" data-view="pool">Pool roulette</button>
-        <button class="tab" type="button" role="tab" data-view="path">Route to a goal</button>
-        <button class="tab" type="button" role="tab" data-view="tips">Tips &amp; tricks</button>
+        <button class="tab" type="button" role="tab" data-view="ready">{{tab.ready}}<span class="n" id="n-ready"></span></button>
+        <button class="tab" type="button" role="tab" data-view="near">{{tab.near}}<span class="n" id="n-near"></span></button>
+        <button class="tab" type="button" role="tab" data-view="pool">{{tab.pool}}</button>
+        <button class="tab" type="button" role="tab" data-view="path">{{tab.path}}</button>
+        <button class="tab" type="button" role="tab" data-view="tips">{{tab.tips}}</button>
       </div>
       <div id="view"></div>
     </main>
@@ -1847,7 +1847,7 @@ if (!storage) {
     : "This browser will not let the page store anything, so your ticks disappear on reload. Take a copy with Download file or Copy before you close it.";
 }
 
-$("src").textContent = `${byName.length} crops · ${MUT.length} recipes · ${Object.keys(POOLM).length} pools`;
+$("src").textContent = `{{head.src}}`;
 /* The url is read before anything is drawn, because render() writes the url:
    rendering first would replace the link you arrived on with #v=ready, so a
    shared link or a reload always landed on the default view. */

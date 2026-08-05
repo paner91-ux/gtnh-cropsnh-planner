@@ -15,6 +15,17 @@ python tools/dump.py path/to/cropsnh-X.Y.Z.jar   # only when the mod version cha
 python tools/extract.py                     # only after dump.py, rewrites data/crops.json
 ```
 
+## Text and languages
+
+No English sentence belongs in `page.src.html`. Text lives in `tools/i18n/en.json` and the template
+refers to it as `{{key}}`; the build writes one page per catalogue, English at the root and every
+other language in its own directory. Nothing about translation reaches the built page - it is still
+a static file with the strings already in it.
+
+`en.json` is the source. Adding a string means adding it there first, and the build refuses to run
+if a key is used but undefined, defined but unused, or if a translation drops a `${...}` that the
+English string has. A missing translation falls back to English rather than showing its key.
+
 The build is reproducible: the same jar always yields a byte-identical `index.html`. If a rebuild
 produces a diff, the data genuinely changed. Anything that makes the output vary between runs
 (unsorted sets, timestamps) is a bug - one already had to be fixed for exactly this reason.
