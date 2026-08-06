@@ -6,7 +6,7 @@ Tick off the seeds you own and it tells you what you can breed next, the exact o
 outcome, which two blocks have to be under the crop stick for the result to be planted at all, and
 which biome to build the farm in.
 
-**Open it:**
+**Live version:**
 [English](https://paner91-ux.github.io/gtnh-cropsnh-planner/)
 &nbsp;·&nbsp; [Polski](https://paner91-ux.github.io/gtnh-cropsnh-planner/pl/)
 &nbsp;·&nbsp; [简体中文](https://paner91-ux.github.io/gtnh-cropsnh-planner/zh/)
