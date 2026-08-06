@@ -741,7 +741,10 @@ const C = DATA.crops, MUT = DATA.mutations, POOLM = DATA.poolMembers;
 /* Biome tags are Forge's, so this table is read from Forge and the mods that
    add biomes rather than from CropsNH - see the About tab.                  */
 const BIOMES = DATA.biomes || {};
-const biomeNm = t => (DATA.biomeNames && DATA.biomeNames[t]) || t;
+/* WATER is a Forge tag CropsNH never names, in any language, so it has no
+   entry to look up and would otherwise be printed as the raw constant. */
+const biomeNm = t => (DATA.biomeNames && DATA.biomeNames[t])
+  || t.charAt(0) + t.slice(1).toLowerCase();
 /* every biome carrying a tag, and every crop that likes it */
 const biomesWith = t => Object.keys(BIOMES).filter(b => BIOMES[b].tags.includes(t)).sort();
 const cropsLiking = t => Object.values(C).filter(c => c.biomes.includes(t))
@@ -1260,7 +1263,7 @@ function renderBestPairs() {
       <td class="nm"><button class="inline-crop" type="button" data-pair="${p.a}|${p.b}">${esc(nm(p.a))}${p.a === p.b ? " ×2" : ` + ${esc(nm(p.b))}`}</button></td>
       <td class="num">${pct(p.gain)}<span class="bar" style="width:${(p.gain / max * 100).toFixed(1)}%"></span></td>
       <td class="num">${p.n}</td>
-      <td class="via">${p.det ? "recipe" : "pools"}</td>
+      <td class="via">${p.det ? `{{best.viaRecipe}}` : `{{best.viaPools}}`}</td>
     </tr>`;
   }
   return html + `</table></div>`;

@@ -74,10 +74,14 @@ The page is in English, Polish and Simplified Chinese. The address bar follows w
 at, so a link opens on the same tab, the same pair and the same open panel, and switching language
 keeps your place.
 
-Crop, biome and soil names stay English in every version, because they are read out of the mod's
-`en_US.lang` along with the rest of the data. For Polish that is also what the game shows, since
-the pack ships no Polish names for CropsNH. Chinese is the exception: those names *are* translated
-in the pack, so that version currently prints English where NEI prints Chinese.
+Crop names follow the game rather than the page. GTNH translates through its own config directory
+rather than through the mod jars, so the Chinese version prints the crop, pool, sub-soil and biome
+tag names a Chinese client shows in NEI, all 179 of them. Polish keeps English names because the
+pack has no Polish ones for CropsNH, which is what a Polish client shows too.
+
+Biome names are the exception in every language. In Minecraft 1.7.10 a biome name is a plain string
+in code with no translation key anywhere, so the game shows "Alps" and "Bayou" whatever language it
+is set to, and so does this.
 
 ---
 
@@ -93,6 +97,7 @@ sub-soils and light requirements are all read straight out of the compiled mod:
 | `SubSoilRequirementLoader` | which blocks and ore dictionary entries count as each sub-soil |
 | `CropsNHSoilTypes` | how compound soil lists are built out of simpler ones |
 | `en_US.lang` | display names, exactly as they appear in NEI, and the biome tag names |
+| the pack's `lang` configs | the same names in the other languages, read the same way |
 
 Built against **CropsNH 2.0.101**, as shipped in the GTNH 2.9 daily builds (nightly 659).
 In that version: 179 crops, 172 recipes, 66 pools.

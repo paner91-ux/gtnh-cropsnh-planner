@@ -145,20 +145,66 @@ def tier_of(field, clsname):
     return t
 
 
+# crops whose language key could not be read, so the name below is this
+# script's own construction rather than the mod's string - see the report
+guessed_name = []
+
+
+def internal_of(field, clsname):
+    """The internalId the constructor hands to CropCard.
+
+    Usually the field name with a lower first letter, but not always: the
+    field KnightmetalBerry holds a crop built by CropOreBerry, whose
+    constructor appends "OreBerry" to the material it is given, making the
+    real id knightmetalOreBerry. So a candidate only stands if the language
+    file has a key for it - the field name alone is not evidence.
+    """
+    cand = field[0].lower() + field[1:]
+    if f'cropsnh_crops.{cand}' in lang:
+        return cand
+    simple = clsname.rsplit('.', 1)[-1]
+    own = jvparse.strings(classes[clsname].code(simple))
+    # whatever the parent constructors append to the name they are handed
+    suffixes = [''] + [s for k in chain(clsname)[1:]
+                       for s in jvparse.strings(k.code(k.name.rsplit('.', 1)[-1]))]
+    for s in own:
+        for suffix in suffixes:
+            if f'cropsnh_crops.{s}{suffix}' in lang:
+                return s + suffix
+    return cand
+
+
+def name_key(field, clsname):
+    """The key the game itself renders the crop through.
+
+    CropCard.getUnlocalizedName() returns "cropsnh_crops." + internalId, but
+    29 crops override it with a key borrowed from whichever mod owns the
+    plant - Wheat answers item.wheat.name, Belladonna answers
+    tile.witchery:belladonna.name. Those keys are absent from CropsNH's own
+    en_US.lang, which is why their English name is built from the field name
+    instead; a translation for them has to be looked up in that other mod.
+    """
+    for k in chain(clsname):
+        lit = jvparse.strings(k.code('getUnlocalizedName'))
+        if not lit:
+            continue
+        # the base implementation builds the key, so its literal is the prefix
+        if lit[0] != 'cropsnh_crops.':
+            return lit[0]
+        break
+    return 'cropsnh_crops.' + internal_of(field, clsname)
+
+
 crops = {}
 for field, clsname in sorted(field_to_class.items()):
     if field in ('Weed', 'Migrator'):
         continue
     code = ctor_code(clsname)
-    internal = field[0].lower() + field[1:]
-    display = L(f'cropsnh_crops.{internal}')
+    key = name_key(field, clsname)
+    internal = key[len('cropsnh_crops.'):] if key.startswith('cropsnh_crops.') else key
+    display = L(key)
     if display is None:
-        # last resort: the first string literal in the class constructor
-        own = classes[clsname].code(clsname.rsplit('.', 1)[-1])
-        for s in jvparse.strings(own):
-            if L(f'cropsnh_crops.{s}'):
-                internal, display = s, L(f'cropsnh_crops.{s}')
-                break
+        guessed_name.append(field)
     subsoil = jvparse.fieldrefs(code, 'CropsNHSubSoilTypes')
     # addLikedBiomes() does addAll on a set, so the class chain and the loader
     # site both contribute rather than one overriding the other
@@ -170,6 +216,9 @@ for field, clsname in sorted(field_to_class.items()):
     crops[field] = {
         'id': field,
         'internal': internal,
+        # the key a translation has to be looked up under, kept so langs.py
+        # can resolve it in whichever mod's language file actually owns it
+        'nameKey': key,
         'name': display or re.sub(r'(?<!^)(?=[A-Z])', ' ', field),
         'cls': clsname,
         'tier': tier_of(field, clsname),
@@ -339,33 +388,17 @@ def flatten(key, seen=None):
     return out
 
 
-# labels for BASE lists only; unions are assembled from these at render time
-soil_gloss = {
-    'farmland':   'Farmland',
-    'sand':       'Sand or sandstone',
-    'soulsand':   'Soul sand',
-    'dirtGrass':  'Dirt or grass',
-    'mycelium':   'Mycelium',
-    'end':        'End stone',
-    'stone':      'Stone, cobblestone and variants',
-    'netherrack': 'Netherrack',
-    'brick':      'Brick blocks',
-    'thaumLogs':  'Thaumcraft logs',
-    'graveyard':  'Graveyard dirt',
-    'slimy':      'Slime grass or slimy mud',
-    'gravel':     'Gravel',
-    'oilSands':   'Oil sands',
-}
-soil_short = {
-    'farmland': 'Farmland', 'sand': 'Sand', 'soulsand': 'Soul sand',
-    'dirtGrass': 'Dirt/grass', 'mycelium': 'Mycelium', 'end': 'End stone',
-    'stone': 'Stone', 'netherrack': 'Netherrack', 'brick': 'Bricks',
-    'thaumLogs': 'Thaum logs', 'graveyard': 'Graveyard dirt',
-    'slimy': 'Slime grass', 'gravel': 'Gravel', 'oilSands': 'Oil sands',
-}
+# BASE lists only; unions are assembled from these at render time. The labels
+# are this page's own wording rather than anything the mod says, so they live
+# in tools/i18n/*.json under soil.gloss.* and soil.short.* and build.py puts
+# them back - that is what lets them be translated along with the rest.
+soil_base = [
+    'brick', 'dirtGrass', 'end', 'farmland', 'gravel', 'graveyard', 'mycelium',
+    'netherrack', 'oilSands', 'sand', 'slimy', 'soulsand', 'stone', 'thaumLogs',
+]
 # sorted, because Python randomises string hashing per process and an unsorted
 # set here would make every rebuild produce a byte-different index.html
-soil_expand = {k: flatten(k) for k in sorted(set(list(soil_gloss) + list(soil_parts)))}
+soil_expand = {k: flatten(k) for k in sorted(set(soil_base + list(soil_parts)))}
 
 # the mod's own display names for the biome tags, so the page reads like NEI
 biome_names = {t: L(f'cropsnh_tooltip.biomeTag.{t}', t.capitalize())
@@ -378,8 +411,7 @@ out = {
     'subsoilDesc': subsoil_desc,
     'poolNames': pool_names,
     'poolMembers': pool_members,
-    'soilGloss': soil_gloss,
-    'soilShort': soil_short,
+    'soilBase': soil_base,
     'soilExpand': soil_expand,
     'biomeNames': biome_names,
 }
@@ -393,10 +425,16 @@ print(f'recipes           {len(mutations)}')
 print(f'mutation pools    {len(pool_members)}')
 print(f'sub-soil types    {len(subsoil_info)}')
 print(f'recipe-only crops {sum(1 for c in crops.values() if not c["pools"])}')
+borrowed = sum(1 for c in crops.values() if not c['nameKey'].startswith('cropsnh_crops.'))
+print(f'names from other mods {borrowed}')
 if guessed_tier:
     print(f'\nWARNING: no class states the tier as a constant, assumed 1 for '
           f'{len(guessed_tier)}: {", ".join(guessed_tier)}')
     print('         read the constructor argument in the loader and check by hand')
+if guessed_name:
+    print(f'\nnote: {len(guessed_name)} names are built from the field name, because their key '
+          f'is not in CropsNH\'s own en_US.lang.\n      That is expected for crops borrowing '
+          f'another mod\'s key - langs.py resolves those.')
 
 print(f'\nwrote {os.path.relpath(OUT, os.path.join(HERE, os.pardir))}')
 print('now run:  python tools/build.py')

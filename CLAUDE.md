@@ -10,9 +10,10 @@ https://paner91-ux.github.io/gtnh-cropsnh-planner/
 silently thrown away by the next rebuild.
 
 ```
-python tools/build.py                       # page.src.html + data/crops.json -> index.html
+python tools/build.py                       # page.src.html + data/*.json -> one page per language
 python tools/dump.py path/to/cropsnh-X.Y.Z.jar   # only when the mod version changes
 python tools/extract.py                     # only after dump.py, rewrites data/crops.json
+python tools/langs.py <.minecraft> <assets> # only after extract.py, rewrites data/lang.<code>.json
 ```
 
 ## Text and languages
@@ -25,6 +26,14 @@ a static file with the strings already in it.
 `en.json` is the source. Adding a string means adding it there first, and the build refuses to run
 if a key is used but undefined, defined but unused, or if a translation drops a `${...}` that the
 English string has. A missing translation falls back to English rather than showing its key.
+
+**Two kinds of text, two homes.** Our own wording lives in `i18n` - including the soil labels
+(`soil.gloss.*`, `soil.short.*`), which the build injects into the data blob rather than the
+markup, so they are exempt from the unused-key check. Names the mod owns - crops, pools, sub-soil
+descriptions, biome tags - are data: `langs.py` reads them out of the pack and `build.py` swaps
+them in per language. Never hand-translate one of those into `i18n`; it would drift from the game.
+Crop names appearing inside prose are the exception that bites - they are plain text in the
+catalogue, so translating the data means the sentences naming crops have to follow.
 
 The build is reproducible: the same jar always yields a byte-identical `index.html`. If a rebuild
 produces a diff, the data genuinely changed. Anything that makes the output vary between runs

@@ -2,7 +2,8 @@
  "crops": {
   "Allium": {
    "id": "Allium",
-   "internal": "allium",
+   "internal": "tile.flower2.allium.name",
+   "nameKey": "tile.flower2.allium.name",
    "name": "Allium",
    "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.flowers.CropAllium",
    "tier": 2,
@@ -28,6 +29,7 @@
   "AluminiumOreBerry": {
    "id": "AluminiumOreBerry",
    "internal": "aluminiumOreBerry",
+   "nameKey": "cropsnh_crops.aluminiumOreBerry",
    "name": "Aluminium Oreberry",
    "cls": "com.gtnewhorizon.cropsnh.crops.oreBerries.CropAluminiumOreBerry",
    "tier": 5,
@@ -55,6 +57,7 @@
   "AndesiteLily": {
    "id": "AndesiteLily",
    "internal": "andesiteLily",
+   "nameKey": "cropsnh_crops.andesiteLily",
    "name": "Andesite Lily",
    "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.modern.CropAndesiteLily",
    "tier": 1,
@@ -81,6 +84,7 @@
   "ArditeOreBerry": {
    "id": "ArditeOreBerry",
    "internal": "arditeOreBerry",
+   "nameKey": "cropsnh_crops.arditeOreBerry",
    "name": "Ardite Oreberry",
    "cls": "com.gtnewhorizon.cropsnh.crops.oreBerries.CropArditeOreBerry",
    "tier": 5,
@@ -108,6 +112,7 @@
   "Argentia": {
    "id": "Argentia",
    "internal": "argentia",
+   "nameKey": "cropsnh_crops.argentia",
    "name": "Argentia",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropArgentia",
    "tier": 7,
@@ -136,6 +141,7 @@
   "Auronia": {
    "id": "Auronia",
    "internal": "auronia",
+   "nameKey": "cropsnh_crops.auronia",
    "name": "Auronia",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropAuronia",
    "tier": 8,
@@ -163,7 +169,8 @@
   },
   "AzureBluet": {
    "id": "AzureBluet",
-   "internal": "azureBluet",
+   "internal": "tile.flower2.houstonia.name",
+   "nameKey": "tile.flower2.houstonia.name",
    "name": "Azure Bluet",
    "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.flowers.CropAzureBluet",
    "tier": 2,
@@ -188,6 +195,7 @@
   "Bamboo": {
    "id": "Bamboo",
    "internal": "bamboo",
+   "nameKey": "cropsnh_crops.bamboo",
    "name": "Bamboo Shoot",
    "cls": "com.gtnewhorizon.cropsnh.crops.biomesoplenty.CropBamboo",
    "tier": 2,
@@ -215,6 +223,7 @@
   "Barley": {
    "id": "Barley",
    "internal": "barley",
+   "nameKey": "cropsnh_crops.barley",
    "name": "Barley",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.natura.CropBarley",
    "tier": 2,
@@ -239,6 +248,7 @@
   "BasaltLily": {
    "id": "BasaltLily",
    "internal": "basaltLily",
+   "nameKey": "cropsnh_crops.basaltLily",
    "name": "Basalt Lily",
    "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.CropBasaltLily",
    "tier": 1,
@@ -265,6 +275,7 @@
   "Bauxia": {
    "id": "Bauxia",
    "internal": "bauxia",
+   "nameKey": "cropsnh_crops.bauxia",
    "name": "Bauxia",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropBauxia",
    "tier": 6,
@@ -286,7 +297,8 @@
   },
   "Belladonna": {
    "id": "Belladonna",
-   "internal": "belladonna",
+   "internal": "tile.witchery:belladonna.name",
+   "nameKey": "tile.witchery:belladonna.name",
    "name": "Belladonna",
    "cls": "com.gtnewhorizon.cropsnh.crops.witchery.CropBelladonna",
    "tier": 4,
@@ -312,6 +324,7 @@
   "BlackGraniteLily": {
    "id": "BlackGraniteLily",
    "internal": "blackGraniteLily",
+   "nameKey": "cropsnh_crops.blackGraniteLily",
    "name": "Black Granite Lily",
    "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.CropBlackGraniteLily",
    "tier": 1,
@@ -338,6 +351,7 @@
   "Blackberry": {
    "id": "Blackberry",
    "internal": "blackberry",
+   "nameKey": "cropsnh_crops.blackberry",
    "name": "Blackberry",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.natura.CropBlackberry",
    "tier": 2,
@@ -364,6 +378,7 @@
   "Blazereed": {
    "id": "Blazereed",
    "internal": "blazereed",
+   "nameKey": "cropsnh_crops.blazereed",
    "name": "Blazereed",
    "cls": "com.gtnewhorizon.cropsnh.crops.mobs.CropBlazereed",
    "tier": 6,
@@ -393,6 +408,7 @@
   "Blightberry": {
    "id": "Blightberry",
    "internal": "blightberry",
+   "nameKey": "cropsnh_crops.blightberry",
    "name": "Blightberry",
    "cls": "com.gtnewhorizon.cropsnh.crops.natura.nether.berry.CropBlightberry",
    "tier": 4,
@@ -424,6 +440,7 @@
   "BlueGlowshroom": {
    "id": "BlueGlowshroom",
    "internal": "blueGlowshroom",
+   "nameKey": "cropsnh_crops.blueGlowshroom",
    "name": "Blue Glowshroom",
    "cls": "com.gtnewhorizon.cropsnh.crops.natura.nether.glowshroom.CropBlueGlowshroom",
    "tier": 3,
@@ -451,7 +468,8 @@
   },
   "BlueOrchid": {
    "id": "BlueOrchid",
-   "internal": "blueOrchid",
+   "internal": "tile.flower2.blueOrchid.name",
+   "nameKey": "tile.flower2.blueOrchid.name",
    "name": "Blue Orchid",
    "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.flowers.CropBlueOrchid",
    "tier": 2,
@@ -475,6 +493,7 @@
   "Blueberry": {
    "id": "Blueberry",
    "internal": "blueberry",
+   "nameKey": "cropsnh_crops.blueberry",
    "name": "Blueberry",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.natura.CropBlueberry",
    "tier": 2,
@@ -501,6 +520,7 @@
   "BoPBerry": {
    "id": "BoPBerry",
    "internal": "bopBerry",
+   "nameKey": "cropsnh_crops.bopBerry",
    "name": "Berry",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.bop.CropBoPBerry",
    "tier": 2,
@@ -526,6 +546,7 @@
   "BobsYerUncleRanks": {
    "id": "BobsYerUncleRanks",
    "internal": "bobsYerUncleRanks",
+   "nameKey": "cropsnh_crops.bobsYerUncleRanks",
    "name": "Bobs-Yer-Uncle-Ranks",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropBobsYerUncleRanks",
    "tier": 6,
@@ -554,6 +575,7 @@
   "BonsaiAcacia": {
    "id": "BonsaiAcacia",
    "internal": "bonsaiAcacia",
+   "nameKey": "cropsnh_crops.bonsaiAcacia",
    "name": "Acacia Bonsai",
    "cls": "com.gtnewhorizon.cropsnh.crops.abstracts.CropBonsai",
    "tier": 1,
@@ -581,6 +603,7 @@
   "BonsaiBirch": {
    "id": "BonsaiBirch",
    "internal": "bonsaiBirch",
+   "nameKey": "cropsnh_crops.bonsaiBirch",
    "name": "Birch Bonsai",
    "cls": "com.gtnewhorizon.cropsnh.crops.abstracts.CropBonsai",
    "tier": 1,
@@ -606,6 +629,7 @@
   "BonsaiDarkOak": {
    "id": "BonsaiDarkOak",
    "internal": "bonsaiDarkOak",
+   "nameKey": "cropsnh_crops.bonsaiDarkOak",
    "name": "Dark Oak Bonsai",
    "cls": "com.gtnewhorizon.cropsnh.crops.abstracts.CropBonsai",
    "tier": 1,
@@ -634,6 +658,7 @@
   "BonsaiJungle": {
    "id": "BonsaiJungle",
    "internal": "bonsaiJungle",
+   "nameKey": "cropsnh_crops.bonsaiJungle",
    "name": "Jungle Bonsai",
    "cls": "com.gtnewhorizon.cropsnh.crops.abstracts.CropBonsai",
    "tier": 1,
@@ -661,6 +686,7 @@
   "BonsaiOak": {
    "id": "BonsaiOak",
    "internal": "bonsaiOak",
+   "nameKey": "cropsnh_crops.bonsaiOak",
    "name": "Oak Bonsai",
    "cls": "com.gtnewhorizon.cropsnh.crops.abstracts.CropBonsai",
    "tier": 1,
@@ -688,6 +714,7 @@
   "BonsaiRubber": {
    "id": "BonsaiRubber",
    "internal": "bonsaiRubber",
+   "nameKey": "cropsnh_crops.bonsaiRubber",
    "name": "Rubber Bonsai",
    "cls": "com.gtnewhorizon.cropsnh.crops.abstracts.CropBonsai",
    "tier": 1,
@@ -713,6 +740,7 @@
   "BonsaiSlimy": {
    "id": "BonsaiSlimy",
    "internal": "bonsaiSlimy",
+   "nameKey": "cropsnh_crops.bonsaiSlimy",
    "name": "Slimy Bonsai",
    "cls": "com.gtnewhorizon.cropsnh.crops.TiC.CropSlimyBonsai",
    "tier": 1,
@@ -733,6 +761,7 @@
   "BonsaiSpruce": {
    "id": "BonsaiSpruce",
    "internal": "bonsaiSpruce",
+   "nameKey": "cropsnh_crops.bonsaiSpruce",
    "name": "Spruce Bonsai",
    "cls": "com.gtnewhorizon.cropsnh.crops.abstracts.CropBonsai",
    "tier": 1,
@@ -758,6 +787,7 @@
   "BrownMushroom": {
    "id": "BrownMushroom",
    "internal": "brownMushroom",
+   "nameKey": "cropsnh_crops.brownMushroom",
    "name": "Brown Mushroom",
    "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.mushrooms.CropBrownMushroom",
    "tier": 1,
@@ -782,7 +812,8 @@
   },
   "Cactus": {
    "id": "Cactus",
-   "internal": "cactus",
+   "internal": "tile.cactus.name",
+   "nameKey": "tile.cactus.name",
    "name": "Cactus",
    "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.CropCactus",
    "tier": 3,
@@ -808,6 +839,7 @@
   "Canola": {
    "id": "Canola",
    "internal": "canola",
+   "nameKey": "cropsnh_crops.canola",
    "name": "Canola",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropCanola",
    "tier": 4,
@@ -832,7 +864,8 @@
   },
   "Carrot": {
    "id": "Carrot",
-   "internal": "carrot",
+   "internal": "item.carrots.name",
+   "nameKey": "item.carrots.name",
    "name": "Carrot",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.vanilla.CropCarrot",
    "tier": 2,
@@ -859,6 +892,7 @@
   "Cassitine": {
    "id": "Cassitine",
    "internal": "cassitine",
+   "nameKey": "cropsnh_crops.cassitine",
    "name": "Cassitine",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropCassitine",
    "tier": 6,
@@ -889,6 +923,7 @@
   "Chilly": {
    "id": "Chilly",
    "internal": "chilly",
+   "nameKey": "cropsnh_crops.chilly",
    "name": "Chilly",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.CropChilly",
    "tier": 4,
@@ -913,6 +948,7 @@
   "Cinderpearl": {
    "id": "Cinderpearl",
    "internal": "cinderpearl",
+   "nameKey": "cropsnh_crops.cinderpearl",
    "name": "Cinderpearl",
    "cls": "com.gtnewhorizon.cropsnh.crops.thaumcraft.CropCinderpearl",
    "tier": 5,
@@ -940,6 +976,7 @@
   "ClayLily": {
    "id": "ClayLily",
    "internal": "clayLily",
+   "nameKey": "cropsnh_crops.clayLily",
    "name": "Clay Lily",
    "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.CropClayLily",
    "tier": 1,
@@ -967,6 +1004,7 @@
   "CobaltOreBerry": {
    "id": "CobaltOreBerry",
    "internal": "cobaltOreBerry",
+   "nameKey": "cropsnh_crops.cobaltOreBerry",
    "name": "Cobalt Oreberry",
    "cls": "com.gtnewhorizon.cropsnh.crops.oreBerries.CropCobaltOreBerry",
    "tier": 5,
@@ -994,7 +1032,8 @@
   },
   "Cocoa": {
    "id": "Cocoa",
-   "internal": "cocoa",
+   "internal": "tile.cocoa.name",
+   "nameKey": "tile.cocoa.name",
    "name": "Cocoa",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.vanilla.CropCocoa",
    "tier": 3,
@@ -1024,6 +1063,7 @@
   "Coffee": {
    "id": "Coffee",
    "internal": "coffee",
+   "nameKey": "cropsnh_crops.coffee",
    "name": "Coffee",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.CropCoffee",
    "tier": 7,
@@ -1051,6 +1091,7 @@
   "CopperOreBerry": {
    "id": "CopperOreBerry",
    "internal": "copperOreBerry",
+   "nameKey": "cropsnh_crops.copperOreBerry",
    "name": "Copper Oreberry",
    "cls": "com.gtnewhorizon.cropsnh.crops.oreBerries.CropCopperOreBerry",
    "tier": 5,
@@ -1081,6 +1122,7 @@
   "Coppon": {
    "id": "Coppon",
    "internal": "coppon",
+   "nameKey": "cropsnh_crops.coppon",
    "name": "Coppon",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropCoppon",
    "tier": 6,
@@ -1111,6 +1153,7 @@
   "Corium": {
    "id": "Corium",
    "internal": "corium",
+   "nameKey": "cropsnh_crops.corium",
    "name": "Corium",
    "cls": "com.gtnewhorizon.cropsnh.crops.mobs.CropCorium",
    "tier": 6,
@@ -1135,6 +1178,7 @@
   "Corpseplant": {
    "id": "Corpseplant",
    "internal": "corpseplant",
+   "nameKey": "cropsnh_crops.corpseplant",
    "name": "Corpseplant",
    "cls": "com.gtnewhorizon.cropsnh.crops.mobs.CropCorpseplant",
    "tier": 5,
@@ -1163,6 +1207,7 @@
   "Cotton": {
    "id": "Cotton",
    "internal": "cotton",
+   "nameKey": "cropsnh_crops.cotton",
    "name": "Cotton",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropCotton",
    "tier": 3,
@@ -1188,6 +1233,7 @@
   "Creeperweed": {
    "id": "Creeperweed",
    "internal": "creeperweed",
+   "nameKey": "cropsnh_crops.creeperweed",
    "name": "Creeperweed",
    "cls": "com.gtnewhorizon.cropsnh.crops.mobs.CropCreeperweed",
    "tier": 7,
@@ -1217,6 +1263,7 @@
   "Cucumber": {
    "id": "Cucumber",
    "internal": "cucumber",
+   "nameKey": "cropsnh_crops.cucumber",
    "name": "Cucumber",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.CropCucumber",
    "tier": 4,
@@ -1240,7 +1287,8 @@
   },
   "Dandelion": {
    "id": "Dandelion",
-   "internal": "dandelion",
+   "internal": "tile.flower1.dandelion.name",
+   "nameKey": "tile.flower1.dandelion.name",
    "name": "Dandelion",
    "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.flowers.CropDandelion",
    "tier": 2,
@@ -1264,6 +1312,7 @@
   "Dayflower": {
    "id": "Dayflower",
    "internal": "dayflower",
+   "nameKey": "cropsnh_crops.dayflower",
    "name": "Dayflower",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropDayflower",
    "tier": 2,
@@ -1289,6 +1338,7 @@
   "DeepslateLily": {
    "id": "DeepslateLily",
    "internal": "deepslateLily",
+   "nameKey": "cropsnh_crops.deepslateLily",
    "name": "Deepslate Lily",
    "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.etfuturum.CropDeepslateLily",
    "tier": 1,
@@ -1316,6 +1366,7 @@
   "Diareed": {
    "id": "Diareed",
    "internal": "diareed",
+   "nameKey": "cropsnh_crops.diareed",
    "name": "Diareed",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropDiareed",
    "tier": 12,
@@ -1345,6 +1396,7 @@
   "DioriteLily": {
    "id": "DioriteLily",
    "internal": "dioriteLily",
+   "nameKey": "cropsnh_crops.dioriteLily",
    "name": "Diorite Lily",
    "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.modern.CropDioriteLily",
    "tier": 1,
@@ -1370,6 +1422,7 @@
   "Duskberry": {
    "id": "Duskberry",
    "internal": "duskberry",
+   "nameKey": "cropsnh_crops.duskberry",
    "name": "Duskberry",
    "cls": "com.gtnewhorizon.cropsnh.crops.natura.nether.berry.CropDuskberry",
    "tier": 4,
@@ -1400,6 +1453,7 @@
   "EggPlant": {
    "id": "EggPlant",
    "internal": "eggPlant",
+   "nameKey": "cropsnh_crops.eggPlant",
    "name": "Egg Plant",
    "cls": "com.gtnewhorizon.cropsnh.crops.mobs.CropEggPlant",
    "tier": 6,
@@ -1425,7 +1479,8 @@
   },
   "EmberMoss": {
    "id": "EmberMoss",
-   "internal": "emberMoss",
+   "internal": "tile.witchery:embermoss.name",
+   "nameKey": "tile.witchery:embermoss.name",
    "name": "Ember Moss",
    "cls": "com.gtnewhorizon.cropsnh.crops.witchery.CropEmberMoss",
    "tier": 7,
@@ -1453,6 +1508,7 @@
   "EndStoneLily": {
    "id": "EndStoneLily",
    "internal": "endStoneLily",
+   "nameKey": "cropsnh_crops.endStoneLily",
    "name": "End Stone Lily",
    "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.CropEndStoneLily",
    "tier": 1,
@@ -1480,6 +1536,7 @@
   "Enderbloom": {
    "id": "Enderbloom",
    "internal": "enderbloom",
+   "nameKey": "cropsnh_crops.enderbloom",
    "name": "Enderbloom",
    "cls": "com.gtnewhorizon.cropsnh.crops.mobs.CropEnderbloom",
    "tier": 10,
@@ -1508,6 +1565,7 @@
   "EssenceOreBerry": {
    "id": "EssenceOreBerry",
    "internal": "essenceOreBerry",
+   "nameKey": "cropsnh_crops.essenceOreBerry",
    "name": "Essence Berry",
    "cls": "com.gtnewhorizon.cropsnh.crops.oreBerries.CropEssenceOreBerry",
    "tier": 5,
@@ -1536,6 +1594,7 @@
   "EvilOre": {
    "id": "EvilOre",
    "internal": "evilOre",
+   "nameKey": "cropsnh_crops.evilOre",
    "name": "Evil Ore",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropEvilOre",
    "tier": 8,
@@ -1563,6 +1622,7 @@
   "Eyebulb": {
    "id": "Eyebulb",
    "internal": "eyebulb",
+   "nameKey": "cropsnh_crops.eyebulb",
    "name": "Eyebulb",
    "cls": "com.gtnewhorizon.cropsnh.crops.biomesoplenty.CropEyebulb",
    "tier": 1,
@@ -1588,6 +1648,7 @@
   "Ferrofern": {
    "id": "Ferrofern",
    "internal": "ferrofern",
+   "nameKey": "cropsnh_crops.ferrofern",
    "name": "Ferrofern",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropFerrofern",
    "tier": 6,
@@ -1615,6 +1676,7 @@
   "Fertilia": {
    "id": "Fertilia",
    "internal": "fertilia",
+   "nameKey": "cropsnh_crops.fertilia",
    "name": "Fertilia",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropFertilia",
    "tier": 3,
@@ -1640,6 +1702,7 @@
   "Flax": {
    "id": "Flax",
    "internal": "flax",
+   "nameKey": "cropsnh_crops.flax",
    "name": "Flax",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropFlax",
    "tier": 2,
@@ -1667,6 +1730,7 @@
   "FloweringVine": {
    "id": "FloweringVine",
    "internal": "floweringVine",
+   "nameKey": "cropsnh_crops.floweringVine",
    "name": "Flowering Vine",
    "cls": "com.gtnewhorizon.cropsnh.crops.biomesoplenty.CropFloweringVine",
    "tier": 3,
@@ -1691,7 +1755,8 @@
   },
   "GaiaWart": {
    "id": "GaiaWart",
-   "internal": "gaiaWart",
+   "internal": "item.cropsnh:gaiaWart.name",
+   "nameKey": "item.cropsnh:gaiaWart.name",
    "name": "Gaia Wart",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.CropGaiaWart",
    "tier": 5,
@@ -1714,6 +1779,7 @@
   "Galvania": {
    "id": "Galvania",
    "internal": "galvania",
+   "nameKey": "cropsnh_crops.galvania",
    "name": "Galvania",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropGalvania",
    "tier": 6,
@@ -1739,7 +1805,8 @@
   },
   "Garlic": {
    "id": "Garlic",
-   "internal": "garlic",
+   "internal": "tile.witchery:garlicplant.name",
+   "nameKey": "tile.witchery:garlicplant.name",
    "name": "Garlic",
    "cls": "com.gtnewhorizon.cropsnh.crops.witchery.CropGarlic",
    "tier": 3,
@@ -1765,6 +1832,7 @@
   "Garnydinia": {
    "id": "Garnydinia",
    "internal": "garnydinia",
+   "nameKey": "cropsnh_crops.garnydinia",
    "name": "Garnydinia",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropGarnydinia",
    "tier": 7,
@@ -1787,7 +1855,8 @@
   },
   "GlintWeed": {
    "id": "GlintWeed",
-   "internal": "glintWeed",
+   "internal": "tile.witchery:glintweed.name",
+   "nameKey": "tile.witchery:glintweed.name",
    "name": "Glint Weed",
    "cls": "com.gtnewhorizon.cropsnh.crops.witchery.CropGlintWeed",
    "tier": 4,
@@ -1813,6 +1882,7 @@
   "Glowflower": {
    "id": "Glowflower",
    "internal": "glowflower",
+   "nameKey": "cropsnh_crops.glowflower",
    "name": "Glowflower",
    "cls": "com.gtnewhorizon.cropsnh.crops.biomesoplenty.CropGlowflower",
    "tier": 3,
@@ -1841,6 +1911,7 @@
   "Glowheat": {
    "id": "Glowheat",
    "internal": "glowheat",
+   "nameKey": "cropsnh_crops.glowheat",
    "name": "Glowheat",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropGlowheat",
    "tier": 4,
@@ -1872,6 +1943,7 @@
   "GlowingCoral": {
    "id": "GlowingCoral",
    "internal": "glowingCoral",
+   "nameKey": "cropsnh_crops.glowingCoral",
    "name": "Glowing Coral",
    "cls": "com.gtnewhorizon.cropsnh.crops.biomesoplenty.CropGlowingCoral",
    "tier": 5,
@@ -1900,6 +1972,7 @@
   "Glowshroom": {
    "id": "Glowshroom",
    "internal": "glowshroom",
+   "nameKey": "cropsnh_crops.glowshroom",
    "name": "Glowshroom",
    "cls": "com.gtnewhorizon.cropsnh.crops.biomesoplenty.CropGlowshroom",
    "tier": 3,
@@ -1927,6 +2000,7 @@
   "GodOfThunder": {
    "id": "GodOfThunder",
    "internal": "godOfThunder",
+   "nameKey": "cropsnh_crops.godOfThunder",
    "name": "God of Thunder",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropGodOfThunder",
    "tier": 9,
@@ -1949,6 +2023,7 @@
   "GoldOreBerry": {
    "id": "GoldOreBerry",
    "internal": "goldOreBerry",
+   "nameKey": "cropsnh_crops.goldOreBerry",
    "name": "Gold Oreberry",
    "cls": "com.gtnewhorizon.cropsnh.crops.oreBerries.CropGoldOreBerry",
    "tier": 5,
@@ -1978,6 +2053,7 @@
   "Goldfish": {
    "id": "Goldfish",
    "internal": "goldfish",
+   "nameKey": "cropsnh_crops.goldfish",
    "name": "Goldfish",
    "cls": "com.gtnewhorizon.cropsnh.crops.mobs.CropGoldfish",
    "tier": 4,
@@ -2008,6 +2084,7 @@
   "GraniteLily": {
    "id": "GraniteLily",
    "internal": "graniteLily",
+   "nameKey": "cropsnh_crops.graniteLily",
    "name": "Granite Lily",
    "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.modern.CropGraniteLily",
    "tier": 1,
@@ -2033,6 +2110,7 @@
   "Grape": {
    "id": "Grape",
    "internal": "grape",
+   "nameKey": "cropsnh_crops.grape",
    "name": "Grape",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.CropGrape",
    "tier": 4,
@@ -2060,6 +2138,7 @@
   "GreenGlowshroom": {
    "id": "GreenGlowshroom",
    "internal": "greenGlowshroom",
+   "nameKey": "cropsnh_crops.greenGlowshroom",
    "name": "Green Glowshroom",
    "cls": "com.gtnewhorizon.cropsnh.crops.natura.nether.glowshroom.CropGreenGlowshroom",
    "tier": 3,
@@ -2088,6 +2167,7 @@
   "Hemp": {
    "id": "Hemp",
    "internal": "hemp",
+   "nameKey": "cropsnh_crops.hemp",
    "name": "Hemp",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropHemp",
    "tier": 5,
@@ -2113,6 +2193,7 @@
   "Hops": {
    "id": "Hops",
    "internal": "hops",
+   "nameKey": "cropsnh_crops.hops",
    "name": "Hops",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.CropHops",
    "tier": 5,
@@ -2137,6 +2218,7 @@
   "Huckleberry": {
    "id": "Huckleberry",
    "internal": "huckleberry",
+   "nameKey": "cropsnh_crops.huckleberry",
    "name": "Huckleberry",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.CropHuckleberry",
    "tier": 2,
@@ -2165,6 +2247,7 @@
   "Indigo": {
    "id": "Indigo",
    "internal": "indigo",
+   "nameKey": "cropsnh_crops.indigo",
    "name": "Indigo",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropIndigo",
    "tier": 2,
@@ -2188,6 +2271,7 @@
   "InkBloom": {
    "id": "InkBloom",
    "internal": "inkbloom",
+   "nameKey": "cropsnh_crops.inkbloom",
    "name": "Inkbloom",
    "cls": "com.gtnewhorizon.cropsnh.crops.mobs.CropInkbloom",
    "tier": 4,
@@ -2212,6 +2296,7 @@
   "Iridine": {
    "id": "Iridine",
    "internal": "iridine",
+   "nameKey": "cropsnh_crops.iridine",
    "name": "Iridine",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropIridine",
    "tier": 12,
@@ -2234,6 +2319,7 @@
   "IronOreBerry": {
    "id": "IronOreBerry",
    "internal": "ironOreBerry",
+   "nameKey": "cropsnh_crops.ironOreBerry",
    "name": "Iron Oreberry",
    "cls": "com.gtnewhorizon.cropsnh.crops.oreBerries.CropIronOreBerry",
    "tier": 5,
@@ -2262,6 +2348,7 @@
   "Ivy": {
    "id": "Ivy",
    "internal": "ivy",
+   "nameKey": "cropsnh_crops.ivy",
    "name": "Ivy",
    "cls": "com.gtnewhorizon.cropsnh.crops.biomesoplenty.CropIvy",
    "tier": 2,
@@ -2290,8 +2377,9 @@
   },
   "KnightmetalBerry": {
    "id": "KnightmetalBerry",
-   "internal": "knightmetalBerry",
-   "name": "Knightmetal Berry",
+   "internal": "knightmetalOreBerry",
+   "nameKey": "cropsnh_crops.knightmetalOreBerry",
+   "name": "Knightly Oreberry",
    "cls": "com.gtnewhorizon.cropsnh.crops.oreBerries.CropKnightmetalBerry",
    "tier": 8,
    "soil": [
@@ -2319,6 +2407,7 @@
   "Lazulia": {
    "id": "Lazulia",
    "internal": "lazulia",
+   "nameKey": "cropsnh_crops.lazulia",
    "name": "Lazulia",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropLazulia",
    "tier": 7,
@@ -2346,6 +2435,7 @@
   "Lemon": {
    "id": "Lemon",
    "internal": "lemon",
+   "nameKey": "cropsnh_crops.lemon",
    "name": "Lemon",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.CropLemon",
    "tier": 4,
@@ -2372,6 +2462,7 @@
   "Liveroot": {
    "id": "Liveroot",
    "internal": "liveroot",
+   "nameKey": "cropsnh_crops.liveroot",
    "name": "Liveroot",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropLiveroot",
    "tier": 8,
@@ -2398,6 +2489,7 @@
   "MagicalNightshade": {
    "id": "MagicalNightshade",
    "internal": "magicalNightshade",
+   "nameKey": "cropsnh_crops.magicalNightshade",
    "name": "Magical Nightshade",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropMagicalNightshade",
    "tier": 13,
@@ -2420,6 +2512,7 @@
   "Malaxia": {
    "id": "Malaxia",
    "internal": "malaxia",
+   "nameKey": "cropsnh_crops.malaxia",
    "name": "Malaxia",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropMalaxia",
    "tier": 6,
@@ -2448,6 +2541,7 @@
   "Maloberry": {
    "id": "Maloberry",
    "internal": "maloberry",
+   "nameKey": "cropsnh_crops.maloberry",
    "name": "Maloberry",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.natura.CropMaloberry",
    "tier": 2,
@@ -2474,6 +2568,7 @@
   "ManaBean": {
    "id": "ManaBean",
    "internal": "manaBean",
+   "nameKey": "cropsnh_crops.manaBean",
    "name": "Mana Bean",
    "cls": "com.gtnewhorizon.cropsnh.crops.thaumcraft.CropManaBean",
    "tier": 5,
@@ -2499,7 +2594,8 @@
   },
   "Mandrake": {
    "id": "Mandrake",
-   "internal": "mandrake",
+   "internal": "tile.witchery:mandrake.name",
+   "nameKey": "tile.witchery:mandrake.name",
    "name": "Mandrake",
    "cls": "com.gtnewhorizon.cropsnh.crops.witchery.CropMandrake",
    "tier": 4,
@@ -2527,6 +2623,7 @@
   "MarbleLily": {
    "id": "MarbleLily",
    "internal": "marbleLily",
+   "nameKey": "cropsnh_crops.marbleLily",
    "name": "Marble Lily",
    "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.CropMarbleLily",
    "tier": 1,
@@ -2552,6 +2649,7 @@
   "Meatrose": {
    "id": "Meatrose",
    "internal": "meatrose",
+   "nameKey": "cropsnh_crops.meatrose",
    "name": "Meatrose",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.CropMeatrose",
    "tier": 7,
@@ -2578,7 +2676,8 @@
   },
   "Melon": {
    "id": "Melon",
-   "internal": "melon",
+   "internal": "tile.melon.name",
+   "nameKey": "tile.melon.name",
    "name": "Melon",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.vanilla.CropMelon",
    "tier": 2,
@@ -2605,6 +2704,7 @@
   "Micadia": {
    "id": "Micadia",
    "internal": "micadia",
+   "nameKey": "cropsnh_crops.micadia",
    "name": "Micadia",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropMicadia",
    "tier": 9,
@@ -2627,6 +2727,7 @@
   "MilkWart": {
    "id": "MilkWart",
    "internal": "milkWart",
+   "nameKey": "cropsnh_crops.milkWart",
    "name": "Milk Wart",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropMilkWart",
    "tier": 6,
@@ -2651,7 +2752,8 @@
   },
   "Moss": {
    "id": "Moss",
-   "internal": "moss",
+   "internal": "tile.moss.name",
+   "nameKey": "tile.moss.name",
    "name": "Moss",
    "cls": "com.gtnewhorizon.cropsnh.crops.biomesoplenty.CropMoss",
    "tier": 4,
@@ -2678,6 +2780,7 @@
   "Necrobloom": {
    "id": "Necrobloom",
    "internal": "necrobloom",
+   "nameKey": "cropsnh_crops.necrobloom",
    "name": "Necrobloom",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropNecrobloom",
    "tier": 3,
@@ -2703,6 +2806,7 @@
   "NetherStoneLily": {
    "id": "NetherStoneLily",
    "internal": "netherStoneLily",
+   "nameKey": "cropsnh_crops.netherStoneLily",
    "name": "Nether Stone Lily",
    "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.CropNetherStoneLily",
    "tier": 1,
@@ -2729,7 +2833,8 @@
   },
   "Netherwart": {
    "id": "Netherwart",
-   "internal": "netherwart",
+   "internal": "item.netherStalkSeeds.name",
+   "nameKey": "item.netherStalkSeeds.name",
    "name": "Netherwart",
    "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.CropNetherwart",
    "tier": 5,
@@ -2754,6 +2859,7 @@
   "Nickelback": {
    "id": "Nickelback",
    "internal": "nickelback",
+   "nameKey": "cropsnh_crops.nickelback",
    "name": "Nickelback",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropNickelback",
    "tier": 5,
@@ -2780,6 +2886,7 @@
   "OilBerry": {
    "id": "OilBerry",
    "internal": "oilBerry",
+   "nameKey": "cropsnh_crops.oilBerry",
    "name": "Oil Berry",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropOilBerry",
    "tier": 4,
@@ -2800,6 +2907,7 @@
   "Olivia": {
    "id": "Olivia",
    "internal": "olivia",
+   "nameKey": "cropsnh_crops.olivia",
    "name": "Olivia",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropOlivia",
    "tier": 2,
@@ -2822,6 +2930,7 @@
   "Onion": {
    "id": "Onion",
    "internal": "onion",
+   "nameKey": "cropsnh_crops.onion",
    "name": "Onion",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.CropOnion",
    "tier": 4,
@@ -2846,7 +2955,8 @@
   },
   "OrangeTulip": {
    "id": "OrangeTulip",
-   "internal": "orangeTulip",
+   "internal": "tile.flower2.tulipOrange.name",
+   "nameKey": "tile.flower2.tulipOrange.name",
    "name": "Orange Tulip",
    "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.flowers.CropOrangeTulip",
    "tier": 2,
@@ -2871,6 +2981,7 @@
   "Osmianth": {
    "id": "Osmianth",
    "internal": "osmianth",
+   "nameKey": "cropsnh_crops.osmianth",
    "name": "Osmianth",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropOsmianth",
    "tier": 12,
@@ -2892,7 +3003,8 @@
   },
   "OxeyeDaisy": {
    "id": "OxeyeDaisy",
-   "internal": "oxeyeDaisy",
+   "internal": "tile.flower2.oxeyeDaisy.name",
+   "nameKey": "tile.flower2.oxeyeDaisy.name",
    "name": "Oxeye Daisy",
    "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.flowers.CropOxeyeDaisy",
    "tier": 2,
@@ -2916,6 +3028,7 @@
   "Papyrus": {
    "id": "Papyrus",
    "internal": "papyrus",
+   "nameKey": "cropsnh_crops.papyrus",
    "name": "Papyrus",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropPapyrus",
    "tier": 5,
@@ -2939,7 +3052,8 @@
   },
   "PinkTulip": {
    "id": "PinkTulip",
-   "internal": "pinkTulip",
+   "internal": "tile.flower2.tulipPink.name",
+   "nameKey": "tile.flower2.tulipPink.name",
    "name": "Pink Tulip",
    "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.flowers.CropPinkTulip",
    "tier": 2,
@@ -2964,6 +3078,7 @@
   "Platina": {
    "id": "Platina",
    "internal": "platina",
+   "nameKey": "cropsnh_crops.platina",
    "name": "Platina",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropPlatina",
    "tier": 11,
@@ -2986,6 +3101,7 @@
   "Plumbilia": {
    "id": "Plumbilia",
    "internal": "plumbilia",
+   "nameKey": "cropsnh_crops.plumbilia",
    "name": "Plumbilia",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropPlumbilia",
    "tier": 6,
@@ -3014,6 +3130,7 @@
   "Plumbshade": {
    "id": "Plumbshade",
    "internal": "plumbshade",
+   "nameKey": "cropsnh_crops.plumbshade",
    "name": "Plumbshade",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropPlumbshade",
    "tier": 6,
@@ -3042,7 +3159,8 @@
   },
   "Poppy": {
    "id": "Poppy",
-   "internal": "poppy",
+   "internal": "tile.flower2.poppy.name",
+   "nameKey": "tile.flower2.poppy.name",
    "name": "Poppy",
    "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.flowers.CropPoppy",
    "tier": 2,
@@ -3065,7 +3183,8 @@
   },
   "Potato": {
    "id": "Potato",
-   "internal": "potato",
+   "internal": "item.potato.name",
+   "nameKey": "item.potato.name",
    "name": "Potato",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.vanilla.CropPotato",
    "tier": 1,
@@ -3090,6 +3209,7 @@
   "PrimordialBerry": {
    "id": "PrimordialBerry",
    "internal": "primordialBerry",
+   "nameKey": "cropsnh_crops.primordialBerry",
    "name": "Primordial Berry",
    "cls": "com.gtnewhorizon.cropsnh.crops.thaumcraft.CropPrimordialBerry",
    "tier": 16,
@@ -3109,7 +3229,8 @@
   },
   "Pumpkin": {
    "id": "Pumpkin",
-   "internal": "pumpkin",
+   "internal": "tile.pumpkin.name",
+   "nameKey": "tile.pumpkin.name",
    "name": "Pumpkin",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.vanilla.CropPumpkin",
    "tier": 2,
@@ -3134,6 +3255,7 @@
   "PurpleGlowshroom": {
    "id": "PurpleGlowshroom",
    "internal": "purpleGlowshroom",
+   "nameKey": "cropsnh_crops.purpleGlowshroom",
    "name": "Purple Glowshroom",
    "cls": "com.gtnewhorizon.cropsnh.crops.natura.nether.glowshroom.CropPurpleGlowshroom",
    "tier": 3,
@@ -3162,6 +3284,7 @@
   "PurpleTulip": {
    "id": "PurpleTulip",
    "internal": "purpleTulip",
+   "nameKey": "cropsnh_crops.purpleTulip",
    "name": "Purple Tulip",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropPurpleTulip",
    "tier": 2,
@@ -3186,6 +3309,7 @@
   "Pyrolusium": {
    "id": "Pyrolusium",
    "internal": "pyrolusium",
+   "nameKey": "cropsnh_crops.pyrolusium",
    "name": "Pyrolusium",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropPyrolusium",
    "tier": 12,
@@ -3212,6 +3336,7 @@
   "Raspberry": {
    "id": "Raspberry",
    "internal": "raspberry",
+   "nameKey": "cropsnh_crops.raspberry",
    "name": "Raspberry",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.natura.CropRaspberry",
    "tier": 2,
@@ -3237,6 +3362,7 @@
   "Reactoria": {
    "id": "Reactoria",
    "internal": "reactoria",
+   "nameKey": "cropsnh_crops.reactoria",
    "name": "Reactoria",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropReactoria",
    "tier": 12,
@@ -3259,6 +3385,7 @@
   "RedGraniteLily": {
    "id": "RedGraniteLily",
    "internal": "redGraniteLily",
+   "nameKey": "cropsnh_crops.redGraniteLily",
    "name": "Red Granite Lily",
    "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.CropRedGraniteLily",
    "tier": 1,
@@ -3284,6 +3411,7 @@
   "RedMushroom": {
    "id": "RedMushroom",
    "internal": "redMushroom",
+   "nameKey": "cropsnh_crops.redMushroom",
    "name": "Red Mushroom",
    "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.mushrooms.CropRedMushroom",
    "tier": 1,
@@ -3309,6 +3437,7 @@
   "RedStraw": {
    "id": "RedStraw",
    "internal": "redstraw",
+   "nameKey": "cropsnh_crops.redstraw",
    "name": "Redstraw",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropRedstraw",
    "tier": 6,
@@ -3336,7 +3465,8 @@
   },
   "RedTulip": {
    "id": "RedTulip",
-   "internal": "redTulip",
+   "internal": "tile.flower2.tulipRed.name",
+   "nameKey": "tile.flower2.tulipRed.name",
    "name": "Red Tulip",
    "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.flowers.CropRedTulip",
    "tier": 2,
@@ -3361,6 +3491,7 @@
   "Rubyne": {
    "id": "Rubyne",
    "internal": "rubyne",
+   "nameKey": "cropsnh_crops.rubyne",
    "name": "Rubyne",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropRubyne",
    "tier": 4,
@@ -3387,6 +3518,7 @@
   "SaguaroCactus": {
    "id": "SaguaroCactus",
    "internal": "saguaroCactus",
+   "nameKey": "cropsnh_crops.saguaroCactus",
    "name": "Saguaro Cactus",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.natura.CropSaguaroCactus",
    "tier": 4,
@@ -3413,6 +3545,7 @@
   "SaltyRoot": {
    "id": "SaltyRoot",
    "internal": "saltyRoot",
+   "nameKey": "cropsnh_crops.saltyRoot",
    "name": "Salty Root",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropSaltyRoot",
    "tier": 4,
@@ -3438,6 +3571,7 @@
   "SandLily": {
    "id": "SandLily",
    "internal": "sandLily",
+   "nameKey": "cropsnh_crops.sandLily",
    "name": "Sand Lily",
    "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.CropSandLily",
    "tier": 1,
@@ -3464,6 +3598,7 @@
   "Sapphirum": {
    "id": "Sapphirum",
    "internal": "sapphirum",
+   "nameKey": "cropsnh_crops.sapphirum",
    "name": "Sapphirum",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropSapphirum",
    "tier": 4,
@@ -3491,6 +3626,7 @@
   "Scheelinium": {
    "id": "Scheelinium",
    "internal": "scheelinium",
+   "nameKey": "cropsnh_crops.scheelinium",
    "name": "Scheelinium",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropScheelinium",
    "tier": 12,
@@ -3514,6 +3650,7 @@
   "Shimmerleaf": {
    "id": "Shimmerleaf",
    "internal": "shimmerleaf",
+   "nameKey": "cropsnh_crops.shimmerleaf",
    "name": "Shimmerleaf",
    "cls": "com.gtnewhorizon.cropsnh.crops.thaumcraft.CropShimmerleaf",
    "tier": 5,
@@ -3542,6 +3679,7 @@
   "Silviscus": {
    "id": "Silviscus",
    "internal": "silviscus",
+   "nameKey": "cropsnh_crops.silviscus",
    "name": "Silviscus",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropSilviscus",
    "tier": 8,
@@ -3571,6 +3709,7 @@
   "Skyberry": {
    "id": "Skyberry",
    "internal": "skyberry",
+   "nameKey": "cropsnh_crops.skyberry",
    "name": "Skyberry",
    "cls": "com.gtnewhorizon.cropsnh.crops.natura.nether.berry.CropSkyberry",
    "tier": 4,
@@ -3601,6 +3740,7 @@
   "Slimeplant": {
    "id": "Slimeplant",
    "internal": "slimeplant",
+   "nameKey": "cropsnh_crops.slimeplant",
    "name": "Slimeplant",
    "cls": "com.gtnewhorizon.cropsnh.crops.mobs.CropSlimeplant",
    "tier": 6,
@@ -3627,7 +3767,8 @@
   },
   "Snowbell": {
    "id": "Snowbell",
-   "internal": "snowbell",
+   "internal": "tile.witchery:snowbell.name",
+   "nameKey": "tile.witchery:snowbell.name",
    "name": "Snowbell",
    "cls": "com.gtnewhorizon.cropsnh.crops.witchery.CropSnowbell",
    "tier": 4,
@@ -3653,6 +3794,7 @@
   "SoulSandLily": {
    "id": "SoulSandLily",
    "internal": "soulSandLily",
+   "nameKey": "cropsnh_crops.soulSandLily",
    "name": "Soul Sand Lily",
    "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.CropSoulSandLily",
    "tier": 2,
@@ -3682,6 +3824,7 @@
   "SpaceFlower": {
    "id": "SpaceFlower",
    "internal": "spaceFlower",
+   "nameKey": "cropsnh_crops.spaceFlower",
    "name": "Space Flower",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropSpaceFlower",
    "tier": 13,
@@ -3704,7 +3847,8 @@
   },
   "SpanishMoss": {
    "id": "SpanishMoss",
-   "internal": "spanishMoss",
+   "internal": "tile.witchery:spanishmoss.name",
+   "nameKey": "tile.witchery:spanishmoss.name",
    "name": "Spanish Moss",
    "cls": "com.gtnewhorizon.cropsnh.crops.witchery.CropSpanishMoss",
    "tier": 7,
@@ -3731,6 +3875,7 @@
   "Spidernip": {
    "id": "Spidernip",
    "internal": "spidernip",
+   "nameKey": "cropsnh_crops.spidernip",
    "name": "Spidernip",
    "cls": "com.gtnewhorizon.cropsnh.crops.mobs.CropSpidernip",
    "tier": 4,
@@ -3759,6 +3904,7 @@
   "StarWart": {
    "id": "StarWart",
    "internal": "starWart",
+   "nameKey": "cropsnh_crops.starWart",
    "name": "Star Wart",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropStarWart",
    "tier": 12,
@@ -3781,6 +3927,7 @@
   "Stargatium": {
    "id": "Stargatium",
    "internal": "stargatium",
+   "nameKey": "cropsnh_crops.stargatium",
    "name": "Stargatium",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropStargatium",
    "tier": 12,
@@ -3803,6 +3950,7 @@
   "Steeleafranks": {
    "id": "Steeleafranks",
    "internal": "steeleafranks",
+   "nameKey": "cropsnh_crops.steeleafranks",
    "name": "Steeleafranks",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropSteeleafranks",
    "tier": 10,
@@ -3831,6 +3979,7 @@
   "StickyCane": {
    "id": "StickyCane",
    "internal": "stickyCane",
+   "nameKey": "cropsnh_crops.stickyCane",
    "name": "Sticky Cane",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropStickyCane",
    "tier": 4,
@@ -3856,6 +4005,7 @@
   "Stingberry": {
    "id": "Stingberry",
    "internal": "stingberry",
+   "nameKey": "cropsnh_crops.stingberry",
    "name": "Stingberry",
    "cls": "com.gtnewhorizon.cropsnh.crops.natura.nether.berry.CropStingberry",
    "tier": 4,
@@ -3886,6 +4036,7 @@
   "StoneLily": {
    "id": "StoneLily",
    "internal": "stoneLily",
+   "nameKey": "cropsnh_crops.stoneLily",
    "name": "Stone Lily",
    "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.CropStoneLily",
    "tier": 1,
@@ -3911,6 +4062,7 @@
   "Strawberry": {
    "id": "Strawberry",
    "internal": "strawberry",
+   "nameKey": "cropsnh_crops.strawberry",
    "name": "Strawberry",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.CropStrawberry",
    "tier": 2,
@@ -3936,6 +4088,7 @@
   "SugarBeet": {
    "id": "SugarBeet",
    "internal": "sugarBeet",
+   "nameKey": "cropsnh_crops.sugarBeet",
    "name": "Sugar Beet",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.CropSugarBeet",
    "tier": 4,
@@ -3962,6 +4115,7 @@
   "SugarCane": {
    "id": "SugarCane",
    "internal": "sugarCane",
+   "nameKey": "cropsnh_crops.sugarCane",
    "name": "Sugar Cane",
    "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.CropSugarCane",
    "tier": 2,
@@ -3986,6 +4140,7 @@
   "Tea": {
    "id": "Tea",
    "internal": "tea",
+   "nameKey": "cropsnh_crops.tea",
    "name": "Tea",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.CropTea",
    "tier": 4,
@@ -4011,6 +4166,7 @@
   "Tearstalks": {
    "id": "Tearstalks",
    "internal": "tearstalks",
+   "nameKey": "cropsnh_crops.tearstalks",
    "name": "Tearstalks",
    "cls": "com.gtnewhorizon.cropsnh.crops.mobs.CropTearstalks",
    "tier": 8,
@@ -4038,6 +4194,7 @@
   "ThauminiteOreBerry": {
    "id": "ThauminiteOreBerry",
    "internal": "thauminiteOreBerry",
+   "nameKey": "cropsnh_crops.thauminiteOreBerry",
    "name": "Thauminite Oreberry",
    "cls": "com.gtnewhorizon.cropsnh.crops.oreBerries.CropThauminiteOreBerry",
    "tier": 7,
@@ -4067,6 +4224,7 @@
   "ThaumiumOreBerry": {
    "id": "ThaumiumOreBerry",
    "internal": "thaumiumOreBerry",
+   "nameKey": "cropsnh_crops.thaumiumOreBerry",
    "name": "Thaumium Oreberry",
    "cls": "com.gtnewhorizon.cropsnh.crops.oreBerries.CropThaumiumOreBerry",
    "tier": 7,
@@ -4096,6 +4254,7 @@
   "Thiosulfine": {
    "id": "Thiosulfine",
    "internal": "thiosulfine",
+   "nameKey": "cropsnh_crops.thiosulfine",
    "name": "Thiosulfine",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropThiosulfine",
    "tier": 6,
@@ -4123,6 +4282,7 @@
   "Thornvine": {
    "id": "Thornvine",
    "internal": "thornvine",
+   "nameKey": "cropsnh_crops.thornvine",
    "name": "Thornvine",
    "cls": "com.gtnewhorizon.cropsnh.crops.natura.nether.CropThornvine",
    "tier": 3,
@@ -4150,6 +4310,7 @@
   "TinOreBerry": {
    "id": "TinOreBerry",
    "internal": "tinOreBerry",
+   "nameKey": "cropsnh_crops.tinOreBerry",
    "name": "Tin Oreberry",
    "cls": "com.gtnewhorizon.cropsnh.crops.oreBerries.CropTinOreBerry",
    "tier": 4,
@@ -4179,6 +4340,7 @@
   "Tine": {
    "id": "Tine",
    "internal": "tine",
+   "nameKey": "cropsnh_crops.tine",
    "name": "Tine",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropTine",
    "tier": 5,
@@ -4208,6 +4370,7 @@
   "Titania": {
    "id": "Titania",
    "internal": "titania",
+   "nameKey": "cropsnh_crops.titania",
    "name": "Titania",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropTitania",
    "tier": 9,
@@ -4230,6 +4393,7 @@
   "Tomato": {
    "id": "Tomato",
    "internal": "tomato",
+   "nameKey": "cropsnh_crops.tomato",
    "name": "Tomato",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.CropTomato",
    "tier": 4,
@@ -4255,6 +4419,7 @@
   "Torchberry": {
    "id": "Torchberry",
    "internal": "torchberry",
+   "nameKey": "cropsnh_crops.torchberry",
    "name": "Torchberry",
    "cls": "com.gtnewhorizon.cropsnh.crops.twilightforest.CropTorchberry",
    "tier": 2,
@@ -4280,6 +4445,7 @@
   "Transformium": {
    "id": "Transformium",
    "internal": "transformium",
+   "nameKey": "cropsnh_crops.transformium",
    "name": "Transformium",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropTransformium",
    "tier": 12,
@@ -4300,6 +4466,7 @@
   "Trollplant": {
    "id": "Trollplant",
    "internal": "trollplant",
+   "nameKey": "cropsnh_crops.trollplant",
    "name": "Trollplant",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropTrollplant",
    "tier": 6,
@@ -4320,6 +4487,7 @@
   "TuffLily": {
    "id": "TuffLily",
    "internal": "tuffLily",
+   "nameKey": "cropsnh_crops.tuffLily",
    "name": "Tuff Lily",
    "cls": "com.gtnewhorizon.cropsnh.crops.stoneilies.etfuturum.CropTuffLily",
    "tier": 1,
@@ -4346,6 +4514,7 @@
   "Turnip": {
    "id": "Turnip",
    "internal": "turnip",
+   "nameKey": "cropsnh_crops.turnip",
    "name": "Turnip",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.bop.CropTurnip",
    "tier": 2,
@@ -4371,6 +4540,7 @@
   "Vine": {
    "id": "Vine",
    "internal": "vine",
+   "nameKey": "cropsnh_crops.vine",
    "name": "Vine",
    "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.CropVine",
    "tier": 2,
@@ -4396,6 +4566,7 @@
   "VoidOreBerry": {
    "id": "VoidOreBerry",
    "internal": "voidOreBerry",
+   "nameKey": "cropsnh_crops.voidOreBerry",
    "name": "Void Metal Oreberry",
    "cls": "com.gtnewhorizon.cropsnh.crops.oreBerries.CropVoidOreBerry",
    "tier": 7,
@@ -4424,7 +4595,8 @@
   },
   "WaterArtichoke": {
    "id": "WaterArtichoke",
-   "internal": "waterArtichoke",
+   "internal": "tile.witchery:artichoke.name",
+   "nameKey": "tile.witchery:artichoke.name",
    "name": "Water Artichoke",
    "cls": "com.gtnewhorizon.cropsnh.crops.witchery.CropWaterArtichoke",
    "tier": 4,
@@ -4452,6 +4624,7 @@
   "Waterlily": {
    "id": "Waterlily",
    "internal": "waterLily",
+   "nameKey": "cropsnh_crops.waterLily",
    "name": "Water Lily",
    "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.CropWaterlily",
    "tier": 2,
@@ -4475,7 +4648,8 @@
   },
   "Wheat": {
    "id": "Wheat",
-   "internal": "wheat",
+   "internal": "item.wheat.name",
+   "nameKey": "item.wheat.name",
    "name": "Wheat",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.vanilla.CropWheat",
    "tier": 1,
@@ -4499,7 +4673,8 @@
   },
   "WhiteTulip": {
    "id": "WhiteTulip",
-   "internal": "whiteTulip",
+   "internal": "tile.flower2.tulipWhite.name",
+   "nameKey": "tile.flower2.tulipWhite.name",
    "name": "White Tulip",
    "cls": "com.gtnewhorizon.cropsnh.crops.vanilla.flowers.CropWhiteTulip",
    "tier": 2,
@@ -4524,6 +4699,7 @@
   "WildCarrot": {
    "id": "WildCarrot",
    "internal": "wildCarrot",
+   "nameKey": "cropsnh_crops.wildCarrot",
    "name": "Wild Carrot",
    "cls": "com.gtnewhorizon.cropsnh.crops.food.bop.CropWildCarrot",
    "tier": 2,
@@ -4549,6 +4725,7 @@
   "Withereed": {
    "id": "Withereed",
    "internal": "withereed",
+   "nameKey": "cropsnh_crops.withereed",
    "name": "Withereed",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropWithereed",
    "tier": 8,
@@ -4577,7 +4754,8 @@
   },
   "Wolfsbane": {
    "id": "Wolfsbane",
-   "internal": "wolfsbane",
+   "internal": "tile.witchery:wolfsbane.name",
+   "nameKey": "tile.witchery:wolfsbane.name",
    "name": "Wolfsbane",
    "cls": "com.gtnewhorizon.cropsnh.crops.witchery.CropWolfsbane",
    "tier": 4,
@@ -4604,6 +4782,7 @@
   "Zomplant": {
    "id": "Zomplant",
    "internal": "zomplant",
+   "nameKey": "cropsnh_crops.zomplant",
    "name": "Zomplant",
    "cls": "com.gtnewhorizon.cropsnh.crops.mobs.CropZomplant",
    "tier": 3,
@@ -7882,38 +8061,22 @@
    "Plumbshade"
   ]
  },
- "soilGloss": {
-  "farmland": "Farmland",
-  "sand": "Sand or sandstone",
-  "soulsand": "Soul sand",
-  "dirtGrass": "Dirt or grass",
-  "mycelium": "Mycelium",
-  "end": "End stone",
-  "stone": "Stone, cobblestone and variants",
-  "netherrack": "Netherrack",
-  "brick": "Brick blocks",
-  "thaumLogs": "Thaumcraft logs",
-  "graveyard": "Graveyard dirt",
-  "slimy": "Slime grass or slimy mud",
-  "gravel": "Gravel",
-  "oilSands": "Oil sands"
- },
- "soilShort": {
-  "farmland": "Farmland",
-  "sand": "Sand",
-  "soulsand": "Soul sand",
-  "dirtGrass": "Dirt/grass",
-  "mycelium": "Mycelium",
-  "end": "End stone",
-  "stone": "Stone",
-  "netherrack": "Netherrack",
-  "brick": "Bricks",
-  "thaumLogs": "Thaum logs",
-  "graveyard": "Graveyard dirt",
-  "slimy": "Slime grass",
-  "gravel": "Gravel",
-  "oilSands": "Oil sands"
- },
+ "soilBase": [
+  "brick",
+  "dirtGrass",
+  "end",
+  "farmland",
+  "gravel",
+  "graveyard",
+  "mycelium",
+  "netherrack",
+  "oilSands",
+  "sand",
+  "slimy",
+  "soulsand",
+  "stone",
+  "thaumLogs"
+ ],
  "soilExpand": {
   "brick": [
    "brick"

@@ -7,6 +7,7 @@ as {{key}}; nothing about translation survives into the built page.
 Usage:  python tools/build.py
 """
 import base64
+import copy
 import glob
 import json
 import os
@@ -22,6 +23,10 @@ KEY = re.compile(r'\{\{([A-Za-z0-9_.]+)\}\}')
 INTERP = re.compile(r'\$\{[^{}]*\}')
 # keys build.py uses itself instead of substituting them into the template
 HEAD_KEYS = {'lang.name', 'lang.code', 'meta.title', 'meta.description', 'nav.lang'}
+# soil labels go into the data blob rather than the markup, so they never
+# appear as {{...}} - they are this page's wording, not the mod's, which is
+# why they live in the catalogue and not in data/crops.json
+DATA_PREFIXES = ('soil.gloss.', 'soil.short.')
 
 
 def order(codes):
@@ -104,7 +109,8 @@ def check(code, cat, base, used, warn):
         for k in sorted(used - set(base)):
             err.append(f'{k} is used in the template but not in en.json')
         for k in sorted(set(base) - used - HEAD_KEYS):
-            err.append(f'{k} is in en.json but nothing uses it')
+            if not k.startswith(DATA_PREFIXES):
+                err.append(f'{k} is in en.json but nothing uses it')
     else:
         for k in sorted(set(cat) - set(base)):
             err.append(f'{k} is not a key in en.json')
@@ -150,6 +156,38 @@ for c in data['crops'].values():
 for m in data['mutations']:
     m.pop('req', None)
 
+
+def localise(code, cat, base):
+    """One data blob per language.
+
+    Crop, pool, sub-soil and biome-tag names are the mod's own strings, so a
+    translation of them is read out of the pack by langs.py and lands in
+    data/lang.<code>.json. Anything that file leaves out keeps the English the
+    jar gave us, which is also what the game shows for that language.
+
+    The soil labels are the other way round: they are this page's wording, so
+    they come from the catalogue and are translated like any other string.
+    """
+    d = copy.deepcopy(data)
+    path = os.path.join(ROOT, 'data', f'lang.{code}.json')
+    if os.path.exists(path):
+        with open(path, encoding='utf-8') as f:
+            tr = json.load(f)
+        for cid, name in tr.get('crops', {}).items():
+            if cid in d['crops']:
+                d['crops'][cid]['name'] = name
+        for field in ('poolNames', 'subsoilDesc', 'biomeNames'):
+            d[field].update(tr.get(field, {}))
+
+    d['soilGloss'] = {k: cat.get(f'soil.gloss.{k}', base[f'soil.gloss.{k}'])
+                      for k in d['soilBase']}
+    d['soilShort'] = {k: cat.get(f'soil.short.{k}', base[f'soil.short.{k}'])
+                      for k in d['soilBase']}
+    del d['soilBase']
+    for c in d['crops'].values():
+        c.pop('nameKey', None)
+    return d
+
 with open(os.path.join(HERE, 'page.src.html'), encoding='utf-8') as f:
     src = f.read()
 
@@ -165,7 +203,11 @@ for code, cat in cats.items():
 for w in warn:
     print('warning: ' + w)
 
-blob = json.dumps(data, ensure_ascii=False, separators=(',', ':'))
+# every base soil needs both labels, or the page would print a bare key
+for k in data['soilBase']:
+    for kind in ('gloss', 'short'):
+        if f'soil.{kind}.{k}' not in base:
+            raise SystemExit(f'en.json has no soil.{kind}.{k}, which data/crops.json asks for')
 
 # favicon goes in as a data URI so each page stays a single self-contained file
 with open(os.path.join(HERE, 'favicon.svg'), encoding='utf-8') as f:
@@ -173,6 +215,7 @@ with open(os.path.join(HERE, 'favicon.svg'), encoding='utf-8') as f:
 
 for code in order(cats):
     cat = cats[code]
+    blob = json.dumps(localise(code, cat, base), ensure_ascii=False, separators=(',', ':'))
     # an untranslated string falls back to English rather than showing its key
     text = KEY.sub(lambda m: cat.get(m.group(1), base[m.group(1)]), src)
     nav = langnav(code, cats)
