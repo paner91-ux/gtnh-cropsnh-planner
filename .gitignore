@@ -7,3 +7,6 @@ __pycache__/
 
 # local notes for Claude Code, never published
 CLAUDE.local.md
+
+# snapshots and console logs dropped here by browser automation
+.playwright-cli/

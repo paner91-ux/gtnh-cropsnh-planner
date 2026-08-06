@@ -71,8 +71,22 @@ tier came from the fallback instead of the bytecode; treat that warning as work 
 
 ## Checking a change
 
-There is no test runner. The page is verified by pulling the `<script>` out of `index.html` and
-running it in Node against a stubbed DOM, then calling the render functions and checking the output.
-Worth doing for anything touching odds, routing or the drawer.
+Two scripts in `tools/`, both of which pull the `<script>` out of a built page and run it in Node
+against a stubbed DOM. Neither needs anything installed.
+
+```
+node tools/checkpage.js index.html pl/index.html ja/index.html zh/index.html
+node tools/dumpviews.js index.html before.txt      # rebuild, then dump again and diff
+```
+
+`checkpage.js` asserts and exits non-zero: every view renders, no `{{key}}` survives, the odds in
+any pair sum to 0.5, and the drawer's shortcut into the roulette still works. Run it on every
+language, not just English - the markup is shared but a catalogue can break a page on its own.
+`dumpviews.js` writes out what each view says, so two runs can be diffed; that is the honest test
+for a text change, because a diff of `page.src.html` also shows rewordings a reader never notices.
+
+Worth doing for anything touching odds, routing or the drawer. When adding a check, break the page
+on purpose first and confirm it fails - the stub answers `getElementById` for any id, so a handler
+bound to a button that is no longer in the markup can look alive when it is not.
 
 Local notes that are not in git may exist in `CLAUDE.local.md` - read it if it is there.

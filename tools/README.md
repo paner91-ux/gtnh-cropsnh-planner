@@ -41,6 +41,21 @@ set would leave the page mixing two languages, and the prose in `i18n` names cro
 The build is reproducible: the same jar always produces a byte-identical `index.html`, so a diff on
 that file means the data genuinely changed.
 
+## Checking a page
+
+```
+node tools/checkpage.js index.html pl/index.html ja/index.html zh/index.html
+node tools/dumpviews.js index.html before.txt
+```
+
+Both take a **built** page, not `page.src.html`, and need only Node. `checkpage.js` exits non-zero
+on the first failure, so it can gate a commit; `dumpviews.js` writes out what every view says, for
+diffing one build against the next.
+
+They cover what `build.py` cannot: the build checks that every key resolves and that none is
+orphaned, but it never runs the page, so a handler wired to a button that no longer exists passes
+the build and breaks in the browser.
+
 ## Changing the favicon
 
 Edit `favicon.svg` and run `build.py`. It is base64-encoded into the page head as a data URI, so
