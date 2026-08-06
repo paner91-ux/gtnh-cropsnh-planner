@@ -3496,7 +3496,7 @@
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropRubyne",
    "tier": 4,
    "soil": [
-    "farmland"
+    "stone"
    ],
    "subsoil": [
     "ruby"

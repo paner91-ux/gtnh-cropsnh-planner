@@ -37,6 +37,13 @@ def parse(paths):
                     continue
                 if cur is None:
                     continue
+                # javap writes the class initialiser as `static {};`, which has no
+                # argument list and so never matches RE_METHOD. Without this its
+                # bytecode would be appended to whichever method came before it.
+                if line.strip() == 'static {};':
+                    cur_sig = '<clinit>()'
+                    cur.methods[cur_sig] = []
+                    continue
                 m = RE_METHOD.match(line)
                 if m and not line.strip().startswith(('Code:', '//')):
                     cur_sig = f'{m.group(1)}({m.group(2)})'

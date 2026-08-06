@@ -89,6 +89,25 @@ def resolve_int(clsname, method, default=None):
     return default
 
 
+def static_soil(k, field):
+    """Soil lists assigned to `field` in the class initialiser.
+
+    Rubyne keeps its list in a static field of its own and getSoilTypes() only
+    hands that field back, so the constant is nowhere near the getter.
+    """
+    out = []
+    pending = None
+    for line in k.code('<clinit>'):
+        m = re.search(r'// Field [\w/$]*CropsNHSoilTypes\.([\w$]+):', line)
+        if m:
+            pending = m.group(1)
+            continue
+        if pending and re.search(r'putstatic\s+#\d+\s+// Field ' + re.escape(field) + ':', line):
+            out.append(pending)
+            pending = None
+    return out
+
+
 def resolve_soil(clsname):
     for k in chain(clsname):
         code = k.code('getSoilTypes')
@@ -96,6 +115,13 @@ def resolve_soil(clsname):
             f = jvparse.fieldrefs(code, 'CropsNHSoilTypes')
             if f:
                 return f
+            own = re.search(r'// Field ([\w$]+):L[\w/$]*ISoilList;', '\n'.join(code))
+            if own:
+                f = static_soil(k, own.group(1))
+                if f:
+                    print(f'note: {clsname.split(".")[-1]} reads its soil from a '
+                          f'static field, resolved to {f}')
+                    return f
     return ['farmland']
 
 
