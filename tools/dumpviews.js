@@ -94,7 +94,8 @@ const dump = (label, text) => {
   out.push(String(text)
     .replace(/<[^>]+>/g, " ")
     .replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">")
-    .replace(/&#9670;/g, "*").replace(/&#8203;/g, "").replace(/&nbsp;/g, " ")
+    .replace(/&#9670;/g, "*").replace(/&#9679;/g, "o").replace(/&#10005;/g, "x")
+    .replace(/&#8203;/g, "").replace(/&nbsp;/g, " ")
     .replace(/[ \t]+/g, " ").replace(/\n{3,}/g, "\n\n").trim());
 };
 
@@ -125,6 +126,15 @@ dump(`drawer: crop ${someCrop}`, drawer.innerHTML);
 
 const someBiome = Object.keys(api.BIOMES).sort()[0];
 if (someBiome) { api.showBiome(someBiome); dump(`drawer: biome ${someBiome}`, drawer.innerHTML); }
+
+/* The rail is not one of the views, so nothing above would show a change to it.
+   Its legend sits in the static markup rather than in a node, and only the rows
+   carrying a marker are dumped - the other 150-odd rows are crop names, which a
+   diff of data/crops.json already covers far better than this would.        */
+dump("rail: legend", (html.match(/<p class="raillegend">[\s\S]*?<\/p>/g) || []).join("\n"));
+const marked = (byId("seedlist").innerHTML.match(/<div class="seed">[\s\S]*?<\/div>/g) || [])
+  .filter(row => /class="mark (mach|none)"/.test(row));
+dump(`rail: rows marked as no stick route (${marked.length})`, marked.join("\n"));
 
 fs.writeFileSync(outPath, out.join("\n") + "\n", "utf8");
 console.log(`${pagePath} -> ${outPath}  (${out.join("").length} chars)`);

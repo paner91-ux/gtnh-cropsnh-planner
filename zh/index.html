@@ -241,6 +241,9 @@ p, li { text-wrap: pretty; }
 /* the under-block marker, wherever it appears - rail rows, legend, tips */
 .mark { font-family: var(--face-data); font-size: 10px; color: var(--ore); }
 .seed .mark { flex: none; }
+/* machine-only keeps the colour it already has on a recipe card's chip */
+.mark.mach { color: var(--steel); }
+.mark.none { font-size: 9px; }
 
 .seed-info {
   flex: none; width: 16px; height: 16px; padding: 0; cursor: pointer;
@@ -696,6 +699,8 @@ footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2p
       <input class="field" id="search" type="search" placeholder="搜索作物…" autocomplete="off">
       <div class="seedlist" id="seedlist"></div>
       <p class="raillegend"><span class="mark">&#9670;</span> 需要土下有特定方块</p>
+      <p class="raillegend"><span class="mark mach">&#9679;</span> 只能从作物培育机出，作物架上永远不会出</p>
+      <p class="raillegend"><span class="mark none">&#10005;</span> 完全没有途径，连机器也不行</p>
       <p class="raillegend"><span class="legend-i">i</span> 打开详情面板</p>
 
       <details class="railpanel">
@@ -774,6 +779,26 @@ const matchCount = (crop, biome) =>
 
 const byName = Object.values(C).sort((a, b) => a.tier - b.tier || a.name.localeCompare(b.name));
 const allSorted = Object.values(C).sort((a, b) => a.name.localeCompare(b.name));
+
+/* Two rail markers that say a crop stick will never hand you this crop. Worked
+   out once here rather than per keystroke, since the rail re-renders on every
+   letter typed into the search box.
+     BREEDER_ONLY  every recipe is machineOnly and no pool holds it, so the Crop
+                   Breeder is the only route. As of 2.0.101 those two conditions
+                   pick out the same 19 crops; neither happens without the other.
+     NO_ROUTE      no recipe at all and in no pool - not even the machine helps. */
+const BREEDER_ONLY = new Set();
+const NO_ROUTE = new Set();
+{
+  const outs = new Map();
+  for (const m of MUT) (outs.get(m.out) || outs.set(m.out, []).get(m.out)).push(m);
+  for (const c of Object.values(C)) {
+    const rs = outs.get(c.id) || [];
+    const pooled = (c.pools || []).length > 0;
+    if (!rs.length && !pooled) NO_ROUTE.add(c.id);
+    else if (rs.length && !pooled && rs.every(m => m.machineOnly)) BREEDER_ONLY.add(c.id);
+  }
+}
 
 const LS = "cropsnh-owned-v1";
 
@@ -1109,12 +1134,16 @@ function renderRail() {
   for (const [tier, cs] of [...groups.entries()].sort((x, y) => x[0] - y[0])) {
     html += `<div class="tiergroup"><div class="tierhead">等级 ${tier}</div>`;
     for (const c of cs) {
-      const mark = c.subsoil.length ? "◆" : "";
+      const mark = c.subsoil.length ? `<span class="mark" title="需要特定的下层方块，具体是哪一种见作物详情">&#9670;</span>` : "";
+      const route = BREEDER_ONLY.has(c.id)
+        ? `<span class="mark mach" title="这个作物的每一个配方都只在作物培育机里跑，它也不属于任何突变池，作物架永远产不出它">&#9679;</span>`
+        : NO_ROUTE.has(c.id)
+          ? `<span class="mark none" title="既没有配方，也不在任何突变池里。这个作物在作物架上和机器里都培育不出来">&#10005;</span>` : "";
       html += `<div class="seed">
         <button class="seed-tick" type="button" role="checkbox" data-id="${c.id}" aria-pressed="${owned.has(c.id)}">
           <span class="box"></span><span class="nm">${esc(c.name)}</span>
         </button>
-        <span class="mark" title="需要特定的下层方块，具体是哪一种见作物详情">${mark}</span>
+        ${route}${mark}
         <button class="seed-info" type="button" data-crop="${c.id}"
           title="${esc(c.name)} 的详情" aria-label="${esc(c.name)} 的详情">i</button>
       </div>`;

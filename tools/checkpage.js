@@ -156,6 +156,24 @@ for (const pagePath of pages) {
     ok(!/crop=/.test(h), "the hash still points at a drawer that was closed");
   }
 
+  /* The two rail markers make a claim the rail has no other way to show: that
+     a crop stick will never hand you this crop. The expected counts are worked
+     out from the data here rather than written down, so the check survives a
+     mod update but still fails if the template stops emitting a marker - and
+     the stub would otherwise hide that, since it answers for any id.        */
+  api.render();
+  const rail = byId("seedlist").innerHTML;
+  const outs = new Set(api.MUT.map(m => m.out));
+  const wantBreeder = Object.values(api.C).filter(c => !c.pools.length && outs.has(c.id)
+    && api.MUT.filter(m => m.out === c.id).every(m => m.machineOnly)).length;
+  const wantNone = Object.values(api.C).filter(c => !c.pools.length && !outs.has(c.id)).length;
+  const seen = cls => (rail.match(new RegExp(`class="mark ${cls}"`, "g")) || []).length;
+  ok(wantBreeder > 0 && wantNone > 0, "no crop matches either route marker, so this check proves nothing");
+  ok(seen("mach") === wantBreeder,
+     `rail draws ${seen("mach")} Crop Breeder marks, the data says ${wantBreeder}`);
+  ok(seen("none") === wantNone,
+     `rail draws ${seen("none")} no-route marks, the data says ${wantNone}`);
+
   if (bad.length) {
     failed++;
     console.log(`FAIL  ${label}`);
