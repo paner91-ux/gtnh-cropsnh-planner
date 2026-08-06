@@ -1105,7 +1105,7 @@ function renderRail() {
 
   let html = "";
   for (const [tier, cs] of [...groups.entries()].sort((x, y) => x[0] - y[0])) {
-    html += `<div class="tiergroup"><div class="tierhead">Poziom ${tier}</div>`;
+    html += `<div class="tiergroup"><div class="tierhead">Tier ${tier}</div>`;
     for (const c of cs) {
       const mark = c.subsoil.length ? "◆" : "";
       html += `<div class="seed">
@@ -1360,8 +1360,8 @@ const TIPS = [
     items: [
     [`<b>Pełny zbiornik wody to +10 do Nutrient Score, a pełny nawóz tyle samo.</b> Podstawa wynosi 5, a otwarte niebo dokłada 2. To dwa największe składniki, na które masz wpływ.`,
      `Wynik składa się tak: podstawa 5, do tego do 10 za wodę, do 10 za nawóz, 2 za dostęp do nieba i to, co większe z premii za wilgotność (do 14) albo za lubiany biom (do 28), przy suficie 55. Woda i nawóz liczą się w dziesiątych częściach zaokrąglanych <b>w górę</b>, więc pojedyncza zmagazynowana jednostka daje już +1, a 100 daje pełne 10.`],
-    [`<b>Roślina z wyższego poziomu po prostu odmówi wzrostu na suchym patyku</b> - chyba że wyciąga ją biom. Potrzebny wynik to podwojony poziom rośliny, a podstawa z otwartym niebem dochodzi tylko do 7, co pokrywa poziom 3 i nic wyżej. Mokry albo lubiany biom dokłada wynik niezależnie od twoich zbiorników, więc ta sama roślina, która stoi w miejscu na pustyni, w dżungli rośnie bez opieki.`,
-     `Tempo wzrostu porównuje <em>wynik × 5</em> z <em>poziom × 10</em>, więc wymaganiem jest wynik równy podwojonemu poziomowi. Każdy punkt tej przeskalowanej różnicy dokłada 1% tempa albo kosztuje 4% poniżej progu, aż do podłogi na zerze - a że jeden punkt Nutrient Score to pięć takich punktów, punkt wyniku jest wart +5% powyżej progu i -20% poniżej. Mierzone wobec tej samej rośliny z oboma zbiornikami pełnymi, w biomie bez premii za wilgotność ani za lubiany biom: roślina poziomu 3 na suchym patyku idzie mniej więcej o połowę wolniej, poziomu 5 mniej więcej pięć razy wolniej, a poziomu 8 nie rośnie wcale.`],
+    [`<b>Roślina z wyższego tieru po prostu odmówi wzrostu na suchym patyku</b> - chyba że wyciąga ją biom. Potrzebny wynik to podwojony tier rośliny, a podstawa z otwartym niebem dochodzi tylko do 7, co pokrywa tier 3 i nic wyżej. Mokry albo lubiany biom dokłada wynik niezależnie od twoich zbiorników, więc ta sama roślina, która stoi w miejscu na pustyni, w dżungli rośnie bez opieki.`,
+     `Tempo wzrostu porównuje <em>wynik × 5</em> z <em>tier × 10</em>, więc wymaganiem jest wynik równy podwojonemu tierowi. Każdy punkt tej przeskalowanej różnicy dokłada 1% tempa albo kosztuje 4% poniżej progu, aż do podłogi na zerze - a że jeden punkt Nutrient Score to pięć takich punktów, punkt wyniku jest wart +5% powyżej progu i -20% poniżej. Mierzone wobec tej samej rośliny z oboma zbiornikami pełnymi, w biomie bez premii za wilgotność ani za lubiany biom: roślina tier 3 na suchym patyku idzie mniej więcej o połowę wolniej, tier 5 mniej więcej pięć razy wolniej, a tier 8 nie rośnie wcale.`],
     [`<b>Trzymaj oba stale uzupełnione</b> - każdy tik wzrostu zjada po punkcie z każdego, więc drenują się bez przerwy. Na zewnątrz deszcz uzupełnia wodę za darmo. Na początku zdecydowanie najwygodniejszym narzędziem jest <b>Watering Can z Extra Utilities</b>: przytrzymaj prawy przycisk nad poletkiem, a utrzyma całość mokrą.`,
      `Tik wzrostu zmniejsza zapas wody i nawozu o jeden każdy. Deszcz dolewa wody po 11 punktów naraz, pomijany gdy zapas przekracza 100 i ograniczony do 101 - ten dodatkowy punkt pokrywa własne -1 z tego samego tiku, więc ustala się dokładnie na 100. (To, jakiego narzędzia użyjesz, jest poradą praktyczną. To, jak pełne to trzymasz, już nie: wynik skaluje się z zapasem, więc prawie pusty zbiornik to nie to samo co pełny.)`],
     [`<b>Zanim zaczniesz produkować nawóz sam, kupuj go w automacie.</b> To najtańsze wczesne źródło, a hodowla zjada go bez przerwy. Podnosi tempo wzrostu i jednocześnie chroni twoje staty.`,
@@ -1407,8 +1407,8 @@ const TIPS = [
   { h: `Chodzenie po własnej hodowli`,
     lead: `Poruszanie się po poletku potrafi połamać patyki i zniszczyć stojące na nich rośliny.`,
     items: [
-    [`<b>Nie biegaj sprintem po poletku.</b> Sprint potrafi złamać patyk i zniszczyć rosnącą na nim roślinę, a im wyższy poziom rośliny, tym częściej to się zdarza. Roślina o odporności 31 jest niewrażliwa, tak samo jak wszystko stojące na przekopanych Fertilized Dirt, Enchanted Earth albo Clean Dirt, które są zarejestrowane jako odporne na zadeptanie.`,
-     `Sprint najpierw losuje mniej więcej <em>1 na 100 × 0,95^poziom</em> - około 1 na 95 dla rośliny poziomu 1 i 1 na 44 dla poziomu 16. Dopiero gdy to trafi, losuje ponownie przeciwko odporności i łamie patyk, gdy <em>random(0…30)</em> ją przebije. Więc ta pierwsza liczba to sufit, a nie faktyczne tempo: roślina poziomu 1 przy odporności 20 łamie się realnie mniej więcej raz na 295 zderzeń.`],
+    [`<b>Nie biegaj sprintem po poletku.</b> Sprint potrafi złamać patyk i zniszczyć rosnącą na nim roślinę, a im wyższy tier rośliny, tym częściej to się zdarza. Roślina o odporności 31 jest niewrażliwa, tak samo jak wszystko stojące na przekopanych Fertilized Dirt, Enchanted Earth albo Clean Dirt, które są zarejestrowane jako odporne na zadeptanie.`,
+     `Sprint najpierw losuje mniej więcej <em>1 na 100 × 0,95^tier</em> - około 1 na 95 dla rośliny tier 1 i 1 na 44 dla tier 16. Dopiero gdy to trafi, losuje ponownie przeciwko odporności i łamie patyk, gdy <em>random(0…30)</em> ją przebije. Więc ta pierwsza liczba to sufit, a nie faktyczne tempo: roślina tier 1 przy odporności 20 łamie się realnie mniej więcej raz na 295 zderzeń.`],
     [`<b>Nie spadaj na rośliny z wysokości.</b> Każdy upadek powyżej trzech czwartych bloku może złamać patyk, a od 1,75 bloku łamie zawsze.`,
      `Lądowanie uruchamia sprawdzenie, gdy dystans upadku przekroczy 0,75. Szansa na złamanie to dystans upadku minus 0,75, więc przy 1,75 bloku rzut nie może już zawieść.`],
     [`<b>Przy roślinach, które ranią, przechodź w kucki.</b> Ore berries, Bamboo, Thornvine i Cactus zadają pół serca przy dotknięciu. Skradanie pomija obrażenia całkowicie.`,
@@ -1801,7 +1801,7 @@ function renderCropDrawer(id) {
     <div class="dsec"><h3>Warunki wzrostu</h3>
       <p class="flav" style="font-style:normal;margin-bottom:8px">Patyk na wierzchu, <b>blok wierzchni</b> bezpośrednio pod nim, <b>blok pod spodem</b> o jeden głębiej.</p>
       <dl class="dl">
-        <dt>Poziom</dt><dd>${c.tier}</dd>
+        <dt>Tier</dt><dd>${c.tier}</dd>
         <dt>Blok wierzchni</dt><dd>${topParts(c).length > 1
           ? `dowolny z:<br>` + topParts(c).map(s => `· ${esc(DATA.soilGloss[s] || s)}`).join("<br>")
           : esc(topBlock(c))}</dd>
