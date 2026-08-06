@@ -8,6 +8,7 @@ which biome to build the farm in.
 
 **Live version:**
 [English](https://paner91-ux.github.io/gtnh-cropsnh-planner/)
+&nbsp;·&nbsp; [日本語](https://paner91-ux.github.io/gtnh-cropsnh-planner/ja/)
 &nbsp;·&nbsp; [Polski](https://paner91-ux.github.io/gtnh-cropsnh-planner/pl/)
 &nbsp;·&nbsp; [简体中文](https://paner91-ux.github.io/gtnh-cropsnh-planner/zh/)
 
@@ -70,18 +71,20 @@ notes about this page have none.
 Every crop links to a panel with its tier, growth time, mutation pools, the recipes that produce
 it, and everything it is a parent for.
 
-The page is in English, Polish and Simplified Chinese. The address bar follows what you are looking
-at, so a link opens on the same tab, the same pair and the same open panel, and switching language
-keeps your place.
+The page is in English, Japanese, Polish and Simplified Chinese. The address bar follows what you
+are looking at, so a link opens on the same tab, the same pair and the same open panel, and
+switching language keeps your place.
 
 Crop names follow the game rather than the page. GTNH translates through its own config directory
-rather than through the mod jars, so the Chinese version prints the crop, pool, sub-soil and biome
-tag names a Chinese client shows in NEI, all 179 of them. Polish keeps English names because the
-pack has no Polish ones for CropsNH, which is what a Polish client shows too.
+rather than through the mod jars, so the Chinese and Japanese versions print the names their
+clients show in NEI, all 179 of them. Polish keeps English names because the pack has no Polish
+ones for CropsNH, which is what a Polish client shows too.
 
-Biome names are the exception in every language. In Minecraft 1.7.10 a biome name is a plain string
-in code with no translation key anywhere, so the game shows "Alps" and "Bayou" whatever language it
-is set to, and so does this.
+Anything the pack leaves untranslated stays English here for the same reason, so the page keeps
+matching the game rather than getting ahead of it. That covers the biome tags on the Japanese
+version, and biome names everywhere: in Minecraft 1.7.10 a biome name is a plain string in code
+with no translation key at all, so the game shows "Alps" and "Bayou" whatever language it is set
+to, and so does this.
 
 ---
 

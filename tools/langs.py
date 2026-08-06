@@ -25,7 +25,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, os.pardir)
 
 # our page code -> the code Minecraft files use
-MC_CODE = {'pl': 'pl_PL', 'zh': 'zh_CN'}
+MC_CODE = {'ja': 'ja_JP', 'pl': 'pl_PL', 'zh': 'zh_CN'}
 
 # share of crop names a language has to reach before the page uses any of
 # them at all - see the note where it is applied
