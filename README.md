@@ -14,6 +14,9 @@ which biome to build the farm in.
 
 Same page in every language, and the picker at the top right keeps your place when you switch.
 
+There is no Russian version and there will not be one. If you would like to help Ukraine instead,
+[United24](https://u24.gov.ua/) is the Ukrainian government's fundraising platform.
+
 No install, no account, nothing sent anywhere. Your ticked seeds are stored in your own browser.
 
 Every feature is explained on the page itself, in
