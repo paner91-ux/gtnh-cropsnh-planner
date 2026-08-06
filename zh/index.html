@@ -1196,7 +1196,7 @@ function pairStrips() {
 function renderPool() {
   const opts = sel => allSorted.map(c =>
     `<option value="${c.id}"${sel === c.id ? " selected" : ""}>${esc(c.name)}${owned.has(c.id) ? " ✓" : ""}</option>`).join("");
-  let html = `<p class="viewnote">两株成熟作物中间的双层作物架能出什么。数字是<b>每次成功的杂交尝试</b>的概率，而大约每三个生长刻才触发一次。允许同一种作物用两次，而且那是最常见的摆法。</p>
+  let html = `<p class="viewnote">两株<b>至少长到 80%</b> 的作物中间，双层作物架能出什么。数字是<b>每次成功的杂交尝试</b>的概率，而大约每三个生长刻才触发一次。允许同一种作物用两次，而且那是最常见的摆法。</p>
     <div class="pairpick">
       <label>亲本 A<select class="field" id="selA"><option value="">-</option>${opts(pairA)}</select></label>
       <label>亲本 B<select class="field" id="selB"><option value="">-</option>${opts(pairB)}</select></label>
@@ -1319,6 +1319,8 @@ const TIPS = [
      `<em>attemptBreeding()</em> 一开头就对 <em>Breeding Chance</em> 配置项（默认 3）掷一次，三次里有两次直接返回。`],
     [`每次尝试对半分。一半的情况下作物架<b>复制邻居</b>，另一半<b>发生突变</b>。反复拿到亲本的复制品是预期结果，不是运气差。`,
      `<em>getBreedingResult()</em> 以一次五五开的抽取开场。一边走克隆路径，只保留长得够大、能杂交的邻居，随机挑一个并重新种下它的作物。另一边走突变路径。如果没有邻居长得够大，克隆路径会转而落到突变路径上。`],
+    [`<b>亲本不必完全长成。</b>植株<b>长到 80%</b> 就已经算数了，两条路径都一样。生长条的最后五分之一对杂交毫无影响，只决定你收获时拿到什么。`,
+     `<em>attemptBreeding()</em> 会把所有邻居都收进来，只剔除空作物架和杂草，它根本不调用 <em>getMatureNeighbours()</em>。生长的检查在后面，而且两条路径各查各的：克隆路径留下通过 <em>canCross()</em> 的邻居，突变路径留下通过 <em>canBreed()</em> 的。两者都拿 <em>getGrowthPercent()</em> 去比对从作物身上读到的阈值，而 <em>CropCard</em> 对这两个阈值都返回 <em>0.8f</em>。阈值为负的作物会被直接剔除，元始浆果就是因此永远无法在作物架上当亲本。`],
     [`如果结果种不到那个位置上，<b>这次判定就被丢掉</b>。没有提示，也没有半长的植株。作物架空着，过一会儿再试，而同一刻仍然会照常掷一次长杂草的小概率。`,
      `<em>attemptBreeding()</em> 只有在结果同时通过 <em>isValidSoilForCrop()</em> 和 <em>wouldCropBeAbleToGrow()</em> 时才种下去。否则它返回 false，和杂交判定没中给出的信号一样，也正是因为这样，同一刻还能跑长杂草的判定。`],
   ]},

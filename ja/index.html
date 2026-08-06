@@ -1196,7 +1196,7 @@ function pairStrips() {
 function renderPool() {
   const opts = sel => allSorted.map(c =>
     `<option value="${c.id}"${sel === c.id ? " selected" : ""}>${esc(c.name)}${owned.has(c.id) ? " ✓" : ""}</option>`).join("");
-  let html = `<p class="viewnote">成熟した作物二つに挟まれた二重支柱から何が出るか。数値は<b>交配の試行が一回成功したときの</b>確率で、試行は成長 tick 三回につきおよそ一回起きます。同じ作物を二つ並べてもよく、それが最も一般的な形です。</p>
+  let html = `<p class="viewnote"><b>八割以上まで育った</b>作物二つに挟まれた二重支柱から何が出るか。数値は<b>交配の試行が一回成功したときの</b>確率で、試行は成長 tick 三回につきおよそ一回起きます。同じ作物を二つ並べてもよく、それが最も一般的な形です。</p>
     <div class="pairpick">
       <label>親 A<select class="field" id="selA"><option value="">-</option>${opts(pairA)}</select></label>
       <label>親 B<select class="field" id="selB"><option value="">-</option>${opts(pairB)}</select></label>
@@ -1319,6 +1319,8 @@ const TIPS = [
      `<em>attemptBreeding()</em> は冒頭で <em>Breeding Chance</em> 設定（既定値 3）に対する判定を行い、三回のうち二回はそこで戻ります。`],
     [`各試行は半々に分かれます。半分は支柱が<b>隣をコピーし</b>、もう半分は<b>変異します</b>。親のコピーばかり出るのは想定どおりで、運が悪いわけではありません。`,
      `<em>getBreedingResult()</em> は五分五分の抽選から始まります。片方はクローンの経路へ進み、交配できるまで育った隣だけを残して無作為に一つ選び、その作物を植え直します。もう片方は変異の経路です。十分に育った隣が一つもない場合、クローンの経路は変異の経路へ落ちます。`],
+    [`<b>親は完全に育っている必要はありません。</b><b>成長度が八割</b>に達した株はもう親として数えられ、これはどちらの経路でも同じです。成長バーの最後の五分の一は交配には何も足さず、収穫で何が取れるかを決めるだけです。`,
+     `<em>attemptBreeding()</em> は隣をすべて集め、空の支柱と雑草だけを取り除きます。<em>getMatureNeighbours()</em> は呼びません。成長の判定はその後、経路ごとに別々に行われます。クローンの経路は <em>canCross()</em> を通った隣を、変異の経路は <em>canBreed()</em> を通った隣を残します。どちらも <em>getGrowthPercent()</em> を作物から読んだしきい値と比べ、<em>CropCard</em> はそのどちらにも <em>0.8f</em> を返します。しきい値が負の作物はその場で外れるため、始原の果実は支柱では決して親になれません。`],
     [`結果をその場所に植えられない場合、<b>その判定は捨てられます</b>。表示も出なければ、育ちかけの株も残りません。支柱は空のままで後からまた試し、その同じ tick でも雑草が生える小さな確率は通常どおり振られます。`,
      `<em>attemptBreeding()</em> は結果が <em>isValidSoilForCrop()</em> と <em>wouldCropBeAbleToGrow()</em> の両方を通ったときだけ植えます。通らなければ false を返し、これは交配の判定を外したときと同じ合図です。だからこそ同じ tick で雑草の判定まで進みます。`],
   ]},

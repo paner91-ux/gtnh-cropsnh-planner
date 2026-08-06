@@ -1196,7 +1196,7 @@ function pairStrips() {
 function renderPool() {
   const opts = sel => allSorted.map(c =>
     `<option value="${c.id}"${sel === c.id ? " selected" : ""}>${esc(c.name)}${owned.has(c.id) ? " ✓" : ""}</option>`).join("");
-  let html = `<p class="viewnote">Co może wyjść z podwójnego patyka między dwiema dorosłymi roślinami. Liczby to szansa <b>na jedną udaną próbę krzyżowania</b>, a taka próba wypada mniej więcej co trzeci tik wzrostu. Ta sama roślina po obu stronach jest dozwolona i to najczęstszy układ.</p>
+  let html = `<p class="viewnote">Co może wyjść z podwójnego patyka między dwiema roślinami wyrośniętymi <b>co najmniej w 80%</b>. Liczby to szansa <b>na jedną udaną próbę krzyżowania</b>, a taka próba wypada mniej więcej co trzeci tik wzrostu. Ta sama roślina po obu stronach jest dozwolona i to najczęstszy układ.</p>
     <div class="pairpick">
       <label>Rodzic A<select class="field" id="selA"><option value="">-</option>${opts(pairA)}</select></label>
       <label>Rodzic B<select class="field" id="selB"><option value="">-</option>${opts(pairB)}</select></label>
@@ -1319,6 +1319,8 @@ const TIPS = [
      `<em>attemptBreeding()</em> zaczyna od rzutu przeciwko konfigowi <em>Breeding Chance</em> (domyślnie 3) i przy dwóch wynikach na trzy wychodzi natychmiast.`],
     [`Każda próba dzieli się po połowie. W połowie przypadków patyk <b>kopiuje sąsiada</b>, w połowie <b>mutuje</b>. Ciągłe kopie rodziców to spodziewany wynik, a nie pech.`,
      `<em>getBreedingResult()</em> zaczyna od losowania 50/50. Jeden wynik prowadzi ścieżką klonowania, która zostawia tylko sąsiadów wyrośniętych na tyle, by dało się ich skrzyżować, losuje jednego z nich i sadzi jego roślinę. Drugi prowadzi ścieżką mutacji. Jeżeli żaden sąsiad nie jest dość wyrośnięty, ścieżka klonowania przechodzi na ścieżkę mutacji.`],
+    [`<b>Rodzic nie musi być w pełni wyrośnięty.</b> Roślina liczy się już przy <b>80% wzrostu</b>, na obu ścieżkach. Ostatnia piąta część paska nie zmienia w krzyżowaniu nic - decyduje tylko o tym, co dostaniesz przy zbiorze.`,
+     `<em>attemptBreeding()</em> zbiera wszystkich sąsiadów i odrzuca tylko puste patyki oraz chwasty - nie sięga po <em>getMatureNeighbours()</em>. Sprawdzenie wzrostu przychodzi później i osobno dla każdej ścieżki: klonowanie zostawia sąsiadów, którzy przechodzą <em>canCross()</em>, mutacja tych, którzy przechodzą <em>canBreed()</em>. Oba porównują <em>getGrowthPercent()</em> z progiem odczytanym z rośliny, a <em>CropCard</em> zwraca dla obu <em>0.8f</em>. Roślina z progiem ujemnym odpada od razu i dlatego Primordial Berry nigdy nie będzie rodzicem na patyku.`],
     [`Jeżeli wyniku nie da się zasadzić w tym miejscu, <b>losowanie przepada</b>. Bez komunikatu, bez na wpół wyrośniętej rośliny. Patyk zostaje pusty i próbuje później, a ten sam tik nadal losuje swoją zwykłą małą szansę na chwast.`,
      `<em>attemptBreeding()</em> sadzi tylko wtedy, gdy dla wyniku przechodzą jednocześnie <em>isValidSoilForCrop()</em> i <em>wouldCropBeAbleToGrow()</em>. Inaczej zwraca false - ten sam sygnał co nieudany rzut na krzyżowanie - i właśnie to pozwala losowaniu chwasta odpalić w tym samym tiku.`],
   ]},
