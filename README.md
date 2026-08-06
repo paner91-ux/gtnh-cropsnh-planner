@@ -6,8 +6,12 @@ Tick off the seeds you own and it tells you what you can breed next, the exact o
 outcome, which two blocks have to be under the crop stick for the result to be planted at all, and
 which biome to build the farm in.
 
-**Live version:** https://paner91-ux.github.io/gtnh-cropsnh-planner/
-&nbsp;·&nbsp; **Po polsku:** https://paner91-ux.github.io/gtnh-cropsnh-planner/pl/
+**Open it:**
+[English](https://paner91-ux.github.io/gtnh-cropsnh-planner/)
+&nbsp;·&nbsp; [Polski](https://paner91-ux.github.io/gtnh-cropsnh-planner/pl/)
+&nbsp;·&nbsp; [简体中文](https://paner91-ux.github.io/gtnh-cropsnh-planner/zh/)
+
+Same page in every language, and the picker at the top right keeps your place when you switch.
 
 No install, no account, nothing sent anywhere. Your ticked seeds are stored in your own browser.
 
@@ -66,8 +70,14 @@ notes about this page have none.
 Every crop links to a panel with its tier, growth time, mutation pools, the recipes that produce
 it, and everything it is a parent for.
 
-The page is in English and Polish. The address bar follows what you are looking at, so a link opens
-on the same tab, the same pair and the same open panel, and switching language keeps your place.
+The page is in English, Polish and Simplified Chinese. The address bar follows what you are looking
+at, so a link opens on the same tab, the same pair and the same open panel, and switching language
+keeps your place.
+
+Crop, biome and soil names stay English in every version, because they are read out of the mod's
+`en_US.lang` along with the rest of the data. For Polish that is also what the game shows, since
+the pack ships no Polish names for CropsNH. Chinese is the exception: those names *are* translated
+in the pack, so that version currently prints English where NEI prints Chinese.
 
 ---
 

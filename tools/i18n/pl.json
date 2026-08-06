@@ -303,7 +303,7 @@
   "app.i5": "<b>Kliknij kafelek, żeby oznaczyć to, nad czym pracujesz.</b> Dostaje zieloną obwódkę i idzie na początek listy, co robi różnicę między zerknięciem na drugi monitor a czytaniem go.",
   "app.i6": "<b>Zarządzaj listą, pod listą nasion,</b> wypisuje twoje zaznaczenia jako tekst i wczytuje je z powrotem - tak przenosisz listę między tą stroną a kopią na dysku albo robisz kopię zapasową.",
   "app.i7": "<b>Adres w przeglądarce podąża za tym, co oglądasz</b>, więc wysłany link otwiera tę samą zakładkę, tę samą parę i ten sam otwarty panel, a F5 zostawia cię tam, gdzie byłeś.",
-  "app.i8": "<b>Odnośniki do języków są w prawym górnym rogu</b> i przenoszą twoje miejsce, więc przełączenie nie odsyła cię do pierwszej zakładki.",
+  "app.i8": "<b>Wybór języka jest w prawym górnym rogu</b> i przenosi twoje miejsce, więc przełączenie nie odsyła cię do pierwszej zakładki.",
   "app.i9": "<b>Twoje zaznaczenia nie opuszczają przeglądarki.</b> Strona nie wysyła zapytań donikąd, co znaczy też, że działa bez sieci i że każda kopia ma własną listę.",
   "tab.about": "O tej stronie",
   "about.note": "Czym jest to narzędzie, jak się nim posługiwać i skąd biorą się jego liczby. Zakładka <b>Porady i sztuczki</b> to druga połowa: tamta jest o modzie i każda linia w niej wskazuje metodę, z której została odczytana.",

@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GTNH Crop Breeding Planner (CropsNH)</title>
-<meta name="description" content="Plan CropsNH breeding in GregTech: New Horizons 2.9. Tick the seeds you hold and see what you can make next, the odds for any pair of parents, and the route to a goal crop. Read straight out of the mod.">
-<link rel="canonical" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/">
+<title>GTNH 作物杂交规划器（CropsNH）</title>
+<meta name="description" content="规划 GregTech: New Horizons 2.9 里的 CropsNH 作物杂交。勾上你已有的种子，就能看到下一步能培育什么、任意一对亲本的概率，以及通往目标作物的路线。数据直接读自模组本身。">
+<link rel="canonical" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/zh/">
 <link rel="alternate" hreflang="en" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/">
 <link rel="alternate" hreflang="pl" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/pl/">
 <link rel="alternate" hreflang="zh" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/zh/">
@@ -675,43 +675,43 @@ footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2p
 
 <div class="wrap">
   <header class="masthead">
-    <h1>CropsNH - Breeding Planner</h1>
+    <h1>CropsNH 杂交规划器</h1>
     <span class="sub">GregTech: New Horizons</span>
     <span class="src" id="src"></span>
-    <nav class="langs" aria-label="Language"><details class="langpick" id="langpick"><summary>English</summary><div class="langmenu" role="menu"><a href="./" hreflang="en" lang="en" role="menuitem" aria-current="page">English</a><a href="pl/" hreflang="pl" lang="pl" role="menuitem">Polski</a><a href="zh/" hreflang="zh" lang="zh" role="menuitem">简体中文</a></div></details></nav>
+    <nav class="langs" aria-label="语言"><details class="langpick" id="langpick"><summary>简体中文</summary><div class="langmenu" role="menu"><a href="../" hreflang="en" lang="en" role="menuitem">English</a><a href="../pl/" hreflang="pl" lang="pl" role="menuitem">Polski</a><a href="./" hreflang="zh" lang="zh" role="menuitem" aria-current="page">简体中文</a></div></details></nav>
   </header>
 
   <div class="cols">
     <aside class="rail">
       <div class="rail-head">
-        <h2>Your seeds</h2>
+        <h2>你的种子</h2>
         <span class="tally" id="tally">0</span>
       </div>
       <div class="progress" id="progress" role="progressbar"
            aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
-           aria-label="Share of all crops you hold"><span class="progress-fill" id="progressFill"></span></div>
-      <input class="field" id="search" type="search" placeholder="Search crops…" autocomplete="off">
+           aria-label="你已持有的作物占全部的比例"><span class="progress-fill" id="progressFill"></span></div>
+      <input class="field" id="search" type="search" placeholder="搜索作物…" autocomplete="off">
       <div class="seedlist" id="seedlist"></div>
-      <p class="raillegend"><span class="mark">&#9670;</span> needs a specific block under the soil</p>
-      <p class="raillegend"><span class="legend-i">i</span> opens the details panel</p>
+      <p class="raillegend"><span class="mark">&#9670;</span> 需要土下有特定方块</p>
+      <p class="raillegend"><span class="legend-i">i</span> 打开详情面板</p>
 
       <details class="railpanel">
-        <summary>Manage list</summary>
+        <summary>管理列表</summary>
         <div class="railpanel-body">
           <div class="railpanel-btns">
-            <button class="btn" id="clearAll" type="button">Clear all ticks</button>
-            <button class="btn" id="undo" type="button" hidden>Undo</button>
+            <button class="btn" id="clearAll" type="button">清空所有勾选</button>
+            <button class="btn" id="undo" type="button" hidden>撤销</button>
           </div>
           <hr>
-          <p>Your ticks live in this browser. The hosted page and a local copy keep separate stores - use this box to move the list between them.</p>
-          <textarea id="code" spellcheck="false" aria-label="Seed list code"></textarea>
+          <p>你的勾选保存在这个浏览器里。在线页面和本地副本各存各的，用这个文本框可以在两者之间搬运列表。</p>
+          <textarea id="code" spellcheck="false" aria-label="种子列表代码"></textarea>
           <div class="railpanel-btns">
-            <button class="btn" id="btnCopy" type="button">Copy</button>
-            <button class="btn" id="btnLoad" type="button">Load from box</button>
-            <button class="btn" id="btnFile" type="button" hidden>Download file</button>
-            <button class="btn" id="btnOpen" type="button">Open file</button>
+            <button class="btn" id="btnCopy" type="button">复制</button>
+            <button class="btn" id="btnLoad" type="button">从文本框载入</button>
+            <button class="btn" id="btnFile" type="button" hidden>下载文件</button>
+            <button class="btn" id="btnOpen" type="button">打开文件</button>
           </div>
-          <p id="dlnote" hidden>This page runs in a sandboxed frame, so it cannot write files. Use <b>Copy</b> and paste the text somewhere safe - the offline copy of this page can download instead.</p>
+          <p id="dlnote" hidden>本页跑在沙盒框架里，写不了文件。请用<b>复制</b>把文本粘到安全的地方，本页的离线副本则可以直接下载。</p>
           <div class="status" id="status" role="status"></div>
           <input type="file" id="filein" accept=".json,application/json,text/plain" hidden>
         </div>
@@ -722,13 +722,13 @@ footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2p
 
     <main class="views">
       <div class="tabs" role="tablist">
-        <button class="tab" type="button" role="tab" data-view="ready">Ready now<span class="n" id="n-ready"></span></button>
-        <button class="tab" type="button" role="tab" data-view="near">One parent short<span class="n" id="n-near"></span></button>
-        <button class="tab" type="button" role="tab" data-view="pool">Pool roulette</button>
-        <button class="tab" type="button" role="tab" data-view="path">Route to a goal</button>
-        <button class="tab" type="button" role="tab" data-view="biome">Biomes</button>
-        <button class="tab" type="button" role="tab" data-view="tips">Tips &amp; tricks</button>
-        <button class="tab" type="button" role="tab" data-view="about">About this page</button>
+        <button class="tab" type="button" role="tab" data-view="ready">现在可培育<span class="n" id="n-ready"></span></button>
+        <button class="tab" type="button" role="tab" data-view="near">差一个亲本<span class="n" id="n-near"></span></button>
+        <button class="tab" type="button" role="tab" data-view="pool">突变池轮盘</button>
+        <button class="tab" type="button" role="tab" data-view="path">通往目标</button>
+        <button class="tab" type="button" role="tab" data-view="biome">生物群系</button>
+        <button class="tab" type="button" role="tab" data-view="tips">技巧与机制</button>
+        <button class="tab" type="button" role="tab" data-view="about">关于本页</button>
       </div>
       <div id="view"></div>
     </main>
@@ -736,14 +736,14 @@ footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2p
 
   <footer class="note">
     <div class="foot-main">
-      <p>A planner for CropsNH breeding in GregTech: New Horizons, read out of the mod's own code rather than from a wiki. Your ticks stay in this browser and the page works offline.</p>
+      <p>一个用于 GregTech: New Horizons 里 CropsNH 杂交的规划器，数据读自模组自己的代码，而不是维基。你的勾选留在这个浏览器里，页面离线也能用。</p>
     </div>
     <div class="foot-side">
       <p class="foot-links">
-        <a href="https://github.com/paner91-ux/gtnh-cropsnh-planner" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
-        <a href="https://github.com/paner91-ux/gtnh-cropsnh-planner/issues" target="_blank" rel="noopener noreferrer">Report a mistake</a>
+        <a href="https://github.com/paner91-ux/gtnh-cropsnh-planner" target="_blank" rel="noopener noreferrer">GitHub 上的源码</a>
+        <a href="https://github.com/paner91-ux/gtnh-cropsnh-planner/issues" target="_blank" rel="noopener noreferrer">报告错误</a>
       </p>
-      <p><button class="goview" type="button" data-goview="about">About this page</button></p>
+      <p><button class="goview" type="button" data-goview="about">关于本页</button></p>
     </div>
   </footer>
 </div>
@@ -916,14 +916,14 @@ function applyImport(text) {
   } catch (e) {
     ids = text.split(/[\s,;]+/);            // a plain list of names works too
   }
-  if (!Array.isArray(ids)) { status(`Unrecognised format - paste a code from this tool.`, "warn"); return; }
+  if (!Array.isArray(ids)) { status(`无法识别的格式，请粘贴本工具生成的代码。`, "warn"); return; }
   const known = ids.map(String).map(s => s.trim()).filter(id => C[id]);
   const unknown = ids.length - known.length;
-  if (!known.length) { status(`Found no known crops in that - nothing was changed.`, "warn"); return; }
+  if (!known.length) { status(`里面没找到已知的作物，什么都没有改动。`, "warn"); return; }
   snapshot();
   owned = new Set(known);
   save(); render();
-  status(`Loaded ${known.length} crops` + (unknown > 0 ? ` · skipped ${unknown} unknown` : "") + ` · Undo is at the top of this panel`, "ok");
+  status(`载入了 ${known.length} 种作物` + (unknown > 0 ? ` · 跳过 ${unknown} 个未知项` : "") + ` · 撤销按钮在本面板顶部`, "ok");
 }
 
 /* ---------------------------------------------------------- requirements */
@@ -940,7 +940,7 @@ function topParts(crop) {
 }
 function topBlock(crop) {
   const p = topParts(crop);
-  return p.map(s => DATA.soilGloss[s] || s).join(`, or `);
+  return p.map(s => DATA.soilGloss[s] || s).join(`，或 `);
 }
 function topBlockShort(crop) {
   const p = topParts(crop);
@@ -950,8 +950,8 @@ function underBlock(crop) {
   return crop.subsoil.length ? crop.subsoil.map(subLabel).join(" / ") : "";
 }
 function lightReq(crop) {
-  if (crop.maxLight !== null) return `max ${crop.maxLight} - dark`;
-  if (crop.minLight !== null && crop.minLight > 9) return `min ${crop.minLight}`;
+  if (crop.maxLight !== null) return `最高 ${crop.maxLight}，要黑暗`;
+  if (crop.minLight !== null && crop.minLight > 9) return `最低 ${crop.minLight}`;
   return "";
 }
 
@@ -959,19 +959,19 @@ function lightReq(crop) {
    marker, which belongs on the same row as the rest of the requirements. */
 function reqChips(crop, extra) {
   if (!crop) return "";
-  const out = [`<span class="chip soil"><span class="k">top block</span>${esc(topBlockShort(crop))}</span>`];
+  const out = [`<span class="chip soil"><span class="k">上层方块</span>${esc(topBlockShort(crop))}</span>`];
   const u = underBlock(crop);
   out.push(u
-    ? `<span class="chip sub"><span class="k">under block</span>${esc(u)}</span>`
-    : `<span class="chip none"><span class="k">under block</span>anything</span>`);
+    ? `<span class="chip sub"><span class="k">下层方块</span>${esc(u)}</span>`
+    : `<span class="chip none"><span class="k">下层方块</span>任意</span>`);
   const l = lightReq(crop);
-  if (l) out.push(`<span class="chip light"><span class="k">light</span>${esc(l)}</span>`);
+  if (l) out.push(`<span class="chip light"><span class="k">光照</span>${esc(l)}</span>`);
   if (extra) out.push(extra);
   return `<div class="chips">${out.join("")}</div>`;
 }
 
 const machChip = m => m.machineOnly
-  ? `<span class="chip mach" title="This recipe only runs in the Crop Breeder machine, never on a crop stick"><span class="k">only in</span>Crop Breeder</span>` : "";
+  ? `<span class="chip mach" title="这个配方只在作物培育机里跑，作物架上永远不会触发"><span class="k">仅限</span>作物培育机</span>` : "";
 
 /* Same facts as reqChips, same labels, without the boxes - see .pneed. */
 function reqPlain(crop) {
@@ -979,13 +979,13 @@ function reqPlain(crop) {
   const g = (k, v, ore) =>
     `<span class="g"><span class="k">${k}</span><span${ore ? ` class="ore"` : ""}>${esc(v)}</span></span>`;
   const u = underBlock(crop), l = lightReq(crop);
-  return `<div class="pneed">${g(`top`, topBlockShort(crop))}${g(`under`, u || `anything`, !!u)}${
-    l ? g(`light`, l, true) : ""}</div>`;
+  return `<div class="pneed">${g(`上`, topBlockShort(crop))}${g(`下`, u || `任意`, !!u)}${
+    l ? g(`光照`, l, true) : ""}</div>`;
 }
 
 /* result, its ground, then each parent with its own ground */
 function parentRows(m) {
-  return `<div class="pgroup"><span class="lbl">from</span>${m.parents.map(p => `
+  return `<div class="pgroup"><span class="lbl">来自</span>${m.parents.map(p => `
     <div class="prow">${cropLink(p, owned.has(p) ? "own" : "miss")}
       ${reqPlain(C[p])}</div>`).join("")}</div>`;
 }
@@ -1101,21 +1101,21 @@ function renderRail() {
 
   let html = "";
   for (const [tier, cs] of [...groups.entries()].sort((x, y) => x[0] - y[0])) {
-    html += `<div class="tiergroup"><div class="tierhead">Tier ${tier}</div>`;
+    html += `<div class="tiergroup"><div class="tierhead">等级 ${tier}</div>`;
     for (const c of cs) {
       const mark = c.subsoil.length ? "◆" : "";
       html += `<div class="seed">
         <button class="seed-tick" type="button" role="checkbox" data-id="${c.id}" aria-pressed="${owned.has(c.id)}">
           <span class="box"></span><span class="nm">${esc(c.name)}</span>
         </button>
-        <span class="mark" title="needs a specific under block, see the crop for which one">${mark}</span>
+        <span class="mark" title="需要特定的下层方块，具体是哪一种见作物详情">${mark}</span>
         <button class="seed-info" type="button" data-crop="${c.id}"
-          title="Details for ${esc(c.name)}" aria-label="Details for ${esc(c.name)}">i</button>
+          title="${esc(c.name)} 的详情" aria-label="${esc(c.name)} 的详情">i</button>
       </div>`;
     }
     html += `</div>`;
   }
-  $("seedlist").innerHTML = html || `<div class="empty">No matches</div>`;
+  $("seedlist").innerHTML = html || `<div class="empty">没有匹配</div>`;
   const share = owned.size / byName.length * 100;
   $("tally").innerHTML = `${owned.size} / ${byName.length} <b>${Math.round(share)}%</b>`;
   $("progress").setAttribute("aria-valuenow", Math.round(share));
@@ -1129,7 +1129,7 @@ function cardFor(m) {
   const c = C[m.out];
   const key = markKey(m), on = marked.has(key);
   return `<article class="card${on ? " marked" : ""}" data-key="${esc(key)}"
-      title="${on ? `Marked as what you are building - click to clear` : `Click to mark this as what you are building`}">
+      title="${on ? `已标记成你正在做的东西，点击取消` : `点击标记成你正在做的东西`}">
     <div class="card-top">
       <button class="card-out" type="button" data-crop="${m.out}">${esc(nm(m.out))}</button>
       <span class="tier">T${c ? c.tier : "?"}</span>
@@ -1141,17 +1141,17 @@ function cardFor(m) {
 
 function renderReady() {
   const list = readyList();
-  if (!owned.size) return `<div class="empty">Tick off what you have in the rail on the left.</div>`;
-  if (!list.length) return `<div class="empty">No new recipe is fully covered by this set.<br>Try <b>One parent short</b> or the <b>Pool roulette</b>.</div>`;
-  return `<p class="viewnote">Recipes where you already hold every parent. Put the parents around a double crop stick, and make sure the ground under the stick satisfies the result's requirements - otherwise the attempt is discarded silently. Click a card to mark what you are building; marked ones stay at the front.</p>
+  if (!owned.size) return `<div class="empty">在左边的边栏里勾上你已经有的。</div>`;
+  if (!list.length) return `<div class="empty">这套种子没有完整覆盖任何新配方。<br>试试<b>差一个亲本</b>或<b>突变池轮盘</b>。</div>`;
+  return `<p class="viewnote">全部亲本你都已经持有的配方。把亲本摆在双层作物架周围，并确认架子下面的地面满足产物的需求，否则这次尝试会被悄悄丢掉。点一张卡片标记你正在做的东西，被标记的会留在最前面。</p>
     <div class="grid">${markFirst(list).map(m => cardFor(m)).join("")}</div>`;
 }
 
 function renderNear() {
   const list = nearList();
-  if (!owned.size) return `<div class="empty">Tick off what you have in the rail on the left.</div>`;
-  if (!list.length) return `<div class="empty">No recipe is exactly one parent away.</div>`;
-  return `<p class="viewnote">One crop short, shown in <span style="color:var(--ore);font-weight:600">rust</span>. Click a name to see where the missing parent comes from, or the card itself to mark it.</p>
+  if (!owned.size) return `<div class="empty">在左边的边栏里勾上你已经有的。</div>`;
+  if (!list.length) return `<div class="empty">没有配方正好差一个亲本。</div>`;
+  return `<p class="viewnote">差一种作物，以<span style="color:var(--ore);font-weight:600">锈色</span>标出。点名字看缺的那个亲本从哪来，或者点卡片本身把它标记下来。</p>
     <div class="grid">${markFirst(list).map(m => cardFor(m)).join("")}</div>`;
 }
 
@@ -1164,7 +1164,7 @@ function pairPill(k, cur) {
     <button class="pname" type="button" data-pair="${k}"${k === cur ? ` aria-current="true"` : ""}>${
       esc(nm(a))}${a === b ? " ×2" : ` + ${esc(nm(b))}`}</button>
     <button class="star${kept ? " on" : ""}" type="button" data-star="${k}" aria-pressed="${kept}"
-      title="${kept ? `Remove from saved` : `Save this pair`}">${kept ? "★" : "☆"}</button>
+      title="${kept ? `从收藏中移除` : `收藏这一对`}">${kept ? "★" : "☆"}</button>
   </span>`;
 }
 
@@ -1176,13 +1176,13 @@ function pairStrips() {
   if (recentPairs.length) {
     const shown = pairsOpen ? recentPairs : recentPairs.slice(0, PAIRS_SHOWN);
     const hidden = recentPairs.length - PAIRS_SHOWN;
-    h += `<div class="pairrow recent"><span class="lbl">Recent</span>${
+    h += `<div class="pairrow recent"><span class="lbl">最近</span>${
       shown.map(k => pairPill(k, cur)).join("")}${
       hidden > 0 ? `<button class="poolchip morechip" type="button" id="morePairs">${
-        pairsOpen ? `Show fewer` : `+${hidden} more`}</button>` : ""}</div>`;
+        pairsOpen ? `收起` : `还有 ${hidden} 对`}</button>` : ""}</div>`;
   }
   if (savedPairs.length)
-    h += `<div class="pairrow saved"><span class="lbl">Saved</span>${
+    h += `<div class="pairrow saved"><span class="lbl">收藏</span>${
       savedPairs.map(k => pairPill(k, cur)).join("")}</div>`;
   return h;
 }
@@ -1190,11 +1190,11 @@ function pairStrips() {
 function renderPool() {
   const opts = sel => allSorted.map(c =>
     `<option value="${c.id}"${sel === c.id ? " selected" : ""}>${esc(c.name)}${owned.has(c.id) ? " ✓" : ""}</option>`).join("");
-  let html = `<p class="viewnote">What can come out of a double crop stick between two mature crops. Figures are the chance <b>per successful breeding attempt</b>, and one fires on roughly every third growth tick. The same crop twice is allowed, and is the most common setup.</p>
+  let html = `<p class="viewnote">两株成熟作物中间的双层作物架能出什么。数字是<b>每次成功的杂交尝试</b>的概率，而大约每三个生长刻才触发一次。允许同一种作物用两次，而且那是最常见的摆法。</p>
     <div class="pairpick">
-      <label>Parent A<select class="field" id="selA"><option value="">-</option>${opts(pairA)}</select></label>
-      <label>Parent B<select class="field" id="selB"><option value="">-</option>${opts(pairB)}</select></label>
-      ${pairA || pairB ? `<button class="btn" id="clearPair" type="button">Clear pair</button>` : ""}
+      <label>亲本 A<select class="field" id="selA"><option value="">-</option>${opts(pairA)}</select></label>
+      <label>亲本 B<select class="field" id="selB"><option value="">-</option>${opts(pairB)}</select></label>
+      ${pairA || pairB ? `<button class="btn" id="clearPair" type="button">清除这一对</button>` : ""}
     </div>${pairStrips()}`;
 
   const o = oddsFor(pairA, pairB);
@@ -1203,58 +1203,58 @@ function renderPool() {
   const A = C[pairA], B = C[pairB];
 
   html += o.newCount
-    ? `<p class="viewnote"><b style="color:var(--leaf)">${pct(o.gain)}</b> chance at one of <b>${o.newCount}</b> crops you do not have yet.</p>`
-    : `<p class="viewnote">This pair gives you nothing new - you already have every possible result.</p>`;
+    ? `<p class="viewnote"><b style="color:var(--leaf)">${pct(o.gain)}</b> 的概率拿到 <b>${o.newCount}</b> 种你还没有的作物之一。</p>`
+    : `<p class="viewnote">这一对给不了你新东西，所有可能的结果你都已经有了。</p>`;
 
   /* --- cloning branch --- */
-  html += `<div class="branch">50% - copy of a parent</div><div class="tablescroll"><table class="odds">`;
+  html += `<div class="branch">50%，亲本的复制品</div><div class="tablescroll"><table class="odds">`;
   if (o.same) {
     html += `<tr><td class="nm">${cropLink(pairA)}</td><td class="num">50.00%<span class="bar" style="width:100%"></span></td>
-      <td class="via">both neighbours are the same crop</td></tr>`;
+      <td class="via">两个邻居是同一种作物</td></tr>`;
   } else {
-    html += `<tr><td class="nm">${cropLink(pairA)}</td><td class="num">25.00%<span class="bar" style="width:50%"></span></td><td class="via">clone of a neighbour</td></tr>
-      <tr><td class="nm">${cropLink(pairB)}</td><td class="num">25.00%<span class="bar" style="width:50%"></span></td><td class="via">clone of a neighbour</td></tr>`;
+    html += `<tr><td class="nm">${cropLink(pairA)}</td><td class="num">25.00%<span class="bar" style="width:50%"></span></td><td class="via">邻居的克隆</td></tr>
+      <tr><td class="nm">${cropLink(pairB)}</td><td class="num">25.00%<span class="bar" style="width:50%"></span></td><td class="via">邻居的克隆</td></tr>`;
   }
   html += `</table></div>`;
 
   /* --- mutation branch --- */
   if (o.det.length) {
-    html += `<div class="branch">50% - deterministic recipe</div>
-      <p class="viewnote">This pair has a specific recipe, so the mutation branch goes there instead of drawing from a pool.
-      ${o.det.length > 1 ? `${o.det.length} recipes match and the engine picks one at random, hence ${pct(0.5 / o.det.length)} each. ` : ""}If the recipe's conditions are not met, that half falls back to a pool draw instead.</p>
+    html += `<div class="branch">50%，决定性配方</div>
+      <p class="viewnote">这一对有确切的配方，所以突变那一支走配方，而不是从池里抽。
+      ${o.det.length > 1 ? `有 ${o.det.length} 个配方同时匹配，引擎随机挑一个，因此每个 ${pct(0.5 / o.det.length)}。 ` : ""}如果配方的条件没满足，那一半会退回到从池里抽。</p>
       <div class="grid">${o.det.map(m => cardFor(m)).join("")}</div>`;
     return html;
   }
 
   if (!o.pools.length) {
-    html += `<div class="branch">50% - mutation</div>
+    html += `<div class="branch">50%，突变</div>
       <div class="empty">${o.same
-        ? `<b>${esc(A.name)}</b> belongs to no pool - that crop is recipe-only.`
-        : `This pair shares neither a pool nor a recipe.`}<br>The mutation branch always fails - you will only ever get copies of the parents.</div>`;
+        ? `<b>${esc(A.name)}</b> 不属于任何突变池，这种作物只能靠配方拿到。`
+        : `这一对既不共享突变池，也没有配方。`}<br>突变那一支永远失败，你只会一直拿到亲本的复制品。</div>`;
     return html;
   }
 
   const poolTxt = o.pools.map(p => `${poolLink(p)} (${POOLM[p].length})`).join(", ");
   const showLight = o.rows.some(r => lightReq(C[r.id]));   // column only when it applies
-  html += `<div class="branch">50% - draw from pools</div>
+  html += `<div class="branch">50%，从突变池抽取</div>
     <p class="viewnote">${o.same
-      ? `Two identical crops match <b>every</b> pool ${esc(A.name)} belongs to: <b>${poolTxt}</b>.`
-      : `Shared pools: <b>${poolTxt}</b>.`} The pool is drawn uniformly - a small pool is worth as much as a large one, it just spreads over fewer crops.</p>
-    <p class="viewnote"><b>Top block</b> is the one directly under the crop stick, <b>under block</b> is one deeper. A result whose ground you have not built simply never gets planted, so setting those two blocks up for the crop you actually want quietly removes most of this table.</p>
+      ? `两株相同的作物匹配 ${esc(A.name)} 所属的<b>每一个</b>突变池：<b>${poolTxt}</b>。`
+      : `共享的突变池：<b>${poolTxt}</b>。`} 池是均匀抽取的，小池和大池一样值钱，只是摊在更少的作物上。</p>
+    <p class="viewnote"><b>上层方块</b>是紧贴作物架下面的那一格，<b>下层方块</b>再深一格。地面没搭好的结果根本不会被种下去，所以照着你真正想要的那种作物搭好这两块，能悄悄地把这张表里大部分条目去掉。</p>
     <div class="tablescroll"><table class="odds">
-      <tr><th>Result</th><th class="num">Chance</th><th>Pool</th><th>Top block</th><th>Under block</th>${showLight ? `<th>Light</th>` : ""}</tr>`;
+      <tr><th>产物</th><th class="num">概率</th><th>突变池</th><th>上层方块</th><th>下层方块</th>${showLight ? `<th>光照</th>` : ""}</tr>`;
   const max = Math.max(...o.rows.map(r => r.p));   // rows are no longer ordered by odds
   for (const r of o.rows) {
     const c = C[r.id];
     const have = owned.has(r.id);
     const u = underBlock(c);
     html += `<tr${have ? ` class="dead"` : ""}>
-      <td class="nm"><button class="inline-crop" type="button" data-crop="${r.id}">${esc(c.name)}</button>${have ? ` <span class="tier">have</span>` : ""}</td>
+      <td class="nm"><button class="inline-crop" type="button" data-crop="${r.id}">${esc(c.name)}</button>${have ? ` <span class="tier">已有</span>` : ""}</td>
       <td class="num">${pct(r.p)}<span class="bar" style="width:${(r.p / max * 100).toFixed(1)}%"></span></td>
       <td class="via">${[...r.via].map(poolLink).join(", ")}</td>
       <td class="via">${esc(topBlockShort(c))}</td>
-      <td class="via"${u ? ` style="color:var(--ore)"` : ""}>${u ? esc(u) : `anything`}</td>
-      ${showLight ? `<td class="via"${lightReq(c) ? ` style="color:var(--ore)"` : ""}>${esc(lightReq(c) || `any`)}</td>` : ""}
+      <td class="via"${u ? ` style="color:var(--ore)"` : ""}>${u ? esc(u) : `任意`}</td>
+      ${showLight ? `<td class="via"${lightReq(c) ? ` style="color:var(--ore)"` : ""}>${esc(lightReq(c) || `任意`)}</td>` : ""}
     </tr>`;
   }
   html += `</table></div>`;
@@ -1263,13 +1263,13 @@ function renderPool() {
 
 /* shown when no pair is picked */
 function renderBestPairs() {
-  if (owned.size < 1) return `<div class="empty">Pick two crops above - or tick off what you have on the left and I will rank the best pairs.</div>`;
+  if (owned.size < 1) return `<div class="empty">在上面选两种作物，或者在左边勾上你已有的，我来排出最好的组合。</div>`;
   const best = bestPairs(15);
-  if (!best.length) return `<div class="empty">No pair from your seeds yields anything new. You need a crop from outside the current set.</div>`;
-  let html = `<div class="branch">Best pairs from your seeds</div>
-    <p class="viewnote">Ranked by the total chance of a crop you do not have yet. Click a pair to load its full breakdown.</p>
+  if (!best.length) return `<div class="empty">你的种子里没有任何一对能产出新东西。你需要一种目前这套之外的作物。</div>`;
+  let html = `<div class="branch">你的种子里最好的组合</div>
+    <p class="viewnote">按拿到你还没有的作物的总概率排序。点一对可以载入它完整的明细。</p>
     <div class="tablescroll"><table class="odds">
-    <tr><th>Pair</th><th class="num">Chance at something new</th><th class="num">New</th><th>Branch</th></tr>`;
+    <tr><th>组合</th><th class="num">拿到新东西的概率</th><th class="num">新</th><th>分支</th></tr>`;
   const max = best[0].gain;
   for (const p of best) {
     html += `<tr>
@@ -1286,216 +1286,216 @@ function renderBestPairs() {
    Everything below was read out of the mod's compiled code. The plain
    sentence is the advice; the WHY box is where it comes from.              */
 const APP = {
-  h: `Using this page`,
-  lead: `Notes about the tool rather than about the mod. Nothing here needs a source.`,
+  h: `怎么用这一页`,
+  lead: `这里说的是工具本身，不是模组，所以不需要出处。`,
   items: [
-    [`<b>Every crop name on this page opens a panel.</b> Soil, under block, light, the pools it sits in, every recipe that makes it and everything it is a parent for.`], [`<b>Type in the search box and press Enter</b> to tick the top match and clear the box, so a handful of seeds goes in without touching the mouse.`], [`<b>Pool roulette remembers the last ten pairs you looked at</b> and offers the five most recent under the pickers, which beats rebuilding a pair from two dropdowns every time.`], [`<b>The star on a pair keeps it</b> in a Saved row of its own, so the two or three pairs a plot is built around stay put while Recent rolls over.`], [`<b>Click a card to mark what you are building.</b> It gets a green edge and moves to the front of the grid, which is the difference between glancing at a second monitor and reading it.`],
-    [`<b>Manage list, under the seed list,</b> copies your ticks out as text and back in - the way to move a list between this page and an offline copy, or to keep a backup.`], [`<b>The address bar follows what you are looking at,</b> so a link you send opens on the same tab, the same pair and the same open panel, and F5 keeps you where you were.`], [`<b>The language picker sits at the top right</b> and carries your place across, so switching does not send you back to the first tab.`], [`<b>Your ticks never leave the browser.</b> The page makes no requests to anywhere, which also means it works with the network off and that each copy keeps its own list.`], [`<b>A crop's <em>Likes</em> tags are links, and the panel names the biomes worth <b>+28</b> to it and the ones worth <b>+14</b>.</b> The <b>Biomes</b> tab goes the other way: search a place by name or by tag and see what is worth growing there.`],
+    [`<b>本页上每一个作物名都能打开一个面板。</b>土壤、下层方块、光照、它待着的池、每一个能产出它的配方，以及它作为亲本参与的一切。`], [`<b>在搜索框里打字然后按回车</b>就会勾上最靠前的匹配项并清空搜索框，这样不碰鼠标也能连着录进好几颗种子。`], [`<b>突变池轮盘记得你最近看过的十对</b>，并在选择器下面给出最近的五对，比每次都从两个下拉框里重建一对省事。`], [`<b>给一对加星就能留住它</b>，它会进到单独的一行收藏里，这样一个田块围着的那两三对不会被最近记录冲掉。`], [`<b>点一张卡片，把它标成你正在做的东西。</b>它会带上绿边并挪到网格最前面，这就是瞥一眼副屏和要费劲去找的区别。`],
+    [`<b>种子列表下面的管理列表</b>能把你的勾选导成文本再导回来，这是在本页和离线副本之间搬列表、或者留个备份的办法。`], [`<b>地址栏跟着你正在看的东西走</b>，所以你发出去的链接会打开同一个标签页、同一对亲本和同一个打开的面板，按 F5 也还在原处。`], [`<b>语言选择器在右上角</b>，切换时会带着你所在的位置，不会把你甩回第一个标签页。`], [`<b>你的勾选从不离开浏览器。</b>本页不向任何地方发请求，这也意味着断网也能用，而且每一份副本各自留着自己的列表。`], [`<b>作物的<em>喜好</em>标签是链接，面板会点名对它值 <b>+28</b> 和值 <b>+14</b> 的生物群系。</b><b>生物群系</b>标签页则反过来：按名字或者标签搜一个地方，看那里值得种什么。`],
   ]
 };
 
 const TIPS = [
-  { h: `Common mistakes`,
-    lead: `Three setups that fail silently. None of them show an error.`,
+  { h: `常见错误`,
+    lead: `三种会静默失败的摆法，都不会报错。`,
     items: [
-    [`<b>Farmland is not dirt.</b> This is the single most common one. Tilling flips a block between two requirements that share nothing at all: <b>${Object.values(C).filter(c => topParts(c).join() === "farmland").length} crops want farmland</b> and refuse plain dirt, while <b>${Object.values(C).filter(c => topParts(c).join() === "dirtGrass").length} want dirt or grass and nothing else</b>. Check the top block on the card against the block actually under your stick.`,
-     `The two soil lists have no block in common, so a hoe turns a valid spot into an invalid one in whichever direction you were not thinking about. Mind the lookalikes: the farmland list also holds Magic Bees' enchanted earth, Random Things' tilled fertilized dirt and Ztones' clean dirt - and that last one looks exactly like plain dirt while counting as farmland. The dirt list is vanilla dirt and grass plus Chisel's dirt block.`],
-    [`<b>The top block is right and the one underneath is missing.</b> That second block is checked when the mutation happens, not only afterwards for growing. Without it the roll is discarded and nothing is reported. Anything marked <span class="mark">&#9670;</span> in the seed list needs one.`,
-     `<em>SubSoilRequirement</em> reports <em>onlyPreventsHarvest() = false</em>, so the pre-planting check rejects the result outright. It also implements the breeding-requirement interface, whose check simply delegates to the growth check.`],
-    [`<b>Breaking a plant below resistance 31 can destroy the seed.</b> The seed comes back on a roll against resistance, so at 20 you lose it about one time in three. At 31 it is guaranteed. Harvest for produce instead, or push resistance up before you start pulling plants.`,
-     `<em>getSeedDrop()</em> returns null unless <em>passesResistanceCheck()</em> passes, which is <em>resistance &gt; random(0…30)</em>. Only 31 beats every roll. The left-click path calls <em>doPlayerHarvest(player, true)</em>, which clears the stick either way - so a failed roll takes the plant with it.`],
+    [`<b>耕地不是泥土。</b>这是最常见的一个。锄地会让方块在两套毫无交集的需求之间来回翻：<b>${Object.values(C).filter(c => topParts(c).join() === "farmland").length} 种作物要耕地</b>，不认普通泥土；而<b>${Object.values(C).filter(c => topParts(c).join() === "dirtGrass").length} 种只要泥土或草方块</b>，别的都不行。请把卡片上的上层方块和作物架下面实际的方块对一下。`,
+     `两套土壤列表没有任何共同的方块，所以锄头总会把有效的位置变成无效的，方向恰好是你没在想的那一边。小心那些长得像的：耕地列表里还有 Magic Bees 的附魔土、Random Things 的耕作过的施肥土，以及 Ztones 的洁净泥土，而最后这个看起来和普通泥土一模一样，却算耕地。泥土列表则是原版泥土和草方块，加上 Chisel 的泥土方块。`],
+    [`<b>上层方块对了，下面那一块没放。</b>第二块是在突变发生的时候检查的，不只是事后长不长的问题。缺了它这次判定就被丢掉，而且什么都不提示。种子列表里带 <span class="mark">&#9670;</span> 标记的都需要它。`,
+     `<em>SubSoilRequirement</em> 的 <em>onlyPreventsHarvest() = false</em>，所以种植前的检查会直接否掉这个结果。它同时实现了杂交需求接口，而那个接口的检查只是转交给生长检查。`],
+    [`<b>抗性不到 31 就拔植株，可能把种子毁掉。</b>种子是靠一次对抗性的判定还回来的，所以抗性 20 时大约每三次丢一次。到 31 就必定还回来。在那之前请收获产物，或者先把抗性堆上去再动手拔。`,
+     `<em>getSeedDrop()</em> 只有在 <em>passesResistanceCheck()</em> 通过时才返回种子，判定是 <em>resistance &gt; random(0…30)</em>，只有 31 能赢下每一次。左键那条路径调用 <em>doPlayerHarvest(player, true)</em>，无论如何都会清空作物架，所以判定失败连植株一起没了。`],
   ]},
 
-  { h: `How one breeding attempt works`,
-    lead: `A double crop stick keeps trying for as long as it stands there. Each attempt is independent of the last.`,
+  { h: `一次杂交尝试是怎么回事`,
+    lead: `双层作物架只要立在那里就会一直试。每次尝试都和上一次无关。`,
     items: [
-    [`A double crop stick only tries to breed on roughly <b>one growth tick in three</b>. Everything below is the chance <i>per attempt</i>, not per tick.`,
-     `<em>attemptBreeding()</em> opens with a roll against the <em>Breeding Chance</em> config (default 3) and returns immediately on two out of three results.`],
-    [`Each attempt splits 50/50. Half the time the stick <b>copies a neighbour</b>, half the time it <b>mutates</b>. Getting copies of the parents over and over is the expected result, not bad luck.`,
-     `<em>getBreedingResult()</em> begins with a 50/50 draw. One result takes the cloning path, which keeps only neighbours grown enough to cross, picks one at random and replants its crop. The other takes the mutation path. If no neighbour is grown enough, the cloning path falls through to the mutation path instead.`],
-    [`If the result cannot be planted on that spot, <b>the roll is discarded</b>. No message, no half-grown plant. The stick stays empty and tries again later, and that same tick still rolls its usual small chance of a weed.`,
-     `<em>attemptBreeding()</em> plants only when both <em>isValidSoilForCrop()</em> and <em>wouldCropBeAbleToGrow()</em> pass for the result. Otherwise it returns false - the same signal a missed breeding roll gives - and that is exactly what lets the weed spawn roll run on the same tick.`],
+    [`双层作物架大约<b>每三个生长刻才试一次杂交</b>。下面所有数字都是<i>每次尝试</i>的概率，不是每刻的。`,
+     `<em>attemptBreeding()</em> 一开头就对 <em>Breeding Chance</em> 配置项（默认 3）掷一次，三次里有两次直接返回。`],
+    [`每次尝试对半分。一半的情况下作物架<b>复制邻居</b>，另一半<b>发生突变</b>。反复拿到亲本的复制品是预期结果，不是运气差。`,
+     `<em>getBreedingResult()</em> 以一次五五开的抽取开场。一边走克隆路径，只保留长得够大、能杂交的邻居，随机挑一个并重新种下它的作物。另一边走突变路径。如果没有邻居长得够大，克隆路径会转而落到突变路径上。`],
+    [`如果结果种不到那个位置上，<b>这次判定就被丢掉</b>。没有提示，也没有半长的植株。作物架空着，过一会儿再试，而同一刻仍然会照常掷一次长杂草的小概率。`,
+     `<em>attemptBreeding()</em> 只有在结果同时通过 <em>isValidSoilForCrop()</em> 和 <em>wouldCropBeAbleToGrow()</em> 时才种下去。否则它返回 false，和杂交判定没中给出的信号一样，也正是因为这样，同一刻还能跑长杂草的判定。`],
   ]},
 
-  { h: `Steering what comes out`,
-    lead: `You cannot change the odds of a roll, but you can change which results are possible.`,
+  { h: `左右结果的走向`,
+    lead: `你改不了判定的概率，但可以改变哪些结果是可能的。`,
     items: [
-    [`<b>Two of the same crop can never produce a recipe result</b>, but they match every pool that crop belongs to. That is the widest range of results available from one pair.`,
-     `The recipe lookup runs the parents through a <em>.distinct()</em> filter first, so two identical crops collapse into one entry and fail the "at least two parents" check. The pool lookup has no such filter, so both entries survive and every pool containing that crop matches.`],
-    [`<b>Two different crops that share a recipe will give that recipe</b>, not a random pool result. Pools only get a look in if the recipe's own conditions are not satisfied.`,
-     `<em>getBreedingResult()</em> asks for matching recipes first. If there are any, one is drawn at random and its conditions checked; only when that check fails does it drop through to the pool draw.`],
-    [`<b>A small pool is worth exactly as much as a large one.</b> The pool is picked first and the crop second, so a 7-crop pool splits its share of the odds seven ways and a 50-crop pool splits the same share fifty ways.`,
-     `The matching pools are collected into a list and one is chosen with a flat random index, then a member of that pool is chosen the same way. Pool size never weights either draw.`],
-    [`A pool only counts if <b>at least two of the parents belong to it</b>.`,
-     `<em>MutationPool.isMatch()</em> walks the parent list counting members and returns true the moment the counter reaches two.`],
-    [`<b>A third crop beside the stick can block the recipe you wanted.</b> Keep only the parents you need next to a breeding stick. A spare grown plant of another crop can stop a recipe you already have both parents for, with no indication that it did.`,
-     `The crops present are sorted by internal id and walked strictly index by index. <em>MutationMap.findMatches()</em> reads entry <em>i</em>, and if there is no branch for it, it returns rather than skipping ahead - so a recipe fires only when its own sorted parents are the leading entries of that list. With A, B and C grown around one stick, a recipe for A + C is never found, because after A the walk demands B. Neighbours below their breeding threshold are filtered out beforehand, so an immature plant cannot block anything.`],
-    [`<b>Use the ground to narrow the pool.</b> Build it for one specific crop and most of the pool cannot be planted there at all, so the few that can appear far more often. This does not raise the overall rate, it only changes which results are possible.`,
-     `This is the same <em>wouldCropBeAbleToGrow()</em> check. Every requirement whose <em>onlyPreventsHarvest()</em> is false stops the result from being planted at all, and the attempt is discarded rather than substituted.`],
+    [`<b>两株相同的作物永远产不出配方结果</b>，但它们匹配这种作物所属的每一个池。这是一对亲本能给出的最宽的结果范围。`,
+     `配方查找会先让亲本过一遍 <em>.distinct()</em> 过滤，所以两株相同的作物合并成一条，过不了“至少两个亲本”的检查。突变池查找没有这道过滤，两条都留了下来，于是包含这种作物的每一个池都匹配。`],
+    [`<b>共享一个配方的两种不同作物会给出那个配方</b>，而不是随机的池结果。只有在配方自己的条件不满足时，池才有机会。`,
+     `<em>getBreedingResult()</em> 先要匹配的配方。只要有，就随机抽一个并检查它的条件；只有这次检查失败，才落到池抽取上。`],
+    [`<b>小池和大池完全一样值钱。</b>先选池、再选作物，所以一个 7 种作物的池把它那份概率分成七份，一个 50 种作物的池把同样一份分成五十份。`,
+     `匹配到的池被收进一个列表，用一个平均分布的随机下标选出其一，然后以同样的方式从这个池里选出一个成员。池的大小不会给任何一次抽取加权。`],
+    [`一个池只有在<b>至少两个亲本属于它</b>的时候才算数。`,
+     `<em>MutationPool.isMatch()</em> 遍历亲本列表并计数，计数一到 2 就立刻返回 true。`],
+    [`<b>作物架旁边的第三种作物会挡掉你想要的配方。</b>杂交架旁边只留必要的亲本。哪怕两个亲本你都齐了，一株多余的、长成的别种作物也能让配方不触发，而且完全没有任何提示。`,
+     `在场的作物按内部 id 排序，然后严格逐个下标往下走。<em>MutationMap.findMatches()</em> 读第 <em>i</em> 条，如果没有对应的分支就直接返回，而不是跳过去接着找，所以配方只有在自己排序后的亲本正好排在这个列表最前面时才会触发。一根作物架周围同时长着 A、B、C 时，A + C 的配方永远找不到，因为走完 A 之后要的是 B。低于杂交阈值的邻居会被事先滤掉，所以没长成的植株挡不了任何东西。`],
+    [`<b>用地面收窄池子。</b>照着某一种作物去搭，池里大部分作物根本种不下去，能种的那几种就出现得频繁得多。这不会提高总体的出货率，只是改变哪些结果是可能的。`,
+     `这就是同一个 <em>wouldCropBeAbleToGrow()</em> 检查。任何 <em>onlyPreventsHarvest()</em> 为 false 的需求都会让结果根本种不下去，而这次尝试是被丢掉，不是换成别的。`],
   ]},
 
-  { h: `Where the blocks go`,
-    lead: `Two blocks below the stick are checked, at different depths and against different lists.`,
+  { h: `方块放在哪里`,
+    lead: `作物架下面有两个方块会被检查，深度不同，对照的列表也不同。`,
     items: [
-    [`The <b>top block</b> is the one directly under the crop stick. The <b>under block</b> goes one deeper, two blocks below the stick and underneath the top block.`,
-     `<em>isValidSoilForCrop()</em> reads the block at <em>y - 1</em>. <em>SubSoilRequirement.getSubSoil()</em> starts by doing <em>y -= 2</em>.`],
-    [`<b>Ore counts, not just the crafted block.</b> A gold ore block under the soil works as well as a block of gold.`,
-     `Each sub-soil carries a GregTech material, and the check accepts any block whose GregTech association is that material with the <em>block</em> prefix or any prefix starting with <em>ore</em> - so every ore variant counts, not only the storage block. GregTech's own ore blocks are matched straight off their material metadata.`],
-    [`<b>Light rules apply to mutation too.</b> A crop that needs darkness will not appear in daylight under an open sky. Outdoors it only gets a chance at night; under a roof it works at any hour.`,
-     `The requirement reads the actual light level at the stick rather than a sky-access flag, and the minimum and maximum light requirements both report <em>onlyPreventsHarvest() = false</em>, so they gate planting in exactly the same way the sub-soil does.`],
-    [`<b>A few crops accept several different top blocks</b> - ${Object.values(C).filter(c => topParts(c).length > 1).length} of the ${Object.keys(C).length} - so a listing like "Stone / Dirt&#8203;/grass / Mycelium / Netherrack" means any one of them will do, not all four. Glowshroom is one of them. Every other crop accepts exactly one top block.`,
-     `Those few come from soil lists that are unions of other lists rather than lists of blocks. <em>netherMushroom</em> is <em>mushroom</em> plus <em>netherrack</em>, and <em>mushroom</em> is itself <em>stone</em> plus <em>dirt/grass</em> plus <em>mycelium</em>. This page expands those unions instead of showing the internal name.`],
-    [`The parents can stand on <b>completely different ground</b> than the breeding stick. Only the stick's own ground decides what may appear on it.`,
-     `The soil and sub-soil checks are run against the coordinates of the breeding stick alone. Neighbours are read for their crop, their stats, how grown they are and whether their own stick still holds fertiliser - never for what they are standing on.`],
-    [`<b>Once a plant is grown, the block under it can be taken away.</b> The under block is checked when something is planted and on every growth tick, and a mature plant has no growth ticks left to fail - so one block can serve a whole setup. Grow the parent on it, break it out from underneath, and put it under the breeding stick, which is where the copy has to be able to land. Diareed and its block of diamond is the case where this is worth the walk, but it applies to all ${Object.values(C).filter(c => c.subsoil.length).length} crops marked <span class="mark">&#9670;</span>. Put the block back before you pick the crop: harvesting checks the requirements again.`,
-     `<em>canGrow()</em> returns false for a mature plant before looking at any requirement, so there is nothing left for a missing sub-soil to stop. Nothing removes the plant either - a stick only breaks itself through <em>onInvalidSoilDetected()</em>, which the block calls after reading <em>y - 1</em> against the crop's soil list, while the sub-soil sits at <em>y - 2</em> and is not part of that check. <em>canCross()</em> asks only for a crop, no weed, and growth past the crossing threshold, so the stripped parent still counts as a parent. <em>canHarvest()</em> does re-run the requirements, which is why the block has to be back for the harvest.`],
+    [`<b>上层方块</b>是紧贴作物架下面的那一格。<b>下层方块</b>再深一格，也就是作物架下面第二格、上层方块的下面。`,
+     `<em>isValidSoilForCrop()</em> 读 <em>y - 1</em> 处的方块。<em>SubSoilRequirement.getSubSoil()</em> 一上来就做 <em>y -= 2</em>。`],
+    [`<b>矿石也算，不是只有合成出来的块。</b>土下面放一块金矿石，和放一块金块一样管用。`,
+     `每种下层方块都带一个格雷科技材料，检查会接受任何格雷科技关联为该材料、且前缀是 <em>block</em> 或任何以 <em>ore</em> 开头的方块，所以每一种矿石变体都算，不只是存储块。格雷科技自己的矿石方块直接按材料元数据匹配。`],
+    [`<b>光照规则对突变一样管用。</b>需要黑暗的作物不会在露天的白天出现。露天只有夜里才有机会，有屋顶就什么时候都行。`,
+     `这个需求读的是作物架处实际的光照等级，而不是能不能看到天空的标志；最低和最高光照需求的 <em>onlyPreventsHarvest()</em> 都是 false，所以它们把关种植的方式和下层方块完全一样。`],
+    [`<b>少数作物接受好几种不同的上层方块</b>，${Object.keys(C).length} 种里有 ${Object.values(C).filter(c => topParts(c).length > 1).length} 种，所以像“石头 / 泥土&#8203;/草方块 / 菌丝 / 下界岩”这样的写法是指其中任意一种都行，不是四种都要。Glowshroom 就是其中之一。其余每一种作物都只接受一种上层方块。`,
+     `这几种来自的土壤列表本身是别的列表的并集，而不是方块的列表。<em>netherMushroom</em> 是 <em>mushroom</em> 加 <em>netherrack</em>，而 <em>mushroom</em> 自己又是 <em>stone</em> 加 <em>dirt/grass</em> 加 <em>mycelium</em>。本页把这些并集展开，而不是显示内部名称。`],
+    [`亲本可以站在和杂交架<b>完全不同的地面</b>上。只有作物架自己脚下的地面决定它上面能出现什么。`,
+     `土壤和下层方块的检查只对杂交架自己的坐标跑。读邻居是为了它的作物、它的属性、它长到什么程度，以及它自己的架子里还有没有肥料，从来不看它站在什么上面。`],
+    [`<b>植株一旦长成，它下面的方块就可以拿走。</b>下层方块是在种下去的时候和每一个生长刻检查的，而成熟的植株已经没有生长刻可以失败了，所以一块方块可以服务一整套装置。用它把亲本养大，从下面挖出来，再放到杂交架下面，因为那里才是复制品必须落得下去的地方。Diareed 和它的钻石块是最值得跑这一趟的例子，但这对所有 ${Object.values(C).filter(c => c.subsoil.length).length} 种带 <span class="mark">&#9670;</span> 标记的作物都成立。摘作物之前把方块放回去：收获会再检查一次需求。`,
+     `<em>canGrow()</em> 对成熟的植株在看任何需求之前就返回 false，所以缺了的下层方块已经没有东西可以拦了。也没有任何东西会移除植株：架子只会通过 <em>onInvalidSoilDetected()</em> 自己断掉，而那是方块读了 <em>y - 1</em> 并对照作物的土壤列表之后调用的，下层方块坐在 <em>y - 2</em>，不在那次检查里。<em>canCross()</em> 只要求有作物、没有杂草、生长过了杂交阈值，所以被抽走方块的亲本仍然算亲本。<em>canHarvest()</em> 确实会重跑需求，这就是收获时方块必须放回去的原因。`],
   ]},
 
-  { h: `Water and fertiliser`,
-    lead: `Both feed a single number the game calls the Nutrient Score, and that number decides how fast anything grows - or whether it grows at all.`,
+  { h: `水和肥料`,
+    lead: `两样都汇进游戏里叫做营养评分的同一个数，而这个数决定东西长得多快，甚至决定它长不长。`,
     items: [
-    [`<b>A full water tank is worth +10 Nutrient Score, and so is full fertiliser.</b> The base score is 5 and an open sky adds 2. These two are the largest contributions you control.`,
-     `The score is built as: base 5, plus up to 10 for water, plus up to 10 for fertiliser, plus 2 for sky access, plus whichever is larger of a humidity bonus (up to 14) or a liked-biome bonus (up to 28), for a ceiling of 55. Water and fertiliser count in tenths rounded <b>up</b>, so a single stored unit is already worth +1 and 100 gives the full 10.`],
-    [`<b>A higher-tier crop will simply refuse to grow on a dry stick</b> - unless the biome is carrying it. The score a crop needs is twice its tier, and base plus open sky only reaches 7, which covers tier 3 and nothing above it. A wet or liked biome adds score whatever your tanks say, so the same crop that stalls in a desert can grow untended in a jungle.`,
-     `Growth rate compares <em>score × 5</em> against <em>tier × 10</em>, so the requirement is a score of twice the tier. Each point of that scaled difference adds 1% speed, or costs 4% below the line down to a floor of zero - and since one Nutrient Score point is five of them, a score point is worth +5% above the line and -20% below it. Measured against the same crop with both tanks full, in a biome giving no humidity or liked-biome bonus: a tier 3 crop on a dry stick runs at about half speed, a tier 5 at roughly a fifth, and a tier 8 does not grow at all.`],
-    [`<b>Keep both topped up all the time</b> - every growth tick spends a point of each, so they drain constantly. Outdoors, rain refills water for free. Early on the easiest tool by far is the <b>Watering Can from Extra Utilities</b>: hold right-click over the patch and it keeps the whole thing wet.`,
-     `The growth tick decrements the water and fertiliser stores by one each. Rain tops water up 11 points at a time, skipped if the store is already over 100 and capped at 101 - that extra point covers the same tick's own -1, so it settles at exactly 100. (Which tool you use is practical advice. How full you keep it is not: the score scales with the amount stored, so a nearly empty tank is not the same as a full one.)`],
-    [`<b>Before you can produce fertiliser yourself, buy it from a vending machine.</b> It is the cheapest early supply, and a breeding farm consumes it constantly. It raises growth speed and protects your stats at the same time.`,
-     `One store is read by two separate systems: the Nutrient Score takes up to 10 from it, and the stat roll uses it as the condition for clamping away negative results. (Where you buy it is practical advice, not a code detail.)`],
-    [`<b>The enriched versions are worth ten times as much per unit</b> - that goes for fertiliser and for Weed-EX alike. Once you can make them, the same tank lasts ten times longer.`,
-     `Fluids are registered with a potency value. Plain fertiliser is 1 and enriched fertiliser is 10; plain Weed-EX is 1 and GregTech's WeedEX9000 is 10.`],
-    [`<b>Distilled water hydrates twice as well as ordinary water</b>, which matters once you are piping water to the crops.`,
-     `The hydration registry gives ordinary water a potency of 1 and GregTech's distilled water a potency of 2.`],
-    [`<b>The <em>Likes</em> line in NEI is a list of biome tags, and matching them is the largest single bonus in the game.</b> Match one and the crop gets +14 Nutrient Score, match two and it gets +28 - more than half the ceiling of 55. A third tag does nothing, the count is capped at two. It also replaces the wet-biome bonus rather than adding to it, so a crop in a biome it likes stops caring how damp the place is. The crop panel on this page lists the tags next to the growth time.`,
-     `The tile counts how many of <em>getLikedBiomeTags()</em> appear in the biome's own <em>BiomeDictionary</em> types, clamps that count to 2, and hands it to <em>getNutrientsPerCycle()</em>. There the score ends with <em>max(humidityBonus, matched × 14)</em>, where the humidity bonus is <em>(rainfall - 0.5) ÷ 0.3</em> clamped to 0…1 and multiplied by 14. Which is why the two never stack and why 28 is the most a biome can ever be worth.`],
-    [`<b>Two ways to find out whether a spot is any good, neither of them inside CropsNH.</b> A <b>Portable Scanner</b> used on a crop stick prints the Nutrient Score out of the score that crop needs - it works on an empty stick too, so you can test a place before planting. <b>Nature's Compass</b> lists the tags of every biome as subtext and can sort biomes by tag, which is the way to find somewhere your crop likes. In the <b>Industrial Farm</b> the question goes away: an Environmental Module carries one tag and is added on top of whatever the biome already has, so two of them reach the +28 anywhere.`,
-     `The scanner readout comes from <em>BlockScanningEventHandler</em>, which calls <em>getPlantLensStatus()</em> and then <em>getNutrientScore()</em>, formatted through the same <em>scanner.6</em> string the Industrial Farm uses. <em>MTEIndustrialFarm</em> builds a set from <em>BiomeDictionary.getTypesForBiome()</em> at its own position, then adds the tag of every <em>ItemEnvironmentalModule</em> in its slots before counting matches, so modules top the biome up rather than replace it. The tags themselves are Forge's, which is why a biome's list belongs to the mod that added it and CropsNH never prints it.`],
+    [`<b>水罐满值 +10 营养评分，肥料满也是 +10。</b>基础分是 5，露天再加 2。这两项是你能掌控的最大的贡献。`,
+     `评分是这么搭起来的：基础 5，水最多 +10，肥料最多 +10，能看到天空 +2，再加上湿度加成（最多 14）和喜好群系加成（最多 28）里较大的那个，上限 55。水和肥料按十分之一计并<b>向上</b>取整，所以只存一个单位就已经值 +1，存到 100 给满 10。`],
+    [`<b>等级高的作物在干的作物架上干脆不长</b>，除非群系在撑着它。作物要的评分是它等级的两倍，而基础分加露天只到 7，只够等级 3，再往上就不行。潮湿或者喜好的群系不管你的罐子怎么样都会加分，所以同一种作物在沙漠里停着不动，在丛林里却能没人管也照长。`,
+     `生长速率拿 <em>score × 5</em> 和 <em>tier × 10</em> 比，所以要求就是评分达到等级的两倍。这个换算过的差值每一点，在线以上加 1% 速度，在线以下扣 4%，最低扣到零；而一点营养评分等于其中的五点，所以一点评分在线以上值 +5%，在线以下值 -20%。以同一种作物两罐都满、且群系不给湿度和喜好加成作基准量出来：等级 3 的作物在干架子上大约半速，等级 5 大约五分之一，等级 8 完全不长。`],
+    [`<b>两样都要一直保持满着</b>，每个生长刻各花掉一点，所以它们一直在掉。露天时下雨会免费补水。前期最省事的工具是<b>更多实用设备（Extra Utilities）的浇水壶</b>：对着地块按住右键，整片就一直是湿的。`,
+     `生长刻把水和肥料的存量各减一。下雨一次给水补 11 点，存量已经超过 100 就跳过，并且封顶在 101，多出来的那一点正好抵掉同一刻自己的 -1，于是稳在整 100。（用哪个工具是实用建议。保持多满则不是：评分随存量变化，所以快空的罐子和满罐不是一回事。）`],
+    [`<b>在你能自己产肥料之前，去自动售货机买。</b>那是前期最便宜的来源，而杂交农场一直在吃它。它既提高生长速度，又护着你的属性。`,
+     `同一个存量被两套系统读：营养评分从里面拿最多 10，而属性判定拿它当作把负结果夹掉的条件。（在哪买是实用建议，不是代码细节。）`],
+    [`<b>富集版本每单位值十倍</b>，肥料和除草剂都一样。一旦你做得出来，同一个罐子能撑十倍久。`,
+     `流体注册时带一个效价值。普通肥料是 1，富集肥料是 10；普通除草剂是 1，格雷科技的 WeedEX9000 是 10。`],
+    [`<b>蒸馏水的补水效果是普通水的两倍</b>，等你开始用管道给作物送水，这一点就有意义了。`,
+     `补水注册表给普通水的效价是 1，给格雷科技蒸馏水的效价是 2。`],
+    [`<b>NEI 里的<em>喜好</em>那一行是一串生物群系标签，匹配它们是游戏里最大的单项加成。</b>匹配一个，作物拿 +14 营养评分；匹配两个拿 +28，超过 55 上限的一半。第三个标签没有用，计数封顶在 2。它还会顶掉潮湿群系加成，而不是叠上去，所以作物待在自己喜欢的群系里，就不再在乎那地方有多湿。本页的作物面板把这些标签列在生长时间旁边。`,
+     `方块实体数一数 <em>getLikedBiomeTags()</em> 里有多少个出现在这个群系自己的 <em>BiomeDictionary</em> 类型中，把这个计数夹到 2，然后交给 <em>getNutrientsPerCycle()</em>。评分在那里以 <em>max(humidityBonus, matched × 14)</em> 收尾，其中湿度加成是 <em>(rainfall - 0.5) ÷ 0.3</em> 夹进 0…1 之后乘以 14。这就是两者永不叠加、以及 28 是一个群系最多能值多少的原因。`],
+    [`<b>有两个办法能知道一个地方好不好，都不在 CropsNH 里面。</b>对着作物架用<b>便携式扫描仪</b>会打出营养评分和这种作物需要的评分，空架子上也管用，所以可以先测再种。<b>Nature's Compass</b> 把每个群系的标签作为副文本列出来，还能按标签给群系排序，这是找到你的作物喜欢的地方的办法。在<b>工业农场</b>里这个问题就不存在了：一个环境模块带一个标签，而且是加在群系已有的之上，所以两个模块在任何地方都能凑到 +28。`,
+     `扫描仪的读数来自 <em>BlockScanningEventHandler</em>，它调用 <em>getPlantLensStatus()</em>，然后是 <em>getNutrientScore()</em>，并通过工业农场用的同一个 <em>scanner.6</em> 字符串格式化。<em>MTEIndustrialFarm</em> 在自己的位置上用 <em>BiomeDictionary.getTypesForBiome()</em> 建一个集合，再把插槽里每一个 <em>ItemEnvironmentalModule</em> 的标签加进去，然后才数匹配，所以模块是给群系加料，不是取代它。标签本身是 Forge 的，这就是一个群系的标签列表属于添加它的那个模组、而 CropsNH 从来不打印它的原因。`],
   ]},
 
-  { h: `Getting good stats`,
-    lead: `Growth, gain and resistance drift a little on every successful cross.`,
+  { h: `把属性堆好`,
+    lead: `每一次成功的杂交，生长速度、产量和抗性都会小幅漂一下。`,
     items: [
-    [`<b>Fertiliser in every parent stops stats from dropping.</b> One parent running dry restores the negative half of the roll for all three stats.`,
-     `Each stat rolls a change between the <em>Breeding Range Low</em> and <em>High</em> configs, -2 to +4 by default. Only when every counted parent still has fertiliser is a negative roll clamped to zero.`],
-    [`The starting point is the <b>average of the parents that actually counted</b> - not of everything standing around the stick.`,
-     `The average is taken over the filtered parent list: for a copy only the neighbours grown past their crossing threshold and holding the same crop, for a mutation only those past their breeding threshold whose crop is in the recipe's parents or the matched pool. An under-grown neighbour contributes nothing to the average, and its empty fertiliser tank is ignored as well. It is integer division, so fractions are lost each time.`],
-    [`<b>Wheat, Potato, Carrot, Dandelion and Poppy have no recipe, and they do not need one.</b> A crop that comes out of a pool draw takes its stats from the two parents beside the stick, not from whatever it turns out to be. So put two 31/31/31 parents that share a pool with Carrot around a stick, and the Carrot that eventually appears is already 31/31/31. Pick the parents by the smallest pool they share. <b>Salty Root + Turnip</b> share only <em>root</em>, which holds ${POOLM.root.length} crops, so each of them comes up ${pct(0.5 / POOLM.root.length)} of the time. A pair whose only shared pool is <em>food</em> is spread over ${POOLM.food.length} crops instead, which is ${pct(0.5 / POOLM.food.length)}. Gaia Wart and Primordial Berry are in no pool at all, so those two really do have to be cloned up one plant at a time.`,
-     `<em>attemptBreeding()</em> hands its neighbour list to <em>getBreedingResult()</em>, which filters that same list in place - for a pool draw it removes every neighbour whose crop the matched pool does not contain. What is left is mapped to its seeds and passed to <em>variateStat()</em> once per stat, and the fertiliser flag is an <em>allMatch</em> over the same list. Nothing along that path reads the result, which is why the result's own stats never enter into it.`],
+    [`<b>每个亲本里都有肥料就不会掉属性。</b>只要有一个亲本干了，三项属性向下的那一半判定就都回来了。`,
+     `每项属性会在 <em>Breeding Range Low</em> 和 <em>High</em> 两个配置项之间掷一个变化量，默认 -2 到 +4。只有当每一个计入的亲本都还有肥料时，负的结果才会被夹成零。`],
+    [`起点是<b>真正计入的那些亲本的平均值</b>，不是架子周围所有东西的平均值。`,
+     `平均值取自过滤后的亲本列表：复制时只算长过杂交阈值、且作物相同的邻居；突变时只算长过杂交阈值、且作物在配方亲本或匹配到的池里的邻居。没长够的邻居对平均值毫无贡献，它空着的肥料罐也一样被忽略。这是整数除法，所以每次都会丢掉小数。`],
+    [`<b>Wheat、Potato、Carrot、Dandelion 和 Poppy 没有配方，它们也不需要。</b>从池里抽出来的作物，属性取自架子旁边那两个亲本，而不是取自它最后变成了什么。所以把两株 31/31/31、并且和 Carrot 共享一个池的亲本摆在架子两边，最终冒出来的那个 Carrot 就已经是 31/31/31 了。按它们共享的最小的池来挑亲本。<b>Salty Root + Turnip</b> 只共享 <em>root</em>，那里面有 ${POOLM.root.length} 种作物，所以每一种出现的概率是 ${pct(0.5 / POOLM.root.length)}。而只共享 <em>food</em> 的一对则摊到 ${POOLM.food.length} 种作物上，也就是 ${pct(0.5 / POOLM.food.length)}。Gaia Wart 和 Primordial Berry 完全不在任何池里，所以这两种真的只能一株一株地克隆上去。`,
+     `<em>attemptBreeding()</em> 把它的邻居列表交给 <em>getBreedingResult()</em>，后者就地过滤同一个列表：池抽取时，它移除作物不在匹配到的池里的每一个邻居。剩下的被映射成它们的种子，每项属性各调用一次 <em>variateStat()</em>，而肥料标志是对同一个列表的 <em>allMatch</em>。这条路上没有任何地方读结果，这就是结果自己的属性从不参与其中的原因。`],
   ]},
 
-  { h: `Weeds`,
-    lead: `Weeds cannot destroy a grown crop. The risk is to the empty stick between the parents.`,
+  { h: `杂草`,
+    lead: `杂草毁不掉长成的作物。危险的是亲本之间那根空架子。`,
     items: [
-    [`<b>Resistance 31 is total immunity, and it covers three separate checks:</b> the plant cannot be overgrown, cannot fall sick, and cannot be trampled. It is the most useful stat to max on anything you intend to leave standing.`,
-     `The disease check is <em>resistance &gt; random(0…30)</em>, which 31 always wins. The overgrowth path and the trample check each have their own explicit "resistance of 31 or more, do nothing" guard.`],
-    [`Below 31, the chance of resisting a disease is <b>resistance ÷ 31</b>. Resistance 20 gives about 65%, resistance 25 about 81%.`,
-     `Same check as above - the roll is uniform over 0…30, so a resistance of r wins r out of 31 times.`],
-    [`<b>Weeds never replace a grown crop.</b> A weed beside a planted crop transfers disease instead, and that is what resistance blocks.`,
-     `Weed planting has only two call sites in the whole mod, and both fire only on a stick holding no crop. When a spreading weed finds an occupied neighbour it calls the disease transfer instead.`],
-    [`<b>The empty stick in the middle is the vulnerable one.</b> If a weed grows there, breeding stops completely. The parents are unaffected, but nothing more will be produced until you clear it.`,
-     `An empty stick rolls the <em>Weed Spawn Chance</em> config (1 in 100 by default) on every growth tick where breeding did not succeed. Once it holds a weed the growth tick takes the "has a crop" branch and never calls <em>attemptBreeding()</em> again.`],
-    [`<b>Weed-EX in the middle stick prevents that</b>, which is what makes a setup safe to leave running unattended.`,
-     `<em>spawnWeed()</em> checks the stored Weed-EX before it plants anything and burns 5 points instead of placing the weed. A full 750-point tank blocks 150 spawns.`],
-    [`<b>A grown Necrobloom with a high growth stat spreads weeds itself.</b> It has to be mature, have a growth stat above 8, and have resistance lower than that growth. With all three met it seeds weeds into the empty sticks around it, so keep it away from a breeding setup.`,
-     `It lowers its weed-spreading threshold to a growth <i>stat</i> of 8, against the default of 24 that ordinary crops use. That is a stat on the 1…31 scale, not a growth stage. Even so it stays stricter than a real weed, which spreads from 50% growth with no stat conditions at all.`],
+    [`<b>抗性 31 是完全免疫，而且管住三项各自独立的检查：</b>植株不会被杂草盖过、不会生病、也不会被踩坏。凡是你打算一直留着的东西，这是最值得堆满的属性。`,
+     `生病的检查是 <em>resistance &gt; random(0…30)</em>，31 永远赢。被盖过的路径和踩踏检查各自还有一条明写的“抗性 31 及以上就什么都不做”的守卫。`],
+    [`31 以下，扛住疾病的概率是<b>抗性 ÷ 31</b>。抗性 20 约 65%，抗性 25 约 81%。`,
+     `和上面是同一个检查，判定在 0…30 上均匀分布，所以抗性为 r 时 31 次里赢 r 次。`],
+    [`<b>杂草绝不会顶掉长成的作物。</b>长成的作物旁边的杂草改成传播疾病，而抗性挡的正是这个。`,
+     `整个模组里种下杂草只有两处调用，两处都只在架子上没有作物时触发。蔓延的杂草碰到已经被占住的邻居时，改成调用疾病传播。`],
+    [`<b>中间那根空架子才是脆弱的。</b>那里一旦长出杂草，杂交就彻底停了。亲本不受影响，但在你清掉它之前不会再产出任何东西。`,
+     `空架子在每一个杂交没成功的生长刻上，都会对 <em>Weed Spawn Chance</em> 配置项（默认百分之一）掷一次。一旦它上面有了杂草，生长刻就走“有作物”的分支，再也不会调用 <em>attemptBreeding()</em>。`],
+    [`<b>中间那根架子里放除草剂就能防住这件事</b>，这也是一套装置能扔着不管的原因。`,
+     `<em>spawnWeed()</em> 在种下任何东西之前先看存的除草剂，改成消耗 5 点而不是放杂草。装满的 750 点罐子能挡 150 次生成。`],
+    [`<b>长成的 Necrobloom 如果生长速度很高，自己会散播杂草。</b>它得成熟、生长速度属性高于 8，而且抗性低于那个生长速度。三条都满足时，它会往周围的空架子里播杂草，所以别把它放在杂交装置附近。`,
+     `它把自己散播杂草的门槛降到生长速度<i>属性</i>为 8，普通作物用的默认值是 24。那是 1…31 这个尺度上的属性，不是生长阶段。即便如此它还是比真正的杂草严：杂草从 50% 生长度就开始蔓延，没有任何属性条件。`],
   ]},
 
-  { h: `Walking through your farm`,
-    lead: `Moving through a crop field can break the sticks and lose the plants on them.`,
+  { h: `在自家农田里走动`,
+    lead: `在作物田里走来走去可能弄断架子，连上面的植株一起没了。`,
     items: [
-    [`<b>Do not sprint across a crop field.</b> Sprinting can break a crop stick and destroy the plant on it, and the higher the tier the more often it happens. A resistance-31 plant is immune, and so is anything standing on tilled Fertilized Dirt, Enchanted Earth or Clean Dirt, which are registered as trample-proof.`,
-     `Sprinting first rolls roughly <em>1 in 100 × 0.95^tier</em> - about 1 in 95 for a tier 1 crop and 1 in 44 for a tier 16 one. Only if that hits does it roll again against resistance, breaking the stick when <em>random(0…30)</em> beats it. So the first figure is the ceiling, not the real rate: a tier 1 crop at resistance 20 actually breaks about 1 collision in 295.`],
-    [`<b>Do not land on crops from a height.</b> Any drop over three quarters of a block can break the stick, and from 1.75 blocks it always does.`,
-     `Landing triggers a check once the fall distance passes 0.75. The chance of breaking is the fall distance minus 0.75, so at 1.75 blocks the roll can no longer fail.`],
-    [`<b>Crouch to walk past crops that damage you.</b> Ore berries, Bamboo, Thornvine and Cactus deal half a heart on contact. Sneaking skips the damage entirely.`,
-     `The collision handler applies the crop's contact damage only when the entity is not sneaking. Those four crop types are the ones that declare a damage value above zero, all of them 1.0.`],
+    [`<b>别在作物田里疾跑。</b>疾跑可能弄断作物架并毁掉上面的植株，等级越高越常发生。抗性 31 的植株免疫，站在耕作过的施肥土、附魔土或洁净泥土上的也免疫，这三种被注册成防踩踏。`,
+     `疾跑先掷大约 <em>1/100 × 0.95^tier</em>，等级 1 的作物约 1/95，等级 16 的约 1/44。只有掷中了才会再对抗性掷一次，当 <em>random(0…30)</em> 赢过抗性时弄断架子。所以第一个数字是上限，不是实际发生率：等级 1、抗性 20 的作物实际上大约每 295 次碰撞才断一次。`],
+    [`<b>别从高处落到作物上。</b>超过四分之三格的下落就可能弄断架子，从 1.75 格落下则必断。`,
+     `落地在下落距离超过 0.75 之后触发一次检查。弄断的概率是下落距离减去 0.75，所以到 1.75 格时判定不可能再失败。`],
+    [`<b>路过会伤人的作物时蹲着走。</b>矿莓类、Bamboo、Thornvine 和 Cactus 碰到就造成半颗心伤害。潜行可以完全免掉。`,
+     `碰撞处理只在实体没有潜行时施加作物的接触伤害。那四类作物是仅有的把伤害值声明成大于零的，全都是 1.0。`],
   ]},
 
-  { h: `Odd corners`,
-    lead: `Deliberate oddities in the mod.`,
+  { h: `古怪的角落`,
+    lead: `模组里刻意留下的怪东西。`,
     items: [
-    [`<b>Walking into a Goldfish plant makes it scream.</b> A fully grown one plays at five times normal volume and a much lower pitch, so it carries a long way. A young one is quiet. Crouching skips it.`,
-     `The collision handler skips the crop's hook entirely for a sneaking entity, and the scream only fires for players. Once mature it plays at volume 5.0 and pitch 0.5, against the 1.0 of an ordinary sound. Before maturity the volume is 3.0 scaled by growth and the pitch is 4.0 minus growth.`],
-    [`<b>It also screams at random while it is still growing</b>, roughly once every 512 growth ticks per plant. A fully grown patch is silent unless stepped on.`,
-     `The random scream is rolled from the growth tick, which only runs while the plant is actually growing: it draws a number under 512 and screams on exactly 42. That also means the random one is always the quiet version - the loud scream only comes from being stepped on. Two configs cover this: one silences crop sounds entirely, another leaves the random screams but stops the stepped-on one.`],
-    [`<b>Trollplant takes an absurd catalyst to duplicate.</b> Five screws made of Fool's Ruby, an item with no other use. Two clay bricks or eight IC2 scrap work as well.`,
-     `Its constructor registers three duplication catalysts: two vanilla bricks, five of the <em>screwFoolsRuby</em> ore dictionary entry, and eight IC2 scrap. Its flavour text is "Trololololol, lololol, lololol!".`],
+    [`<b>撞到 Goldfish 植株它会尖叫。</b>完全长成的那株以五倍音量、低得多的音调播放，所以传得很远。年轻的则很安静。潜行可以避开。`,
+     `碰撞处理对潜行的实体会完全跳过作物的钩子，而且尖叫只对玩家触发。成熟之后音量 5.0、音调 0.5，普通声音则是 1.0。成熟之前音量是 3.0 乘以生长进度，音调是 4.0 减去生长进度。`],
+    [`<b>它在还在长的时候也会随机尖叫</b>，每株大约每 512 个生长刻一次。完全长成的一片除非被踩到，否则是安静的。`,
+     `随机尖叫是从生长刻里掷的，而生长刻只在植株确实在长的时候跑：它抽一个小于 512 的数，正好是 42 时尖叫。这也意味着随机的那种永远是安静版本，响的那次只来自被踩。有两个配置项管这件事：一个把作物音效整个关掉，另一个留着随机尖叫但停掉被踩的那次。`],
+    [`<b>Trollplant 要用荒唐的催化剂才能复制。</b>五个愚人红宝石做的螺丝，一种没有别的用处的物品。两块黏土砖或者八个 IC2 废料也一样行。`,
+     `它的构造函数注册了三种复制催化剂：两个原版砖、五个 <em>screwFoolsRuby</em> 矿物词典条目，以及八个 IC2 废料。它的风味文本是 “Trololololol, lololol, lololol!”。`],
   ]},
 
-  { h: `Where crops come from`,
-    lead: `Not every crop can be bred, and not every crop can turn up by chance.`,
+  { h: `作物从哪里来`,
+    lead: `不是每种作物都能杂交出来，也不是每种都能靠运气碰上。`,
     items: [
-    [`<b>Some crops belong to no pool at all.</b> With two exceptions those can only come from their exact recipe; random crossing will never produce one. Gaia Wart and Primordial Berry have neither a pool nor a recipe, so the world is their only source.`,
-     `In this pack ${Object.values(C).filter(c => !c.pools.length).length} of the ${Object.keys(C).length} crops are registered into no pool. The crop drawer lists this under Mutation pools.`],
-    [`<b>${Object.values(C).filter(c => !MUT.some(m => m.out === c.id)).length} crops have no recipe at all:</b> Wheat, Potato, Carrot, Dandelion, Poppy, Gaia Wart and Primordial Berry. Nothing breeds into them, so every chain starts from one of these. They do not all come the same way. ${Object.values(C).filter(c => !MUT.some(m => m.out === c.id) && c.pools.length).length} of them are in a mutation pool, so once you own anything you can still draw them out of a pair by luck - and a draw arrives with the parents' stats, which is the easy way to a maxed one. Gaia Wart and Primordial Berry are in no pool either. Those two come from the world and nowhere else, and the only way to improve them is to clone them.`,
-     `Exactly ${Object.values(C).filter(c => !MUT.some(m => m.out === c.id)).length} crops never appear as the output of any recipe, so they can only come from world generation, mobs or loot. ${Object.values(C).filter(c => !MUT.some(m => m.out === c.id) && c.pools.length).length} of them are registered into at least one mutation pool; Gaia Wart and Primordial Berry are registered into none. Everything else in the pack can be bred if you can get hold of its parents.`],
-    [`A recipe with three or four parents needs that <b>many grown crops around one stick</b>. A stick has four sides, so four parents is the limit.`,
-     `Only the four horizontal neighbours are read, and every one of a recipe's parents has to be standing there and grown enough at the same moment.`],
-    [`<b>A recipe marked <em>only in Crop Breeder</em> never fires on a crop stick.</b> The mark is on the recipe, not on the crop, so on its own it does not mean the crop is out of reach. In this pack it works out that way anyway: ${MUT.filter(m => m.machineOnly).length} recipes carry the mark, and for ${MUT.filter(m => m.machineOnly && !MUT.some(x => x.out === m.out && !x.machineOnly) && !C[m.out].pools.length).length} of them the crop has no other recipe and belongs to no pool, so the machine really is its only source.`,
-     `<em>machineOnly()</em> attaches a <em>MachineOnlyBreedingRequirement</em>, whose <em>canBreed()</em> returns false without looking at anything. Requirements are filtered by interface: the crop stick asks only those implementing <em>IWorldBreedingRequirement</em> and the machine only <em>IMachineBreedingRequirement</em>, and this one implements the first alone, so the machine never sees it. On a stick the recipe fails its conditions like any other, which means that half of the attempt falls back to a pool draw.`],
+    [`<b>有些作物完全不属于任何池。</b>除了两个例外，这些只能来自它们各自确切的配方，随机杂交永远产不出来。Gaia Wart 和 Primordial Berry 既没有池也没有配方，所以世界是它们唯一的来源。`,
+     `在这个整合包里，${Object.keys(C).length} 种作物中有 ${Object.values(C).filter(c => !c.pools.length).length} 种没有被注册进任何池。作物面板在突变池那一栏里写着这件事。`],
+    [`<b>有 ${Object.values(C).filter(c => !MUT.some(m => m.out === c.id)).length} 种作物完全没有配方：</b>Wheat、Potato、Carrot、Dandelion、Poppy、Gaia Wart 和 Primordial Berry。没有任何东西能杂交成它们，所以每条链子都从这几种里的一种起头。它们的来路也不都一样。其中 ${Object.values(C).filter(c => !MUT.some(m => m.out === c.id) && c.pools.length).length} 种在突变池里，所以只要你手上有东西，仍然可以靠运气从一对亲本里抽出来，而抽出来的那株带着亲本的属性，这是拿到满属性的捷径。Gaia Wart 和 Primordial Berry 连池也不在。这两种只来自世界，别无他处，唯一能改善它们的办法是克隆。`,
+     `正好有 ${Object.values(C).filter(c => !MUT.some(m => m.out === c.id)).length} 种作物从来不作为任何配方的产物出现，所以它们只能来自世界生成、生物或者战利品。其中 ${Object.values(C).filter(c => !MUT.some(m => m.out === c.id) && c.pools.length).length} 种被注册进至少一个突变池；Gaia Wart 和 Primordial Berry 一个都没有。整合包里其余的东西，只要你弄得到亲本就能杂交出来。`],
+    [`有三个或四个亲本的配方，需要一根架子周围站着<b>那么多长成的作物</b>。架子有四个面，所以四个亲本就是上限。`,
+     `只有水平方向的四个邻居会被读到，而且配方的每一个亲本都得在同一时刻站在那里、并且长得够大。`],
+    [`<b>标着<em>仅限作物培育机</em>的配方在作物架上永远不会触发。</b>这个标记属于配方，不属于作物，所以单凭它并不表示这种作物够不着。不过在这个整合包里结果就是那样：有 ${MUT.filter(m => m.machineOnly).length} 个配方带着这个标记，其中 ${MUT.filter(m => m.machineOnly && !MUT.some(x => x.out === m.out && !x.machineOnly) && !C[m.out].pools.length).length} 个的作物没有别的配方，也不属于任何池，所以机器确实是它唯一的来源。`,
+     `<em>machineOnly()</em> 挂上一个 <em>MachineOnlyBreedingRequirement</em>，它的 <em>canBreed()</em> 什么都不看就返回 false。需求是按接口过滤的：作物架只问实现了 <em>IWorldBreedingRequirement</em> 的，机器只问 <em>IMachineBreedingRequirement</em> 的，而这一个只实现了前者，所以机器根本看不到它。在架子上，这个配方像别的配方一样条件不满足，也就意味着那一半的尝试会退回到池抽取。`],
   ]},
 ];
 
 /* The whole game loop as one chain. Steps that claim something about the mod
    carry the same why box as a tip; the navigational ones do not.           */
 const FLOW = [
-  { t: `Pick any crop`,
-    d: `Barley, Wheat, whatever you already have. The choice does not affect anything later.` },
+  { t: `随便挑一种作物`,
+    d: `Barley、Wheat，你手上有什么都行。这个选择不影响后面任何事。` },
 
-  { t: `Take it to 31/31/31`,
-    d: `Growth, Gain and Resistance each cap at 31. Do this before anything else, and only once - one plant of one crop is enough.`,
-    w: `<em>variateStat()</em> takes the average of every parent that counted - integer division - then adds a roll drawn uniformly between the <em>Breeding Range Low</em> and <em>High</em> configs, -2 to +4 by default. A negative roll is replaced with zero <b>only</b> when every counted parent still holds fertiliser, so a fertilised copy can equal its parent but never fall below it. The total is finally clamped into 1…31 by <em>Constants.MIN_SEED_STAT</em> and <em>MAX_SEED_STAT</em>.`,
+  { t: `把它堆到 31/31/31`,
+    d: `生长速度、产量和抗性各自的上限都是 31。先做这件事，而且只做一次，一种作物的一株就够了。`,
+    w: `<em>variateStat()</em> 取所有计入的亲本的平均值（整数除法），再加上一个在 <em>Breeding Range Low</em> 和 <em>High</em> 配置项之间均匀抽出来的变化量，默认 -2 到 +4。<b>只有</b>当每个计入的亲本都还有肥料时，负的结果才会被换成零，所以施过肥的复制品可以等于亲本，但绝不会低于它。最后由 <em>Constants.MIN_SEED_STAT</em> 和 <em>MAX_SEED_STAT</em> 把总数夹进 1…31。`,
     cycle: {
-      h: `repeat until all three read 31`,
-      w: `<em>Plant Lens</em> is an item in the mod, tooltip "Inspects crops". Right-clicking a crop prints the seed name, then <em>Stats -- Growth / Gain / Resistance</em>, then <em>Soil -- Fertilizer / Water / Weed-EX</em>, plus a warning line if the plant is sick or a growth requirement is unmet. One look covers both the numbers and whether the stick is actually still fed.`,
+      h: `重复到三项都是 31`,
+      w: `<em>植物透镜</em>是模组里的一个物品，提示文本是 “Inspects crops”。右键作物会打出种子名称，然后是 <em>Stats -- Growth / Gain / Resistance</em>，再是 <em>Soil -- Fertilizer / Water / Weed-EX</em>，如果植株生病或者某项生长需求没满足，还会多一行警告。看一眼就同时知道数值和架子是不是真的还有供给。`,
       items: [
-        `Plant it. Keep <b>fertiliser</b> in its stick at all times - that is what removes the downward rolls. Water only affects growth speed.`,
-        `Put a <b>double crop stick</b> next to it and wait for a copy to appear.`,
-        `Check the copy with a <b>Plant Lens</b>.`,
-        `If the numbers went up, breed from that plant instead and remove the old one. Weaker plants of the same crop left nearby pull the average down.`
+        `种下它。<b>肥料</b>要一直在它的架子里，那才是去掉向下判定的东西。水只影响生长速度。`,
+        `在旁边放一根<b>双层作物架</b>，等复制品出现。`,
+        `用<b>植物透镜</b>看看这个复制品。`,
+        `如果数值上去了，就改从那一株继续杂交，把旧的移掉。同种作物里较弱的植株留在附近会把平均值拉下来。`
       ]
     } },
 
-  { t: `Make a second copy`,
-    d: `Run the cycle above once more. A fertilised copy of a 31/31/31 plant is always 31/31/31, so this one needs no checking.`,
-    w: `The average of a single 31/31/31 parent is 31. Upward rolls hit the clamp at 31 and downward rolls are already removed by the fertiliser check, so 31/31/31 is the only reachable result.` },
+  { t: `再做一个复制品`,
+    d: `把上面那个循环再跑一遍。31/31/31 植株施过肥的复制品必定是 31/31/31，所以这一个不用检查。`,
+    w: `单个 31/31/31 亲本的平均值就是 31。向上的判定撞在 31 的上限上，向下的判定已经被肥料检查去掉，所以 31/31/31 是唯一可能出现的结果。` },
 
-  { t: `Left-click both plants for the seeds`,
-    d: `At resistance 31 the seed always drops. Below 31 it can be destroyed along with the plant, which is why step 2 comes first.`,
-    w: `<em>onLeftClick()</em> calls <em>doPlayerHarvest(player, true)</em>, which drops whatever <em>getSeedDrop()</em> returns. That method is gated on <em>passesResistanceCheck()</em>, namely <em>resistance &gt; random(0…30)</em>, so only 31 never fails. A failed roll is not a retry either: the same method ends with an unconditional <em>clear()</em> whenever the remove flag is set, so the plant is gone and you get nothing.` },
+  { t: `左键这两株拿种子`,
+    d: `抗性 31 时种子必掉。低于 31 它可能连植株一起被毁，这正是第 2 步要排在前面的原因。`,
+    w: `<em>onLeftClick()</em> 调用 <em>doPlayerHarvest(player, true)</em>，掉落 <em>getSeedDrop()</em> 返回的东西。那个方法卡在 <em>passesResistanceCheck()</em> 上，也就是 <em>resistance &gt; random(0…30)</em>，所以只有 31 从不失手。判定失败也不是可以重来：同一个方法在移除标志置位时以一个无条件的 <em>clear()</em> 收尾，所以植株没了，你什么也没拿到。` },
 
-  { t: `Plant them one block apart, double crop stick in the gap`,
-    d: `Seed, double stick, seed. The middle stick's ground decides what can appear on it, so build that for the crop you want. The parents only need ground valid for their own crop.`,
-    w: `The soil and sub-soil checks run against the breeding stick's own coordinates. Neighbours are read for their crop, their stats, how grown they are and whether their own stick still holds fertiliser, never for what they are standing on. <em>attemptBreeding()</em> then opens with a roll against the <em>Breeding Chance</em> config, default 3, and returns immediately on two results out of three.` },
+  { t: `隔一格种下，中间放双层作物架`,
+    d: `种子、双层架、种子。中间那根架子脚下的地面决定它上面能出现什么，所以照你想要的作物去搭。亲本只需要对它们自己那种作物有效的地面。`,
+    w: `土壤和下层方块的检查只对杂交架自己的坐标跑。读邻居是为了它的作物、它的属性、它长到什么程度，以及它自己的架子里还有没有肥料，从来不看它站在什么上面。接着 <em>attemptBreeding()</em> 一开头就对 <em>Breeding Chance</em> 配置项（默认 3）掷一次，三次里有两次直接返回。` },
 
-  { t: `Check what the pair can produce`,
-    d: `Two of the same crop never trigger a recipe, but they match every pool that crop belongs to. Pick it below for the full list of results and their odds.`,
+  { t: `看看这一对能产出什么`,
+    d: `两株相同的作物永远不触发配方，但它们匹配这种作物所属的每一个池。在下面选它，就能看到完整的结果列表和概率。`,
     pick: true },
 
-  { t: `Tick each new seed and repeat`,
-    d: `More seeds means more recipes within reach, and recipes beat pool draws whenever a mutation is rolled at all.`,
+  { t: `把每颗新种子勾上，然后重复`,
+    d: `种子越多，够得着的配方就越多，而只要掷出了突变，配方总是排在池抽取前面。`,
     ready: true,
-    w: `Recipes are looked up from the parents present and one is drawn before any pool draw happens. Pools are only consulted when there is no matching recipe, or when the matched recipe's own conditions fail.` },
+    w: `配方是按在场的亲本查出来的，而且在任何池抽取之前就先抽一个。只有在没有匹配的配方、或者匹配到的配方自己的条件不满足时，才会去查池。` },
 ];
 
 function renderFlow() {
   const opts = allSorted.map(c =>
     `<option value="${c.id}">${esc(c.name)}${owned.has(c.id) ? " ✓" : ""}</option>`).join("");
   let html = `<section class="tipgroup" id="sec-flow">
-    <h3>Getting started</h3>
-    <p class="lead">Seven steps from one crop to a working breeding setup. The sections below explain the mechanics behind them.</p>
+    <h3>从头开始</h3>
+    <p class="lead">从一种作物到一套能用的杂交装置，七步。下面各节讲背后的机制。</p>
     <ol class="flow-steps">`;
   FLOW.forEach((s, i) => {
     html += `<li class="flow-step"><span class="flow-n">${i + 1}</span><div class="flow-body">
-      <div class="flow-head"><p><b>${s.t}</b></p>${s.w ? `<span class="why"><button class="why-btn" type="button">why</button>
+      <div class="flow-head"><p><b>${s.t}</b></p>${s.w ? `<span class="why"><button class="why-btn" type="button">依据</button>
         <span class="why-pop" role="note">${s.w}</span></span>` : ""}</div>
       <p>${s.d}</p>`;
     if (s.cycle) html += `<div class="flow-cycle">
-      <div class="flow-cycle-h"><span>&#8635; ${s.cycle.h}</span>${s.cycle.w ? `<span class="why"><button class="why-btn" type="button">why</button>
+      <div class="flow-cycle-h"><span>&#8635; ${s.cycle.h}</span>${s.cycle.w ? `<span class="why"><button class="why-btn" type="button">依据</button>
         <span class="why-pop" role="note">${s.cycle.w}</span></span>` : ""}</div>
       <ol>${s.cycle.items.map(i => `<li>${i}</li>`).join("")}</ol></div>`;
-    if (s.pick) html += `<div class="flow-pick"><label>Two of <select class="field" id="flowPick"><option value="">-</option>${opts}</select></label></div>`;
-    if (s.ready) html += `<p><button class="goview" type="button" data-goview="ready">Open Ready now</button></p>`;
+    if (s.pick) html += `<div class="flow-pick"><label>两株 <select class="field" id="flowPick"><option value="">-</option>${opts}</select></label></div>`;
+    if (s.ready) html += `<p><button class="goview" type="button" data-goview="ready">打开“现在可培育”</button></p>`;
     html += `</div></li>`;
   });
   return html + `</ol></section>`;
@@ -1510,7 +1510,7 @@ function tipGroup(g, id) {
   for (const [text, why] of g.items) {
     html += `<li class="tip"><div class="tip-line">
       <p>${text}</p>
-      ${why ? `<span class="why"><button class="why-btn" type="button">why</button>
+      ${why ? `<span class="why"><button class="why-btn" type="button">依据</button>
         <span class="why-pop" role="note">${why}</span></span>` : ""}
     </div></li>`;
   }
@@ -1542,25 +1542,25 @@ function biomeList() {
     </tr>`;
   };
   return hits.length ? `<div class="tablescroll"><table class="odds">
-      <tr><th>Biome</th><th>Tags</th><th class="num">Crops at +28</th><th>From</th></tr>
+      <tr><th>生物群系</th><th>标签</th><th class="num">+28 的作物</th><th>来自</th></tr>
       ${hits.map(row).join("")}</table></div>`
-    : `<div class="empty">No biome matches that.</div>`;
+    : `<div class="empty">没有匹配的生物群系。</div>`;
 }
 
 function renderBiomes() {
-  return `<p class="viewnote">Which biome to build in. The tags belong to Forge rather than to CropsNH, so this table is read from Minecraft itself and from the mods that add biomes - Biomes O' Plenty, Twilight Forest, RWG and Thaumcraft. A crop matching two of a biome's tags gets +28 Nutrient Score, more than half the ceiling of 55.</p>
-    <div class="pairpick"><label>Search biome or tag<input class="field" id="biomeSearch" type="search"
+  return `<p class="viewnote">该在哪个生物群系里建。标签属于 Forge 而不是 CropsNH，所以这张表读自 Minecraft 本身，以及添加生物群系的那些模组：Biomes O' Plenty、Twilight Forest、RWG 和 Thaumcraft。作物匹配上一个群系的两个标签就拿 +28 营养评分，超过 55 上限的一半。</p>
+    <div class="pairpick"><label>搜索生物群系或标签<input class="field" id="biomeSearch" type="search"
       style="min-width:280px" value="${esc(biomeFilter)}" autocomplete="off"></label></div>
     <div id="biomeList">${biomeList()}</div>`;
 }
 
 function renderTips() {
-  const secs = [{ id: "sec-flow", h: `Getting started` }]
+  const secs = [{ id: "sec-flow", h: `从头开始` }]
     .concat(TIPS.map((g, i) => ({ id: `sec-${i}`, h: g.h })));
-  const index = `<nav class="tipindex" aria-label="Sections on this page">${
+  const index = `<nav class="tipindex" aria-label="本页的章节">${
     secs.map(s => `<button type="button" data-jump="${s.id}">${s.h}</button>`).join("")}</nav>`;
 
-  let html = `<p class="viewnote">Everything here was read out of the pack's own code rather than collected from experience, so it should hold exactly. Hover <span class="why-btn" style="cursor:default">why</span> on any line to see where it comes from.</p>${index}<div class="tips">` + renderFlow();
+  let html = `<p class="viewnote">这里的每一条都是从整合包自己的代码里读出来的，不是靠经验攒的，所以应当分毫不差。把鼠标停在任意一行的 <span class="why-btn" style="cursor:default">依据</span> 上，就能看到它的出处。</p>${index}<div class="tips">` + renderFlow();
   TIPS.forEach((g, i) => { html += tipGroup(g, `sec-${i}`); });
   return html + `</div>`;
 }
@@ -1568,21 +1568,21 @@ function renderTips() {
 /* What this page is and how to work it. Nothing here has a source in the mod,
    which is exactly why it does not belong in Tips & tricks.               */
 function renderAbout() {
-  return `<p class="viewnote">What this tool is, how to work it, and where its numbers come from. The <b>Tips &amp; tricks</b> tab is the other half: that one is about the mod, and every line in it names the method it was read from.</p><div class="tips">`
+  return `<p class="viewnote">这个工具是什么、怎么用它，以及它的数字从哪来。<b>技巧与机制</b>标签页是另外一半：那边讲的是模组，而且每一行都点名了它读自哪个方法。</p><div class="tips">`
     + tipGroup(APP, "sec-app")
-    + `<section class="tipgroup"><h3>Where the data comes from</h3>
-        <p class="lead">Extracted from the bytecode of <code>cropsnh-2.0.101.jar</code>, as shipped in GTNH 2.9 - recipes, pools, soils, sub-soils and light requirements come straight out of <code>MutationLoader</code>, <code>CropLoader</code> and <code>SubSoilRequirementLoader</code>, not from a wiki. Nothing else in the pack registers crops with CropsNH, so the list above is the whole set rather than a selection.</p>
-        <p class="lead">One table is not from CropsNH. Biome tags belong to Forge, and each biome is registered by whichever mod added it, so the <b>Biomes</b> tab is read out of Minecraft itself and out of Biomes O' Plenty, Twilight Forest, RWG and Thaumcraft - the mods in this pack that register any. It is read the same way, from the compiled classes rather than from a wiki, and a mod that adds biomes without registering tags simply will not appear.</p></section>
-      <section class="tipgroup"><h3>What the page stores</h3>
-        <p class="lead">Your ticks are stored in this browser and nowhere else. The page makes no external requests and works offline - move a list between copies from <b>Manage list</b> in the sidebar.</p></section>
-      <section class="tipgroup"><h3>Credit and licence</h3>
-        <p class="lead"><a href="https://github.com/GTNewHorizons/CropsNH" target="_blank" rel="noopener noreferrer">CropsNH</a> is by C0bra5 and the GTNH Team, built on AgriCraft. This is an unofficial fan tool, not affiliated with or endorsed by the GTNH team. Planner code is MIT.</p></section></div>`;
+    + `<section class="tipgroup"><h3>数据从哪里来</h3>
+        <p class="lead">从 GTNH 2.9 附带的 <code>cropsnh-2.0.101.jar</code> 字节码里提取：配方、突变池、土壤、下层方块和光照需求全部直接来自 <code>MutationLoader</code>、<code>CropLoader</code> 和 <code>SubSoilRequirementLoader</code>，不是抄的维基。整合包里没有别的东西向 CropsNH 注册作物，所以上面这份列表是全集，不是精选。</p>
+        <p class="lead">有一张表不来自 CropsNH。生物群系标签属于 Forge，而每个生物群系由添加它的那个模组注册，所以<b>生物群系</b>标签页读自 Minecraft 本身，以及 Biomes O' Plenty、Twilight Forest、RWG 和 Thaumcraft，也就是这个整合包里所有注册了标签的模组。读法是一样的，从编译后的类里读而不是从维基；而一个添加了生物群系却不注册标签的模组，根本不会出现在里面。</p></section>
+      <section class="tipgroup"><h3>本页存了什么</h3>
+        <p class="lead">你的勾选只存在这个浏览器里，别无他处。本页不发任何外部请求，离线也能用，用边栏里的<b>管理列表</b>可以在不同副本之间搬运列表。</p></section>
+      <section class="tipgroup"><h3>致谢与许可</h3>
+        <p class="lead"><a href="https://github.com/GTNewHorizons/CropsNH" target="_blank" rel="noopener noreferrer">CropsNH</a> 由 C0bra5 和 GTNH 团队基于 AgriCraft 制作。本页是非官方的爱好者工具，与 GTNH 团队无关，也未获其背书。规划器代码采用 MIT 许可。</p></section></div>`;
 }
 
 function renderPath() {
   if (!owned.size) {
-    return `<p class="viewnote">This works out a chain of recipes from the crops you already hold to one you want.</p>
-      <div class="empty">Tick off what you have in the rail on the left first.<br>With nothing ticked there is no starting point, so every goal would come back unreachable.</div>`;
+    return `<p class="viewnote">这里会算出一条配方链，从你已经持有的作物通到你想要的那一种。</p>
+      <div class="empty">先在左边的边栏里勾上你已经有的。<br>什么都不勾就没有起点，于是每个目标都会显示成够不着。</div>`;
   }
 
   const { have } = reachable();
@@ -1593,29 +1593,29 @@ function renderPath() {
     (have.has(c.id) ? reachableOpts : blockedOpts).push(opt);
   }
 
-  let html = `<p class="viewnote">A chain of recipes from what you hold to the crop you want. It only follows exact recipes, so a crop that comes out of a pool draw will not have a route here even though you can still get it.</p>
-    <div class="pairpick"><label>Goal<select class="field" id="selTarget" style="min-width:280px">
+  let html = `<p class="viewnote">一条从你持有的东西通到你想要的作物的配方链。它只走确切的配方，所以从突变池抽出来的作物在这里不会有路线，尽管你仍然拿得到它。</p>
+    <div class="pairpick"><label>目标<select class="field" id="selTarget" style="min-width:280px">
       <option value="">-</option>
-      ${reachableOpts.length ? `<optgroup label="Reachable now (${reachableOpts.length})">${reachableOpts.join("")}</optgroup>` : ""}
-      ${blockedOpts.length ? `<optgroup label="Needs something you do not have yet (${blockedOpts.length})">${blockedOpts.join("")}</optgroup>` : ""}
+      ${reachableOpts.length ? `<optgroup label="现在就够得着（${reachableOpts.length}）">${reachableOpts.join("")}</optgroup>` : ""}
+      ${blockedOpts.length ? `<optgroup label="还缺你没有的东西（${blockedOpts.length}）">${blockedOpts.join("")}</optgroup>` : ""}
     </select></label></div>`;
 
   if (!target) {
     return html + (reachableOpts.length
-      ? `<div class="empty">Pick a goal. <b>${reachableOpts.length}</b> crops are reachable from what you hold right now.</div>`
-      : `<div class="empty">Nothing is reachable by recipe from your current set yet.<br>Tick off more of what you actually own, or use the <b>Pool roulette</b> to find a first new crop.</div>`);
+      ? `<div class="empty">挑一个目标。以你现在持有的作物，有 <b>${reachableOpts.length}</b> 种够得着。</div>`
+      : `<div class="empty">以你目前这套，还没有任何东西能靠配方达成。<br>多勾一些你实际拥有的，或者用<b>突变池轮盘</b>找出第一种新作物。</div>`);
   }
-  if (owned.has(target)) return html + `<div class="empty">You already have it.</div>`;
+  if (owned.has(target)) return html + `<div class="empty">你已经有了。</div>`;
 
   const steps = planFor(target);
   if (!steps) {
     const recipes = MUT.filter(x => x.out === target);
     if (!recipes.length) {
-      return html + `<div class="empty"><b>${esc(nm(target))}</b> has no recipe at all. It only ever comes out of a pool draw or from the world, so there is no chain to follow. See the <b>Pool roulette</b>.</div>`;
+      return html + `<div class="empty"><b>${esc(nm(target))}</b> 完全没有配方。它只会来自突变池抽取或者世界本身，所以没有链子可循。请看<b>突变池轮盘</b>。</div>`;
     }
     // one level of "what exactly is in the way", with each blocker's own status
-    const made = recipes.length === 1 ? `this recipe` : `any of these ${recipes.length} recipes`;
-    html += `<p class="viewnote"><b>${esc(nm(target))}</b> cannot be reached by recipe yet. It is made by ${made}, with the parts you are missing in <span style="color:var(--ore);font-weight:600">rust</span>:</p><div class="steps">`;
+    const made = recipes.length === 1 ? `这个配方` : `这 ${recipes.length} 个配方中的任意一个`;
+    html += `<p class="viewnote"><b>${esc(nm(target))}</b> 目前还没法靠配方拿到。它由${made}产出，你缺的部分以<span style="color:var(--ore);font-weight:600">锈色</span>标出：</p><div class="steps">`;
     for (const m of recipes) {
       const missing = m.parents.filter(p => !owned.has(p));
       html += `<div class="step"><div class="idx">-</div><div class="body">
@@ -1623,10 +1623,10 @@ function renderPath() {
         <div class="linkrow">${missing.map(p => {
           const inPools = (C[p].pools || []).length;
           const state = have.has(p)
-            ? `reachable by recipe, set it as the goal first`
+            ? `可以靠配方达成，先把它设成目标`
             : (MUT.some(x => x.out === p)
-                ? (inPools ? `no route yet, but it is in ${inPools} pool${inPools > 1 ? "s" : ""}` : `no route yet and it is in no pool, so it needs its own recipe chain`)
-                : `has no recipe, you have to find it in the world`);
+                ? (inPools ? `还没有路线，但它在 ${inPools} 个突变池里` : `还没有路线，而且它不在任何池里，所以它需要自己的一条配方链`)
+                : `没有配方，只能在世界里找到`);
           return `<span style="font-size:12.5px;color:var(--ink-faint)">
             <button class="inline-crop" type="button" data-crop="${p}">${esc(nm(p))}</button> - ${state}</span>`;
         }).join("")}</div>
@@ -1699,7 +1699,7 @@ function renderPoolDrawer(key) {
     return `<div class="poolrow${owned.has(id) ? " have" : ""}">
       ${cropLink(id, owned.has(id) ? "own" : "miss")}
       <span class="tier">T${c.tier}</span>
-      ${c.subsoil.length ? `<span class="mark" title="needs a specific block under the soil">&#9670;</span>` : ""}
+      ${c.subsoil.length ? `<span class="mark" title="需要土下有特定方块">&#9670;</span>` : ""}
     </div>`;
   };
 
@@ -1707,18 +1707,18 @@ function renderPoolDrawer(key) {
     <div class="drawer-top">
       <h2>${esc(DATA.poolNames[key] || key)}</h2>
       ${backButton()}
-      <button class="btn close" type="button" id="closeDrawer">Close</button>
+      <button class="btn close" type="button" id="closeDrawer">关闭</button>
     </div>
-    <p class="flav" style="font-style:normal">Mutation pool with <b>${members.length}</b> crops in it. Two parents that both belong to this pool can draw any one of them, each equally likely. You already hold <b>${mine.length}</b>.</p>
+    <p class="flav" style="font-style:normal">含 <b>${members.length}</b> 种作物的突变池。同属这个池的两个亲本可以抽到其中任意一种，概率均等。你已经持有 <b>${mine.length}</b> 种。</p>
 
-    <div class="dsec"><h3>Not yours yet (${rest.length})</h3>
+    <div class="dsec"><h3>还没有的（${rest.length}）</h3>
       <div class="poollist">${rest.length ? byName(rest).map(row).join("")
-        : `<span style="color:var(--ink-faint);font-size:13px">You have every crop in this pool.</span>`}</div>
+        : `<span style="color:var(--ink-faint);font-size:13px">这个池里的作物你都有了。</span>`}</div>
     </div>
 
-    <div class="dsec"><h3>Already yours (${mine.length})</h3>
+    <div class="dsec"><h3>已经有的（${mine.length}）</h3>
       <div class="poollist">${mine.length ? byName(mine).map(row).join("")
-        : `<span style="color:var(--ink-faint);font-size:13px">None of these are ticked yet.</span>`}</div>
+        : `<span style="color:var(--ink-faint);font-size:13px">这些还一个都没勾。</span>`}</div>
     </div>`;
 }
 
@@ -1729,18 +1729,18 @@ function renderTagDrawer(t) {
     <div class="drawer-top">
       <h2>${esc(biomeNm(t))}</h2>
       ${backButton()}
-      <button class="btn close" type="button" id="closeDrawer">Close</button>
+      <button class="btn close" type="button" id="closeDrawer">关闭</button>
     </div>
-    <p class="flav" style="font-style:normal">One biome tag. Matching it is worth +14 Nutrient Score to a crop that likes it, and two matched tags are worth +28.</p>
+    <p class="flav" style="font-style:normal">一个生物群系标签。喜欢它的作物匹配上值 +14 营养评分，匹配两个标签值 +28。</p>
 
-    <div class="dsec"><h3>Biomes carrying this tag</h3>
+    <div class="dsec"><h3>带这个标签的生物群系</h3>
       <div class="poollist">${bs.length ? bs.map(b =>
         `<div class="poolrow"><button class="inline-crop" type="button" data-biome="${esc(b)}">${esc(b)}</button>
           <span class="tier">${BIOMES[b].tags.length}</span></div>`).join("")
-        : `<span style="color:var(--ink-faint);font-size:13px">No biome in this pack carries it.</span>`}</div>
+        : `<span style="color:var(--ink-faint);font-size:13px">这个整合包里没有生物群系带它。</span>`}</div>
     </div>
 
-    <div class="dsec"><h3>Crops that like it</h3>
+    <div class="dsec"><h3>喜欢它的作物</h3>
       <div class="poollist">${cs.map(c =>
         `<div class="poolrow${owned.has(c.id) ? " have" : ""}">${cropLink(c.id, owned.has(c.id) ? "own" : "miss")}
           <span class="tier">T${c.tier}</span></div>`).join("")}</div>
@@ -1758,20 +1758,20 @@ function renderBiomeDrawer(b) {
   const list = cs => cs.length
     ? cs.map(c => `<div class="poolrow${owned.has(c.id) ? " have" : ""}">${
         cropLink(c.id, owned.has(c.id) ? "own" : "miss")}<span class="tier">T${c.tier}</span></div>`).join("")
-    : `<span style="color:var(--ink-faint);font-size:13px">None.</span>`;
+    : `<span style="color:var(--ink-faint);font-size:13px">没有。</span>`;
   $("drawer").innerHTML = `
     <div class="drawer-top">
       <h2>${esc(b)}</h2>
       ${backButton()}
-      <button class="btn close" type="button" id="closeDrawer">Close</button>
+      <button class="btn close" type="button" id="closeDrawer">关闭</button>
     </div>
-    <p class="flav" style="font-style:normal">What this biome is worth to a crop. Two matched tags are the cap, a third adds nothing.</p>
-    <div class="dsec"><h3>Its tags</h3>
+    <p class="flav" style="font-style:normal">这个生物群系对作物值多少。匹配两个标签就是上限，第三个不再加。</p>
+    <div class="dsec"><h3>它的标签</h3>
       <div class="poolchips">${e.tags.map(t =>
         `<button class="poolchip" type="button" data-tag="${t}">${esc(biomeNm(t))}</button>`).join("")}</div>
     </div>
-    <div class="dsec"><h3>Crops at the full +28 here</h3><div class="poollist">${list(two)}</div></div>
-    <div class="dsec"><h3>Crops at +14 here</h3><div class="poollist">${list(one)}</div></div>`;
+    <div class="dsec"><h3>在这里能拿满 +28 的作物</h3><div class="poollist">${list(two)}</div></div>
+    <div class="dsec"><h3>在这里拿 +14 的作物</h3><div class="poollist">${list(one)}</div></div>`;
 }
 
 function renderCropDrawer(id) {
@@ -1781,7 +1781,7 @@ function renderCropDrawer(id) {
   const sub = c.subsoil.map(k => {
     const info = DATA.subsoil[k] || {};
     const acc = [...(info.oredict || []), ...(info.modBlocks || [])];
-    return `<dt>Under block</dt><dd>${esc(DATA.subsoilDesc[k] || k)}` +
+    return `<dt>下层方块</dt><dd>${esc(DATA.subsoilDesc[k] || k)}` +
       (acc.length ? `<br><span style="font-family:var(--face-data);font-size:12px;color:var(--ink-faint)">${esc(acc.join(", "))}</span>` : "") +
       `</dd>`;
   }).join("");
@@ -1790,26 +1790,26 @@ function renderCropDrawer(id) {
     <div class="drawer-top">
       <h2>${esc(c.name)}</h2>
       ${backButton()}
-      <button class="btn close" type="button" id="closeDrawer">Close</button>
+      <button class="btn close" type="button" id="closeDrawer">关闭</button>
     </div>
     ${c.flavour ? `<p class="flav">${esc(c.flavour)}</p>` : ""}
 
-    <div class="dsec"><h3>Growing conditions</h3>
-      <p class="flav" style="font-style:normal;margin-bottom:8px">Crop stick on top, <b>top block</b> directly under it, <b>under block</b> one deeper.</p>
+    <div class="dsec"><h3>生长条件</h3>
+      <p class="flav" style="font-style:normal;margin-bottom:8px">作物架在最上面，<b>上层方块</b>紧贴它下面，<b>下层方块</b>再深一格。</p>
       <dl class="dl">
-        <dt>Tier</dt><dd>${c.tier}</dd>
-        <dt>Top block</dt><dd>${topParts(c).length > 1
-          ? `any one of:<br>` + topParts(c).map(s => `· ${esc(DATA.soilGloss[s] || s)}`).join("<br>")
+        <dt>等级</dt><dd>${c.tier}</dd>
+        <dt>上层方块</dt><dd>${topParts(c).length > 1
+          ? `以下任意一种：<br>` + topParts(c).map(s => `· ${esc(DATA.soilGloss[s] || s)}`).join("<br>")
           : esc(topBlock(c))}</dd>
-        ${c.subsoil.length ? sub : `<dt>Under block</dt><dd>anything - no requirement</dd>`}
-        ${c.maxLight !== null ? `<dt>Light</dt><dd>max ${c.maxLight} - needs to be dark</dd>` : ""}
-        ${c.minLight !== null ? `<dt>Light</dt><dd>min ${c.minLight}</dd>` : ""}
-        <dt>Growth time</dt><dd>${c.growth ?? "-"}</dd>
-        ${c.biomes && c.biomes.length ? `<dt>Likes</dt><dd>${
+        ${c.subsoil.length ? sub : `<dt>下层方块</dt><dd>任意，没有要求</dd>`}
+        ${c.maxLight !== null ? `<dt>光照</dt><dd>最高 ${c.maxLight}，需要黑暗</dd>` : ""}
+        ${c.minLight !== null ? `<dt>光照</dt><dd>最低 ${c.minLight}</dd>` : ""}
+        <dt>生长时间</dt><dd>${c.growth ?? "-"}</dd>
+        ${c.biomes && c.biomes.length ? `<dt>喜好</dt><dd>${
           c.biomes.map(tagLink).join(", ")}<br>
-          <span style="font-size:12px;color:var(--ink-faint)">biome tags, not a requirement - see Tips &amp; tricks</span></dd>` : ""}
+          <span style="font-size:12px;color:var(--ink-faint)">生物群系标签，不是硬性需求，详见技巧与机制</span></dd>` : ""}
       </dl>
-      <button class="btn own-toggle" type="button" id="toggleOwn">${owned.has(id) ? `✓ Have it - untick` : `Add to my seeds`}</button>
+      <button class="btn own-toggle" type="button" id="toggleOwn">${owned.has(id) ? `✓ 已有，取消勾选` : `加入我的种子`}</button>
     </div>
 
     ${c.biomes && c.biomes.length ? (() => {
@@ -1817,38 +1817,38 @@ function renderCropDrawer(id) {
       const half = Object.keys(BIOMES).filter(b => matchCount(c, b) === 1).sort();
       const chips = bs => bs.map(b =>
         `<button class="poolchip" type="button" data-biome="${esc(b)}">${esc(b)}</button>`).join("");
-      return `<div class="dsec"><h3>Where it grows best</h3>
+      return `<div class="dsec"><h3>在哪里长得最好</h3>
         ${full.length
-          ? `<p class="flav" style="font-style:normal;margin-bottom:8px">The full <b>+28</b> Nutrient Score - two of its tags match:</p>
+          ? `<p class="flav" style="font-style:normal;margin-bottom:8px">完整的 <b>+28</b> 营养评分，它有两个标签对上了：</p>
              <div class="poolchips">${chips(full)}</div>`
           : `<p class="flav" style="font-style:normal;margin-bottom:8px">${
-              c.biomes.length < 2 ? `It likes a single tag, so a biome can never be worth more than <b>+14</b> to it.` : `No biome in this pack carries two of its tags, so <b>+14</b> is the most it can get from a biome.`}</p>`}
-        ${half.length ? `<p class="flav" style="font-style:normal;margin:12px 0 8px"><b>+14</b> - one tag matches:</p>
+              c.biomes.length < 2 ? `它只喜欢一个标签，所以任何生物群系对它最多值 <b>+14</b>。` : `这个整合包里没有生物群系同时带它的两个标签，所以 <b>+14</b> 就是它从群系那里能拿到的上限。`}</p>`}
+        ${half.length ? `<p class="flav" style="font-style:normal;margin:12px 0 8px"><b>+14</b>，一个标签对上了：</p>
           <div class="poolchips">${chips(half)}</div>` : ""}
       </div>`;
     })() : ""}
 
-    <div class="dsec"><h3>Mutation pools (${c.pools.length})</h3>
-      ${c.pools.length ? `<p class="flav" style="font-style:normal;margin-bottom:8px">Any two parents that share one of these can draw this crop at random. Open a pool to see everything else in it.</p>` : ""}
+    <div class="dsec"><h3>突变池（${c.pools.length}）</h3>
+      ${c.pools.length ? `<p class="flav" style="font-style:normal;margin-bottom:8px">任何两个共享其中之一的亲本，都可能随机抽到这种作物。打开一个池能看到里面还有什么。</p>` : ""}
       <div class="poolchips">${c.pools.length
         ? c.pools.map(p => `<button class="poolchip" type="button" data-pool="${p}">${esc(DATA.poolNames[p] || p)}
             <span class="tier">${POOLM[p] ? POOLM[p].length : 0}</span></button>`).join("")
-        : `<span style="color:var(--ink-faint);font-size:13px">None - this crop can only be obtained from a recipe.</span>`}</div>
+        : `<span style="color:var(--ink-faint);font-size:13px">没有，这种作物只能靠配方拿到。</span>`}</div>
     </div>
 
-    <div class="dsec"><h3>How to get it (${from.length})</h3>
+    <div class="dsec"><h3>怎么拿到它（${from.length}）</h3>
       <div class="linkrow">${from.length
-        ? from.map(m => `<span class="parents">${parentLinks(m.parents)}${m.machineOnly ? ` <span class="tier">Crop Breeder</span>` : ""}</span>`).join("")
-        : `<span style="color:var(--ink-faint)">No recipe.${c.pools.length
-            ? ` Only ever from a pool draw, see the ${c.pools.length} pool${c.pools.length > 1 ? "s" : ""} above.`
-            : ` Not from a pool either, so this one is found in the world.`}</span>`}</div>
+        ? from.map(m => `<span class="parents">${parentLinks(m.parents)}${m.machineOnly ? ` <span class="tier">作物培育机</span>` : ""}</span>`).join("")
+        : `<span style="color:var(--ink-faint)">没有配方。${c.pools.length
+            ? ` 只会来自突变池抽取，见上面的 ${c.pools.length} 个池。`
+            : ` 也不在任何池里，所以这一种是在世界里找到的。`}</span>`}</div>
     </div>
 
-    <div class="dsec"><h3>Used as a parent (${used.length})</h3>
+    <div class="dsec"><h3>作为亲本用在（${used.length}）</h3>
       <div class="linkrow">${used.length
         ? used.map(m => `<span>${cropLink(m.out, owned.has(m.out) ? "own" : "miss")}
             <span class="parents" style="font-size:12px"> ← ${parentLinks(m.parents)}</span></span>`).join("")
-        : `<span style="color:var(--ink-faint)">Nowhere.</span>`}</div>
+        : `<span style="color:var(--ink-faint)">没有。</span>`}</div>
     </div>`;
 
   $("toggleOwn").onclick = () => { toggle(id); paintDrawer(); };
@@ -2003,13 +2003,13 @@ $("search").addEventListener("keydown", e => {
   if (!first) return;
   filter = ""; e.target.value = "";
   toggle(first.id);                       // toggle() saves and re-renders
-  status(owned.has(first.id) ? `Added ${first.name}` : `Removed ${first.name}`, "ok");
+  status(owned.has(first.id) ? `已添加 ${first.name}` : `已移除 ${first.name}`, "ok");
 });
 
 $("clearAll").onclick = () => {
   if (!owned.size) return;
   snapshot(); owned.clear(); save(); render();
-  status(`Cleared ${undoState.length} crops - Undo is right above.`, "warn");
+  status(`已清空 ${undoState.length} 种作物，撤销按钮就在上面。`, "warn");
 };
 
 $("undo").onclick = () => {
@@ -2018,7 +2018,7 @@ $("undo").onclick = () => {
   snapshot();                       // so Undo can be undone
   owned = new Set(back);
   save(); render();
-  status(`Restored ${owned.size} crops.`, "ok");
+  status(`已恢复 ${owned.size} 种作物。`, "ok");
 };
 
 /* --- export / import --- */
@@ -2027,10 +2027,10 @@ $("btnCopy").onclick = async () => {
   box.value = currentCode();
   try {
     await navigator.clipboard.writeText(box.value);
-    status(`Copied to clipboard.`, "ok");
+    status(`已复制到剪贴板。`, "ok");
   } catch (e) {
     box.focus(); box.select();
-    status(`Clipboard is blocked - the box is selected, press Ctrl+C.`, "warn");
+    status(`剪贴板被拦住了，文本已经选中，请按 Ctrl+C。`, "warn");
   }
 };
 
@@ -2050,9 +2050,9 @@ $("btnFile").onclick = () => {
     a.href = url; a.download = `cropsnh-seeds-${stamp}.json`;
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 2000);
-    status(`Sent cropsnh-seeds-${stamp}.json to your downloads.`, "ok");
+    status(`已把 cropsnh-seeds-${stamp}.json 发到你的下载目录。`, "ok");
   } catch (e) {
-    status(`The browser refused the download - use Copy instead.`, "warn");
+    status(`浏览器拒绝了下载，请改用复制。`, "warn");
   }
 };
 
@@ -2062,7 +2062,7 @@ $("filein").onchange = e => {
   if (!f) return;
   const r = new FileReader();
   r.onload = () => { $("code").value = r.result; applyImport(r.result); };
-  r.onerror = () => status(`Could not read that file.`, "warn");
+  r.onerror = () => status(`读不了这个文件。`, "warn");
   r.readAsText(f);
   e.target.value = "";
 };
@@ -2079,11 +2079,11 @@ if (!storage) {
   const w = $("storagewarn");
   w.hidden = false;
   w.textContent = embedded
-    ? `This browser will not let the page store anything, so your ticks disappear on reload. Press Copy and keep the text somewhere before you close the tab.`
-    : `This browser will not let the page store anything, so your ticks disappear on reload. Take a copy with Download file or Copy before you close it.`;
+    ? `这个浏览器不让页面存任何东西，所以你的勾选会在刷新之后消失。关掉标签页之前请按复制，把文本留在别处。`
+    : `这个浏览器不让页面存任何东西，所以你的勾选会在刷新之后消失。关掉之前请用下载文件或者复制留一份。`;
 }
 
-$("src").textContent = `${byName.length} crops · ${MUT.length} recipes · ${Object.keys(POOLM).length} pools`;
+$("src").textContent = `${byName.length} 种作物 · ${MUT.length} 个配方 · ${Object.keys(POOLM).length} 个突变池`;
 /* The url is read before anything is drawn, because render() writes the url:
    rendering first would replace the link you arrived on with #v=ready, so a
    shared link or a reload always landed on the default view. */

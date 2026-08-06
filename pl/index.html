@@ -8,6 +8,7 @@
 <link rel="canonical" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/pl/">
 <link rel="alternate" hreflang="en" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/">
 <link rel="alternate" hreflang="pl" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/pl/">
+<link rel="alternate" hreflang="zh" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/zh/">
 <link rel="alternate" hreflang="x-default" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/">
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNyIgZmlsbD0iIzNEN0EzMyIvPjxwYXRoIGQ9Ik0xNiAyN1YxNCIgc3Ryb2tlPSIjRThFNEQ3IiBzdHJva2Utd2lkdGg9IjIuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTE2IDE3QzEwIDE3IDcgMTMgNyA4YzYgMCA5IDQgOSA5eiIgZmlsbD0iI0U4RTRENyIvPjxwYXRoIGQ9Ik0xNiAyMWM2IDAgOS00IDktOS02IDAtOSA0LTkgOXoiIGZpbGw9IiNFOEU0RDciLz48L3N2Zz4=">
 <meta name="theme-color" content="#3D7A33">
@@ -30,8 +31,12 @@
   --rule:       #C3BCA7;
   --shadow:     rgba(20, 23, 15, .10);
 
-  --face-display: "Palatino Linotype", Palatino, "Iowan Old Style", Georgia, serif;
-  --face-ui: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* The CJK entries only ever answer for glyphs the faces before them do not
+     cover, so they change nothing on the English and Polish pages.        */
+  --face-display: "Palatino Linotype", Palatino, "Iowan Old Style", Georgia,
+                  "Songti SC", "Noto Serif CJK SC", SimSun, serif;
+  --face-ui: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+             "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
   --face-data: ui-monospace, "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace;
 
   --rail: 320px;
@@ -124,13 +129,30 @@ p, li { text-wrap: pretty; }
   margin-left: auto; font-family: var(--face-data); font-size: 11px;
   color: var(--ink-faint); letter-spacing: .02em;
 }
-.langs { display: flex; gap: 10px; font-size: 12px; }
-.langs a {
-  color: var(--ink-faint); text-decoration: underline;
-  text-decoration-color: var(--rule); text-underline-offset: 3px;
+/* Language picker, top right. Links rather than a <select>, because
+   writeHash() hangs the current hash on each one - that is what makes a
+   switch land on the same tab, the same pair and the same open panel. */
+.langs { font-size: 12px; }
+.langpick { position: relative; }
+.langpick > summary {
+  display: flex; align-items: center; gap: 5px; cursor: pointer;
+  list-style: none; padding: 3px 9px; color: var(--ink-faint);
+  border: 1px solid var(--rule); border-radius: 3px; background: var(--paper-2);
 }
-.langs a:hover { color: var(--ink); text-decoration-color: var(--leaf); }
-.langs a[aria-current] { color: var(--ink); font-weight: 600; text-decoration: none; }
+.langpick > summary::-webkit-details-marker { display: none; }
+.langpick > summary::after { content: "▾"; font-size: 9px; }
+.langpick[open] > summary::after { content: "▴"; }
+.langpick > summary:hover { color: var(--ink); border-color: var(--leaf); }
+.langpick > summary:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2px; }
+.langmenu {
+  position: absolute; right: 0; top: calc(100% + 4px); z-index: 10;
+  display: flex; flex-direction: column; min-width: 100%;
+  border: 1px solid var(--rule); border-radius: 3px;
+  background: var(--paper); box-shadow: 0 4px 14px var(--shadow);
+}
+.langmenu a { padding: 5px 11px; white-space: nowrap; color: var(--ink-faint); }
+.langmenu a:hover { background: var(--paper-2); color: var(--ink); }
+.langmenu a[aria-current] { color: var(--ink); font-weight: 600; }
 
 /* ---------------------------------------------------------- layout */
 .cols { display: grid; grid-template-columns: var(--rail) minmax(0, 1fr); gap: 32px; align-items: start; }
@@ -656,7 +678,7 @@ footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2p
     <h1>CropsNH - planer krzyżowania</h1>
     <span class="sub">GregTech: New Horizons</span>
     <span class="src" id="src"></span>
-    <nav class="langs" aria-label="Język"><a href="../" hreflang="en" lang="en">English</a><a href="./" hreflang="pl" lang="pl" aria-current="page">Polski</a></nav>
+    <nav class="langs" aria-label="Język"><details class="langpick" id="langpick"><summary>Polski</summary><div class="langmenu" role="menu"><a href="../" hreflang="en" lang="en" role="menuitem">English</a><a href="./" hreflang="pl" lang="pl" role="menuitem" aria-current="page">Polski</a><a href="../zh/" hreflang="zh" lang="zh" role="menuitem">简体中文</a></div></details></nav>
   </header>
 
   <div class="cols">
@@ -1268,7 +1290,7 @@ const APP = {
   lead: `Notatki o samym narzędziu, a nie o modzie. Żadna z nich nie potrzebuje źródła.`,
   items: [
     [`<b>Każda nazwa rośliny na tej stronie otwiera panel.</b> Gleba, blok pod spodem, światło, pule, w których siedzi, każdy przepis, który ją robi, i wszystko, czego jest rodzicem.`], [`<b>Wpisz coś w wyszukiwarkę i naciśnij Enter</b>, żeby zaznaczyć pierwszy wynik i wyczyścić pole - kilka nasion wprowadzisz bez dotykania myszy.`], [`<b>Ruletka pul pamięta dziesięć ostatnich par</b>, a pięć najnowszych pokazuje pod listami wyboru, co jest szybsze niż składanie pary z dwóch list za każdym razem.`], [`<b>Gwiazdka przy parze ją zapisuje</b> do osobnego rzędu, więc te dwie czy trzy pary, wokół których zbudowana jest hodowla, zostają na miejscu, choć Ostatnie się przewijają.`], [`<b>Kliknij kafelek, żeby oznaczyć to, nad czym pracujesz.</b> Dostaje zieloną obwódkę i idzie na początek listy, co robi różnicę między zerknięciem na drugi monitor a czytaniem go.`],
-    [`<b>Zarządzaj listą, pod listą nasion,</b> wypisuje twoje zaznaczenia jako tekst i wczytuje je z powrotem - tak przenosisz listę między tą stroną a kopią na dysku albo robisz kopię zapasową.`], [`<b>Adres w przeglądarce podąża za tym, co oglądasz</b>, więc wysłany link otwiera tę samą zakładkę, tę samą parę i ten sam otwarty panel, a F5 zostawia cię tam, gdzie byłeś.`], [`<b>Odnośniki do języków są w prawym górnym rogu</b> i przenoszą twoje miejsce, więc przełączenie nie odsyła cię do pierwszej zakładki.`], [`<b>Twoje zaznaczenia nie opuszczają przeglądarki.</b> Strona nie wysyła zapytań donikąd, co znaczy też, że działa bez sieci i że każda kopia ma własną listę.`], [`<b>Tagi <em>Lubi</em> w panelu rośliny są odnośnikami, a panel wymienia biomy warte jej <b>+28</b> i te warte <b>+14</b>.</b> Zakładka <b>Biomy</b> idzie w drugą stronę: szukasz miejsca po nazwie albo po tagu i widzisz, co warto tam hodować.`],
+    [`<b>Zarządzaj listą, pod listą nasion,</b> wypisuje twoje zaznaczenia jako tekst i wczytuje je z powrotem - tak przenosisz listę między tą stroną a kopią na dysku albo robisz kopię zapasową.`], [`<b>Adres w przeglądarce podąża za tym, co oglądasz</b>, więc wysłany link otwiera tę samą zakładkę, tę samą parę i ten sam otwarty panel, a F5 zostawia cię tam, gdzie byłeś.`], [`<b>Wybór języka jest w prawym górnym rogu</b> i przenosi twoje miejsce, więc przełączenie nie odsyła cię do pierwszej zakładki.`], [`<b>Twoje zaznaczenia nie opuszczają przeglądarki.</b> Strona nie wysyła zapytań donikąd, co znaczy też, że działa bez sieci i że każda kopia ma własną listę.`], [`<b>Tagi <em>Lubi</em> w panelu rośliny są odnośnikami, a panel wymienia biomy warte jej <b>+28</b> i te warte <b>+14</b>.</b> Zakładka <b>Biomy</b> idzie w drugą stronę: szukasz miejsca po nazwie albo po tagu i widzisz, co warto tam hodować.`],
   ]
 };
 
@@ -1928,6 +1950,11 @@ function readHash() {
 }
 
 document.addEventListener("click", e => {
+  /* A click anywhere else shuts the language menu. One on the summary is
+     left alone, because <details> already toggles itself. It is absent
+     entirely while there is only one language, hence the guard. */
+  const lp = $("langpick");
+  if (lp && lp.open && !e.target.closest(".langpick")) lp.open = false;
   const seed = e.target.closest(".seed-tick");
   if (seed) { toggle(seed.dataset.id); return; }
   const star = e.target.closest("[data-star]");
@@ -1955,7 +1982,15 @@ document.addEventListener("click", e => {
   if (tab) { view = tab.dataset.view; render(); return; }
   if (e.target.id === "scrim") closeDrawer();
 });
-document.addEventListener("keydown", e => { if (e.key === "Escape") closeDrawer(); });
+/* Escape closes the language menu first, then the drawer - whichever is on
+   top. <details> does not close itself on Escape, so this is the only way
+   back out for the keyboard. */
+document.addEventListener("keydown", e => {
+  if (e.key !== "Escape") return;
+  const lp = $("langpick");
+  if (lp && lp.open) { lp.open = false; lp.querySelector("summary").focus(); return; }
+  closeDrawer();
+});
 
 $("search").addEventListener("input", e => { filter = e.target.value; renderRail(); });
 

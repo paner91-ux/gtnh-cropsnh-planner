@@ -57,15 +57,24 @@ def head(code, cats):
 
 
 def langnav(code, cats):
-    """Left out entirely while there is only one language to offer."""
+    """Left out entirely while there is only one language to offer.
+
+    A summary naming the current language with the rest folded behind it, and
+    plain links inside rather than a <select>: writeHash() hangs the current
+    hash on every link, which is what keeps your place across a switch.
+    """
     if len(cats) < 2:
         return ''
     links = ''.join(
-        f'<a href="{path_from(code, c)}" hreflang="{c}" lang="{c}"'
+        f'<a href="{path_from(code, c)}" hreflang="{c}" lang="{c}" role="menuitem"'
         f'{" aria-current=" + chr(34) + "page" + chr(34) if c == code else ""}'
         f'>{cats[c]["lang.name"]}</a>'
         for c in order(cats))
-    return f'<nav class="langs" aria-label="{cats[code]["nav.lang"]}">{links}</nav>'
+    return (f'<nav class="langs" aria-label="{cats[code]["nav.lang"]}">'
+            f'<details class="langpick" id="langpick">'
+            f'<summary>{cats[code]["lang.name"]}</summary>'
+            f'<div class="langmenu" role="menu">{links}</div>'
+            f'</details></nav>')
 
 
 def sitemap(cats):

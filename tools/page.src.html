@@ -15,8 +15,12 @@
   --rule:       #C3BCA7;
   --shadow:     rgba(20, 23, 15, .10);
 
-  --face-display: "Palatino Linotype", Palatino, "Iowan Old Style", Georgia, serif;
-  --face-ui: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* The CJK entries only ever answer for glyphs the faces before them do not
+     cover, so they change nothing on the English and Polish pages.        */
+  --face-display: "Palatino Linotype", Palatino, "Iowan Old Style", Georgia,
+                  "Songti SC", "Noto Serif CJK SC", SimSun, serif;
+  --face-ui: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+             "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
   --face-data: ui-monospace, "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace;
 
   --rail: 320px;
@@ -109,13 +113,30 @@ p, li { text-wrap: pretty; }
   margin-left: auto; font-family: var(--face-data); font-size: 11px;
   color: var(--ink-faint); letter-spacing: .02em;
 }
-.langs { display: flex; gap: 10px; font-size: 12px; }
-.langs a {
-  color: var(--ink-faint); text-decoration: underline;
-  text-decoration-color: var(--rule); text-underline-offset: 3px;
+/* Language picker, top right. Links rather than a <select>, because
+   writeHash() hangs the current hash on each one - that is what makes a
+   switch land on the same tab, the same pair and the same open panel. */
+.langs { font-size: 12px; }
+.langpick { position: relative; }
+.langpick > summary {
+  display: flex; align-items: center; gap: 5px; cursor: pointer;
+  list-style: none; padding: 3px 9px; color: var(--ink-faint);
+  border: 1px solid var(--rule); border-radius: 3px; background: var(--paper-2);
 }
-.langs a:hover { color: var(--ink); text-decoration-color: var(--leaf); }
-.langs a[aria-current] { color: var(--ink); font-weight: 600; text-decoration: none; }
+.langpick > summary::-webkit-details-marker { display: none; }
+.langpick > summary::after { content: "▾"; font-size: 9px; }
+.langpick[open] > summary::after { content: "▴"; }
+.langpick > summary:hover { color: var(--ink); border-color: var(--leaf); }
+.langpick > summary:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2px; }
+.langmenu {
+  position: absolute; right: 0; top: calc(100% + 4px); z-index: 10;
+  display: flex; flex-direction: column; min-width: 100%;
+  border: 1px solid var(--rule); border-radius: 3px;
+  background: var(--paper); box-shadow: 0 4px 14px var(--shadow);
+}
+.langmenu a { padding: 5px 11px; white-space: nowrap; color: var(--ink-faint); }
+.langmenu a:hover { background: var(--paper-2); color: var(--ink); }
+.langmenu a[aria-current] { color: var(--ink); font-weight: 600; }
 
 /* ---------------------------------------------------------- layout */
 .cols { display: grid; grid-template-columns: var(--rail) minmax(0, 1fr); gap: 32px; align-items: start; }
@@ -1913,6 +1934,11 @@ function readHash() {
 }
 
 document.addEventListener("click", e => {
+  /* A click anywhere else shuts the language menu. One on the summary is
+     left alone, because <details> already toggles itself. It is absent
+     entirely while there is only one language, hence the guard. */
+  const lp = $("langpick");
+  if (lp && lp.open && !e.target.closest(".langpick")) lp.open = false;
   const seed = e.target.closest(".seed-tick");
   if (seed) { toggle(seed.dataset.id); return; }
   const star = e.target.closest("[data-star]");
@@ -1940,7 +1966,15 @@ document.addEventListener("click", e => {
   if (tab) { view = tab.dataset.view; render(); return; }
   if (e.target.id === "scrim") closeDrawer();
 });
-document.addEventListener("keydown", e => { if (e.key === "Escape") closeDrawer(); });
+/* Escape closes the language menu first, then the drawer - whichever is on
+   top. <details> does not close itself on Escape, so this is the only way
+   back out for the keyboard. */
+document.addEventListener("keydown", e => {
+  if (e.key !== "Escape") return;
+  const lp = $("langpick");
+  if (lp && lp.open) { lp.open = false; lp.querySelector("summary").focus(); return; }
+  closeDrawer();
+});
 
 $("search").addEventListener("input", e => { filter = e.target.value; renderRail(); });
 

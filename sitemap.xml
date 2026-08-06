@@ -5,10 +5,18 @@
     <loc>https://paner91-ux.github.io/gtnh-cropsnh-planner/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/pl/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/zh/"/>
   </url>
   <url>
     <loc>https://paner91-ux.github.io/gtnh-cropsnh-planner/pl/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/pl/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/zh/"/>
+  </url>
+  <url>
+    <loc>https://paner91-ux.github.io/gtnh-cropsnh-planner/zh/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/pl/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://paner91-ux.github.io/gtnh-cropsnh-planner/zh/"/>
   </url>
 </urlset>

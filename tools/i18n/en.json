@@ -303,7 +303,7 @@
   "app.i5": "<b>Click a card to mark what you are building.</b> It gets a green edge and moves to the front of the grid, which is the difference between glancing at a second monitor and reading it.",
   "app.i6": "<b>Manage list, under the seed list,</b> copies your ticks out as text and back in - the way to move a list between this page and an offline copy, or to keep a backup.",
   "app.i7": "<b>The address bar follows what you are looking at,</b> so a link you send opens on the same tab, the same pair and the same open panel, and F5 keeps you where you were.",
-  "app.i8": "<b>The language links sit at the top right</b> and carry your place across, so switching does not send you back to the first tab.",
+  "app.i8": "<b>The language picker sits at the top right</b> and carries your place across, so switching does not send you back to the first tab.",
   "app.i9": "<b>Your ticks never leave the browser.</b> The page makes no requests to anywhere, which also means it works with the network off and that each copy keeps its own list.",
   "tab.about": "About this page",
   "about.note": "What this tool is, how to work it, and where its numbers come from. The <b>Tips &amp; tricks</b> tab is the other half: that one is about the mod, and every line in it names the method it was read from.",
