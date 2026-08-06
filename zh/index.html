@@ -606,7 +606,9 @@ p, li { text-wrap: pretty; }
 }
 .scrim[data-open="true"] { opacity: 1; pointer-events: auto; }
 
-.own-toggle { margin-top: 14px; }
+/* Ticking the crop and sending it to the roulette sit side by side, and wrap
+   instead of stretching when the drawer is narrow. */
+.drawer-acts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
 
 /* ------------------------------------------------- manage-list panel */
 /* Clear, Undo and the backup box all rewrite the whole tick list, so they
@@ -1813,7 +1815,10 @@ function renderCropDrawer(id) {
           c.biomes.map(tagLink).join(", ")}<br>
           <span style="font-size:12px;color:var(--ink-faint)">生物群系标签，不是硬性需求，详见技巧与机制</span></dd>` : ""}
       </dl>
-      <button class="btn own-toggle" type="button" id="toggleOwn">${owned.has(id) ? `✓ 已有，取消勾选` : `加入我的种子`}</button>
+      <div class="drawer-acts">
+        <button class="btn" type="button" id="toggleOwn">${owned.has(id) ? `✓ 已有，取消勾选` : `加入我的种子`}</button>
+        <button class="btn" type="button" id="pairSelf" title="把该作物设为两个亲本并打开突变池轮盘">×2 送入轮盘</button>
+      </div>
     </div>
 
     ${c.biomes && c.biomes.length ? (() => {
@@ -1856,6 +1861,16 @@ function renderCropDrawer(id) {
     </div>`;
 
   $("toggleOwn").onclick = () => { toggle(id); paintDrawer(); };
+  /* Two sticks of the same crop is the ordinary setup, and oddsFor() already
+     treats it as its own case, so the drawer offers it directly rather than
+     making you pick the same name out of both dropdowns. The view is set
+     before closeDrawer(), because that is what writes the hash.            */
+  $("pairSelf").onclick = () => {
+    setPair(id, id);
+    view = "pool";
+    closeDrawer();
+    render();
+  };
 }
 function closeDrawer() {
   drawerStack = [];

@@ -137,6 +137,8 @@
   "drawer.growth": "生育時間",
   "drawer.untick": "✓ 持っている（チェックを外す）",
   "drawer.tick": "持っている種に追加",
+  "drawer.pairSelf": "×2 でルーレットへ",
+  "drawer.pairSelfTitle": "この作物を両方の親に設定してプールのルーレットを開きます",
   "drawer.pools": "変異プール（${c.pools.length}）",
   "drawer.poolsNote": "このいずれかを共有する親が二つそろえば、この作物が無作為に引かれることがあります。プールを開くと他に何が入っているか見られます。",
   "drawer.noPools": "なし。この作物はレシピからしか手に入りません。",

@@ -137,6 +137,8 @@
   "drawer.growth": "Growth time",
   "drawer.untick": "✓ Have it - untick",
   "drawer.tick": "Add to my seeds",
+  "drawer.pairSelf": "Send ×2 to the roulette",
+  "drawer.pairSelfTitle": "Set this crop as both parents and open the Pool roulette",
   "drawer.pools": "Mutation pools (${c.pools.length})",
   "drawer.poolsNote": "Any two parents that share one of these can draw this crop at random. Open a pool to see everything else in it.",
   "drawer.noPools": "None - this crop can only be obtained from a recipe.",

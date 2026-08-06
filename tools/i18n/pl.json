@@ -137,6 +137,8 @@
   "drawer.growth": "Czas wzrostu",
   "drawer.untick": "✓ Mam - odznacz",
   "drawer.tick": "Dodaj do moich nasion",
+  "drawer.pairSelf": "Wyślij ×2 do ruletki",
+  "drawer.pairSelfTitle": "Ustaw tę roślinę jako obu rodziców i otwórz Ruletkę pul",
   "drawer.pools": "Pule mutacji (${c.pools.length})",
   "drawer.poolsNote": "Dowolna dwójka rodziców dzieląca jedną z nich może wylosować tę roślinę. Otwórz pulę, żeby zobaczyć co jeszcze w niej jest.",
   "drawer.noPools": "Żadne - tę roślinę da się zdobyć wyłącznie z przepisu.",

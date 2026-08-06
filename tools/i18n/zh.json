@@ -137,6 +137,8 @@
   "drawer.growth": "生长时间",
   "drawer.untick": "✓ 已有，取消勾选",
   "drawer.tick": "加入我的种子",
+  "drawer.pairSelf": "×2 送入轮盘",
+  "drawer.pairSelfTitle": "把该作物设为两个亲本并打开突变池轮盘",
   "drawer.pools": "突变池（${c.pools.length}）",
   "drawer.poolsNote": "任何两个共享其中之一的亲本，都可能随机抽到这种作物。打开一个池能看到里面还有什么。",
   "drawer.noPools": "没有，这种作物只能靠配方拿到。",
