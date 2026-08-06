@@ -14,6 +14,10 @@ which biome to build the farm in.
 
 Same page in every language, and the picker at the top right keeps your place when you switch.
 
+More can follow. A language gets its own version once GTNH has translated CropsNH into it, because
+only then can the page name crops and terms the way your own game names them. If you want one for
+your language, that translation is the thing to push for.
+
 There is no Russian version and there will not be one. If you would like to help Ukraine instead,
 [United24](https://u24.gov.ua/) is the Ukrainian government's fundraising platform.
 
@@ -89,12 +93,10 @@ version, and biome names everywhere: in Minecraft 1.7.10 a biome name is a plain
 with no translation key at all, so the game shows "Alps" and "Bayou" whatever language it is set
 to, and so does this.
 
-Which languages exist follows from the same rule. A version is worth building when the pack has
-translated CropsNH itself, because only then can the page name things the way the player's own
-screen names them. Chinese and Japanese have the whole CropsNH catalogue; no other language has
-more than a tenth of it, so a page in one of those would have to invent words for terms the game
-still prints in English. Polish is the exception, and it is here because it is the author's own
-language.
+Which languages exist follows from the same rule. Chinese and Japanese have the whole CropsNH
+catalogue translated in the pack; no other language has more than a tenth of it, so a page in one
+of those would have to invent words for terms the game still prints in English. Polish is the
+exception, and it is here because it is the author's own language.
 
 ---
 
