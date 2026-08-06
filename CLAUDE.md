@@ -57,6 +57,16 @@ wrong class simply answered every question with a default. When crop data looks 
 first: it should always be a `com.gtnewhorizon.cropsnh` crop class. `extract.py` now warns when a
 tier came from the fallback instead of the bytecode; treat that warning as work to do, not noise.
 
+**A getter can return a field instead of a constant.** Rubyne shipped with `soil: farmland` when
+the mod says `stone`, because `CropRubyne.getSoilTypes()` hands back a static field of its own and
+the list is assigned in the class initialiser, out of the getter's sight. `resolve_soil()` found no
+`CropsNHSoilTypes` constant and fell through to its default. Note the shape of the failure: both
+soil bugs so far ended as `farmland`, because that is what the fallback says. **Treat `farmland` on
+a crop that has no business being on a farm as a question, not an answer.** `extract.py` now prints
+a `note:` when it resolves a soil through a field, and javap writes the class initialiser as
+`static {};`, which matches no method signature - `jvparse` gives it the name `<clinit>` so its
+bytecode stops being appended to whatever method came before it.
+
 ## Conventions
 
 - The page and all repo files are **English**. The author is Polish; chat can be Polish, the product
