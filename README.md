@@ -89,6 +89,13 @@ version, and biome names everywhere: in Minecraft 1.7.10 a biome name is a plain
 with no translation key at all, so the game shows "Alps" and "Bayou" whatever language it is set
 to, and so does this.
 
+Which languages exist follows from the same rule. A version is worth building when the pack has
+translated CropsNH itself, because only then can the page name things the way the player's own
+screen names them. Chinese and Japanese have the whole CropsNH catalogue; no other language has
+more than a tenth of it, so a page in one of those would have to invent words for terms the game
+still prints in English. Polish is the exception, and it is here because it is the author's own
+language.
+
 ---
 
 ## Where the data comes from
