@@ -383,5 +383,11 @@
   "soil.short.slimy": "スライムの草",
   "soil.short.soulsand": "ソウルサンド",
   "soil.short.stone": "石",
-  "soil.short.thaumLogs": "Thaum 原木"
+  "soil.short.thaumLogs": "Thaum 原木",
+  "tips.g5.i9": "<b>肥料はどれも同じ価値ではありません。</b>骨粉は 5 点、Forestry のリン酸肥料は 25 点、Forestry の堆肥は 50 点、そしてこの Mod の無機肥料は一個でタンクを満たします。タンクは 100 で止まり、あふれた分は捨てられるので、強い肥料は空に近いタンクのために取っておいてください。",
+  "tips.g5.i9w": "<em>FertilizerLoader.registerItemFertilizers()</em> が効力を登録します。骨粉 5、Forestry の <em>fertilizerCompound</em> 25、<em>fertilizerBio</em> 50、CropsNH 自身の肥料 100 です。右クリックは <em>addFertilizer(potency, max(90, 100 - potency), 100)</em> を呼び、残量がその閾値を超えている間は何もせず、そうでなければ合計を 100 に切り詰めます。",
+  "tips.g5.i10": "<b>作物管理機は畑一面の水やり、施肥、収穫をひとりでこなします。</b>この Mod のブロック一つの機械で、範囲は Tier とともに広がります。LV では横に 5 ブロック、Tier が一つ上がるごとに 2 ブロックずつ増え、上下には 2 ブロックです。機械が入れる場合、支柱のタンクは 100 ではなく 200 まで入ります。これは栄養素スコアを上げるものではなく、放っておける時間が二倍になるだけです。",
+  "tips.g5.i10w": "<em>MTECropManager</em> は LV から UMV まで登録されています。<em>getHorizontalRadius()</em> は <em>3 + 2 × tier</em> を返し、垂直方向の半径は 2 です。水と肥料は上限 200 で与えますが、<em>getNutrientsPerCycle()</em> は両方を <em>min(100, …)</em> で読むので、100 を超えた分は貯まっても数えられません。",
+  "tips.g6.i4": "<b>成長値が高い作物は五倍以上速く育ちます。</b>成長の速さは 6 に成長値を足したところから始まるので、成長値 1 の作物は 7、31 の作物は 37 から始まります。水も肥料もバイオームも、その数を割合で増減させるだけです。だからこの能力値はそれら全部を合わせたよりも効きます。",
+  "tips.g6.i4w": "<em>getGrowthRate()</em> は <em>BASE_GROWTH_SPEED + growth</em> を土台にします。<em>BASE_GROWTH_SPEED</em> は 6 です。そのうえで <em>score × 5</em> と <em>tier × 10</em> の比較から出る割合を土台に掛けます。この割合が出せる最大は 3.65 倍で、Tier 1 の作物で満点の 55 を取ったときに限られます。一方で能力値だけで 7 から 37 まで動きます。"
 }

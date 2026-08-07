@@ -383,5 +383,11 @@
   "soil.short.stone": "石头",
   "soil.short.thaumLogs": "神秘原木",
   "best.viaRecipe": "配方",
-  "best.viaPools": "突变池"
+  "best.viaPools": "突变池",
+  "tips.g5.i9": "<b>不是每种肥料都一样值钱。</b>骨粉加 5 点，Forestry 的肥料加 25 点，Forestry 的堆肥加 50 点，而本模组自己的肥料一个就能把罐子装满。罐子到 100 就停，多出来的那部分白白扔掉，所以强的留给快空的罐子。",
+  "tips.g5.i9w": "<em>FertilizerLoader.registerItemFertilizers()</em> 注册了这些效价：骨粉 5，Forestry 的 <em>fertilizerCompound</em> 25，<em>fertilizerBio</em> 50，CropsNH 自己的肥料 100。右键会调用 <em>addFertilizer(potency, max(90, 100 - potency), 100)</em>，存量高于那个阈值时什么都不做，否则把总和夹到 100。",
+  "tips.g5.i10": "<b>作物管理器能自己把整片田的浇水、施肥和收获全包下来。</b>它是本模组的单方块机器，范围随等级变大：LV 时向四周 5 格，每高一级多 2 格，上下各 2 格。由机器来加的时候，作物架里的罐子能装 200 而不是 100。这并不提高营养评分，只是让这片田在没人管的情况下多撑一倍时间。",
+  "tips.g5.i10w": "<em>MTECropManager</em> 从 LV 一直注册到 UMV。<em>getHorizontalRadius()</em> 返回 <em>3 + 2 × tier</em>，垂直半径是 2。它加水和肥料的上限是 200，而 <em>getNutrientsPerCycle()</em> 读这两项时都套了 <em>min(100, …)</em>，所以超过 100 的部分存着但从不计入。",
+  "tips.g6.i4": "<b>生长速度属性高的作物长得快五倍不止。</b>生长的快慢从 6 加上生长速度属性算起，所以属性 1 的作物从 7 起步，属性 31 的从 37 起步。水、肥料和群系只是按百分比加减这个数，所以这一项属性比它们全部加起来还重要。",
+  "tips.g6.i4w": "<em>getGrowthRate()</em> 以 <em>BASE_GROWTH_SPEED + growth</em> 作为基数，其中 <em>BASE_GROWTH_SPEED</em> 是 6，然后把这个基数乘上由 <em>score × 5</em> 与 <em>tier × 10</em> 相比得出的百分比。这个百分比最多只能乘到 3.65 倍，而且要等级 1 的作物拿到满分 55 才行；属性本身却能从 7 一直到 37。"
 }

@@ -1407,6 +1407,10 @@ const TIPS = [
      `方块实体数一数 <em>getLikedBiomeTags()</em> 里有多少个出现在这个群系自己的 <em>BiomeDictionary</em> 类型中，把这个计数夹到 2，然后交给 <em>getNutrientsPerCycle()</em>。评分在那里以 <em>max(humidityBonus, matched × 14)</em> 收尾，其中湿度加成是 <em>(rainfall - 0.5) ÷ 0.3</em> 夹进 0…1 之后乘以 14。这就是两者永不叠加、以及 28 是一个群系最多能值多少的原因。`],
     [`<b>有两个办法能知道一个地方好不好，都不在 CropsNH 里面。</b>对着作物架用<b>便携式扫描仪</b>会打出营养评分和这种作物需要的评分，空架子上也管用，所以可以先测再种。<b>Nature's Compass</b> 把每个群系的标签作为副文本列出来，还能按标签给群系排序，这是找到你的作物喜欢的地方的办法。在<b>工业农场</b>里这个问题就不存在了：一个环境模块带一个标签，而且是加在群系已有的之上，所以两个模块在任何地方都能凑到 +28。`,
      `扫描仪的读数来自 <em>BlockScanningEventHandler</em>，它调用 <em>getPlantLensStatus()</em>，然后是 <em>getNutrientScore()</em>，并通过工业农场用的同一个 <em>scanner.6</em> 字符串格式化。<em>MTEIndustrialFarm</em> 在自己的位置上用 <em>BiomeDictionary.getTypesForBiome()</em> 建一个集合，再把插槽里每一个 <em>ItemEnvironmentalModule</em> 的标签加进去，然后才数匹配，所以模块是给群系加料，不是取代它。标签本身是 Forge 的，这就是一个群系的标签列表属于添加它的那个模组、而 CropsNH 从来不打印它的原因。`],
+    [`<b>不是每种肥料都一样值钱。</b>骨粉加 5 点，Forestry 的肥料加 25 点，Forestry 的堆肥加 50 点，而本模组自己的肥料一个就能把罐子装满。罐子到 100 就停，多出来的那部分白白扔掉，所以强的留给快空的罐子。`,
+     `<em>FertilizerLoader.registerItemFertilizers()</em> 注册了这些效价：骨粉 5，Forestry 的 <em>fertilizerCompound</em> 25，<em>fertilizerBio</em> 50，CropsNH 自己的肥料 100。右键会调用 <em>addFertilizer(potency, max(90, 100 - potency), 100)</em>，存量高于那个阈值时什么都不做，否则把总和夹到 100。`],
+    [`<b>作物管理器能自己把整片田的浇水、施肥和收获全包下来。</b>它是本模组的单方块机器，范围随等级变大：LV 时向四周 5 格，每高一级多 2 格，上下各 2 格。由机器来加的时候，作物架里的罐子能装 200 而不是 100。这并不提高营养评分，只是让这片田在没人管的情况下多撑一倍时间。`,
+     `<em>MTECropManager</em> 从 LV 一直注册到 UMV。<em>getHorizontalRadius()</em> 返回 <em>3 + 2 × tier</em>，垂直半径是 2。它加水和肥料的上限是 200，而 <em>getNutrientsPerCycle()</em> 读这两项时都套了 <em>min(100, …)</em>，所以超过 100 的部分存着但从不计入。`],
   ]},
 
   { h: `把属性堆好`,
@@ -1418,6 +1422,8 @@ const TIPS = [
      `平均值取自过滤后的亲本列表：复制时只算长过杂交阈值、且作物相同的邻居；突变时只算长过杂交阈值、且作物在配方亲本或匹配到的池里的邻居。没长够的邻居对平均值毫无贡献，它空着的肥料罐也一样被忽略。这是整数除法，所以每次都会丢掉小数。`],
     [`<b>小麦、马铃薯、胡萝卜、蒲公英 和 罂粟 没有配方，它们也不需要。</b>从池里抽出来的作物，属性取自架子旁边那两个亲本，而不是取自它最后变成了什么。所以把两株 31/31/31、并且和 胡萝卜 共享一个池的亲本摆在架子两边，最终冒出来的那个 胡萝卜 就已经是 31/31/31 了。按它们共享的最小的池来挑亲本。<b>盐根 + 芜青</b> 只共享 <em>root</em>，那里面有 ${POOLM.root.length} 种作物，所以每一种出现的概率是 ${pct(0.5 / POOLM.root.length)}。而只共享 <em>food</em> 的一对则摊到 ${POOLM.food.length} 种作物上，也就是 ${pct(0.5 / POOLM.food.length)}。大地疣 和 元始浆果 完全不在任何池里，所以这两种真的只能一株一株地克隆上去。`,
      `<em>attemptBreeding()</em> 把它的邻居列表交给 <em>getBreedingResult()</em>，后者就地过滤同一个列表：池抽取时，它移除作物不在匹配到的池里的每一个邻居。剩下的被映射成它们的种子，每项属性各调用一次 <em>variateStat()</em>，而肥料标志是对同一个列表的 <em>allMatch</em>。这条路上没有任何地方读结果，这就是结果自己的属性从不参与其中的原因。`],
+    [`<b>生长速度属性高的作物长得快五倍不止。</b>生长的快慢从 6 加上生长速度属性算起，所以属性 1 的作物从 7 起步，属性 31 的从 37 起步。水、肥料和群系只是按百分比加减这个数，所以这一项属性比它们全部加起来还重要。`,
+     `<em>getGrowthRate()</em> 以 <em>BASE_GROWTH_SPEED + growth</em> 作为基数，其中 <em>BASE_GROWTH_SPEED</em> 是 6，然后把这个基数乘上由 <em>score × 5</em> 与 <em>tier × 10</em> 相比得出的百分比。这个百分比最多只能乘到 3.65 倍，而且要等级 1 的作物拿到满分 55 才行；属性本身却能从 7 一直到 37。`],
   ]},
 
   { h: `杂草`,
