@@ -6,6 +6,7 @@
     "MOUNTAIN",
     "SNOWY"
    ],
+   "rain": 0.5,
    "from": "BiomesOPlenty"
   },
   "Alps Forest": {
@@ -15,6 +16,7 @@
     "MOUNTAIN",
     "SNOWY"
    ],
+   "rain": 0.5,
    "from": "BiomesOPlenty"
   },
   "Arctic": {
@@ -24,6 +26,7 @@
     "SNOWY",
     "WASTELAND"
    ],
+   "rain": 0.5,
    "from": "BiomesOPlenty"
   },
   "Bamboo Forest": {
@@ -33,27 +36,32 @@
     "JUNGLE",
     "LUSH"
    ],
+   "rain": 0.9,
    "from": "BiomesOPlenty"
   },
   "Bayou": {
    "tags": [
     "LUSH",
+    "OCEAN",
+    "RIVER",
     "SWAMP",
-    "WATER",
     "WET"
    ],
+   "rain": 0.9,
    "from": "BiomesOPlenty"
   },
   "Beach": {
    "tags": [
     "BEACH"
    ],
+   "rain": 0.4,
    "from": "minecraft"
   },
   "Birch Forest": {
    "tags": [
     "FOREST"
    ],
+   "rain": 0.6,
    "from": "minecraft"
   },
   "Birch Forest Hills": {
@@ -61,6 +69,7 @@
     "FOREST",
     "HILLS"
    ],
+   "rain": 0.6,
    "from": "minecraft"
   },
   "Bog": {
@@ -70,6 +79,7 @@
     "SWAMP",
     "WET"
    ],
+   "rain": 0.9,
    "from": "BiomesOPlenty"
   },
   "Boneyard": {
@@ -78,6 +88,7 @@
     "SPOOKY",
     "WASTELAND"
    ],
+   "rain": 0.0,
    "from": "BiomesOPlenty"
   },
   "Boreal Forest": {
@@ -87,6 +98,7 @@
     "FOREST",
     "LUSH"
    ],
+   "rain": 0.6,
    "from": "BiomesOPlenty"
   },
   "Brushland": {
@@ -96,6 +108,7 @@
     "PLAINS",
     "SAVANNA"
    ],
+   "rain": 0.1,
    "from": "BiomesOPlenty"
   },
   "Canyon": {
@@ -107,6 +120,7 @@
     "SANDY",
     "SPARSE"
    ],
+   "rain": 0.3,
    "from": "BiomesOPlenty"
   },
   "Canyon Ravine": {
@@ -116,6 +130,7 @@
     "HOT",
     "SANDY"
    ],
+   "rain": 0.3,
    "from": "BiomesOPlenty"
   },
   "Chaparral": {
@@ -123,6 +138,7 @@
     "PLAINS",
     "SPARSE"
    ],
+   "rain": 0.6,
    "from": "BiomesOPlenty"
   },
   "Cherry Blossom Grove": {
@@ -131,6 +147,7 @@
     "LUSH",
     "MAGICAL"
    ],
+   "rain": 0.8,
    "from": "BiomesOPlenty"
   },
   "Cold Beach": {
@@ -139,6 +156,7 @@
     "COLD",
     "SNOWY"
    ],
+   "rain": 0.3,
    "from": "minecraft"
   },
   "Cold Forest": {
@@ -149,6 +167,7 @@
     "FOREST",
     "HILLS"
    ],
+   "rain": 0.4,
    "from": "RWG"
   },
   "Cold Ocean": {
@@ -159,6 +178,7 @@
     "FOREST",
     "OCEAN"
    ],
+   "rain": 0.4,
    "from": "RWG"
   },
   "Cold Plains": {
@@ -166,6 +186,7 @@
     "COLD",
     "WASTELAND"
    ],
+   "rain": 0.2,
    "from": "RWG"
   },
   "Cold River": {
@@ -175,6 +196,7 @@
     "FOREST",
     "RIVER"
    ],
+   "rain": 0.4,
    "from": "RWG"
   },
   "Cold Taiga": {
@@ -184,6 +206,7 @@
     "FOREST",
     "SNOWY"
    ],
+   "rain": 0.4,
    "from": "minecraft"
   },
   "Cold Taiga Hills": {
@@ -194,6 +217,7 @@
     "HILLS",
     "SNOWY"
    ],
+   "rain": 0.4,
    "from": "minecraft"
   },
   "Coniferous Forest": {
@@ -203,12 +227,15 @@
     "FOREST",
     "HILLS"
    ],
+   "rain": 0.5,
    "from": "BiomesOPlenty"
   },
   "Coral Reef": {
    "tags": [
-    "WATER"
+    "OCEAN",
+    "RIVER"
    ],
+   "rain": 0.9,
    "from": "BiomesOPlenty"
   },
   "Corrupted Sands": {
@@ -217,6 +244,7 @@
     "SANDY",
     "SPOOKY"
    ],
+   "rain": 0.0,
    "from": "BiomesOPlenty"
   },
   "Crag": {
@@ -227,6 +255,7 @@
     "SPOOKY",
     "WASTELAND"
    ],
+   "rain": 0.0,
    "from": "BiomesOPlenty"
   },
   "Dark Forest": {
@@ -235,6 +264,7 @@
     "FOREST",
     "SPOOKY"
    ],
+   "rain": 0.8,
    "from": "TwilightForest"
   },
   "Dark Forest Center": {
@@ -244,6 +274,7 @@
     "MAGICAL",
     "SPOOKY"
    ],
+   "rain": 0.8,
    "from": "TwilightForest"
   },
   "Dead Forest": {
@@ -253,6 +284,7 @@
     "SPARSE",
     "SPOOKY"
    ],
+   "rain": 0.3,
    "from": "BiomesOPlenty"
   },
   "Dead Swamp": {
@@ -262,6 +294,7 @@
     "SPOOKY",
     "SWAMP"
    ],
+   "rain": 0.9,
    "from": "BiomesOPlenty"
   },
   "Deciduous Forest": {
@@ -270,6 +303,7 @@
     "DRY",
     "FOREST"
    ],
+   "rain": 0.8,
    "from": "BiomesOPlenty"
   },
   "Deep Mushroom Forest": {
@@ -277,12 +311,14 @@
     "FOREST",
     "MUSHROOM"
    ],
+   "rain": 1.0,
    "from": "TwilightForest"
   },
   "Deep Ocean": {
    "tags": [
     "OCEAN"
    ],
+   "rain": 0.5,
    "from": "minecraft"
   },
   "Dense Twilight Forest": {
@@ -290,6 +326,7 @@
     "DENSE",
     "FOREST"
    ],
+   "rain": 0.8,
    "from": "TwilightForest"
   },
   "Desert": {
@@ -298,6 +335,7 @@
     "HOT",
     "SANDY"
    ],
+   "rain": 0.0,
    "from": "minecraft"
   },
   "DesertHills": {
@@ -307,6 +345,7 @@
     "HOT",
     "SANDY"
    ],
+   "rain": 0.0,
    "from": "minecraft"
   },
   "Eerie": {
@@ -314,6 +353,7 @@
     "MAGICAL",
     "SPOOKY"
    ],
+   "rain": 0.5,
    "from": "Thaumcraft"
   },
   "Eldritch": {
@@ -322,6 +362,7 @@
     "MAGICAL",
     "SPOOKY"
    ],
+   "rain": 0.5,
    "from": "Thaumcraft"
   },
   "Enchanted Forest": {
@@ -329,6 +370,7 @@
     "FOREST",
     "MAGICAL"
    ],
+   "rain": 0.5,
    "from": "TwilightForest"
   },
   "Extreme Hills": {
@@ -336,12 +378,14 @@
     "HILLS",
     "MOUNTAIN"
    ],
+   "rain": 0.3,
    "from": "minecraft"
   },
   "Extreme Hills Edge": {
    "tags": [
     "MOUNTAIN"
    ],
+   "rain": 0.3,
    "from": "minecraft"
   },
   "Extreme Hills+": {
@@ -350,6 +394,7 @@
     "MOUNTAIN",
     "SPARSE"
    ],
+   "rain": 0.3,
    "from": "minecraft"
   },
   "Fen": {
@@ -359,6 +404,7 @@
     "SWAMP",
     "WET"
    ],
+   "rain": 0.4,
    "from": "BiomesOPlenty"
   },
   "Fire Swamp": {
@@ -367,6 +413,7 @@
     "SWAMP",
     "WASTELAND"
    ],
+   "rain": 0.4,
    "from": "TwilightForest"
   },
   "Firefly Forest": {
@@ -374,6 +421,7 @@
     "FOREST",
     "LUSH"
    ],
+   "rain": 1.0,
    "from": "TwilightForest"
   },
   "Flower Field": {
@@ -381,12 +429,14 @@
     "LUSH",
     "PLAINS"
    ],
+   "rain": 0.7,
    "from": "BiomesOPlenty"
   },
   "Forest": {
    "tags": [
     "FOREST"
    ],
+   "rain": 0.8,
    "from": "minecraft"
   },
   "ForestHills": {
@@ -394,6 +444,7 @@
     "FOREST",
     "HILLS"
    ],
+   "rain": 0.8,
    "from": "minecraft"
   },
   "Frost Forest": {
@@ -403,6 +454,7 @@
     "SNOWY",
     "SPARSE"
    ],
+   "rain": 0.5,
    "from": "BiomesOPlenty"
   },
   "FrozenOcean": {
@@ -411,6 +463,7 @@
     "OCEAN",
     "SNOWY"
    ],
+   "rain": 0.5,
    "from": "minecraft"
   },
   "FrozenRiver": {
@@ -419,6 +472,7 @@
     "RIVER",
     "SNOWY"
    ],
+   "rain": 0.5,
    "from": "minecraft"
   },
   "Fungi Forest": {
@@ -430,6 +484,7 @@
     "SWAMP",
     "WET"
    ],
+   "rain": 1.0,
    "from": "BiomesOPlenty"
   },
   "Garden": {
@@ -438,6 +493,7 @@
     "MAGICAL",
     "PLAINS"
    ],
+   "rain": 0.8,
    "from": "BiomesOPlenty"
   },
   "Glacier": {
@@ -447,6 +503,7 @@
     "HILLS",
     "SNOWY"
    ],
+   "rain": 0.2,
    "from": "BiomesOPlenty"
   },
   "Grassland": {
@@ -457,6 +514,7 @@
     "SPARSE",
     "SWAMP"
    ],
+   "rain": 0.7,
    "from": "BiomesOPlenty"
   },
   "Grove": {
@@ -466,6 +524,7 @@
     "LUSH",
     "PLAINS"
    ],
+   "rain": 0.8,
    "from": "BiomesOPlenty"
   },
   "Heathland": {
@@ -474,6 +533,7 @@
     "PLAINS",
     "SAVANNA"
    ],
+   "rain": 0.2,
    "from": "BiomesOPlenty"
   },
   "Hell": {
@@ -482,6 +542,7 @@
     "HOT",
     "NETHER"
    ],
+   "rain": 0.0,
    "from": "minecraft"
   },
   "Highland": {
@@ -490,6 +551,7 @@
     "MOUNTAIN",
     "SPARSE"
    ],
+   "rain": 0.8,
    "from": "BiomesOPlenty"
   },
   "Highlands Center": {
@@ -499,6 +561,7 @@
     "MESA",
     "WASTELAND"
    ],
+   "rain": 0.2,
    "from": "TwilightForest"
   },
   "Hot Desert": {
@@ -507,6 +570,7 @@
     "HOT",
     "SANDY"
    ],
+   "rain": 0.0,
    "from": "RWG"
   },
   "Hot Forest": {
@@ -516,6 +580,7 @@
     "SAVANNA",
     "SPARSE"
    ],
+   "rain": 0.2,
    "from": "RWG"
   },
   "Hot Ocean": {
@@ -526,6 +591,7 @@
     "OCEAN",
     "SANDY"
    ],
+   "rain": 0.2,
    "from": "RWG"
   },
   "Hot Plains": {
@@ -535,6 +601,7 @@
     "SAVANNA",
     "SPARSE"
    ],
+   "rain": 0.1,
    "from": "RWG"
   },
   "Hot River": {
@@ -544,6 +611,7 @@
     "RIVER",
     "SANDY"
    ],
+   "rain": 0.2,
    "from": "RWG"
   },
   "Ice Mountains": {
@@ -552,6 +620,7 @@
     "MOUNTAIN",
     "SNOWY"
    ],
+   "rain": 0.5,
    "from": "minecraft"
   },
   "Ice Ocean": {
@@ -561,6 +630,7 @@
     "OCEAN",
     "SNOWY"
    ],
+   "rain": 0.1,
    "from": "RWG"
   },
   "Ice Plains": {
@@ -569,6 +639,7 @@
     "SNOWY",
     "WASTELAND"
    ],
+   "rain": 0.5,
    "from": "minecraft"
   },
   "Ice River": {
@@ -577,6 +648,7 @@
     "RIVER",
     "SNOWY"
    ],
+   "rain": 0.1,
    "from": "RWG"
   },
   "Jade Cliffs": {
@@ -585,6 +657,7 @@
     "FOREST",
     "MOUNTAIN"
    ],
+   "rain": 0.9,
    "from": "BiomesOPlenty"
   },
   "Jungle": {
@@ -594,6 +667,7 @@
     "JUNGLE",
     "WET"
    ],
+   "rain": 0.9,
    "from": "minecraft"
   },
   "Jungle (RWG)": {
@@ -602,6 +676,7 @@
     "JUNGLE",
     "WET"
    ],
+   "rain": 0.9,
    "from": "RWG"
   },
   "JungleEdge": {
@@ -611,6 +686,7 @@
     "JUNGLE",
     "WET"
    ],
+   "rain": 0.8,
    "from": "minecraft"
   },
   "JungleHills": {
@@ -621,13 +697,16 @@
     "JUNGLE",
     "WET"
    ],
+   "rain": 0.9,
    "from": "minecraft"
   },
   "Kelp Forest": {
    "tags": [
     "FOREST",
-    "WATER"
+    "OCEAN",
+    "RIVER"
    ],
+   "rain": 0.9,
    "from": "BiomesOPlenty"
   },
   "Lavender Fields": {
@@ -636,6 +715,7 @@
     "PLAINS",
     "SPARSE"
    ],
+   "rain": 0.7,
    "from": "BiomesOPlenty"
   },
   "Lush Desert": {
@@ -646,15 +726,18 @@
     "SANDY",
     "SAVANNA"
    ],
+   "rain": 0.5,
    "from": "BiomesOPlenty"
   },
   "Lush Swamp": {
    "tags": [
     "LUSH",
+    "OCEAN",
+    "RIVER",
     "SWAMP",
-    "WATER",
     "WET"
    ],
+   "rain": 1.0,
    "from": "BiomesOPlenty"
   },
   "Magical Forest": {
@@ -662,15 +745,18 @@
     "FOREST",
     "MAGICAL"
    ],
+   "rain": 0.6,
    "from": "Thaumcraft"
   },
   "Mangrove": {
    "tags": [
     "FOREST",
     "LUSH",
-    "WATER",
+    "OCEAN",
+    "RIVER",
     "WET"
    ],
+   "rain": 0.9,
    "from": "BiomesOPlenty"
   },
   "Maple Woods": {
@@ -678,16 +764,19 @@
     "COLD",
     "FOREST"
    ],
+   "rain": 0.8,
    "from": "BiomesOPlenty"
   },
   "Marsh": {
    "tags": [
     "LUSH",
+    "OCEAN",
+    "RIVER",
     "SPARSE",
     "SWAMP",
-    "WATER",
     "WET"
    ],
+   "rain": 0.9,
    "from": "BiomesOPlenty"
   },
   "Meadow": {
@@ -696,6 +785,7 @@
     "LUSH",
     "PLAINS"
    ],
+   "rain": 0.7,
    "from": "BiomesOPlenty"
   },
   "Meadow Forest": {
@@ -704,6 +794,7 @@
     "LUSH",
     "PLAINS"
    ],
+   "rain": 0.7,
    "from": "BiomesOPlenty"
   },
   "Mega Taiga": {
@@ -712,6 +803,7 @@
     "CONIFEROUS",
     "FOREST"
    ],
+   "rain": 0.8,
    "from": "minecraft"
   },
   "Mega Taiga Hills": {
@@ -721,6 +813,7 @@
     "FOREST",
     "HILLS"
    ],
+   "rain": 0.8,
    "from": "minecraft"
   },
   "Mesa": {
@@ -728,6 +821,7 @@
     "MESA",
     "SANDY"
    ],
+   "rain": 0.0,
    "from": "minecraft"
   },
   "Mesa Plateau": {
@@ -735,6 +829,7 @@
     "MESA",
     "SANDY"
    ],
+   "rain": 0.0,
    "from": "minecraft"
   },
   "Mesa Plateau F": {
@@ -743,6 +838,7 @@
     "SANDY",
     "SPARSE"
    ],
+   "rain": 0.0,
    "from": "minecraft"
   },
   "Moor": {
@@ -752,6 +848,7 @@
     "SWAMP",
     "WET"
    ],
+   "rain": 1.0,
    "from": "BiomesOPlenty"
   },
   "Mountain": {
@@ -760,6 +857,7 @@
     "FOREST",
     "MOUNTAIN"
    ],
+   "rain": 0.1,
    "from": "BiomesOPlenty"
   },
   "Mushroom Forest": {
@@ -767,12 +865,14 @@
     "FOREST",
     "MUSHROOM"
    ],
+   "rain": 0.8,
    "from": "TwilightForest"
   },
   "MushroomIsland": {
    "tags": [
     "MUSHROOM"
    ],
+   "rain": 1.0,
    "from": "minecraft"
   },
   "MushroomIslandShore": {
@@ -780,6 +880,7 @@
     "BEACH",
     "MUSHROOM"
    ],
+   "rain": 1.0,
    "from": "minecraft"
   },
   "Mystic Grove": {
@@ -789,6 +890,7 @@
     "MAGICAL",
     "WET"
    ],
+   "rain": 1.0,
    "from": "BiomesOPlenty"
   },
   "Oak Savanna": {
@@ -796,6 +898,7 @@
     "FOREST",
     "SPARSE"
    ],
+   "rain": 0.0,
    "from": "TwilightForest"
   },
   "Oasis": {
@@ -806,12 +909,14 @@
     "LUSH",
     "SANDY"
    ],
+   "rain": 0.3,
    "from": "BiomesOPlenty"
   },
   "Ocean": {
    "tags": [
     "OCEAN"
    ],
+   "rain": 0.5,
    "from": "minecraft"
   },
   "Ocean Oasis": {
@@ -822,6 +927,7 @@
     "OCEAN",
     "WET"
    ],
+   "rain": 0.9,
    "from": "RWG"
   },
   "Ominous Woods": {
@@ -832,6 +938,7 @@
     "SPOOKY",
     "SWAMP"
    ],
+   "rain": 0.9,
    "from": "BiomesOPlenty"
   },
   "Orchard": {
@@ -841,6 +948,7 @@
     "PLAINS",
     "SPARSE"
    ],
+   "rain": 0.7,
    "from": "BiomesOPlenty"
   },
   "Outback": {
@@ -851,6 +959,7 @@
     "SANDY",
     "SAVANNA"
    ],
+   "rain": 0.05,
    "from": "BiomesOPlenty"
   },
   "Phantasmagoric Inferno": {
@@ -858,18 +967,21 @@
     "NETHER",
     "SPOOKY"
    ],
+   "rain": 0.0,
    "from": "BiomesOPlenty"
   },
   "Plains": {
    "tags": [
     "PLAINS"
    ],
+   "rain": 0.4,
    "from": "minecraft"
   },
   "Plains (RWG)": {
    "tags": [
     "PLAINS"
    ],
+   "rain": 0.4,
    "from": "RWG"
   },
   "Prairie": {
@@ -878,6 +990,7 @@
     "PLAINS",
     "SPARSE"
    ],
+   "rain": 0.3,
    "from": "BiomesOPlenty"
   },
   "Quagmire": {
@@ -888,6 +1001,7 @@
     "WASTELAND",
     "WET"
    ],
+   "rain": 0.9,
    "from": "BiomesOPlenty"
   },
   "Rainforest": {
@@ -899,6 +1013,7 @@
     "LUSH",
     "WET"
    ],
+   "rain": 1.0,
    "from": "BiomesOPlenty"
   },
   "Redwood": {
@@ -907,6 +1022,7 @@
     "CONIFEROUS",
     "FOREST"
    ],
+   "rain": 0.6,
    "from": "RWG"
   },
   "Redwood Forest": {
@@ -915,12 +1031,14 @@
     "DENSE",
     "FOREST"
    ],
+   "rain": 0.7,
    "from": "BiomesOPlenty"
   },
   "River": {
    "tags": [
     "RIVER"
    ],
+   "rain": 0.5,
    "from": "minecraft"
   },
   "River Oasis": {
@@ -930,6 +1048,7 @@
     "RIVER",
     "WET"
    ],
+   "rain": 0.9,
    "from": "RWG"
   },
   "Roofed Forest": {
@@ -938,6 +1057,7 @@
     "FOREST",
     "SPOOKY"
    ],
+   "rain": 0.8,
    "from": "minecraft"
   },
   "Sacred Springs": {
@@ -949,6 +1069,7 @@
     "MOUNTAIN",
     "WET"
    ],
+   "rain": 0.5,
    "from": "BiomesOPlenty"
   },
   "Savanna": {
@@ -958,6 +1079,7 @@
     "SAVANNA",
     "SPARSE"
    ],
+   "rain": 0.0,
    "from": "minecraft"
   },
   "Savanna Plateau": {
@@ -967,6 +1089,7 @@
     "SAVANNA",
     "SPARSE"
    ],
+   "rain": 0.0,
    "from": "minecraft"
   },
   "Scrubland": {
@@ -977,6 +1100,7 @@
     "SAVANNA",
     "SPARSE"
    ],
+   "rain": 0.0,
    "from": "BiomesOPlenty"
   },
   "Seasonal Forest": {
@@ -985,15 +1109,18 @@
     "FOREST",
     "LUSH"
    ],
+   "rain": 0.8,
    "from": "BiomesOPlenty"
   },
   "Shield": {
    "tags": [
     "CONIFEROUS",
     "FOREST",
-    "WATER",
+    "OCEAN",
+    "RIVER",
     "WET"
    ],
+   "rain": 0.8,
    "from": "BiomesOPlenty"
   },
   "Shrubland": {
@@ -1002,6 +1129,7 @@
     "PLAINS",
     "SPARSE"
    ],
+   "rain": 0.05,
    "from": "BiomesOPlenty"
   },
   "Silkglades": {
@@ -1011,6 +1139,7 @@
     "SPOOKY",
     "SWAMP"
    ],
+   "rain": 0.9,
    "from": "BiomesOPlenty"
   },
   "Sky": {
@@ -1019,6 +1148,7 @@
     "DRY",
     "END"
    ],
+   "rain": 0.5,
    "from": "minecraft"
   },
   "Sludgepit": {
@@ -1030,6 +1160,7 @@
     "WASTELAND",
     "WET"
    ],
+   "rain": 0.9,
    "from": "BiomesOPlenty"
   },
   "Snow Desert": {
@@ -1038,6 +1169,7 @@
     "SNOWY",
     "WASTELAND"
    ],
+   "rain": 0.1,
    "from": "RWG"
   },
   "Snow Forest": {
@@ -1047,6 +1179,7 @@
     "FOREST",
     "SNOWY"
    ],
+   "rain": 0.1,
    "from": "RWG"
   },
   "Snowy Coniferous Forest": {
@@ -1058,6 +1191,7 @@
     "HILLS",
     "SNOWY"
    ],
+   "rain": 0.5,
    "from": "BiomesOPlenty"
   },
   "Snowy Forest": {
@@ -1067,6 +1201,7 @@
     "FOREST",
     "SNOWY"
    ],
+   "rain": 0.9,
    "from": "TwilightForest"
   },
   "Spruce Woods": {
@@ -1076,6 +1211,7 @@
     "FOREST",
     "LUSH"
    ],
+   "rain": 0.8,
    "from": "BiomesOPlenty"
   },
   "Steppe": {
@@ -1088,12 +1224,14 @@
     "SAVANNA",
     "SPARSE"
    ],
+   "rain": 0.05,
    "from": "BiomesOPlenty"
   },
   "Stone Beach": {
    "tags": [
     "BEACH"
    ],
+   "rain": 0.3,
    "from": "minecraft"
   },
   "Swampland": {
@@ -1101,6 +1239,7 @@
     "SWAMP",
     "WET"
    ],
+   "rain": 0.9,
    "from": "minecraft"
   },
   "Taiga": {
@@ -1109,6 +1248,7 @@
     "CONIFEROUS",
     "FOREST"
    ],
+   "rain": 0.8,
    "from": "minecraft"
   },
   "TaigaHills": {
@@ -1118,6 +1258,7 @@
     "FOREST",
     "HILLS"
    ],
+   "rain": 0.8,
    "from": "minecraft"
   },
   "Tainted Land": {
@@ -1125,6 +1266,7 @@
     "MAGICAL",
     "WASTELAND"
    ],
+   "rain": 0.5,
    "from": "Thaumcraft"
   },
   "Temperate Ocean": {
@@ -1134,6 +1276,7 @@
     "FOREST",
     "OCEAN"
    ],
+   "rain": 0.6,
    "from": "RWG"
   },
   "Temperate Rainforest": {
@@ -1144,6 +1287,7 @@
     "LUSH",
     "WET"
    ],
+   "rain": 1.2,
    "from": "BiomesOPlenty"
   },
   "Temperate River": {
@@ -1152,6 +1296,7 @@
     "FOREST",
     "RIVER"
    ],
+   "rain": 0.6,
    "from": "RWG"
   },
   "Thicket": {
@@ -1162,6 +1307,7 @@
     "FOREST",
     "PLAINS"
    ],
+   "rain": 0.2,
    "from": "BiomesOPlenty"
   },
   "Thornlands": {
@@ -1171,6 +1317,7 @@
     "HILLS",
     "WASTELAND"
    ],
+   "rain": 0.2,
    "from": "TwilightForest"
   },
   "Tropical Island": {
@@ -1179,6 +1326,7 @@
     "JUNGLE",
     "WET"
    ],
+   "rain": 0.8,
    "from": "RWG"
   },
   "Tropical Rainforest": {
@@ -1189,6 +1337,7 @@
     "LUSH",
     "WET"
    ],
+   "rain": 1.0,
    "from": "BiomesOPlenty"
   },
   "Tropics": {
@@ -1196,9 +1345,11 @@
     "BEACH",
     "JUNGLE",
     "LUSH",
-    "WATER",
+    "OCEAN",
+    "RIVER",
     "WET"
    ],
+   "rain": 1.0,
    "from": "BiomesOPlenty"
   },
   "Tundra": {
@@ -1209,6 +1360,7 @@
     "SPARSE",
     "WASTELAND"
    ],
+   "rain": 0.5,
    "from": "BiomesOPlenty"
   },
   "Twilight Clearing": {
@@ -1216,12 +1368,14 @@
     "PLAINS",
     "SPARSE"
    ],
+   "rain": 0.4,
    "from": "TwilightForest"
   },
   "Twilight Forest": {
    "tags": [
     "FOREST"
    ],
+   "rain": 0.5,
    "from": "TwilightForest"
   },
   "Twilight Glacier": {
@@ -1230,6 +1384,7 @@
     "SNOWY",
     "WASTELAND"
    ],
+   "rain": 0.1,
    "from": "TwilightForest"
   },
   "Twilight Highlands": {
@@ -1238,18 +1393,21 @@
     "FOREST",
     "MOUNTAIN"
    ],
+   "rain": 0.7,
    "from": "TwilightForest"
   },
   "Twilight Lake": {
    "tags": [
     "OCEAN"
    ],
+   "rain": 1.0,
    "from": "TwilightForest"
   },
   "Twilight Stream": {
    "tags": [
     "RIVER"
    ],
+   "rain": 1.0,
    "from": "TwilightForest"
   },
   "Twilight Swamp": {
@@ -1257,6 +1415,7 @@
     "SWAMP",
     "WET"
    ],
+   "rain": 0.9,
    "from": "TwilightForest"
   },
   "Undergarden": {
@@ -1265,6 +1424,7 @@
     "NETHER",
     "SPOOKY"
    ],
+   "rain": 0.0,
    "from": "BiomesOPlenty"
   },
   "Visceral Heap": {
@@ -1272,6 +1432,7 @@
     "NETHER",
     "SPOOKY"
    ],
+   "rain": 0.0,
    "from": "BiomesOPlenty"
   },
   "Volcano": {
@@ -1281,6 +1442,7 @@
     "MOUNTAIN",
     "WASTELAND"
    ],
+   "rain": 0.05,
    "from": "BiomesOPlenty"
   },
   "Wasteland": {
@@ -1290,6 +1452,7 @@
     "SPOOKY",
     "WASTELAND"
    ],
+   "rain": 0.05,
    "from": "BiomesOPlenty"
   },
   "Wet Ocean": {
@@ -1300,6 +1463,7 @@
     "OCEAN",
     "WET"
    ],
+   "rain": 0.9,
    "from": "RWG"
   },
   "Wet River": {
@@ -1309,6 +1473,7 @@
     "RIVER",
     "WET"
    ],
+   "rain": 0.9,
    "from": "RWG"
   },
   "Wetland": {
@@ -1319,6 +1484,7 @@
     "SWAMP",
     "WET"
    ],
+   "rain": 0.9,
    "from": "BiomesOPlenty"
   },
   "Woodland": {
@@ -1327,6 +1493,7 @@
     "DRY",
     "FOREST"
    ],
+   "rain": 0.4,
    "from": "BiomesOPlenty"
   }
  }

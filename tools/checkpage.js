@@ -70,6 +70,7 @@ function load(pagePath) {
     setOwned: ids => { owned = new Set(ids); },
     render, oddsFor, showCrop, showPool, showTag, showBiome,
     cycleMark,
+    askHelp: q => { helpQuery = q; renderHelp(); }, stallsIn,
     C, MUT, POOLM, BIOMES,
   };`;
 
@@ -182,6 +183,41 @@ for (const pagePath of pages) {
     ok(cards().map(c => c.key).join() === first.map(c => c.key).join(),
        "a full cycle did not restore the original order");
   }
+
+  /* The "it won't grow without help" panel. One pair is pinned rather than
+     recomputed: Withereed in Hot River was checked in the game, and it is the
+     only thing here that would still pass if the formula itself drifted.   */
+  const help = byId("helpOut");
+  const wither = api.C.Withereed;
+  if (wither && api.BIOMES["Hot River"]) {
+    ok(wither.tier === 8, `Withereed is tier ${wither.tier}, the pinned case assumes 8`);
+    ok(api.stallsIn(wither).open.includes("Hot River"),
+       "Withereed no longer stalls in Hot River, which the game says it does");
+  }
+  const stallers = Object.values(api.C)
+    .filter(c => api.stallsIn(c).open.length).sort((a, b) => b.tier - a.tier);
+  ok(stallers.length > 0, "no crop stalls anywhere, so this check proves nothing");
+  if (stallers.length) {
+    const c = stallers[0];
+    api.askHelp(c.name);
+    const want = api.stallsIn(c);
+    const chips = (help.innerHTML.match(/data-biome="/g) || []).length;
+    ok(help.innerHTML.includes(c.name), `the panel does not name ${c.name}`);
+    ok(!help.innerHTML.includes("{{"), "the help panel left a {{key}} unreplaced");
+    ok(chips === want.open.length + want.roofed.length,
+       `the panel drew ${chips} biomes, stallsIn says ${want.open.length + want.roofed.length}`);
+  }
+  const safe = Object.values(api.C).find(c => {
+    const s = api.stallsIn(c);
+    return !s.open.length && !s.roofed.length;
+  });
+  if (safe) {
+    api.askHelp(safe.name);
+    ok((help.innerHTML.match(/data-biome="/g) || []).length === 0,
+       `${safe.name} stalls nowhere, but the panel still listed biomes`);
+  }
+  api.askHelp("");
+  ok(help.innerHTML === "", "an empty search left the help panel populated");
 
   /* The two rail markers make a claim the rail has no other way to show: that
      a crop stick will never hand you this crop. The expected counts are worked

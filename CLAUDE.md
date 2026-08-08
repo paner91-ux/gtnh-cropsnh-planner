@@ -15,6 +15,7 @@ python tools/dump.py path/to/cropsnh-X.Y.Z.jar   # only when the mod version cha
 python tools/extract.py                     # only after dump.py, rewrites data/crops.json
 python tools/langs.py <.minecraft> <assets> # only after extract.py, rewrites data/lang.<code>.json
 python tools/altseeds.py <.minecraft> [lang]     # needs a fresh NEI dump, rewrites data/altseeds.json
+python tools/biomedump.py <.minecraft>      # needs a fresh NEI dump, refines data/biomes.json
 ```
 
 ## Text and languages

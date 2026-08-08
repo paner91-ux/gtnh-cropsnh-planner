@@ -633,6 +633,9 @@ p, li { text-wrap: pretty; }
 }
 #code:focus-visible { outline: 2px solid var(--leaf); outline-offset: 1px; }
 .railpanel-btns { display: flex; flex-wrap: wrap; gap: 6px; }
+/* the biome answers, which are long lists in a narrow column */
+.helpnote { margin: 2px 0 0 !important; font-size: 12px; color: var(--ink-faint); }
+#helpOut .poolchips { max-height: 190px; overflow-y: auto; margin-top: 4px; }
 .status { font-size: 12px; min-height: 1.4em; }
 .status[data-kind="ok"] { color: var(--leaf); }
 .status[data-kind="warn"] { color: var(--ore); }
@@ -692,6 +695,15 @@ footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2p
       <p class="raillegend"><span class="mark mach">&#9679;</span> {{rail.legendBreeder}}</p>
       <p class="raillegend"><span class="mark none">&#10005;</span> {{rail.legendNone}}</p>
       <p class="raillegend"><span class="legend-i">i</span> {{rail.legendInfo}}</p>
+
+      <details class="railpanel">
+        <summary>{{help.summary}}</summary>
+        <div class="railpanel-body">
+          <p>{{help.about}}</p>
+          <input class="field" id="helpSearch" type="search" placeholder="{{help.search}}" autocomplete="off">
+          <div id="helpOut"></div>
+        </div>
+      </details>
 
       <details class="railpanel">
         <summary>{{manage.summary}}</summary>
@@ -755,8 +767,8 @@ const C = DATA.crops, MUT = DATA.mutations, POOLM = DATA.poolMembers;
 /* Biome tags are Forge's, so this table is read from Forge and the mods that
    add biomes rather than from CropsNH - see the About tab.                  */
 const BIOMES = DATA.biomes || {};
-/* WATER is a Forge tag CropsNH never names, in any language, so it has no
-   entry to look up and would otherwise be printed as the raw constant. */
+/* CropsNH names the 28 tags the game can report and nothing else, so a tag it
+   has no string for is written out rather than printed as a raw constant. */
 const biomeNm = t => (DATA.biomeNames && DATA.biomeNames[t])
   || t.charAt(0) + t.slice(1).toLowerCase();
 /* every biome carrying a tag, and every crop that likes it */
@@ -769,6 +781,27 @@ const matchCount = (crop, biome) =>
 
 const byName = Object.values(C).sort((a, b) => a.tier - b.tier || a.name.localeCompare(b.name));
 const allSorted = Object.values(C).sort((a, b) => a.name.localeCompare(b.name));
+
+/* Biomes where an empty stick is not enough. getNutrientsPerCycle() adds 5 to
+   start with, 2 for open sky, and then max(humidity, matched tags x 14) - the
+   biome's two contributions do not stack, the larger one wins. A full water
+   tank and a full fertiliser tank are worth 10 each on top.
+   getGrowthRate() compares score x 5 against tier x 10 and returns 0 once the
+   shortfall reaches 25, which works out as a score of 2 x tier - 5 or less. At
+   0 the plant does not merely sit still: doGrowth() rolls its resistance and
+   marks it sick when the roll fails.                                        */
+const humidity = rain => Math.floor(Math.max(0, Math.min(1, (rain - 0.5) / 0.3)) * 14);
+const biomeScore = (crop, biome) =>
+  Math.max(humidity(BIOMES[biome].rain || 0), Math.min(2, matchCount(crop, biome)) * 14);
+function stallsIn(crop) {
+  const limit = 2 * crop.tier - 5, open = [], roofed = [];
+  for (const b of Object.keys(BIOMES)) {
+    const give = biomeScore(crop, b);
+    if (5 + 2 + give <= limit) open.push(b);
+    else if (5 + give <= limit) roofed.push(b);
+  }
+  return { limit, open: open.sort(), roofed: roofed.sort() };
+}
 
 /* Two rail markers that say a crop stick will never hand you this crop. Worked
    out once here rather than per keystroke, since the rail re-renders on every
@@ -1166,6 +1199,36 @@ function renderRail() {
   /* a sliver still has to be visible, or one crop looks the same as none */
   $("progressFill").style.width = owned.size ? `max(2px, ${share.toFixed(1)}%)` : "0";
   $("undo").hidden = undoState === null;
+  renderHelp();
+}
+
+/* The "it won't grow without help" panel. Its own search rather than the
+   rail's, because the rail's filter is a list you tick and this is a single
+   crop you look up - sharing one box would make ticking a seed reshuffle the
+   answer below it.                                                         */
+let helpQuery = "";
+function renderHelp() {
+  const box = $("helpOut");
+  if (!box) return;
+  const q = helpQuery.trim().toLowerCase();
+  if (!q) { box.innerHTML = ""; return; }
+  const hits = allSorted.filter(c => c.name.toLowerCase().includes(q)
+    || c.id.toLowerCase().includes(q));
+  if (!hits.length) { box.innerHTML = `<p class="helpnote">{{help.noCrop}}</p>`; return; }
+  if (hits.length > 1 && !hits.some(c => c.name.toLowerCase() === q)) {
+    box.innerHTML = `<div class="poolchips">${hits.slice(0, 24).map(c =>
+      `<button class="poolchip" type="button" data-help="${esc(c.name)}">${esc(c.name)}
+        <span class="tier">T${c.tier}</span></button>`).join("")}</div>`;
+    return;
+  }
+  const c = hits.find(x => x.name.toLowerCase() === q) || hits[0];
+  const { limit, open, roofed } = stallsIn(c);
+  const chips = bs => `<div class="poolchips">${bs.map(b =>
+    `<button class="poolchip" type="button" data-biome="${esc(b)}">${esc(b)}</button>`).join("")}</div>`;
+  box.innerHTML = `<p class="helpnote">{{help.head}}</p>`
+    + (open.length ? `<p class="helpnote">{{help.open}}</p>${chips(open)}` : "")
+    + (roofed.length ? `<p class="helpnote">{{help.roofed}}</p>${chips(roofed)}` : "")
+    + (open.length || roofed.length ? "" : `<p class="helpnote">{{help.none}}</p>`);
 }
 
 /* ---------------------------------------------------------- views */
@@ -2036,6 +2099,13 @@ document.addEventListener("click", e => {
   if (pair) { setPair(...pair.dataset.pair.split("|")); render(); return; }
   const tag = e.target.closest("[data-tag]");
   if (tag) { showTag(tag.dataset.tag); return; }
+  const help = e.target.closest("[data-help]");
+  if (help) {
+    helpQuery = help.dataset.help;
+    $("helpSearch").value = helpQuery;
+    renderHelp();
+    return;
+  }
   const biome = e.target.closest("[data-biome]");
   if (biome) { showBiome(biome.dataset.biome); return; }
   const pool = e.target.closest("[data-pool]");
@@ -2066,6 +2136,7 @@ document.addEventListener("keydown", e => {
 });
 
 $("search").addEventListener("input", e => { filter = e.target.value; renderRail(); });
+$("helpSearch").addEventListener("input", e => { helpQuery = e.target.value; renderHelp(); });
 
 /* Enter ticks the top match and clears the box, so a run of seeds can be
    entered without leaving the keyboard.                                   */

@@ -23,6 +23,7 @@ python tools/build.py
 | `extract.py` | parses the disassembly into `data/crops.json` |
 | `langs.py` | reads the pack's translations into `data/lang.<code>.json` |
 | `altseeds.py` | reads NEI's data dumps into `data/altseeds.json` |
+| `biomedump.py` | puts rainfall and the runtime tags from NEI's biome dump into `data/biomes.json` |
 | `build.py` | inlines that JSON into `page.src.html` and writes one page per language |
 
 `dump.py` looks for `javap` on `PATH`, then `JAVA_HOME`, then the usual JDK install locations
@@ -67,6 +68,22 @@ instead.
 `altseeds.py` refuses to write if its crop list disagrees with the `altSeed` flag `extract.py` read
 out of the bytecode. The two are independent readings of the same fact, so a disagreement means one
 of them is being read wrong.
+
+`biomedump.py` is the same idea for biomes and takes the third dump, **Biome**, which needs no
+setting at all - it walks the biome array rather than anything the interface is showing. It refines
+what `biomes.py` produced instead of replacing it, so run it after, not instead:
+
+- **rainfall**, which `biomes.py` cannot reach. CropsNH turns it into up to +14 Nutrient Score and
+  it is the only term that decides whether a crop grows at all in a biome whose tags it does not
+  like. Mods set it every which way; RWG hands a type number to a shared constructor and branches
+  on it, so there is no one place to read.
+- **the tags the game reports**, which are not always the tags a mod registers. Three of Forge's
+  types are compounds - `WATER` is `{OCEAN, RIVER}`, `DESERT` is `{SANDY}`, `FROZEN` is `{SNOWY}` -
+  and `getTypesForBiome()` answers the parts, never the compound. That call is exactly what
+  CropsNH's `getNutrientScore()` makes. Reading the registration argument kept `WATER` on eight
+  biomes, so crops that like `OCEAN` or `RIVER` were shown as not matching Bayou or Coral Reef when
+  in the game they do. CropsNH's own language file confirms it: it names all 28 leaf types and none
+  of the three compounds.
 
 The build is reproducible: the same jar always produces a byte-identical `index.html`, so a diff on
 that file means the data genuinely changed.
