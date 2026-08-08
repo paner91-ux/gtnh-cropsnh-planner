@@ -29,6 +29,7 @@
   "manage.download": "Pobierz plik",
   "manage.open": "Otwórz plik",
   "manage.dlnote": "Ta strona działa w ramce z ograniczeniami i nie może zapisywać plików. Użyj <b>Kopiuj</b> i wklej tekst w bezpieczne miejsce - kopia strony na dysku potrafi pobierać.",
+  "bio.section": "Biomy",
   "bio.search": "Znajdź biom…",
   "bio.found": "Ten biom, bez wody i bez nawozu",
   "bio.row": "pasujące tagi: ${n} · opady ${BIOMES[b].rain} · biom dodaje ${give} · Nutrient Score ${score}, a potrzeba więcej niż ${limit}",

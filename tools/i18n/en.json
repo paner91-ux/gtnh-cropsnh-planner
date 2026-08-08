@@ -29,6 +29,7 @@
   "manage.download": "Download file",
   "manage.open": "Open file",
   "manage.dlnote": "This page runs in a sandboxed frame, so it cannot write files. Use <b>Copy</b> and paste the text somewhere safe - the offline copy of this page can download instead.",
+  "bio.section": "Biomes",
   "bio.search": "Find a biome…",
   "bio.found": "That biome, with no water and no fertiliser",
   "bio.row": "${n} tags match · rainfall ${BIOMES[b].rain} · the biome adds ${give} · Nutrient Score ${score}, and it needs more than ${limit}",

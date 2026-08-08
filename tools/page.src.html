@@ -601,7 +601,9 @@ p, li { text-wrap: pretty; }
 
 /* Ticking the crop and sending it to the roulette sit side by side, and wrap
    instead of stretching when the drawer is narrow. */
-.drawer-acts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+/* Directly under the name, because ticking a crop off and pairing it with
+   itself are what the panel is opened for more often than reading it. */
+.drawer-acts { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 2px; }
 /* one row per biome the search box matched: the name, the arithmetic, the answer */
 .biohit {
   display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 8px;
@@ -1945,6 +1947,10 @@ function renderCropDrawer(id) {
       ${backButton()}
       <button class="btn close" type="button" id="closeDrawer">{{drawer.close}}</button>
     </div>
+    <div class="drawer-acts">
+      <button class="btn" type="button" id="toggleOwn">${owned.has(id) ? `{{drawer.untick}}` : `{{drawer.tick}}`}</button>
+      <button class="btn" type="button" id="pairSelf" title="{{drawer.pairSelfTitle}}">{{drawer.pairSelf}}</button>
+    </div>
     ${c.flavour ? `<p class="flav">${esc(c.flavour)}</p>` : ""}
 
     <div class="dsec"><h3>{{drawer.conditions}}</h3>
@@ -1962,14 +1968,12 @@ function renderCropDrawer(id) {
           c.biomes.map(tagLink).join(", ")}<br>
           <span style="font-size:12px;color:var(--ink-faint)">{{drawer.likesNote}}</span></dd>` : ""}
       </dl>
-      <div class="drawer-acts">
-        <button class="btn" type="button" id="toggleOwn">${owned.has(id) ? `{{drawer.untick}}` : `{{drawer.tick}}`}</button>
-        <button class="btn" type="button" id="pairSelf" title="{{drawer.pairSelfTitle}}">{{drawer.pairSelf}}</button>
-      </div>
     </div>
 
-    <input class="field" id="bioFind" type="search" placeholder="{{bio.search}}"
-      autocomplete="off" value="${esc(bioQuery)}">
+    <div class="dsec"><h3>{{bio.section}}</h3>
+      <input class="field" id="bioFind" type="search" placeholder="{{bio.search}}"
+        autocomplete="off" value="${esc(bioQuery)}">
+    </div>
     <div id="bioSecs">${biomeSections(c)}</div>
 
     <div class="dsec"><h3>{{drawer.pools}}</h3>

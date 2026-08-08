@@ -618,7 +618,9 @@ p, li { text-wrap: pretty; }
 
 /* Ticking the crop and sending it to the roulette sit side by side, and wrap
    instead of stretching when the drawer is narrow. */
-.drawer-acts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+/* Directly under the name, because ticking a crop off and pairing it with
+   itself are what the panel is opened for more often than reading it. */
+.drawer-acts { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 2px; }
 /* one row per biome the search box matched: the name, the arithmetic, the answer */
 .biohit {
   display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 8px;
@@ -1962,6 +1964,10 @@ function renderCropDrawer(id) {
       ${backButton()}
       <button class="btn close" type="button" id="closeDrawer">閉じる</button>
     </div>
+    <div class="drawer-acts">
+      <button class="btn" type="button" id="toggleOwn">${owned.has(id) ? `✓ 持っている（チェックを外す）` : `持っている種に追加`}</button>
+      <button class="btn" type="button" id="pairSelf" title="この作物を両方の親に設定してプールのルーレットを開きます">×2 でルーレットへ</button>
+    </div>
     ${c.flavour ? `<p class="flav">${esc(c.flavour)}</p>` : ""}
 
     <div class="dsec"><h3>生育条件</h3>
@@ -1979,14 +1985,12 @@ function renderCropDrawer(id) {
           c.biomes.map(tagLink).join(", ")}<br>
           <span style="font-size:12px;color:var(--ink-faint)">バイオームタグです。必須条件ではありません。コツと仕組みを参照してください</span></dd>` : ""}
       </dl>
-      <div class="drawer-acts">
-        <button class="btn" type="button" id="toggleOwn">${owned.has(id) ? `✓ 持っている（チェックを外す）` : `持っている種に追加`}</button>
-        <button class="btn" type="button" id="pairSelf" title="この作物を両方の親に設定してプールのルーレットを開きます">×2 でルーレットへ</button>
-      </div>
     </div>
 
-    <input class="field" id="bioFind" type="search" placeholder="バイオームを検索…"
-      autocomplete="off" value="${esc(bioQuery)}">
+    <div class="dsec"><h3>バイオーム</h3>
+      <input class="field" id="bioFind" type="search" placeholder="バイオームを検索…"
+        autocomplete="off" value="${esc(bioQuery)}">
+    </div>
     <div id="bioSecs">${biomeSections(c)}</div>
 
     <div class="dsec"><h3>変異プール（${c.pools.length}）</h3>
