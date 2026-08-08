@@ -309,6 +309,13 @@ p, li { text-wrap: pretty; }
   box-shadow: inset 3px 0 0 var(--leaf);
 }
 .card.marked .card-out { color: var(--leaf); }
+/* The opposite decision: still there to be read, but out of the way and out of
+   the palette's three meanings, since it says nothing about the recipe.    */
+.card.parked {
+  background: none; border-style: dashed; opacity: 0.55;
+  box-shadow: inset 3px 0 0 var(--ink-faint);
+}
+.card.parked:hover { opacity: 1; }
 /* the crop names and chips inside stay their normal pointer targets */
 .card :is(button, a) { cursor: pointer; }
 
@@ -816,23 +823,42 @@ if (storage) {
   try { owned = new Set(JSON.parse(storage.getItem(LS) || "[]").filter(id => C[id])); } catch (e) {}
 }
 
-/* Recipes you are working on right now. Marked cards are highlighted and
-   sorted to the front, so the one you are building is never something you
-   have to hunt for on a second monitor. Kept per recipe, not per crop,
-   because one crop can have several recipes.                             */
+/* Recipes you are working on right now, and recipes you have decided against.
+   A click cycles a card through three states: plain, marked, set aside. Marked
+   is highlighted and sorted to the front, so the one you are building is never
+   something you have to hunt for on a second monitor; set aside is dimmed and
+   sorted to the very back, so the middle of the list holds only what you have
+   not ruled on yet and anything new lands there. Kept per recipe, not per
+   crop, because one crop can have several recipes.                        */
 const LS_MARK = "cropsnh-marked-v1";
+const LS_PARK = "cropsnh-parked-v1";
 const markKey = m => `${m.out}|${m.parents.join(",")}`;
 let marked = new Set();
+let parked = new Set();
 if (storage) {
   try { marked = new Set(JSON.parse(storage.getItem(LS_MARK) || "[]")); } catch (e) {}
+  try { parked = new Set(JSON.parse(storage.getItem(LS_PARK) || "[]")); } catch (e) {}
 }
-function toggleMark(key) {
-  marked.has(key) ? marked.delete(key) : marked.add(key);
-  if (storage) { try { storage.setItem(LS_MARK, JSON.stringify([...marked])); } catch (e) {} }
+/* plain -> marked -> set aside -> plain. A key is in at most one of the two
+   sets, so the state is whichever set holds it.                           */
+function cycleMark(key) {
+  if (marked.has(key)) { marked.delete(key); parked.add(key); }
+  else if (parked.has(key)) { parked.delete(key); }
+  else { marked.add(key); }
+  if (storage) {
+    try {
+      storage.setItem(LS_MARK, JSON.stringify([...marked]));
+      storage.setItem(LS_PARK, JSON.stringify([...parked]));
+    } catch (e) {}
+  }
   render();
 }
-/* marked first, otherwise the order the view already decided */
-const markFirst = list => [...list].sort((a, b) => marked.has(markKey(b)) - marked.has(markKey(a)));
+const markRank = m => {
+  const k = markKey(m);
+  return marked.has(k) ? 1 : parked.has(k) ? -1 : 0;
+};
+/* marked first, set aside last, everything else in the order the view decided */
+const markFirst = list => [...list].sort((a, b) => markRank(b) - markRank(a));
 
 let view = "ready";
 let filter = "";
@@ -1162,9 +1188,9 @@ function renderRail() {
 /* ---------------------------------------------------------- views */
 function cardFor(m) {
   const c = C[m.out];
-  const key = markKey(m), on = marked.has(key);
-  return `<article class="card${on ? " marked" : ""}" data-key="${esc(key)}"
-      title="${on ? `已标记成你正在做的东西，点击取消` : `点击标记成你正在做的东西`}">
+  const key = markKey(m), on = marked.has(key), off = parked.has(key);
+  return `<article class="card${on ? " marked" : off ? " parked" : ""}" data-key="${esc(key)}"
+      title="${on ? `已标记成你正在做的东西，再点一次可以搁到一边` : off ? `已搁到一边并排到末尾，点击可以拿回来` : `点击标记成你正在做的东西`}">
     <div class="card-top">
       <button class="card-out" type="button" data-crop="${m.out}">${esc(nm(m.out))}</button>
       <span class="tier">T${c ? c.tier : "?"}</span>
@@ -1178,7 +1204,7 @@ function renderReady() {
   const list = readyList();
   if (!owned.size) return `<div class="empty">在左边的边栏里勾上你已经有的。</div>`;
   if (!list.length) return `<div class="empty">这套种子没有完整覆盖任何新配方。<br>试试<b>差一个亲本</b>或<b>突变池轮盘</b>。</div>`;
-  return `<p class="viewnote">全部亲本你都已经持有的配方。把亲本摆在双层作物架周围，并确认架子下面的地面满足产物的需求，否则这次尝试会被悄悄丢掉。点一张卡片标记你正在做的东西，被标记的会留在最前面。</p>
+  return `<p class="viewnote">全部亲本你都已经持有的配方。把亲本摆在双层作物架周围，并确认架子下面的地面满足产物的需求，否则这次尝试会被悄悄丢掉。点一张卡片把它标记成你正在做的东西，它会留在最前面；再点一次就把它搁到一边、排到末尾。你还没拿定主意的留在中间，新出现的配方也落在那里。</p>
     <div class="grid">${markFirst(list).map(m => cardFor(m)).join("")}</div>`;
 }
 
@@ -1186,7 +1212,7 @@ function renderNear() {
   const list = nearList();
   if (!owned.size) return `<div class="empty">在左边的边栏里勾上你已经有的。</div>`;
   if (!list.length) return `<div class="empty">没有配方正好差一个亲本。</div>`;
-  return `<p class="viewnote">差一种作物，以<span style="color:var(--ore);font-weight:600">锈色</span>标出。点名字看缺的那个亲本从哪来，或者点卡片本身把它标记下来。</p>
+  return `<p class="viewnote">差一种作物，以<span style="color:var(--ore);font-weight:600">锈色</span>标出。点名字看缺的那个亲本从哪来，或者点卡片本身把它标记下来，点一次到最前，点两次到末尾。</p>
     <div class="grid">${markFirst(list).map(m => cardFor(m)).join("")}</div>`;
 }
 
@@ -2039,7 +2065,7 @@ document.addEventListener("click", e => {
   if (goview) { view = goview.dataset.goview; render(); return; }
   /* last, so every button inside a card wins over marking it */
   const card = e.target.closest(".card[data-key]");
-  if (card) { toggleMark(card.dataset.key); return; }
+  if (card) { cycleMark(card.dataset.key); return; }
   if (e.target.id === "morePairs") { pairsOpen = !pairsOpen; render(); return; }
   if (e.target.id === "clearPair") { pairA = pairB = ""; render(); return; }
   const tab = e.target.closest(".tab");

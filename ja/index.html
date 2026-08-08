@@ -309,6 +309,13 @@ p, li { text-wrap: pretty; }
   box-shadow: inset 3px 0 0 var(--leaf);
 }
 .card.marked .card-out { color: var(--leaf); }
+/* The opposite decision: still there to be read, but out of the way and out of
+   the palette's three meanings, since it says nothing about the recipe.    */
+.card.parked {
+  background: none; border-style: dashed; opacity: 0.55;
+  box-shadow: inset 3px 0 0 var(--ink-faint);
+}
+.card.parked:hover { opacity: 1; }
 /* the crop names and chips inside stay their normal pointer targets */
 .card :is(button, a) { cursor: pointer; }
 
@@ -816,23 +823,42 @@ if (storage) {
   try { owned = new Set(JSON.parse(storage.getItem(LS) || "[]").filter(id => C[id])); } catch (e) {}
 }
 
-/* Recipes you are working on right now. Marked cards are highlighted and
-   sorted to the front, so the one you are building is never something you
-   have to hunt for on a second monitor. Kept per recipe, not per crop,
-   because one crop can have several recipes.                             */
+/* Recipes you are working on right now, and recipes you have decided against.
+   A click cycles a card through three states: plain, marked, set aside. Marked
+   is highlighted and sorted to the front, so the one you are building is never
+   something you have to hunt for on a second monitor; set aside is dimmed and
+   sorted to the very back, so the middle of the list holds only what you have
+   not ruled on yet and anything new lands there. Kept per recipe, not per
+   crop, because one crop can have several recipes.                        */
 const LS_MARK = "cropsnh-marked-v1";
+const LS_PARK = "cropsnh-parked-v1";
 const markKey = m => `${m.out}|${m.parents.join(",")}`;
 let marked = new Set();
+let parked = new Set();
 if (storage) {
   try { marked = new Set(JSON.parse(storage.getItem(LS_MARK) || "[]")); } catch (e) {}
+  try { parked = new Set(JSON.parse(storage.getItem(LS_PARK) || "[]")); } catch (e) {}
 }
-function toggleMark(key) {
-  marked.has(key) ? marked.delete(key) : marked.add(key);
-  if (storage) { try { storage.setItem(LS_MARK, JSON.stringify([...marked])); } catch (e) {} }
+/* plain -> marked -> set aside -> plain. A key is in at most one of the two
+   sets, so the state is whichever set holds it.                           */
+function cycleMark(key) {
+  if (marked.has(key)) { marked.delete(key); parked.add(key); }
+  else if (parked.has(key)) { parked.delete(key); }
+  else { marked.add(key); }
+  if (storage) {
+    try {
+      storage.setItem(LS_MARK, JSON.stringify([...marked]));
+      storage.setItem(LS_PARK, JSON.stringify([...parked]));
+    } catch (e) {}
+  }
   render();
 }
-/* marked first, otherwise the order the view already decided */
-const markFirst = list => [...list].sort((a, b) => marked.has(markKey(b)) - marked.has(markKey(a)));
+const markRank = m => {
+  const k = markKey(m);
+  return marked.has(k) ? 1 : parked.has(k) ? -1 : 0;
+};
+/* marked first, set aside last, everything else in the order the view decided */
+const markFirst = list => [...list].sort((a, b) => markRank(b) - markRank(a));
 
 let view = "ready";
 let filter = "";
@@ -1162,9 +1188,9 @@ function renderRail() {
 /* ---------------------------------------------------------- views */
 function cardFor(m) {
   const c = C[m.out];
-  const key = markKey(m), on = marked.has(key);
-  return `<article class="card${on ? " marked" : ""}" data-key="${esc(key)}"
-      title="${on ? `今作っているものとして印が付いています。クリックで解除` : `クリックすると今作っているものとして印が付きます`}">
+  const key = markKey(m), on = marked.has(key), off = parked.has(key);
+  return `<article class="card${on ? " marked" : off ? " parked" : ""}" data-key="${esc(key)}"
+      title="${on ? `今作っているものとして印が付いています。もう一度クリックすると脇に寄せます` : off ? `脇に寄せて末尾に並べてあります。クリックすると戻ります` : `クリックすると今作っているものとして印が付きます`}">
     <div class="card-top">
       <button class="card-out" type="button" data-crop="${m.out}">${esc(nm(m.out))}</button>
       <span class="tier">T${c ? c.tier : "?"}</span>
@@ -1178,7 +1204,7 @@ function renderReady() {
   const list = readyList();
   if (!owned.size) return `<div class="empty">左の欄で持っているものにチェックを入れてください。</div>`;
   if (!list.length) return `<div class="empty">この組み合わせで親がすべてそろうレシピはありません。<br><b>親があと一つ</b>か<b>プールのルーレット</b>を試してください。</div>`;
-  return `<p class="viewnote">親をすべて持っているレシピです。二重支柱の周りに親を並べ、支柱の下の地面が結果の条件を満たしているか確かめてください。満たしていないと試行は何も告げずに捨てられます。カードをクリックすると今作っているものとして印が付き、印の付いたものは先頭に残ります。</p>
+  return `<p class="viewnote">親をすべて持っているレシピです。二重支柱の周りに親を並べ、支柱の下の地面が結果の条件を満たしているか確かめてください。満たしていないと試行は何も告げずに捨てられます。カードをクリックすると今作っているものとして印が付いて先頭に残り、もう一度クリックすると脇に寄って末尾に並びます。まだ決めていないものはその間に入り、新しいレシピもそこに現れます。</p>
     <div class="grid">${markFirst(list).map(m => cardFor(m)).join("")}</div>`;
 }
 
@@ -1186,7 +1212,7 @@ function renderNear() {
   const list = nearList();
   if (!owned.size) return `<div class="empty">左の欄で持っているものにチェックを入れてください。</div>`;
   if (!list.length) return `<div class="empty">親がちょうど一つ足りないレシピはありません。</div>`;
-  return `<p class="viewnote">作物が一つ足りません。<span style="color:var(--ore);font-weight:600">さび色</span>で示しています。名前をクリックすると足りない親の入手方法が、カード自体をクリックすると印が付きます。</p>
+  return `<p class="viewnote">作物が一つ足りません。<span style="color:var(--ore);font-weight:600">さび色</span>で示しています。名前をクリックすると足りない親の入手方法が、カード自体をクリックすると印が付きます。一度で先頭、二度で末尾です。</p>
     <div class="grid">${markFirst(list).map(m => cardFor(m)).join("")}</div>`;
 }
 
@@ -2039,7 +2065,7 @@ document.addEventListener("click", e => {
   if (goview) { view = goview.dataset.goview; render(); return; }
   /* last, so every button inside a card wins over marking it */
   const card = e.target.closest(".card[data-key]");
-  if (card) { toggleMark(card.dataset.key); return; }
+  if (card) { cycleMark(card.dataset.key); return; }
   if (e.target.id === "morePairs") { pairsOpen = !pairsOpen; render(); return; }
   if (e.target.id === "clearPair") { pairA = pairB = ""; render(); return; }
   const tab = e.target.closest(".tab");

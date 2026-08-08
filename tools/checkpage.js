@@ -69,6 +69,7 @@ function load(pagePath) {
     getRecent: () => recentPairs, getStack: () => drawerStack,
     setOwned: ids => { owned = new Set(ids); },
     render, oddsFor, showCrop, showPool, showTag, showBiome,
+    cycleMark,
     C, MUT, POOLM, BIOMES,
   };`;
 
@@ -154,6 +155,32 @@ for (const pagePath of pages) {
     ok(/v=pool/.test(h) && h.includes(`a=${target}`) && h.includes(`b=${target}`),
        `pairSelf wrote the hash ${h}`);
     ok(!/crop=/.test(h), "the hash still points at a drawer that was closed");
+  }
+
+  /* A card cycles plain -> marked -> set aside -> plain, and each state has to
+     both look different and sort differently. Order is the half that matters
+     and the half a screenshot does not show, so it is read back from the
+     rendered grid rather than from the sets.                               */
+  api.setView("ready");
+  api.render();
+  const cards = () => [...view.innerHTML.matchAll(/class="card([^"]*)"\s+data-key="([^"]+)"/g)]
+    .map(m => ({ cls: m[1].trim(), key: m[2] }));
+  const state = key => (cards().find(c => c.key === key) || {}).cls;
+  const first = cards();
+  ok(first.length > 2, `the ready view drew ${first.length} cards, too few to sort`);
+  if (first.length > 2) {
+    const key = first[first.length - 1].key;
+    api.cycleMark(key);
+    ok(cards()[0].key === key, "a marked card did not sort to the front");
+    ok(state(key) === "marked", `a marked card carries class "card ${state(key)}"`);
+    api.cycleMark(key);
+    const after = cards();
+    ok(after[after.length - 1].key === key, "a card set aside did not sort to the back");
+    ok(state(key) === "parked", `a card set aside carries class "card ${state(key)}"`);
+    api.cycleMark(key);
+    ok(state(key) === "", `a card cycled back to plain carries class "card ${state(key)}"`);
+    ok(cards().map(c => c.key).join() === first.map(c => c.key).join(),
+       "a full cycle did not restore the original order");
   }
 
   /* The two rail markers make a claim the rail has no other way to show: that
