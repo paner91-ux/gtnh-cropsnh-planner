@@ -650,9 +650,6 @@ p, li { text-wrap: pretty; }
 }
 #code:focus-visible { outline: 2px solid var(--leaf); outline-offset: 1px; }
 .railpanel-btns { display: flex; flex-wrap: wrap; gap: 6px; }
-/* the biome answers, which are long lists in a narrow column */
-.helpnote { margin: 2px 0 0 !important; font-size: 12px; color: var(--ink-faint); }
-#helpOut .poolchips { max-height: 190px; overflow-y: auto; margin-top: 4px; }
 .status { font-size: 12px; min-height: 1.4em; }
 .status[data-kind="ok"] { color: var(--leaf); }
 .status[data-kind="warn"] { color: var(--ore); }
@@ -712,15 +709,6 @@ footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2p
       <p class="raillegend"><span class="mark mach">&#9679;</span> 作物交配機からのみ、支柱では出ない</p>
       <p class="raillegend"><span class="mark none">&#10005;</span> 入手経路なし、機械でも出ない</p>
       <p class="raillegend"><span class="legend-i">i</span> 詳細パネルを開く</p>
-
-      <details class="railpanel">
-        <summary>助けなしでは育たない場所</summary>
-        <div class="railpanel-body">
-          <p>空の支柱だけでは足りないバイオームです。水も肥料もないと成長速度はそこでちょうど 0 になり、0 の作物は毎ティック耐性判定を振って、やがて病気になります。どちらか一方でも満タンなら栄養素スコアが 10 増え、たいていはそれで足ります。</p>
-          <input class="field" id="helpSearch" type="search" placeholder="作物を検索…" autocomplete="off">
-          <div id="helpOut"></div>
-        </div>
-      </details>
 
       <details class="railpanel">
         <summary>リストの管理</summary>
@@ -1216,36 +1204,6 @@ function renderRail() {
   /* a sliver still has to be visible, or one crop looks the same as none */
   $("progressFill").style.width = owned.size ? `max(2px, ${share.toFixed(1)}%)` : "0";
   $("undo").hidden = undoState === null;
-  renderHelp();
-}
-
-/* The "it won't grow without help" panel. Its own search rather than the
-   rail's, because the rail's filter is a list you tick and this is a single
-   crop you look up - sharing one box would make ticking a seed reshuffle the
-   answer below it.                                                         */
-let helpQuery = "";
-function renderHelp() {
-  const box = $("helpOut");
-  if (!box) return;
-  const q = helpQuery.trim().toLowerCase();
-  if (!q) { box.innerHTML = ""; return; }
-  const hits = allSorted.filter(c => c.name.toLowerCase().includes(q)
-    || c.id.toLowerCase().includes(q));
-  if (!hits.length) { box.innerHTML = `<p class="helpnote">該当する作物がありません。</p>`; return; }
-  if (hits.length > 1 && !hits.some(c => c.name.toLowerCase() === q)) {
-    box.innerHTML = `<div class="poolchips">${hits.slice(0, 24).map(c =>
-      `<button class="poolchip" type="button" data-help="${esc(c.name)}">${esc(c.name)}
-        <span class="tier">T${c.tier}</span></button>`).join("")}</div>`;
-    return;
-  }
-  const c = hits.find(x => x.name.toLowerCase() === q) || hits[0];
-  const { limit, open, roofed } = stallsIn(c);
-  const chips = bs => `<div class="poolchips">${bs.map(b =>
-    `<button class="poolchip" type="button" data-biome="${esc(b)}">${esc(b)}</button>`).join("")}</div>`;
-  box.innerHTML = `<p class="helpnote"><b>${esc(c.name)}</b>、tier ${c.tier}。動き出すには栄養素スコアが ${limit} より大きい必要があります。空の支柱は空の下で 7 で、そこにバイオームの分が乗ります。</p>`
-    + (open.length ? `<p class="helpnote">${Object.keys(BIOMES).length} 個のうち ${open.length} 個で止まります：</p>${chips(open)}` : "")
-    + (roofed.length ? `<p class="helpnote">空の下なら育ちますが、屋根の下や地下では ${roofed.length} 個で止まります：</p>${chips(roofed)}` : "")
-    + (open.length || roofed.length ? "" : `<p class="helpnote">このパックでは、両方空でもどこでも育ちます。</p>`);
 }
 
 /* ---------------------------------------------------------- views */
@@ -1969,6 +1927,23 @@ function renderCropDrawer(id) {
       </div>`;
     })() : ""}
 
+    ${(() => {
+      /* The mirror of the section above: not where it does best, but where an
+         empty stick leaves it at a standstill.                              */
+      const { limit, open, roofed } = stallsIn(c);
+      const chips = bs => `<div class="poolchips">${bs.map(b =>
+        `<button class="poolchip" type="button" data-biome="${esc(b)}">${esc(b)}</button>`).join("")}</div>`;
+      return `<div class="dsec"><h3>助けなしでは育たない場所</h3>
+        ${open.length || roofed.length
+          ? `<p class="flav" style="font-style:normal;margin-bottom:8px">両方の槽が空のとき、この作物が動き出すには栄養素スコアが ${limit} より大きい必要があります。空の支柱は空の下で 7 で、バイオームの分はその上に乗ります。そこに届かないと成長速度はちょうど 0 になり、0 の作物は毎ティック耐性判定を振って、やがて病気になります。水でも肥料でも、どちらか一方が満タンなら 10 増え、たいていはそれで足ります。</p>
+             ${open.length ? `<p class="flav" style="font-style:normal;margin:12px 0 8px">${Object.keys(BIOMES).length} 個のうち ${open.length} 個で止まります：</p>
+               ${chips(open)}` : ""}
+             ${roofed.length ? `<p class="flav" style="font-style:normal;margin:12px 0 8px">空の下なら育ちますが、屋根の下や地下では ${roofed.length} 個で止まります：</p>
+               ${chips(roofed)}` : ""}`
+          : `<p class="flav" style="font-style:normal">このパックでは、両方の槽が空でもどこでも育ちます。</p>`}
+      </div>`;
+    })()}
+
     <div class="dsec"><h3>変異プール（${c.pools.length}）</h3>
       ${c.pools.length ? `<p class="flav" style="font-style:normal;margin-bottom:8px">このいずれかを共有する親が二つそろえば、この作物が無作為に引かれることがあります。プールを開くと他に何が入っているか見られます。</p>` : ""}
       <div class="poolchips">${c.pools.length
@@ -2116,13 +2091,6 @@ document.addEventListener("click", e => {
   if (pair) { setPair(...pair.dataset.pair.split("|")); render(); return; }
   const tag = e.target.closest("[data-tag]");
   if (tag) { showTag(tag.dataset.tag); return; }
-  const help = e.target.closest("[data-help]");
-  if (help) {
-    helpQuery = help.dataset.help;
-    $("helpSearch").value = helpQuery;
-    renderHelp();
-    return;
-  }
   const biome = e.target.closest("[data-biome]");
   if (biome) { showBiome(biome.dataset.biome); return; }
   const pool = e.target.closest("[data-pool]");
@@ -2153,7 +2121,6 @@ document.addEventListener("keydown", e => {
 });
 
 $("search").addEventListener("input", e => { filter = e.target.value; renderRail(); });
-$("helpSearch").addEventListener("input", e => { helpQuery = e.target.value; renderHelp(); });
 
 /* Enter ticks the top match and clears the box, so a run of seeds can be
    entered without leaving the keyboard.                                   */

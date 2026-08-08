@@ -650,9 +650,6 @@ p, li { text-wrap: pretty; }
 }
 #code:focus-visible { outline: 2px solid var(--leaf); outline-offset: 1px; }
 .railpanel-btns { display: flex; flex-wrap: wrap; gap: 6px; }
-/* the biome answers, which are long lists in a narrow column */
-.helpnote { margin: 2px 0 0 !important; font-size: 12px; color: var(--ink-faint); }
-#helpOut .poolchips { max-height: 190px; overflow-y: auto; margin-top: 4px; }
 .status { font-size: 12px; min-height: 1.4em; }
 .status[data-kind="ok"] { color: var(--leaf); }
 .status[data-kind="warn"] { color: var(--ore); }
@@ -712,15 +709,6 @@ footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2p
       <p class="raillegend"><span class="mark mach">&#9679;</span> 只能从作物培育机出，作物架上永远不会出</p>
       <p class="raillegend"><span class="mark none">&#10005;</span> 完全没有途径，连机器也不行</p>
       <p class="raillegend"><span class="legend-i">i</span> 打开详情面板</p>
-
-      <details class="railpanel">
-        <summary>没有帮助就长不起来</summary>
-        <div class="railpanel-body">
-          <p>光靠一根空架子不够的生物群系。既没水也没肥的时候，生长速度在那里正好是零，而速度为零的作物每一刻都要掷一次抗性判定，迟早会生病。两个罐子里随便哪一个装满都值 10 点营养评分，通常就够了。</p>
-          <input class="field" id="helpSearch" type="search" placeholder="搜索作物…" autocomplete="off">
-          <div id="helpOut"></div>
-        </div>
-      </details>
 
       <details class="railpanel">
         <summary>管理列表</summary>
@@ -1216,36 +1204,6 @@ function renderRail() {
   /* a sliver still has to be visible, or one crop looks the same as none */
   $("progressFill").style.width = owned.size ? `max(2px, ${share.toFixed(1)}%)` : "0";
   $("undo").hidden = undoState === null;
-  renderHelp();
-}
-
-/* The "it won't grow without help" panel. Its own search rather than the
-   rail's, because the rail's filter is a list you tick and this is a single
-   crop you look up - sharing one box would make ticking a seed reshuffle the
-   answer below it.                                                         */
-let helpQuery = "";
-function renderHelp() {
-  const box = $("helpOut");
-  if (!box) return;
-  const q = helpQuery.trim().toLowerCase();
-  if (!q) { box.innerHTML = ""; return; }
-  const hits = allSorted.filter(c => c.name.toLowerCase().includes(q)
-    || c.id.toLowerCase().includes(q));
-  if (!hits.length) { box.innerHTML = `<p class="helpnote">没有匹配的作物。</p>`; return; }
-  if (hits.length > 1 && !hits.some(c => c.name.toLowerCase() === q)) {
-    box.innerHTML = `<div class="poolchips">${hits.slice(0, 24).map(c =>
-      `<button class="poolchip" type="button" data-help="${esc(c.name)}">${esc(c.name)}
-        <span class="tier">T${c.tier}</span></button>`).join("")}</div>`;
-    return;
-  }
-  const c = hits.find(x => x.name.toLowerCase() === q) || hits[0];
-  const { limit, open, roofed } = stallsIn(c);
-  const chips = bs => `<div class="poolchips">${bs.map(b =>
-    `<button class="poolchip" type="button" data-biome="${esc(b)}">${esc(b)}</button>`).join("")}</div>`;
-  box.innerHTML = `<p class="helpnote"><b>${esc(c.name)}</b>，等级 ${c.tier}。要想动起来，营养评分必须大于 ${limit}。空架子在露天下是 7，生物群系再往上加。</p>`
-    + (open.length ? `<p class="helpnote">在 ${Object.keys(BIOMES).length} 个生物群系里，有 ${open.length} 个会停住：</p>${chips(open)}` : "")
-    + (roofed.length ? `<p class="helpnote">露天能长，但在屋顶下或者地下有 ${roofed.length} 个会停住：</p>${chips(roofed)}` : "")
-    + (open.length || roofed.length ? "" : `<p class="helpnote">在这个整合包里，两个罐子都空着也到处都能长。</p>`);
 }
 
 /* ---------------------------------------------------------- views */
@@ -1969,6 +1927,23 @@ function renderCropDrawer(id) {
       </div>`;
     })() : ""}
 
+    ${(() => {
+      /* The mirror of the section above: not where it does best, but where an
+         empty stick leaves it at a standstill.                              */
+      const { limit, open, roofed } = stallsIn(c);
+      const chips = bs => `<div class="poolchips">${bs.map(b =>
+        `<button class="poolchip" type="button" data-biome="${esc(b)}">${esc(b)}</button>`).join("")}</div>`;
+      return `<div class="dsec"><h3>没有帮助就长不起来</h3>
+        ${open.length || roofed.length
+          ? `<p class="flav" style="font-style:normal;margin-bottom:8px">两个罐子都空着的时候，这种作物的营养评分必须大于 ${limit} 才动得起来，而空架子在露天下只值 7，生物群系再往上加。到不了这个数，生长速度就正好是零，而速度为零的作物每一刻都要掷一次抗性判定，迟早会生病。水和肥随便哪一个装满都值 10，通常就够了。</p>
+             ${open.length ? `<p class="flav" style="font-style:normal;margin:12px 0 8px">在 ${Object.keys(BIOMES).length} 个生物群系里，有 ${open.length} 个会停住：</p>
+               ${chips(open)}` : ""}
+             ${roofed.length ? `<p class="flav" style="font-style:normal;margin:12px 0 8px">露天能长，但在屋顶下或者地下有 ${roofed.length} 个会停住：</p>
+               ${chips(roofed)}` : ""}`
+          : `<p class="flav" style="font-style:normal">在这个整合包里，两个罐子都空着也到处都能长。</p>`}
+      </div>`;
+    })()}
+
     <div class="dsec"><h3>突变池（${c.pools.length}）</h3>
       ${c.pools.length ? `<p class="flav" style="font-style:normal;margin-bottom:8px">任何两个共享其中之一的亲本，都可能随机抽到这种作物。打开一个池能看到里面还有什么。</p>` : ""}
       <div class="poolchips">${c.pools.length
@@ -2116,13 +2091,6 @@ document.addEventListener("click", e => {
   if (pair) { setPair(...pair.dataset.pair.split("|")); render(); return; }
   const tag = e.target.closest("[data-tag]");
   if (tag) { showTag(tag.dataset.tag); return; }
-  const help = e.target.closest("[data-help]");
-  if (help) {
-    helpQuery = help.dataset.help;
-    $("helpSearch").value = helpQuery;
-    renderHelp();
-    return;
-  }
   const biome = e.target.closest("[data-biome]");
   if (biome) { showBiome(biome.dataset.biome); return; }
   const pool = e.target.closest("[data-pool]");
@@ -2153,7 +2121,6 @@ document.addEventListener("keydown", e => {
 });
 
 $("search").addEventListener("input", e => { filter = e.target.value; renderRail(); });
-$("helpSearch").addEventListener("input", e => { helpQuery = e.target.value; renderHelp(); });
 
 /* Enter ticks the top match and clears the box, so a run of seeds can be
    entered without leaving the keyboard.                                   */
