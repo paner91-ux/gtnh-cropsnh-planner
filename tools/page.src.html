@@ -1806,6 +1806,10 @@ function renderCropDrawer(id) {
   const c = C[id]; if (!c) return;
   const from = MUT.filter(m => m.out === id);
   const used = MUT.filter(m => m.parents.includes(id));
+  /* Item names are only there for a language whose dump we have, so the
+     drawer has two wordings: one that names the item and one that sends you
+     to NEI for it. */
+  const items = ((DATA.altSeeds || {})[id] || []).map(esc).join(" &middot; ");
   const sub = c.subsoil.map(k => {
     const info = DATA.subsoil[k] || {};
     const acc = [...(info.oredict || []), ...(info.modBlocks || [])];
@@ -1873,7 +1877,8 @@ function renderCropDrawer(id) {
         : `<span style="color:var(--ink-faint)">{{drawer.noRecipe}}${c.pools.length
             ? ` {{drawer.noRecipePools}}`
             : ` {{drawer.noRecipeWild}}`}</span>`}</div>
-      ${c.altSeed ? `<p class="flav" style="font-style:normal;margin-top:10px">{{drawer.altSeed}}</p>` : ""}
+      ${c.altSeed ? `<p class="flav" style="font-style:normal;margin-top:10px">${
+        items ? `{{drawer.altSeedItems}}` : `{{drawer.altSeed}}`}</p>` : ""}
     </div>
 
     <div class="dsec"><h3>{{drawer.usedAs}}</h3>

@@ -149,6 +149,7 @@
   "drawer.noRecipePools": "Only ever from a pool draw, see the ${c.pools.length} pool${c.pools.length > 1 ? \"s\" : \"\"} above.",
   "drawer.noRecipeWild": "Not from a pool either, so this one is found in the world.",
   "drawer.altSeed": "<b>Alternate seed.</b> An ordinary item plants this crop straight onto a crop stick, at 1/1/1 and already analysed, so no cross is needed to get one. NEI lists which item under <em>Alternate Seeds</em>.",
+  "drawer.altSeedItems": "<b>Alternate seed: ${items}.</b> Put one straight onto a crop stick and the crop is standing there at 1/1/1, already analysed. No breeding involved.",
   "drawer.usedAs": "Used as a parent (${used.length})",
   "drawer.nowhere": "Nowhere.",
   "word.have": "have",

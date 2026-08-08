@@ -149,6 +149,7 @@
   "drawer.noRecipePools": "Wyłącznie z losowania puli, zobacz pule powyżej: ${c.pools.length}.",
   "drawer.noRecipeWild": "Nie ma tego też w żadnej puli, więc tę roślinę znajduje się w świecie.",
   "drawer.altSeed": "<b>Alternate seed.</b> Tę roślinę sadzi się wprost zwykłym przedmiotem: kładziesz go na patyku i roślina stoi, 1/1/1 i już przeskanowana, bez ani jednego krzyżowania. NEI pokazuje, co to za przedmiot, pod <em>Alternate Seeds</em>.",
+  "drawer.altSeedItems": "<b>Alternate seed: ${items}.</b> Kładziesz to na patyku i roślina od razu stoi, 1/1/1 i już przeskanowana. Bez żadnego krzyżowania.",
   "drawer.usedAs": "Używane jako rodzic (${used.length})",
   "drawer.nowhere": "Nigdzie.",
   "word.have": "mam",

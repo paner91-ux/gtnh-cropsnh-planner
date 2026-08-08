@@ -1,0 +1,307 @@
+{
+ "en": {
+  "Allium": [
+   "Allium"
+  ],
+  "AluminiumOreBerry": [
+   "Aluminum Oreberry"
+  ],
+  "AzureBluet": [
+   "Azure Bluet"
+  ],
+  "Bamboo": [
+   "Bamboo Sapling"
+  ],
+  "Barley": [
+   "Barley Seed",
+   "Barley Seeds"
+  ],
+  "Belladonna": [
+   "Belladonna Seeds"
+  ],
+  "Blackberry": [
+   "Blackberry",
+   "Blackberry Seed"
+  ],
+  "Blightberry": [
+   "Blightberry"
+  ],
+  "BlueGlowshroom": [
+   "Blue Glowshroom"
+  ],
+  "BlueOrchid": [
+   "Blue Orchid"
+  ],
+  "Blueberry": [
+   "Blueberry",
+   "Blueberry Seed"
+  ],
+  "BoPBerry": [
+   "Berry"
+  ],
+  "BonsaiAcacia": [
+   "Acacia Sapling"
+  ],
+  "BonsaiBirch": [
+   "Birch Sapling"
+  ],
+  "BonsaiDarkOak": [
+   "Dark Oak Sapling"
+  ],
+  "BonsaiJungle": [
+   "Jungle Sapling"
+  ],
+  "BonsaiOak": [
+   "Oak Sapling"
+  ],
+  "BonsaiRubber": [
+   "Rubber Tree Sapling"
+  ],
+  "BonsaiSlimy": [
+   "Slimy Sapling"
+  ],
+  "BonsaiSpruce": [
+   "Spruce Sapling"
+  ],
+  "BrownMushroom": [
+   "Mushroom"
+  ],
+  "Cactus": [
+   "Cactus"
+  ],
+  "Carrot": [
+   "Carrot"
+  ],
+  "Chilly": [
+   "Chili Pepper",
+   "Chili Pepper Seed",
+   "Chilli"
+  ],
+  "Cinderpearl": [
+   "Cinderpearl"
+  ],
+  "Cocoa": [
+   "Cocoa Beans"
+  ],
+  "Coffee": [
+   "Coffee",
+   "Coffee Beans"
+  ],
+  "CopperOreBerry": [
+   "Copper Oreberry"
+  ],
+  "Cotton": [
+   "Cotton",
+   "Cotton Seed",
+   "Cotton Seeds"
+  ],
+  "Cucumber": [
+   "Cucumber",
+   "Cucumber Seed"
+  ],
+  "Dandelion": [
+   "Dandelion"
+  ],
+  "Duskberry": [
+   "Duskberry"
+  ],
+  "EggPlant": [
+   "Egg"
+  ],
+  "EmberMoss": [
+   "Ember Moss"
+  ],
+  "EssenceOreBerry": [
+   "Concentrated Essence Berry"
+  ],
+  "Eyebulb": [
+   "Eyebulb"
+  ],
+  "Flax": [
+   "Flax"
+  ],
+  "FloweringVine": [
+   "Flowering Vines"
+  ],
+  "GaiaWart": [
+   "Gaia Wart"
+  ],
+  "Garlic": [
+   "Garlic"
+  ],
+  "GlintWeed": [
+   "Glint Weed"
+  ],
+  "Glowflower": [
+   "Glowflower"
+  ],
+  "GlowingCoral": [
+   "Glowing Coral"
+  ],
+  "Glowshroom": [
+   "Glowshroom"
+  ],
+  "GoldOreBerry": [
+   "Gold Oreberry"
+  ],
+  "Grape": [
+   "Grape",
+   "Grape Seed"
+  ],
+  "GreenGlowshroom": [
+   "Green Glowshroom"
+  ],
+  "Hops": [
+   "Hops"
+  ],
+  "Huckleberry": [
+   "Huckleberry"
+  ],
+  "Indigo": [
+   "Indigo Blossom"
+  ],
+  "IronOreBerry": [
+   "Iron Oreberry"
+  ],
+  "Ivy": [
+   "Ivy"
+  ],
+  "Lemon": [
+   "Lemon",
+   "Lemon Sapling"
+  ],
+  "MagicalNightshade": [
+   "Magic Essence"
+  ],
+  "Maloberry": [
+   "Gooseberry",
+   "Maloberry"
+  ],
+  "Mandrake": [
+   "Mandrake Seeds"
+  ],
+  "Melon": [
+   "Melon Seeds"
+  ],
+  "Moss": [
+   "Moss",
+   "Moss Patch",
+   "Tree Moss"
+  ],
+  "Netherwart": [
+   "Nether Wart"
+  ],
+  "Onion": [
+   "Onion",
+   "Onion Seed"
+  ],
+  "OrangeTulip": [
+   "Orange Tulip"
+  ],
+  "OxeyeDaisy": [
+   "Oxeye Daisy"
+  ],
+  "PinkTulip": [
+   "Pink Tulip"
+  ],
+  "Poppy": [
+   "Poppy"
+  ],
+  "Potato": [
+   "Potato"
+  ],
+  "PrimordialBerry": [
+   "Primordial Pearl"
+  ],
+  "Pumpkin": [
+   "Pumpkin Seeds"
+  ],
+  "PurpleGlowshroom": [
+   "Purple Glowshroom"
+  ],
+  "Raspberry": [
+   "Raspberry",
+   "Raspberry Seed"
+  ],
+  "RedMushroom": [
+   "Mushroom"
+  ],
+  "RedTulip": [
+   "Red Tulip"
+  ],
+  "SaguaroCactus": [
+   "Saguaro Cactus",
+   "Saguaro Fruit"
+  ],
+  "Shimmerleaf": [
+   "Shimmerleaf"
+  ],
+  "Skyberry": [
+   "Skyberry"
+  ],
+  "Snowbell": [
+   "Snowbell Seeds"
+  ],
+  "SpanishMoss": [
+   "Spanish Moss"
+  ],
+  "Stingberry": [
+   "Stingberry"
+  ],
+  "Strawberry": [
+   "Strawberry",
+   "Strawberry Seed"
+  ],
+  "SugarBeet": [
+   "Sugar Beet"
+  ],
+  "SugarCane": [
+   "Sugar Canes"
+  ],
+  "Tea": [
+   "Tea Seed"
+  ],
+  "Thornvine": [
+   "Thornvines"
+  ],
+  "TinOreBerry": [
+   "Tin Oreberry"
+  ],
+  "Tomato": [
+   "Tomato",
+   "Tomato Seed"
+  ],
+  "Torchberry": [
+   "Torchberries"
+  ],
+  "Turnip": [
+   "Turnip",
+   "Turnip Seed",
+   "Turnip Seeds"
+  ],
+  "Vine": [
+   "Vines"
+  ],
+  "VoidOreBerry": [
+   "Void Seed"
+  ],
+  "WaterArtichoke": [
+   "Water Artichoke Seeds"
+  ],
+  "Waterlily": [
+   "Lily Pad"
+  ],
+  "Wheat": [
+   "Wheat Seeds"
+  ],
+  "WhiteTulip": [
+   "White Tulip"
+  ],
+  "WildCarrot": [
+   "Wild Carrots"
+  ],
+  "Wolfsbane": [
+   "Wolfsbane Seeds"
+  ]
+ }
+}

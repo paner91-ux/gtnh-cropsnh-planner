@@ -149,6 +149,14 @@ if os.path.exists(bpath):
     with open(bpath, encoding='utf-8') as f:
         data['biomes'] = json.load(f)['biomes']
 
+# the item that plants a crop without breeding it, one table per language,
+# written by altseeds.py from the game's own NEI dump
+altseeds = {}
+apath = os.path.join(ROOT, 'data', 'altseeds.json')
+if os.path.exists(apath):
+    with open(apath, encoding='utf-8') as f:
+        altseeds = json.load(f)
+
 # fields the page never reads
 for c in data['crops'].values():
     c.pop('cls', None)
@@ -170,6 +178,13 @@ def localise(code, cat, base):
     """
     d = copy.deepcopy(data)
     path = os.path.join(ROOT, 'data', f'lang.{code}.json')
+    # Item names come from a dump taken with the game in that language. A page
+    # that has no dump of its own can borrow the English one only if its crop
+    # names are English as well, which is exactly the case where langs.py
+    # wrote no lang.<code>.json. Otherwise the crop drawer says an item exists
+    # and points at NEI rather than naming it in the wrong language.
+    d['altSeeds'] = altseeds.get(
+        code, {} if os.path.exists(path) else altseeds.get('en', {}))
     if os.path.exists(path):
         with open(path, encoding='utf-8') as f:
             tr = json.load(f)

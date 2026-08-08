@@ -149,6 +149,7 @@
   "drawer.noRecipePools": "只会来自突变池抽取，见上面的 ${c.pools.length} 个池。",
   "drawer.noRecipeWild": "也不在任何池里，所以这一种是在世界里找到的。",
   "drawer.altSeed": "<b>替代种子。</b>这种作物可以直接用一件普通物品种下：放到作物架上就是 1/1/1，而且已经分析过，不用杂交也能拿到一株。是哪件物品，NEI 的<em>替代种子</em>里有。",
+  "drawer.altSeedItems": "<b>替代种子：${items}。</b>拿其中一件放到作物架上，作物就已经站在那里，1/1/1，而且已经分析过。完全不用杂交。",
   "drawer.usedAs": "作为亲本用在（${used.length}）",
   "drawer.nowhere": "没有。",
   "word.have": "已有",
