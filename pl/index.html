@@ -1898,8 +1898,8 @@ function biomeSections(c) {
           return `<div class="biohit">
             <button class="poolchip" type="button" data-biome="${esc(b)}">${esc(b)}</button>
             <span class="biosum">pasujących tagów: ${n} · opady ${BIOMES[b].rain} · biom daje ${give} · Nutrient ${score} wobec ${limit}, które musi przebić</span>
-            <span class="bioverdict ${verdict}">${verdict === "miss" ? `staje z pustymi zbiornikami`
-              : verdict === "roof" ? `pod niebem dobrze, pod dachem staje` : `rośnie z pustymi zbiornikami`}</span>
+            <span class="bioverdict ${verdict}">${verdict === "miss" ? `nie urośnie z pustymi zbiornikami`
+              : verdict === "roof" ? `pod niebem urośnie, pod dachem nie` : `rośnie z pustymi zbiornikami`}</span>
           </div>`;
         }).join("")
       : `<p class="flav" style="font-style:normal">Żaden biom w tej paczce nie nazywa się podobnie.</p>`}</div>`;
@@ -1928,9 +1928,9 @@ function biomeSections(c) {
   const stall = `<div class="dsec"><h3>Nie urośnie bez pomocy</h3>
     ${open.length || roofed.length
       ? `<p class="flav" style="font-style:normal;margin-bottom:8px">Z pustymi zbiornikami ta roślina potrzebuje więcej niż ${limit} punktów Nutrient Score, żeby w ogóle ruszyć, a pusty patyk pod gołym niebem daje 7, zanim biom cokolwiek dołoży. Poniżej tego tempo wzrostu wynosi dokładnie zero, a roślina z zerowym tempem przy każdym ticku losuje rzut na odporność i w końcu choruje. Jeden pełny zbiornik, wody albo nawozu, daje 10 i zwykle to załatwia.</p>
-         ${fOpen.length ? `<p class="flav" style="font-style:normal;margin:12px 0 8px">Staje w ${open.length} biomach ze ${Object.keys(BIOMES).length}:</p>
+         ${fOpen.length ? `<p class="flav" style="font-style:normal;margin:12px 0 8px">Nie urośnie w ${open.length} biomach ze ${Object.keys(BIOMES).length}:</p>
            ${chips(fOpen)}` : ""}
-         ${fRoofed.length ? `<p class="flav" style="font-style:normal;margin:12px 0 8px">Pod niebem urośnie, ale pod dachem albo pod ziemią staje w ${roofed.length}:</p>
+         ${fRoofed.length ? `<p class="flav" style="font-style:normal;margin:12px 0 8px">Pod niebem urośnie, ale pod dachem albo pod ziemią nie, w ${roofed.length}:</p>
            ${chips(fRoofed)}` : ""}
          ${q && !fOpen.length && !fRoofed.length
            ? `<p class="flav" style="font-style:normal">Nic na tej liście nie pasuje do tej nazwy.</p>` : ""}`

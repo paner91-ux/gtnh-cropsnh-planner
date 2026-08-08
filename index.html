@@ -1898,8 +1898,8 @@ function biomeSections(c) {
           return `<div class="biohit">
             <button class="poolchip" type="button" data-biome="${esc(b)}">${esc(b)}</button>
             <span class="biosum">${n} of its tags · rainfall ${BIOMES[b].rain} · biome worth ${give} · Nutrient ${score} against the ${limit} it has to beat</span>
-            <span class="bioverdict ${verdict}">${verdict === "miss" ? `stalls with both tanks empty`
-              : verdict === "roof" ? `fine outdoors, stalls under a roof` : `grows with both tanks empty`}</span>
+            <span class="bioverdict ${verdict}">${verdict === "miss" ? `will not grow with both tanks empty`
+              : verdict === "roof" ? `grows outdoors, will not grow under a roof` : `grows with both tanks empty`}</span>
           </div>`;
         }).join("")
       : `<p class="flav" style="font-style:normal">No biome in this pack has a name like that.</p>`}</div>`;
@@ -1928,9 +1928,9 @@ function biomeSections(c) {
   const stall = `<div class="dsec"><h3>It won't grow without help</h3>
     ${open.length || roofed.length
       ? `<p class="flav" style="font-style:normal;margin-bottom:8px">With both tanks empty this crop needs more than ${limit} Nutrient Score to move at all, and an empty stick under open sky is worth 7 before the biome adds anything. Below that the growth rate is exactly zero, and a plant at zero rolls its resistance every tick and eventually falls sick. One full tank of either water or fertiliser is worth 10 and usually clears it.</p>
-         ${fOpen.length ? `<p class="flav" style="font-style:normal;margin:12px 0 8px">Stalls in ${open.length} of the ${Object.keys(BIOMES).length} biomes:</p>
+         ${fOpen.length ? `<p class="flav" style="font-style:normal;margin:12px 0 8px">Will not grow in ${open.length} of the ${Object.keys(BIOMES).length} biomes:</p>
            ${chips(fOpen)}` : ""}
-         ${fRoofed.length ? `<p class="flav" style="font-style:normal;margin:12px 0 8px">Grows outdoors, but stalls under a roof or underground in ${roofed.length}:</p>
+         ${fRoofed.length ? `<p class="flav" style="font-style:normal;margin:12px 0 8px">Grows outdoors, but will not grow under a roof or underground, in ${roofed.length}:</p>
            ${chips(fRoofed)}` : ""}
          ${q && !fOpen.length && !fRoofed.length
            ? `<p class="flav" style="font-style:normal">Nothing in this list matches that name.</p>` : ""}`
