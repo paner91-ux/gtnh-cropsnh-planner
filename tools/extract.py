@@ -254,6 +254,10 @@ for field, clsname in sorted(field_to_class.items()):
         'maxLight': maxl,
         'minLight': minl,
         'growth': resolve_int(clsname, 'getGrowthDuration'),
+        # An ordinary item registered as a stand-in for the seed. Every call
+        # sits in a constructor, so the chain ctor_code() already walks is the
+        # whole search: the eight bonsai inherit theirs from CropBonsai.
+        'altSeed': any('addAlternateSeed:' in line for line in code),
         'pools': [],
         'flavour': L(f'cropsnh_crops.{internal}.flavour'),
     }

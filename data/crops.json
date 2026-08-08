@@ -19,6 +19,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": true,
    "pools": [
     "purple",
     "root",
@@ -46,6 +47,7 @@
    "maxLight": 10,
    "minLight": null,
    "growth": 6000,
+   "altSeed": true,
    "pools": [
     "white",
     "oreBerry",
@@ -74,6 +76,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": false,
    "pools": [
     "stone",
     "gray",
@@ -101,6 +104,7 @@
    "maxLight": 10,
    "minLight": null,
    "growth": 6000,
+   "altSeed": false,
    "pools": [
     "orange",
     "oreBerry",
@@ -129,6 +133,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1400,
+   "altSeed": false,
    "pools": [
     "white",
     "metal",
@@ -158,6 +163,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 3700,
+   "altSeed": false,
    "pools": [
     "yellow",
     "dense",
@@ -186,6 +192,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": true,
    "pools": [
     "white",
     "flower"
@@ -212,6 +219,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 250,
+   "altSeed": true,
    "pools": [
     "green",
     "stem",
@@ -238,6 +246,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 675,
+   "altSeed": true,
    "pools": [
     "green",
     "wheat",
@@ -265,6 +274,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": false,
    "pools": [
     "black",
     "dark",
@@ -292,6 +302,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
+   "altSeed": false,
    "pools": [],
    "flavour": null
   },
@@ -313,6 +324,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1100,
+   "altSeed": true,
    "pools": [
     "purple",
     "flower",
@@ -341,6 +353,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": false,
    "pools": [
     "black",
     "dark",
@@ -367,6 +380,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 200,
+   "altSeed": true,
    "pools": [
     "black",
     "berry",
@@ -393,6 +407,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 3600,
+   "altSeed": false,
    "pools": [
     "orange",
     "nether",
@@ -423,6 +438,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 300,
+   "altSeed": true,
    "pools": [
     "green",
     "nether",
@@ -456,6 +472,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": true,
    "pools": [
     "blue",
     "nether",
@@ -484,6 +501,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": true,
    "pools": [
     "blue",
     "flower"
@@ -509,6 +527,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 200,
+   "altSeed": true,
    "pools": [
     "blue",
     "berry",
@@ -535,6 +554,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 200,
+   "altSeed": true,
    "pools": [
     "red",
     "berry",
@@ -563,6 +583,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 3000,
+   "altSeed": false,
    "pools": [
     "green",
     "berry",
@@ -592,6 +613,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
+   "altSeed": true,
    "pools": [
     "orange",
     "tree",
@@ -618,6 +640,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
+   "altSeed": true,
    "pools": [
     "white",
     "tree",
@@ -645,6 +668,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
+   "altSeed": true,
    "pools": [
     "brown",
     "tree",
@@ -675,6 +699,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
+   "altSeed": true,
    "pools": [
     "brown",
     "tree",
@@ -702,6 +727,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
+   "altSeed": true,
    "pools": [
     "brown",
     "tree",
@@ -729,6 +755,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
+   "altSeed": true,
    "pools": [
     "brown",
     "tree",
@@ -755,6 +782,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
+   "altSeed": true,
    "pools": [],
    "flavour": null
   },
@@ -777,6 +805,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
+   "altSeed": true,
    "pools": [
     "brown",
     "tree",
@@ -803,6 +832,7 @@
    "maxLight": 9,
    "minLight": null,
    "growth": 400,
+   "altSeed": true,
    "pools": [
     "brown",
     "mushroom",
@@ -829,6 +859,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 450,
+   "altSeed": true,
    "pools": [
     "green",
     "cactus",
@@ -854,6 +885,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 450,
+   "altSeed": false,
    "pools": [
     "yellow",
     "wheat",
@@ -881,6 +913,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 800,
+   "altSeed": true,
    "pools": [
     "orange",
     "root",
@@ -910,6 +943,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 2800,
+   "altSeed": false,
    "pools": [
     "gray",
     "bush",
@@ -938,6 +972,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 800,
+   "altSeed": true,
    "pools": [
     "red",
     "fire",
@@ -966,6 +1001,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 4000,
+   "altSeed": true,
    "pools": [
     "orange",
     "magic",
@@ -994,6 +1030,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 850,
+   "altSeed": false,
    "pools": [
     "gray",
     "water",
@@ -1021,6 +1058,7 @@
    "maxLight": 10,
    "minLight": null,
    "growth": 6000,
+   "altSeed": false,
    "pools": [
     "blue",
     "nether",
@@ -1050,6 +1088,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 1700,
+   "altSeed": true,
    "pools": [
     "brown",
     "bean",
@@ -1079,6 +1118,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 2800,
+   "altSeed": true,
    "pools": [
     "brown",
     "bean",
@@ -1109,6 +1149,7 @@
    "maxLight": 10,
    "minLight": null,
    "growth": 6000,
+   "altSeed": true,
    "pools": [
     "orange",
     "oreBerry",
@@ -1140,6 +1181,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
+   "altSeed": false,
    "pools": [
     "orange",
     "bush",
@@ -1168,6 +1210,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 800,
+   "altSeed": false,
    "pools": [
     "brown",
     "mushroom",
@@ -1193,6 +1236,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 800,
+   "altSeed": false,
    "pools": [
     "brown",
     "bush",
@@ -1222,6 +1266,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 900,
+   "altSeed": true,
    "pools": [
     "white",
     "tendrilly",
@@ -1248,6 +1293,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1000,
+   "altSeed": false,
    "pools": [
     "green",
     "evil",
@@ -1278,6 +1324,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 800,
+   "altSeed": true,
    "pools": [
     "green",
     "tendrilly",
@@ -1303,6 +1350,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": true,
    "pools": [
     "yellow",
     "flower"
@@ -1328,6 +1376,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": false,
    "pools": [
     "blue",
     "flower",
@@ -1355,6 +1404,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": false,
    "pools": [
     "black",
     "dark",
@@ -1383,6 +1433,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 7200,
+   "altSeed": false,
    "pools": [
     "blue",
     "reed",
@@ -1413,6 +1464,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": false,
    "pools": [
     "white",
     "stone"
@@ -1437,6 +1489,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 300,
+   "altSeed": true,
    "pools": [
     "gray",
     "nether",
@@ -1468,6 +1521,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 1200,
+   "altSeed": true,
    "pools": [
     "white",
     "mushroom",
@@ -1495,6 +1549,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1100,
+   "altSeed": true,
    "pools": [
     "red",
     "climbable",
@@ -1526,6 +1581,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 850,
+   "altSeed": false,
    "pools": [
     "yellow",
     "alien",
@@ -1553,6 +1609,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 3000,
+   "altSeed": false,
    "pools": [
     "black",
     "flower",
@@ -1582,6 +1639,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 6000,
+   "altSeed": true,
    "pools": [
     "green",
     "oreBerry",
@@ -1610,6 +1668,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1600,
+   "altSeed": false,
    "pools": [
     "white",
     "nether",
@@ -1637,6 +1696,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 450,
+   "altSeed": true,
    "pools": [
     "red",
     "nether",
@@ -1665,6 +1725,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 2800,
+   "altSeed": false,
    "pools": [
     "gray",
     "metal",
@@ -1692,6 +1753,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1800,
+   "altSeed": false,
    "pools": [
     "brown",
     "mushroom",
@@ -1719,6 +1781,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
+   "altSeed": true,
    "pools": [
     "blue",
     "wheat",
@@ -1745,6 +1808,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 675,
+   "altSeed": true,
    "pools": [
     "green",
     "flower",
@@ -1773,6 +1837,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1000,
+   "altSeed": true,
    "pools": [],
    "flavour": null
   },
@@ -1796,6 +1861,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
+   "altSeed": false,
    "pools": [
     "white",
     "bush",
@@ -1821,6 +1887,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 450,
+   "altSeed": true,
    "pools": [
     "white",
     "root",
@@ -1850,6 +1917,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 850,
+   "altSeed": false,
    "pools": [],
    "flavour": null
   },
@@ -1872,6 +1940,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1100,
+   "altSeed": true,
    "pools": [
     "orange",
     "flower",
@@ -1899,6 +1968,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 2000,
+   "altSeed": true,
    "pools": [
     "blue",
     "nether",
@@ -1929,6 +1999,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1500,
+   "altSeed": false,
    "pools": [
     "yellow",
     "nether",
@@ -1960,6 +2031,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 450,
+   "altSeed": true,
    "pools": [
     "purple",
     "water",
@@ -1988,6 +2060,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": true,
    "pools": [
     "green",
     "nether",
@@ -2017,6 +2090,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 3600,
+   "altSeed": false,
    "pools": [],
    "flavour": null
   },
@@ -2040,6 +2114,7 @@
    "maxLight": 10,
    "minLight": null,
    "growth": 6000,
+   "altSeed": true,
    "pools": [
     "yellow",
     "oreBerry",
@@ -2069,6 +2144,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 450,
+   "altSeed": false,
    "pools": [
     "orange",
     "nether",
@@ -2101,6 +2177,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": false,
    "pools": [
     "red",
     "stone"
@@ -2126,6 +2203,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 800,
+   "altSeed": true,
    "pools": [
     "purple",
     "climbable",
@@ -2154,6 +2232,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": true,
    "pools": [
     "green",
     "nether",
@@ -2182,6 +2261,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 800,
+   "altSeed": false,
    "pools": [
     "green",
     "stem",
@@ -2208,6 +2288,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 2400,
+   "altSeed": true,
    "pools": [
     "green",
     "wheat",
@@ -2235,6 +2316,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 200,
+   "altSeed": true,
    "pools": [
     "purple",
     "bush",
@@ -2262,6 +2344,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
+   "altSeed": true,
    "pools": [
     "blue",
     "flower"
@@ -2286,6 +2369,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": false,
    "pools": [
     "black",
     "flower",
@@ -2313,6 +2397,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 7200,
+   "altSeed": false,
    "pools": [],
    "flavour": null
   },
@@ -2336,6 +2421,7 @@
    "maxLight": 10,
    "minLight": null,
    "growth": 6000,
+   "altSeed": true,
    "pools": [
     "gray",
     "oreBerry",
@@ -2365,6 +2451,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 450,
+   "altSeed": true,
    "pools": [
     "green",
     "flower",
@@ -2395,6 +2482,7 @@
    "maxLight": 10,
    "minLight": null,
    "growth": 5500,
+   "altSeed": false,
    "pools": [
     "gray",
     "twilightForest",
@@ -2424,6 +2512,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 2800,
+   "altSeed": false,
    "pools": [
     "blue",
     "crystal",
@@ -2451,6 +2540,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 800,
+   "altSeed": true,
    "pools": [
     "yellow",
     "tree",
@@ -2477,6 +2567,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 4800,
+   "altSeed": false,
    "pools": [
     "brown",
     "twilightForest",
@@ -2506,6 +2597,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 23436,
+   "altSeed": true,
    "pools": [],
    "flavour": null
   },
@@ -2529,6 +2621,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 2800,
+   "altSeed": false,
    "pools": [
     "orange",
     "bush",
@@ -2557,6 +2650,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 200,
+   "altSeed": true,
    "pools": [
     "yellow",
     "berry",
@@ -2585,6 +2679,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 2000,
+   "altSeed": false,
    "pools": [
     "brown",
     "bean",
@@ -2610,6 +2705,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1100,
+   "altSeed": true,
    "pools": [
     "brown",
     "flower",
@@ -2640,6 +2736,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": false,
    "pools": [
     "white",
     "stone"
@@ -2664,6 +2761,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 4200,
+   "altSeed": false,
    "pools": [
     "red",
     "flower",
@@ -2692,6 +2790,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 1200,
+   "altSeed": true,
    "pools": [
     "green",
     "stem",
@@ -2721,6 +2820,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1800,
+   "altSeed": false,
    "pools": [],
    "flavour": null
   },
@@ -2742,6 +2842,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 2400,
+   "altSeed": false,
    "pools": [
     "white",
     "food",
@@ -2769,6 +2870,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 450,
+   "altSeed": true,
    "pools": [
     "green",
     "twilightForest",
@@ -2795,6 +2897,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1800,
+   "altSeed": false,
    "pools": [
     "purple",
     "flower",
@@ -2824,6 +2927,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": false,
    "pools": [
     "red",
     "nether",
@@ -2849,6 +2953,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 2000,
+   "altSeed": true,
    "pools": [
     "red",
     "nether",
@@ -2876,6 +2981,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1000,
+   "altSeed": false,
    "pools": [
     "gray",
     "metal",
@@ -2901,6 +3007,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
+   "altSeed": false,
    "pools": [],
    "flavour": null
   },
@@ -2924,6 +3031,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 400,
+   "altSeed": false,
    "pools": [],
    "flavour": null
   },
@@ -2946,6 +3054,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 800,
+   "altSeed": true,
    "pools": [
     "brown",
     "root",
@@ -2971,6 +3080,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": true,
    "pools": [
     "orange",
     "flower",
@@ -2998,6 +3108,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 7200,
+   "altSeed": false,
    "pools": [],
    "flavour": null
   },
@@ -3019,6 +3130,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": true,
    "pools": [
     "white",
     "flower"
@@ -3044,6 +3156,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 450,
+   "altSeed": false,
    "pools": [
     "white",
     "stem"
@@ -3068,6 +3181,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": true,
    "pools": [
     "red",
     "flower",
@@ -3095,6 +3209,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 6600,
+   "altSeed": false,
    "pools": [],
    "flavour": null
   },
@@ -3118,6 +3233,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
+   "altSeed": false,
    "pools": [
     "purple",
     "metal",
@@ -3147,6 +3263,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 2800,
+   "altSeed": false,
    "pools": [
     "purple",
     "bush",
@@ -3175,6 +3292,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": true,
    "pools": [
     "red",
     "flower"
@@ -3199,6 +3317,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 800,
+   "altSeed": true,
    "pools": [
     "yellow",
     "root",
@@ -3224,6 +3343,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 375000,
+   "altSeed": true,
    "pools": [],
    "flavour": null
   },
@@ -3245,6 +3365,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 1000,
+   "altSeed": true,
    "pools": [
     "orange",
     "stem",
@@ -3271,6 +3392,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": true,
    "pools": [
     "purple",
     "nether",
@@ -3299,6 +3421,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": false,
    "pools": [
     "purple",
     "flower",
@@ -3326,6 +3449,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 2400,
+   "altSeed": false,
    "pools": [
     "red",
     "metal",
@@ -3351,6 +3475,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 200,
+   "altSeed": true,
    "pools": [
     "red",
     "berry",
@@ -3379,6 +3504,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 4800,
+   "altSeed": false,
    "pools": [],
    "flavour": null
   },
@@ -3402,6 +3528,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": false,
    "pools": [
     "red",
     "stone"
@@ -3427,6 +3554,7 @@
    "maxLight": 9,
    "minLight": null,
    "growth": 400,
+   "altSeed": true,
    "pools": [
     "red",
     "mushroom",
@@ -3454,6 +3582,7 @@
    "maxLight": 12,
    "minLight": 5,
    "growth": 1500,
+   "altSeed": false,
    "pools": [
     "red",
     "stone",
@@ -3481,6 +3610,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": true,
    "pools": [
     "red",
     "flower",
@@ -3508,6 +3638,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 800,
+   "altSeed": false,
    "pools": [
     "red",
     "crystal",
@@ -3534,6 +3665,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 450,
+   "altSeed": true,
    "pools": [
     "green",
     "cactus",
@@ -3561,6 +3693,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1600,
+   "altSeed": false,
    "pools": [
     "gray",
     "root",
@@ -3589,6 +3722,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": false,
    "pools": [
     "yellow",
     "stone"
@@ -3616,6 +3750,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 800,
+   "altSeed": false,
    "pools": [
     "blue",
     "crystal",
@@ -3644,6 +3779,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 2400,
+   "altSeed": false,
    "pools": [],
    "flavour": null
   },
@@ -3667,6 +3803,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 4000,
+   "altSeed": true,
    "pools": [
     "gray",
     "light",
@@ -3697,6 +3834,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 3700,
+   "altSeed": false,
    "pools": [
     "white",
     "bush",
@@ -3724,6 +3862,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 300,
+   "altSeed": true,
    "pools": [
     "blue",
     "nether",
@@ -3755,6 +3894,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
+   "altSeed": false,
    "pools": [
     "green",
     "tree",
@@ -3783,6 +3923,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1100,
+   "altSeed": true,
    "pools": [
     "white",
     "flower",
@@ -3812,6 +3953,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 2000,
+   "altSeed": false,
    "pools": [
     "brown",
     "nether",
@@ -3842,6 +3984,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 15000,
+   "altSeed": false,
    "pools": [],
    "flavour": null
   },
@@ -3865,6 +4008,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 675,
+   "altSeed": true,
    "pools": [
     "green",
     "climbable",
@@ -3890,6 +4034,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 2400,
+   "altSeed": false,
    "pools": [
     "white",
     "evil",
@@ -3921,6 +4066,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 7200,
+   "altSeed": false,
    "pools": [],
    "flavour": null
   },
@@ -3944,6 +4090,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 7200,
+   "altSeed": false,
    "pools": [],
    "flavour": null
   },
@@ -3967,6 +4114,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 6000,
+   "altSeed": false,
    "pools": [
     "green",
     "twilightForest",
@@ -3995,6 +4143,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 200,
+   "altSeed": false,
    "pools": [
     "green",
     "reed",
@@ -4020,6 +4169,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 300,
+   "altSeed": true,
    "pools": [
     "brown",
     "nether",
@@ -4053,6 +4203,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": false,
    "pools": [
     "gray",
     "stone"
@@ -4077,6 +4228,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 200,
+   "altSeed": true,
    "pools": [
     "red",
     "berry",
@@ -4103,6 +4255,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 450,
+   "altSeed": true,
    "pools": [
     "white",
     "root",
@@ -4130,6 +4283,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 400,
+   "altSeed": true,
    "pools": [
     "green",
     "reed",
@@ -4156,6 +4310,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 2400,
+   "altSeed": true,
    "pools": [
     "green",
     "leafy",
@@ -4181,6 +4336,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 4800,
+   "altSeed": false,
    "pools": [
     "white",
     "nether",
@@ -4211,6 +4367,7 @@
    "maxLight": 10,
    "minLight": null,
    "growth": 4500,
+   "altSeed": false,
    "pools": [
     "blue",
     "oreBerry",
@@ -4241,6 +4398,7 @@
    "maxLight": 10,
    "minLight": null,
    "growth": 3000,
+   "altSeed": false,
    "pools": [
     "purple",
     "oreBerry",
@@ -4271,6 +4429,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1200,
+   "altSeed": false,
    "pools": [
     "yellow",
     "flower",
@@ -4297,6 +4456,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 450,
+   "altSeed": true,
    "pools": [
     "yellow",
     "nether",
@@ -4327,6 +4487,7 @@
    "maxLight": 10,
    "minLight": null,
    "growth": 6000,
+   "altSeed": true,
    "pools": [
     "white",
     "oreBerry",
@@ -4357,6 +4518,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1000,
+   "altSeed": false,
    "pools": [
     "gray",
     "stem",
@@ -4387,6 +4549,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1800,
+   "altSeed": false,
    "pools": [],
    "flavour": "The queen of crops."
   },
@@ -4408,6 +4571,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 800,
+   "altSeed": true,
    "pools": [
     "red",
     "tendrilly",
@@ -4434,6 +4598,7 @@
    "maxLight": 10,
    "minLight": null,
    "growth": 150,
+   "altSeed": true,
    "pools": [
     "yellow",
     "twilightForest",
@@ -4460,6 +4625,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 7200,
+   "altSeed": false,
    "pools": [],
    "flavour": null
   },
@@ -4481,6 +4647,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 4800,
+   "altSeed": false,
    "pools": [],
    "flavour": "Trololololol, lololol, lololol!"
   },
@@ -4504,6 +4671,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": false,
    "pools": [
     "gray",
     "dark",
@@ -4530,6 +4698,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 450,
+   "altSeed": true,
    "pools": [
     "purple",
     "root",
@@ -4556,6 +4725,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 450,
+   "altSeed": true,
    "pools": [
     "green",
     "climbable",
@@ -4583,6 +4753,7 @@
    "maxLight": 10,
    "minLight": null,
    "growth": 4500,
+   "altSeed": true,
    "pools": [
     "black",
     "oreBerry",
@@ -4612,6 +4783,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 1100,
+   "altSeed": true,
    "pools": [
     "blue",
     "flower",
@@ -4640,6 +4812,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 450,
+   "altSeed": true,
    "pools": [
     "green",
     "water"
@@ -4664,6 +4837,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 1000,
+   "altSeed": true,
    "pools": [
     "yellow",
     "wheat",
@@ -4689,6 +4863,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 600,
+   "altSeed": true,
    "pools": [
     "white",
     "flower",
@@ -4715,6 +4890,7 @@
    "maxLight": null,
    "minLight": 9,
    "growth": 450,
+   "altSeed": true,
    "pools": [
     "white",
     "root",
@@ -4742,6 +4918,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 4800,
+   "altSeed": false,
    "pools": [
     "black",
     "reed",
@@ -4771,6 +4948,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1100,
+   "altSeed": true,
    "pools": [
     "purple",
     "flower",
@@ -4797,6 +4975,7 @@
    "maxLight": null,
    "minLight": null,
    "growth": 1800,
+   "altSeed": false,
    "pools": [
     "brown",
     "evil",

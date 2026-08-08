@@ -1455,6 +1455,8 @@ const TIPS = [
      `{{tips.g10.i1w}}`],
     [`{{tips.g10.i2}}`,
      `{{tips.g10.i2w}}`],
+    [`{{tips.g10.i5}}`,
+     `{{tips.g10.i5w}}`],
     [`{{tips.g10.i3}}`,
      `{{tips.g10.i3w}}`],
     [`{{tips.g10.i4}}`,
@@ -1871,6 +1873,7 @@ function renderCropDrawer(id) {
         : `<span style="color:var(--ink-faint)">{{drawer.noRecipe}}${c.pools.length
             ? ` {{drawer.noRecipePools}}`
             : ` {{drawer.noRecipeWild}}`}</span>`}</div>
+      ${c.altSeed ? `<p class="flav" style="font-style:normal;margin-top:10px">{{drawer.altSeed}}</p>` : ""}
     </div>
 
     <div class="dsec"><h3>{{drawer.usedAs}}</h3>
