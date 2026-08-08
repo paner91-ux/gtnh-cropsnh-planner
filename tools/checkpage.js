@@ -70,7 +70,8 @@ function load(pagePath) {
     setOwned: ids => { owned = new Set(ids); },
     render, oddsFor, showCrop, showPool, showTag, showBiome,
     cycleMark,
-    stallsIn, matchCount,
+    stallsIn, matchCount, biomeSections,
+    setBio: q => { bioQuery = q; },
     C, MUT, POOLM, BIOMES,
   };`;
 
@@ -211,6 +212,30 @@ for (const pagePath of pages) {
     ok(!drawer.innerHTML.includes("{{"), "the crop drawer left a {{key}} unreplaced");
     ok(chips === wanted, `the drawer drew ${chips} biome chips, expected ${wanted}`);
   }
+  /* The biome box over both lists. It has to survive being typed into without
+     the drawer repainting, so the handler is checked as well as the markup -
+     the stub answers getElementById for any id, so only the pair proves it. */
+  if (wither) {
+    api.showCrop(wither.id);
+    ok(/id="bioFind"/.test(drawer.innerHTML), "the crop drawer has no biome search box");
+    const box = nodes.get("bioFind");
+    ok(box && typeof box.oninput === "function", "nothing is bound to the biome search box");
+    if (api.BIOMES["Hot River"]) {
+      api.setBio("hot river");
+      const html = api.biomeSections(wither);
+      const rows = (html.match(/class="biohit"/g) || []).length;
+      ok(rows === 1, `searching "hot river" turned up ${rows} biomes, expected 1`);
+      ok(/class="bioverdict miss"/.test(html),
+         "Hot River is not marked as a stall for Withereed");
+    }
+    api.setBio("zzzz no such biome");
+    const none = api.biomeSections(wither);
+    ok((none.match(/class="biohit"/g) || []).length === 0,
+       "a nonsense biome search still produced rows");
+    ok(!none.includes("{{"), "the biome search left a {{key}} unreplaced");
+    api.setBio("");
+  }
+
   const safe = Object.values(api.C).find(c => {
     const s = api.stallsIn(c);
     return !s.open.length && !s.roofed.length && !c.biomes.length;
