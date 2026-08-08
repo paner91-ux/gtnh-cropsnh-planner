@@ -1891,15 +1891,15 @@ function biomeSections(c) {
   if (q) {
     const hits = Object.keys(BIOMES).filter(hit).sort();
     const limit = 2 * c.tier - 5;
-    found = `<div class="dsec"><h3>What that biome does to it</h3>${hits.length
+    found = `<div class="dsec"><h3>That biome, with no water and no fertiliser</h3>${hits.length
       ? hits.map(b => {
           const n = matchCount(c, b), give = biomeScore(c, b), score = 7 + give;
           const verdict = score <= limit ? "miss" : 5 + give <= limit ? "roof" : "ok";
           return `<div class="biohit">
             <button class="poolchip" type="button" data-biome="${esc(b)}">${esc(b)}</button>
-            <span class="biosum">${n} of its tags · rainfall ${BIOMES[b].rain} · biome worth ${give} · Nutrient ${score} against the ${limit} it has to beat</span>
-            <span class="bioverdict ${verdict}">${verdict === "miss" ? `will not grow with both tanks empty`
-              : verdict === "roof" ? `grows outdoors, will not grow under a roof` : `grows with both tanks empty`}</span>
+            <span class="biosum">${n} tags match · rainfall ${BIOMES[b].rain} · the biome adds ${give} · Nutrient Score ${score}, and it needs more than ${limit}</span>
+            <span class="bioverdict ${verdict}">${verdict === "miss" ? `will not grow`
+              : verdict === "roof" ? `grows outdoors, not under a roof` : `grows`}</span>
           </div>`;
         }).join("")
       : `<p class="flav" style="font-style:normal">No biome in this pack has a name like that.</p>`}</div>`;
@@ -1927,14 +1927,14 @@ function biomeSections(c) {
   const fOpen = open.filter(hit), fRoofed = roofed.filter(hit);
   const stall = `<div class="dsec"><h3>It won't grow without help</h3>
     ${open.length || roofed.length
-      ? `<p class="flav" style="font-style:normal;margin-bottom:8px">With both tanks empty this crop needs more than ${limit} Nutrient Score to move at all, and an empty stick under open sky is worth 7 before the biome adds anything. Below that the growth rate is exactly zero, and a plant at zero rolls its resistance every tick and eventually falls sick. One full tank of either water or fertiliser is worth 10 and usually clears it.</p>
+      ? `<p class="flav" style="font-style:normal;margin-bottom:8px">With no water and no fertiliser this crop needs more than ${limit} Nutrient Score to grow at all, and an empty crop stick under open sky is worth 7 before the biome adds anything. Below that it makes no progress whatsoever, and a plant making no progress rolls its resistance every tick and eventually falls sick. Filling either the water or the fertiliser is worth 10 and usually fixes it.</p>
          ${fOpen.length ? `<p class="flav" style="font-style:normal;margin:12px 0 8px">Will not grow in ${open.length} of the ${Object.keys(BIOMES).length} biomes:</p>
            ${chips(fOpen)}` : ""}
          ${fRoofed.length ? `<p class="flav" style="font-style:normal;margin:12px 0 8px">Grows outdoors, but will not grow under a roof or underground, in ${roofed.length}:</p>
            ${chips(fRoofed)}` : ""}
          ${q && !fOpen.length && !fRoofed.length
            ? `<p class="flav" style="font-style:normal">Nothing in this list matches that name.</p>` : ""}`
-      : `<p class="flav" style="font-style:normal">It grows anywhere in this pack with both tanks empty.</p>`}
+      : `<p class="flav" style="font-style:normal">With no water and no fertiliser it still grows anywhere in this pack.</p>`}
   </div>`;
 
   return found + where + stall;

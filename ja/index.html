@@ -1891,15 +1891,15 @@ function biomeSections(c) {
   if (q) {
     const hits = Object.keys(BIOMES).filter(hit).sort();
     const limit = 2 * c.tier - 5;
-    found = `<div class="dsec"><h3>そのバイオームがこの作物に与える影響</h3>${hits.length
+    found = `<div class="dsec"><h3>水も肥料もない場合、このバイオームでは</h3>${hits.length
       ? hits.map(b => {
           const n = matchCount(c, b), give = biomeScore(c, b), score = 7 + give;
           const verdict = score <= limit ? "miss" : 5 + give <= limit ? "roof" : "ok";
           return `<div class="biohit">
             <button class="poolchip" type="button" data-biome="${esc(b)}">${esc(b)}</button>
-            <span class="biosum">一致するタグ ${n} 個 · 降水量 ${BIOMES[b].rain} · バイオーム分 ${give} · 栄養素スコア ${score}、超えるべき値は ${limit}</span>
-            <span class="bioverdict ${verdict}">${verdict === "miss" ? `両方空だと育ちません`
-              : verdict === "roof" ? `空の下では育ちますが、屋根の下では育ちません` : `両方空でも育ちます`}</span>
+            <span class="biosum">一致するタグ ${n} 個 · 降水量 ${BIOMES[b].rain} · バイオームが足すのは ${give} · 栄養素スコア ${score}、必要なのは ${limit} より大きい値</span>
+            <span class="bioverdict ${verdict}">${verdict === "miss" ? `育ちません`
+              : verdict === "roof" ? `空の下では育ちますが、屋根の下では育ちません` : `育ちます`}</span>
           </div>`;
         }).join("")
       : `<p class="flav" style="font-style:normal">そういう名前のバイオームはこのパックにありません。</p>`}</div>`;
@@ -1927,14 +1927,14 @@ function biomeSections(c) {
   const fOpen = open.filter(hit), fRoofed = roofed.filter(hit);
   const stall = `<div class="dsec"><h3>助けなしでは育たない場所</h3>
     ${open.length || roofed.length
-      ? `<p class="flav" style="font-style:normal;margin-bottom:8px">両方の槽が空のとき、この作物が動き出すには栄養素スコアが ${limit} より大きい必要があります。空の支柱は空の下で 7 で、バイオームの分はその上に乗ります。そこに届かないと成長速度はちょうど 0 になり、0 の作物は毎ティック耐性判定を振って、やがて病気になります。水でも肥料でも、どちらか一方が満タンなら 10 増え、たいていはそれで足ります。</p>
+      ? `<p class="flav" style="font-style:normal;margin-bottom:8px">水も肥料もないとき、この作物が育つには栄養素スコアが ${limit} より大きい必要があります。何も植わっていない支柱は空の下で 7 で、バイオームの分はその上に乗ります。そこに届かないと成長はまったく進まず、進まない作物は毎ティック耐性判定を振って、やがて病気になります。水か肥料のどちらかを満たせば 10 増え、たいていはそれで直ります。</p>
          ${fOpen.length ? `<p class="flav" style="font-style:normal;margin:12px 0 8px">${Object.keys(BIOMES).length} 個のうち ${open.length} 個では育ちません：</p>
            ${chips(fOpen)}` : ""}
          ${fRoofed.length ? `<p class="flav" style="font-style:normal;margin:12px 0 8px">空の下なら育ちますが、屋根の下や地下では育たないのが ${roofed.length} 個：</p>
            ${chips(fRoofed)}` : ""}
          ${q && !fOpen.length && !fRoofed.length
            ? `<p class="flav" style="font-style:normal">この一覧にその名前はありません。</p>` : ""}`
-      : `<p class="flav" style="font-style:normal">このパックでは、両方の槽が空でもどこでも育ちます。</p>`}
+      : `<p class="flav" style="font-style:normal">水も肥料もなくても、このパックではどこでも育ちます。</p>`}
   </div>`;
 
   return found + where + stall;

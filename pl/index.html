@@ -1891,15 +1891,15 @@ function biomeSections(c) {
   if (q) {
     const hits = Object.keys(BIOMES).filter(hit).sort();
     const limit = 2 * c.tier - 5;
-    found = `<div class="dsec"><h3>Co ten biom z nią robi</h3>${hits.length
+    found = `<div class="dsec"><h3>Ten biom, bez wody i bez nawozu</h3>${hits.length
       ? hits.map(b => {
           const n = matchCount(c, b), give = biomeScore(c, b), score = 7 + give;
           const verdict = score <= limit ? "miss" : 5 + give <= limit ? "roof" : "ok";
           return `<div class="biohit">
             <button class="poolchip" type="button" data-biome="${esc(b)}">${esc(b)}</button>
-            <span class="biosum">pasujących tagów: ${n} · opady ${BIOMES[b].rain} · biom daje ${give} · Nutrient ${score} wobec ${limit}, które musi przebić</span>
-            <span class="bioverdict ${verdict}">${verdict === "miss" ? `nie urośnie z pustymi zbiornikami`
-              : verdict === "roof" ? `pod niebem urośnie, pod dachem nie` : `rośnie z pustymi zbiornikami`}</span>
+            <span class="biosum">pasujące tagi: ${n} · opady ${BIOMES[b].rain} · biom dodaje ${give} · Nutrient Score ${score}, a potrzeba więcej niż ${limit}</span>
+            <span class="bioverdict ${verdict}">${verdict === "miss" ? `nie urośnie`
+              : verdict === "roof" ? `pod niebem urośnie, pod dachem nie` : `rośnie`}</span>
           </div>`;
         }).join("")
       : `<p class="flav" style="font-style:normal">Żaden biom w tej paczce nie nazywa się podobnie.</p>`}</div>`;
@@ -1927,14 +1927,14 @@ function biomeSections(c) {
   const fOpen = open.filter(hit), fRoofed = roofed.filter(hit);
   const stall = `<div class="dsec"><h3>Nie urośnie bez pomocy</h3>
     ${open.length || roofed.length
-      ? `<p class="flav" style="font-style:normal;margin-bottom:8px">Z pustymi zbiornikami ta roślina potrzebuje więcej niż ${limit} punktów Nutrient Score, żeby w ogóle ruszyć, a pusty patyk pod gołym niebem daje 7, zanim biom cokolwiek dołoży. Poniżej tego tempo wzrostu wynosi dokładnie zero, a roślina z zerowym tempem przy każdym ticku losuje rzut na odporność i w końcu choruje. Jeden pełny zbiornik, wody albo nawozu, daje 10 i zwykle to załatwia.</p>
+      ? `<p class="flav" style="font-style:normal;margin-bottom:8px">Bez wody i bez nawozu ta roślina potrzebuje więcej niż ${limit} punktów Nutrient Score, żeby w ogóle rosnąć, a sam patyk pod gołym niebem daje 7, zanim biom cokolwiek dołoży. Poniżej tego nie posuwa się ani o jeden punkt, a roślina, która nie posuwa się do przodu, przy każdym ticku losuje rzut na odporność i w końcu choruje. Napełnienie wody albo nawozu daje 10 i zwykle to załatwia.</p>
          ${fOpen.length ? `<p class="flav" style="font-style:normal;margin:12px 0 8px">Nie urośnie w ${open.length} biomach ze ${Object.keys(BIOMES).length}:</p>
            ${chips(fOpen)}` : ""}
          ${fRoofed.length ? `<p class="flav" style="font-style:normal;margin:12px 0 8px">Pod niebem urośnie, ale pod dachem albo pod ziemią nie, w ${roofed.length}:</p>
            ${chips(fRoofed)}` : ""}
          ${q && !fOpen.length && !fRoofed.length
            ? `<p class="flav" style="font-style:normal">Nic na tej liście nie pasuje do tej nazwy.</p>` : ""}`
-      : `<p class="flav" style="font-style:normal">W tej paczce urośnie wszędzie z pustymi zbiornikami.</p>`}
+      : `<p class="flav" style="font-style:normal">Bez wody i bez nawozu i tak urośnie wszędzie w tej paczce.</p>`}
   </div>`;
 
   return found + where + stall;

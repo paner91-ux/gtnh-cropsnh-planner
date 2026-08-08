@@ -1891,15 +1891,15 @@ function biomeSections(c) {
   if (q) {
     const hits = Object.keys(BIOMES).filter(hit).sort();
     const limit = 2 * c.tier - 5;
-    found = `<div class="dsec"><h3>这个生物群系对它的影响</h3>${hits.length
+    found = `<div class="dsec"><h3>没有水也没有肥的时候，这个生物群系里</h3>${hits.length
       ? hits.map(b => {
           const n = matchCount(c, b), give = biomeScore(c, b), score = 7 + give;
           const verdict = score <= limit ? "miss" : 5 + give <= limit ? "roof" : "ok";
           return `<div class="biohit">
             <button class="poolchip" type="button" data-biome="${esc(b)}">${esc(b)}</button>
-            <span class="biosum">匹配的标签 ${n} 个 · 降水量 ${BIOMES[b].rain} · 生物群系给 ${give} · 营养评分 ${score}，需要超过 ${limit}</span>
-            <span class="bioverdict ${verdict}">${verdict === "miss" ? `两个罐子都空着就长不起来`
-              : verdict === "roof" ? `露天能长，屋顶下长不起来` : `两个罐子都空着也能长`}</span>
+            <span class="biosum">匹配的标签 ${n} 个 · 降水量 ${BIOMES[b].rain} · 生物群系加 ${give} · 营养评分 ${score}，需要大于 ${limit}</span>
+            <span class="bioverdict ${verdict}">${verdict === "miss" ? `长不起来`
+              : verdict === "roof" ? `露天能长，屋顶下长不起来` : `能长`}</span>
           </div>`;
         }).join("")
       : `<p class="flav" style="font-style:normal">这个整合包里没有叫这个名字的生物群系。</p>`}</div>`;
@@ -1927,14 +1927,14 @@ function biomeSections(c) {
   const fOpen = open.filter(hit), fRoofed = roofed.filter(hit);
   const stall = `<div class="dsec"><h3>没有帮助就长不起来</h3>
     ${open.length || roofed.length
-      ? `<p class="flav" style="font-style:normal;margin-bottom:8px">两个罐子都空着的时候，这种作物的营养评分必须大于 ${limit} 才动得起来，而空架子在露天下只值 7，生物群系再往上加。到不了这个数，生长速度就正好是零，而速度为零的作物每一刻都要掷一次抗性判定，迟早会生病。水和肥随便哪一个装满都值 10，通常就够了。</p>
+      ? `<p class="flav" style="font-style:normal;margin-bottom:8px">没有水也没有肥的时候，这种作物的营养评分要大于 ${limit} 才长得起来，而空的作物架在露天下只值 7，生物群系再往上加。到不了这个数，它一点进度都不会走，而不走进度的作物每一刻都要掷一次抗性判定，迟早会生病。把水或者肥随便哪一个装满就多 10 点，通常就能解决。</p>
          ${fOpen.length ? `<p class="flav" style="font-style:normal;margin:12px 0 8px">在 ${Object.keys(BIOMES).length} 个生物群系里，有 ${open.length} 个长不起来：</p>
            ${chips(fOpen)}` : ""}
          ${fRoofed.length ? `<p class="flav" style="font-style:normal;margin:12px 0 8px">露天能长，但在屋顶下或者地下长不起来的有 ${roofed.length} 个：</p>
            ${chips(fRoofed)}` : ""}
          ${q && !fOpen.length && !fRoofed.length
            ? `<p class="flav" style="font-style:normal">这个列表里没有匹配这个名字的。</p>` : ""}`
-      : `<p class="flav" style="font-style:normal">在这个整合包里，两个罐子都空着也到处都能长。</p>`}
+      : `<p class="flav" style="font-style:normal">没有水也没有肥，它在这个整合包里照样到处都能长。</p>`}
   </div>`;
 
   return found + where + stall;
