@@ -334,6 +334,12 @@ p, li { text-wrap: pretty; }
   font-variant-numeric: tabular-nums; color: var(--ink-faint);
   border: 1px solid var(--rule); border-radius: 2px; padding: 0 4px;
 }
+.unlock-count {
+  flex: none; font-family: var(--face-data); font-size: 10.5px;
+  font-variant-numeric: tabular-nums; color: var(--leaf);
+  border: 1px solid color-mix(in srgb, var(--leaf) 45%, transparent);
+  border-radius: 2px; padding: 0 4px;
+}
 
 .lbl {
   font-family: var(--face-data); font-size: 9.5px;
@@ -1089,10 +1095,27 @@ function subLabel(key) {
 
 /* ---------------------------------------------------------- logic */
 const missingOf = m => m.parents.filter(p => !owned.has(p));
+const readyRecipes = have => MUT.filter(m =>
+  !have.has(m.out) && m.parents.every(p => have.has(p)));
+let readyUnlocks = new Map();
 
 function readyList() {
-  return MUT.filter(m => !owned.has(m.out) && missingOf(m).length === 0)
-            .sort((a, b) => (C[a.out]?.tier ?? 99) - (C[b.out]?.tier ?? 99) || nm(a.out).localeCompare(nm(b.out)));
+  const list = readyRecipes(owned);
+  const current = new Set(list);
+  readyUnlocks = new Map();
+  const unlocks = new Map();
+  for (const m of list) {
+    const after = new Set(owned);
+    after.add(m.out);
+    const unlocked = [...new Set(readyRecipes(after)
+      .filter(x => !current.has(x)).map(x => x.out))]
+      .sort((a, b) => (C[a]?.tier ?? 99) - (C[b]?.tier ?? 99) || nm(a).localeCompare(nm(b)));
+    readyUnlocks.set(m, unlocked);
+    unlocks.set(m, unlocked.length);
+  }
+  return list.sort((a, b) => unlocks.get(b) - unlocks.get(a)
+    || (C[a.out]?.tier ?? 99) - (C[b.out]?.tier ?? 99)
+    || nm(a.out).localeCompare(nm(b.out)));
 }
 function nearList() {
   return MUT.filter(m => !owned.has(m.out) && missingOf(m).length === 1)
@@ -1219,14 +1242,17 @@ function renderRail() {
 }
 
 /* ---------------------------------------------------------- views */
-function cardFor(m) {
+function cardFor(m, unlockIds) {
   const c = C[m.out];
   const key = markKey(m), on = marked.has(key), off = parked.has(key);
+  const unlockCount = unlockIds ? unlockIds.length : 0;
+  const unlockNames = unlockCount ? esc(unlockIds.map(nm).join(", ")) : "";
   return `<article class="card${on ? " marked" : off ? " parked" : ""}" data-key="${esc(key)}"
       title="${on ? `Oznaczone jako to, nad czym pracujesz - kliknij jeszcze raz, żeby odłożyć` : off ? `Odłożone i przeniesione na koniec - kliknij, żeby wróciło` : `Kliknij, żeby oznaczyć to jako to, nad czym pracujesz`}">
     <div class="card-top">
       <button class="card-out" type="button" data-crop="${m.out}">${esc(nm(m.out))}</button>
       <span class="tier">T${c ? c.tier : "?"}</span>
+      ${unlockCount ? `<span class="unlock-count" title="${unlockNames}" aria-label="${unlockNames}">+${unlockCount}</span>` : ""}
     </div>
     ${reqChips(c, machChip(m))}
     ${parentRows(m)}
@@ -1238,7 +1264,7 @@ function renderReady() {
   if (!owned.size) return `<div class="empty">Zaznacz po lewej to, co masz.</div>`;
   if (!list.length) return `<div class="empty">Żaden nowy przepis nie jest w całości pokryty tym zestawem.<br>Zajrzyj do <b>Brakuje jednego rodzica</b> albo do <b>Ruletki pul</b>.</div>`;
   return `<p class="viewnote">Przepisy, do których masz już wszystkich rodziców. Ustaw rodziców wokół podwójnego patyka i sprawdź, czy ziemia pod patykiem spełnia wymagania wyniku - inaczej próba przepada bez słowa. Kliknij kafelek, żeby oznaczyć to, nad czym pracujesz, a zostanie z przodu; kliknij drugi raz, żeby odłożyć go na koniec. To, czego jeszcze nie rozstrzygnąłeś, siedzi pomiędzy i tam też pojawia się nowy przepis.</p>
-    <div class="grid">${markFirst(list).map(m => cardFor(m)).join("")}</div>`;
+    <div class="grid">${markFirst(list).map(m => cardFor(m, readyUnlocks.get(m))).join("")}</div>`;
 }
 
 function renderNear() {
