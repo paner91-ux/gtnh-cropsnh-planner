@@ -457,6 +457,16 @@ p, li { text-wrap: pretty; }
 }
 .step .body { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
 .step .made { font-family: var(--face-display); font-size: 16px; font-weight: 600; }
+.poolhint {
+  display: flex; flex-direction: column; gap: 6px;
+  margin-top: 3px; padding: 7px 0 1px 10px;
+  border-left: 2px solid var(--rule); font-size: 12px; text-align: left;
+}
+.poolhint-note { color: var(--ink-faint); }
+.poolsource { display: flex; flex-wrap: wrap; align-items: baseline; gap: 3px 9px; }
+.poolsource-name { flex: none; }
+.poolsource-seeds { color: var(--ink-soft); }
+.poolsource-seeds .lbl { margin-right: 4px; }
 
 /* ---------------------------------------------------------- tips */
 /* eleven sections is a long page, so it opens with what is on it */
@@ -981,6 +991,22 @@ const parentLinks = ids => ids
 const poolLink = key => POOLM[key]
   ? `<button class="inline-pool" type="button" data-pool="${key}">${esc(DATA.poolNames[key] || key)}</button>`
   : esc(key);
+
+function poolHint(id) {
+  const pools = [...new Set(C[id].pools || [])];
+  const rows = pools.map(p => {
+    const members = POOLM[p] || [];
+    const mine = members.filter(x => owned.has(x));
+    const seeds = mine.length
+      ? mine.map(x => cropLink(x, "own")).join(", ")
+      : `<span style="color:var(--ink-faint)">还没有</span>`;
+    return `<div class="poolsource">
+      <span class="poolsource-name">${poolLink(p)} <span class="tier">${members.length}</span></span>
+      <span class="poolsource-seeds"><span class="lbl">你拥有的作物：</span> ${seeds}</span>
+    </div>`;
+  }).join("");
+  return `<div class="poolhint"><div class="poolhint-note">要抽到这种作物，请从其中一个突变池里选两株作物。同一种作物可以用两次。</div>${rows}</div>`;
+}
 
 function save() {
   if (storage) { try { storage.setItem(LS, JSON.stringify([...owned])); } catch (e) {} }
@@ -1777,7 +1803,8 @@ function renderPath() {
   if (!steps) {
     const recipes = MUT.filter(x => x.out === target);
     if (!recipes.length) {
-      return html + `<div class="empty"><b>${esc(nm(target))}</b> 完全没有配方。它只会来自突变池抽取或者世界本身，所以没有链子可循。请看<b>突变池轮盘</b>。</div>`;
+      const pools = [...new Set(C[target].pools || [])];
+      return html + `<div class="empty"><b>${esc(nm(target))}</b> 完全没有配方。它只会来自突变池抽取或者世界本身，所以没有链子可循。请看<b>突变池轮盘</b>。${pools.length ? poolHint(target) : ""}</div>`;
     }
     // one level of "what exactly is in the way", with each blocker's own status
     const made = recipes.length === 1 ? `这个配方` : `这 ${recipes.length} 个配方中的任意一个`;
@@ -1787,14 +1814,17 @@ function renderPath() {
       html += `<div class="step"><div class="idx">-</div><div class="body">
         <div class="parents">${parentLinks(m.parents)}</div>
         <div class="linkrow">${missing.map(p => {
-          const inPools = (C[p].pools || []).length;
+          const pools = [...new Set(C[p].pools || [])];
+          const inPools = pools.length;
           const state = have.has(p)
             ? `可以靠配方达成，先把它设成目标`
-            : (MUT.some(x => x.out === p)
-                ? (inPools ? `还没有路线，但它在 ${inPools} 个突变池里` : `还没有路线，而且它不在任何池里，所以它需要自己的一条配方链`)
-                : `没有配方，只能在世界里找到`);
-          return `<span style="font-size:12.5px;color:var(--ink-faint)">
-            <button class="inline-crop" type="button" data-crop="${p}">${esc(nm(p))}</button> - ${state}</span>`;
+            : (inPools
+                ? `还没有路线，但它在 ${inPools} 个突变池里`
+                : (MUT.some(x => x.out === p)
+                    ? `还没有路线，而且它不在任何池里，所以它需要自己的一条配方链`
+                    : `没有配方，只能在世界里找到`));
+          return `<div style="font-size:12.5px;color:var(--ink-faint)">
+            <button class="inline-crop" type="button" data-crop="${p}">${esc(nm(p))}</button> - ${state}${!have.has(p) && inPools ? poolHint(p) : ""}</div>`;
         }).join("")}</div>
       </div></div>`;
     }
