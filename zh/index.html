@@ -418,6 +418,18 @@ p, li { text-wrap: pretty; }
   letter-spacing: .08em; text-transform: uppercase; color: var(--ink-faint);
   padding: 0 8px 5px 0; border-bottom: 1px solid var(--rule);
 }
+.odds .sortbtn {
+  display: inline-flex; align-items: center; gap: 4px;
+  font: inherit; letter-spacing: inherit; text-transform: inherit; text-align: inherit;
+  color: inherit; background: none; border: 0; padding: 0; cursor: pointer;
+}
+.odds .sortbtn::after { content: "↕"; font-size: 11px; opacity: .55; }
+.odds th[aria-sort="ascending"] .sortbtn,
+.odds th[aria-sort="descending"] .sortbtn { color: var(--ink); }
+.odds th[aria-sort="ascending"] .sortbtn::after { content: "↑"; opacity: 1; }
+.odds th[aria-sort="descending"] .sortbtn::after { content: "↓"; opacity: 1; }
+.odds .sortbtn:hover { color: var(--ink); }
+.odds .sortbtn:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2px; }
 .odds th.num, .odds td.num { text-align: right; font-variant-numeric: tabular-nums; }
 .odds td { padding: 5px 8px 5px 0; border-bottom: 1px solid var(--rule); vertical-align: baseline; }
 .odds tr.dead td { color: var(--ink-faint); }
@@ -896,6 +908,7 @@ const markFirst = list => [...list].sort((a, b) => markRank(b) - markRank(a));
 let view = "ready";
 let filter = "";
 let pairA = "", pairB = "";
+let poolSort = { key: "chance", direction: "desc" };
 let target = "";
 
 /* Pairs you have already looked at, newest first. Working through a plot
@@ -1043,6 +1056,55 @@ function lightReq(crop) {
   if (crop.maxLight !== null) return `最高 ${crop.maxLight}，要黑暗`;
   if (crop.minLight !== null && crop.minLight > 9) return `最低 ${crop.minLight}`;
   return "";
+}
+
+const POOL_SORT_KEYS = ["result", "chance", "pool", "topBlock", "underBlock", "light"];
+
+function poolSortValue(row, key) {
+  const crop = C[row.id];
+  if (key === "result") return nm(row.id);
+  if (key === "chance") return row.p;
+  if (key === "pool") return [...row.via].map(p => DATA.poolNames[p] || p).join(", ");
+  if (key === "topBlock") return topBlockShort(crop);
+  if (key === "underBlock") return underBlock(crop);
+  if (key === "light") return lightReq(crop);
+  return "";
+}
+
+function sortedPoolRows(rows) {
+  const original = new Map(rows.map((row, index) => [row.id, index]));
+  const direction = poolSort.direction === "asc" ? 1 : -1;
+  return [...rows].sort((a, b) => {
+    /* Keep owned results together at the bottom, as the default odds list does. */
+    const held = (owned.has(a.id) ? 1 : 0) - (owned.has(b.id) ? 1 : 0);
+    if (held) return held;
+
+    const av = poolSortValue(a, poolSort.key), bv = poolSortValue(b, poolSort.key);
+    const aEmpty = av === "", bEmpty = bv === "";
+    if (aEmpty !== bEmpty) return aEmpty ? 1 : -1;
+
+    const compared = typeof av === "number"
+      ? av - bv
+      : String(av).localeCompare(String(bv), undefined, { sensitivity: "base", numeric: true });
+    return compared * direction || original.get(a.id) - original.get(b.id);
+  });
+}
+
+function poolSortHeader(key, label, numeric) {
+  const active = poolSort.key === key;
+  const ariaSort = active
+    ? (poolSort.direction === "asc" ? "ascending" : "descending")
+    : "none";
+  return `<th class="sortable${numeric ? " num" : ""}" aria-sort="${ariaSort}">
+    <button class="sortbtn" type="button" data-pool-sort="${key}">${label}</button></th>`;
+}
+
+function togglePoolSort(key) {
+  if (!POOL_SORT_KEYS.includes(key)) return;
+  poolSort = poolSort.key === key
+    ? { key, direction: poolSort.direction === "asc" ? "desc" : "asc" }
+    : { key, direction: "asc" };
+  render();
 }
 
 /* `extra` appends a chip built by the caller - used for the Crop Breeder
@@ -1336,9 +1398,9 @@ function renderPool() {
       : `共享的突变池：<b>${poolTxt}</b>。`} 池是均匀抽取的，小池和大池一样值钱，只是摊在更少的作物上。</p>
     <p class="viewnote"><b>上层方块</b>是紧贴作物架下面的那一格，<b>下层方块</b>再深一格。地面没搭好的结果根本不会被种下去，所以照着你真正想要的那种作物搭好这两块，能悄悄地把这张表里大部分条目去掉。</p>
     <div class="tablescroll"><table class="odds">
-      <tr><th>产物</th><th class="num">概率</th><th>突变池</th><th>上层方块</th><th>下层方块</th>${showLight ? `<th>光照</th>` : ""}</tr>`;
+      <tr>${poolSortHeader("result", `产物`)}${poolSortHeader("chance", `概率`, true)}${poolSortHeader("pool", `突变池`)}${poolSortHeader("topBlock", `上层方块`)}${poolSortHeader("underBlock", `下层方块`)}${showLight ? poolSortHeader("light", `光照`) : ""}</tr>`;
   const max = Math.max(...o.rows.map(r => r.p));   // rows are no longer ordered by odds
-  for (const r of o.rows) {
+  for (const r of sortedPoolRows(o.rows)) {
     const c = C[r.id];
     const have = owned.has(r.id);
     const u = underBlock(c);
@@ -2151,6 +2213,8 @@ document.addEventListener("click", e => {
   if (biome) { showBiome(biome.dataset.biome); return; }
   const pool = e.target.closest("[data-pool]");
   if (pool) { showPool(pool.dataset.pool); return; }
+  const poolSortButton = e.target.closest("[data-pool-sort]");
+  if (poolSortButton) { togglePoolSort(poolSortButton.dataset.poolSort); return; }
   const crop = e.target.closest("[data-crop]");
   if (crop) { showCrop(crop.dataset.crop); return; }
   const jump = e.target.closest("[data-jump]");
