@@ -1578,11 +1578,11 @@ const FLOW = [
     } },
 
   { t: `Make a second copy`,
-    d: `Run the cycle above once more. A fertilised copy of a 31/31/31 plant is always 31/31/31, so this one needs no checking.`,
+    d: `Run the cycle above once more. A fertilised copy of a 31/31/31 plant is always 31/31/31, so this one needs no checking. With a <b>Spade</b> you can skip this step, and the next one says why one plant is then enough.`,
     w: `The average of a single 31/31/31 parent is 31. Upward rolls hit the clamp at 31 and downward rolls are already removed by the fertiliser check, so 31/31/31 is the only reachable result.` },
 
-  { t: `Left-click both plants for the seeds`,
-    d: `At resistance 31 the seed always drops. Below 31 it can be destroyed along with the plant, which is why step 2 comes first. With a <b>Spade</b> in hand you do not have to break anything: a right click takes the seed off and leaves the plant standing, which also makes step 3 unnecessary.`,
+  { t: `Take the two seeds`,
+    d: `With a <b>Spade</b> in hand, right-click a grown plant: the seed comes off and the plant stays standing, so one plant hands you both. Without one, left-click both plants instead. At resistance 31 the seed always drops; below 31 it can be destroyed along with the plant, which is why step 2 comes first.`,
     w: `<em>onLeftClick()</em> calls <em>doPlayerHarvest(player, true)</em>, which drops whatever <em>getSeedDrop()</em> returns. That method is gated on <em>passesResistanceCheck()</em>, namely <em>resistance &gt; random(0…30)</em>, so only 31 never fails. A failed roll is not a retry either: the same method ends with an unconditional <em>clear()</em> whenever the remove flag is set, so the plant is gone and you get nothing. A spade changes which branch runs at all: it implements <em>IHarvestDropModifier</em>, so <em>doPlayerHarvest(player, false)</em> adds the seed to the harvest drops while the plant is only reset to zero growth.` },
 
   { t: `Plant them one block apart, double crop stick in the gap`,

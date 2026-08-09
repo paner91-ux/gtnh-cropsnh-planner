@@ -1578,11 +1578,11 @@ const FLOW = [
     } },
 
   { t: `Zrób drugą kopię`,
-    d: `Przejdź powyższy cykl jeszcze raz. Nawożona kopia rośliny 31/31/31 zawsze wychodzi 31/31/31, więc tej nie trzeba już sprawdzać.`,
+    d: `Przejdź powyższy cykl jeszcze raz. Nawożona kopia rośliny 31/31/31 zawsze wychodzi 31/31/31, więc tej nie trzeba już sprawdzać. Ze <b>Spade</b> ten krok możesz pominąć, a następny mówi, czemu jedna roślina wtedy wystarczy.`,
     w: `Średnia z jednego rodzica 31/31/31 to 31. Rzuty w górę trafiają w ograniczenie na 31, a rzuty w dół są już usunięte przez sprawdzenie nawozu, więc 31/31/31 jest jedynym osiągalnym wynikiem.` },
 
-  { t: `Kliknij obie rośliny lewym, żeby zebrać nasiona`,
-    d: `Przy odporności 31 nasiono wypada zawsze. Poniżej 31 może zostać zniszczone razem z rośliną i dlatego krok 2 jest pierwszy. Ze <b>Spade</b> w ręku nie musisz niczego niszczyć: prawe kliknięcie zdejmuje nasiono i zostawia roślinę na miejscu, przez co krok 3 przestaje być potrzebny.`,
+  { t: `Zabierz dwa nasiona`,
+    d: `Ze <b>Spade</b> w ręku klikasz dojrzałą roślinę prawym: nasiono schodzi, a roślina zostaje na miejscu, więc jedna roślina daje ci oba. Bez niego kliknij obie rośliny lewym. Przy odporności 31 nasiono wypada zawsze; poniżej 31 może zostać zniszczone razem z rośliną i dlatego krok 2 jest pierwszy.`,
     w: `<em>onLeftClick()</em> woła <em>doPlayerHarvest(player, true)</em>, które wyrzuca to, co zwróci <em>getSeedDrop()</em>. Ta metoda jest zablokowana przez <em>passesResistanceCheck()</em>, czyli <em>odporność &gt; random(0…30)</em>, więc tylko 31 nigdy nie zawodzi. Nieudany rzut nie oznacza też kolejnej próby: ta sama metoda kończy się bezwarunkowym <em>clear()</em>, gdy ustawiona jest flaga usunięcia, więc rośliny nie ma, a ty nie dostajesz nic. Spade zmienia to, która gałąź w ogóle się wykonuje: implementuje <em>IHarvestDropModifier</em>, więc <em>doPlayerHarvest(player, false)</em> dokłada nasiono do plonu, a roślina jest tylko cofana do zera wzrostu.` },
 
   { t: `Zasadź je w odstępie jednego bloku, podwójny patyk w przerwie`,
