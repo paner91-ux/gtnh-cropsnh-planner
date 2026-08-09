@@ -246,6 +246,23 @@ for (const pagePath of pages) {
        `${safe.name} stalls nowhere and likes no tag, but the drawer listed biomes`);
   }
 
+  /* Crops that cannot be harvested by hand say so in the drawer. The note is
+     matched on its inline colour rather than its text, because the same check
+     runs against every language. Both sides are asserted: a template that
+     emitted the note unconditionally would otherwise pass.                  */
+  const NOTE = /color:var\(--steel\)/;
+  const machine = Object.values(api.C).filter(c => c.machineGrow);
+  ok(machine.length > 0, "no crop is flagged machineGrow, so this check proves nothing");
+  if (machine.length) {
+    api.showCrop(machine[0].id);
+    ok(NOTE.test(drawer.innerHTML),
+       `${machine[0].name} can only be harvested by machine and the drawer does not say so`);
+    const byHand = Object.values(api.C).find(c => !c.machineGrow);
+    api.showCrop(byHand.id);
+    ok(!NOTE.test(drawer.innerHTML),
+       `${byHand.name} is harvestable by hand and the drawer claimed otherwise`);
+  }
+
   /* The two rail markers make a claim the rail has no other way to show: that
      a crop stick will never hand you this crop. The expected counts are worked
      out from the data here rather than written down, so the check survives a

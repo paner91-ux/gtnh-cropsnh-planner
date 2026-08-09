@@ -1470,6 +1470,23 @@ const TIPS = [
      `{{tips.g6.i4w}}`],
   ]},
 
+  { h: `{{tips.g11.h}}`,
+    lead: `{{tips.g11.lead}}`,
+    items: [
+    [`{{tips.g11.i1}}`,
+     `{{tips.g11.i1w}}`],
+    [`{{tips.g11.i2}}`,
+     `{{tips.g11.i2w}}`],
+    [`{{tips.g11.i3}}`,
+     `{{tips.g11.i3w}}`],
+    [`{{tips.g11.i4}}`,
+     `{{tips.g11.i4w}}`],
+    [`{{tips.g11.i5}}`,
+     `{{tips.g11.i5w}}`],
+    [`{{tips.g11.i6}}`,
+     `{{tips.g11.i6w}}`],
+  ]},
+
   { h: `{{tips.g7.h}}`,
     lead: `{{tips.g7.lead}}`,
     items: [
@@ -1968,6 +1985,7 @@ function renderCropDrawer(id) {
           c.biomes.map(tagLink).join(", ")}<br>
           <span style="font-size:12px;color:var(--ink-faint)">{{drawer.likesNote}}</span></dd>` : ""}
       </dl>
+      ${c.machineGrow ? `<p class="flav" style="font-style:normal;margin-top:10px;color:var(--steel)">{{drawer.machineGrow}}</p>` : ""}
     </div>
 
     <div class="dsec"><h3>{{bio.section}}</h3>

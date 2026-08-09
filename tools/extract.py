@@ -258,6 +258,12 @@ for field, clsname in sorted(field_to_class.items()):
         # sits in a constructor, so the chain ctor_code() already walks is the
         # whole search: the eight bonsai inherit theirs from CropBonsai.
         'altSeed': any('addAlternateSeed:' in line for line in code),
+        # A growth requirement whose canGrow() is always false while its
+        # onlyPreventsHarvest() is true: the crop grows to full on an ordinary
+        # crop stick and nothing can be taken off it by hand. Same constructor
+        # search as altSeed above.
+        'machineGrow': any('MachineOnlyGrowthRequirement."<init>"' in line
+                           for line in code),
         'pools': [],
         'flavour': L(f'cropsnh_crops.{internal}.flavour'),
     }
