@@ -1488,7 +1488,7 @@ const TIPS = [
   ]},
 
   { h: `工具`,
-    lead: `五件拿在手里的东西。其中一件改变了种子从植株上下来的方式。`,
+    lead: `六件拿在手里的东西。其中一件改变了种子从植株上下来的方式。`,
     items: [
     [`<b>手里拿着铲子，每次收获都会多出一颗种子，而植株留在原地。</b>照常右键一株长好的作物：你拿到产物，外加一颗带着这株确切属性的种子，植株回到零成长继续长。空手收获根本不出种子，拿到种子的唯一办法是把植株拔掉。普通<b>铲子</b>要靠一次对抗性的判定才掉一颗，所以抗性 31 时每次都掉；<b>强化铲子</b>完全不做这个判定，直接掉 <b>抗性 ÷ 10</b> 颗，也就是 31/31/31 的植株掉三到四颗。两把都不会损坏。`,
      `<em>ItemSpadeNH</em> 实现了 <em>IHarvestDropModifier</em>，而 <em>doPlayerHarvest(player, breakCrop)</em> 在 <em>harvest()</em> 之后立刻对手持物品调用 <em>modifyCropDrops()</em>。右键传的是 <em>breakCrop = false</em>，所以方块实体只把 <em>growthProgress</em> 置零并留下植株；空手能拿到的那颗种子在另一条分支上，只有那个标志置位时才走。<em>ItemSpade.addSeedDrop()</em> 取 <em>getSeedDrop()</em>，它卡在 <em>passesResistanceCheck()</em> 上，也就是 <em>resistance &gt; random(0…30)</em>。<em>ItemReinforcedSpade.addSeedDrop()</em> 取 <em>getSeedStack()</em>，完全不判定，把堆叠数设成 <em>resistance / 10</em>，再以 <em>(resistance mod 10) / 10</em> 的概率多加一颗。两个构造函数都调用 <em>setMaxDamage(0)</em>，在 1.7.10 里这表示物品不可损坏。`],
@@ -1502,6 +1502,8 @@ const TIPS = [
      `<em>ItemSpadeNH.TILLABLE_BLOCKS</em> 把草、土、菌丝映射到耕地，把耕地映射到土。<em>onItemUse()</em> 先抛出 Forge 的 <em>UseHoeEvent</em>，然后在表里有对应项且上方是空的时候替换方块。`],
     [`<b>植物治愈剂和除草剂罐都很小，各管一件事。</b>植物治愈剂治好生病的植株，并把作物架里的肥料补到 25，而且只有确实有病可治时才花掉 100 次使用中的一次。除草剂罐给作物架的储量加 10，上限 100，一共 75 次使用，储量已经高于 90 时它什么也不做。`,
      `<em>ItemPlantCure.onRightClick()</em> 调用 <em>cureDisease()</em>，只有返回 true 时才接着调用 <em>addFertilizer(25, 25, 25)</em> 并扣掉一点耐久；构造函数设的是 <em>setMaxDamage(100)</em>。<em>ItemWeedEX.onRightClick()</em> 调用 <em>addWeedEx(10, 90, 100)</em>，它的构造函数设的是 <em>setMaxDamage(75)</em>。<em>addWeedEx(potency, threshold, max)</em> 在储量高于阈值时返回 false，否则按 potency 提高并夹到 max。`],
+    [`<b>按住潜行放作物架，一次点击就直接立起双层作物架。</b>先放一根、再拿着作物架右键点它一次，得到的是同一样东西，只是要点两次。这个捷径一次从堆里拿走两根，手上只剩一根时，它会不声不响地放下一根普通作物架 - 沿着一行摆之前先看一眼堆里还剩多少。`,
+     `<em>ItemCropSticks.onItemUse()</em> 由 <em>player.isSneaking()</em> 加上创造模式或 <em>stackSize &gt;= 2</em> 两者之一，算出一个标志。标志成立时它放下方块，从堆里扣 2 而不是 1，然后对刚创建的 tile 调用 <em>setCrossCrop(true)</em>。只有一根的堆过不了后半个条件，标志保持 false，这一下就只放一根普通作物架。点两次的那条路是 <em>onRightClick()</em>，用多一根把已经立着的作物架升成双层，两条路里只有它会播放双层作物架的声音。`],
   ]},
 
   { h: `杂草`,
