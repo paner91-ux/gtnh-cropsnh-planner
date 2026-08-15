@@ -78,6 +78,8 @@ globalThis.__api = {
   showCrop, showBiome, showTag, paintDrawer, drawerStack,
   setOwned: ids => { owned = new Set(ids); },
   setPair: (a, b) => { pairA = a; pairB = b; },
+  setTarget: t => { target = t; },
+  sortPool: typeof togglePoolSort === "function" ? togglePoolSort : null,
   C, MUT, POOLM, BIOMES,
 };`;
 
@@ -110,14 +112,98 @@ for (const v of ["ready", "near", "pool", "path", "biome", "tips", "about"]) {
   dump(`view: ${v}`, view.innerHTML);
 }
 
-/* The pool view again with a pair loaded, which is the odds table itself. */
+/* The pool view with a pair loaded. This used to claim it was "the odds table
+   itself" and it was not: bestPairs()[0] is a pair with a deterministic recipe,
+   which renders cards instead. The table went untested for as long as that
+   comment was there, and a diff of two runs came back empty either way, which
+   reads exactly like proof that nothing changed.                             */
 const pair = api.bestPairs(1)[0];
 if (pair) {
   api.setPair(pair.a, pair.b);
   api.setView("pool");
   api.render();
-  dump(`view: pool (${pair.a} + ${pair.b})`, view.innerHTML);
+  dump(`view: pool, recipe pair (${pair.a} + ${pair.b})`, view.innerHTML);
 }
+
+/* So find a pair by its data rather than its markup - testing the rendered
+   html for class="odds" passes on a pair whose table has no rows at all.
+   First pair wins ties, so the choice is stable between two runs.            */
+let odds = null, oddsRows = 0;
+for (const a of seed) {
+  for (const b of Object.keys(api.C)) {
+    let o; try { o = api.oddsFor(a, b); } catch (e) { continue; }
+    const n = o && o.rows ? o.rows.length : 0;
+    if (n > oddsRows) { oddsRows = n; odds = [a, b]; }
+  }
+}
+if (odds) {
+  api.setPair(odds[0], odds[1]);
+  api.setView("pool");
+  api.render();
+  dump(`view: pool, odds table (${odds[0]} + ${odds[1]}, ${oddsRows} rows)`, view.innerHTML);
+
+  /* Column sorting is what a reader sees, so it belongs here rather than in
+     checkpage. Only the order of the result column is dumped: sorting cannot
+     change anything else, and twelve copies of a 76 row table would bury every
+     other section in the diff. Two clicks per key, the second reverses it.   */
+  if (api.sortPool) {
+    /* The view holds two tables with this class - the parent copies first, the
+       pool draw after it - so take whichever has the most crops in it rather
+       than the first one, which quietly yields a single name.                */
+    const order = h => (h.match(/<table class="odds">[\s\S]*?<\/table>/g) || [])
+      .map(t => (t.match(/data-crop="([^"]+)"/g) || []).map(s => s.slice(11, -1)))
+      .reduce((best, ids) => ids.length > best.length ? ids : best, [])
+      .join(" ");
+    const orders = [];
+    for (const key of ["result", "chance", "pool", "topBlock", "underBlock", "light"]) {
+      for (const dir of ["ascending", "descending"]) {
+        api.sortPool(key);
+        api.render();
+        orders.push(`${key} ${dir}:\n${order(view.innerHTML)}`);
+      }
+    }
+    dump("view: pool, result order per sort column", orders.join("\n\n"));
+    api.sortPool("chance");   // back to the default so later dumps are unaffected
+    api.sortPool("chance");
+  }
+  api.setPair("", "");
+}
+
+/* The route view above ran with no goal set, so it only ever showed the goal
+   picker. These two are the branches that actually say something: a goal that
+   no recipe chain reaches, and a goal with no recipe at all.                 */
+const sorted = Object.keys(api.C).sort();
+const blocked = sorted.find(id =>
+  !seed.includes(id) && !api.planFor(id) && api.MUT.some(m => m.out === id));
+if (blocked) {
+  api.setTarget(blocked);
+  api.setView("path");
+  api.render();
+  dump(`view: path, goal out of reach (${blocked})`, view.innerHTML);
+}
+const wild = sorted.find(id => !seed.includes(id) && !api.MUT.some(m => m.out === id));
+if (wild) {
+  api.setTarget(wild);
+  api.setView("path");
+  api.render();
+  dump(`view: path, goal with no recipe (${wild})`, view.innerHTML);
+}
+
+/* Same branch once more for a crop that has no recipe but does sit in a pool,
+   which is the only case that renders the pool hint under the goal. Every such
+   crop is one of the five vanilla starters and so is in the seed set, and an
+   owned goal short-circuits to "you already have it" - hand one back first.  */
+const wildPooled = sorted.find(id =>
+  !api.MUT.some(m => m.out === id) && (api.C[id].pools || []).length);
+if (wildPooled) {
+  api.setOwned(seed.filter(id => id !== wildPooled));
+  api.setTarget(wildPooled);
+  api.setView("path");
+  api.render();
+  dump(`view: path, goal with no recipe but in pools (${wildPooled})`, view.innerHTML);
+  api.setOwned(seed);
+}
+api.setTarget("");
 
 /* Every drawer kind, since each has its own strings. */
 const someCrop = Object.keys(api.C).sort()[0];
