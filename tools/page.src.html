@@ -480,6 +480,21 @@ p, li { text-wrap: pretty; }
 .tipgroup > p.lead { color: var(--ink-faint); font-size: 13px; margin: 7px 0 2px; }
 .tiplist { list-style: none; margin: 0; padding: 0; }
 
+/* Screenshots go under the list, side by side while there is room: the pair is
+   the same patch of ground before and after, so they are read against each
+   other. No image-rendering here on purpose - these are always drawn smaller
+   than they were saved, and pixelated is a rule for scaling up.            */
+.tipshots { display: flex; flex-wrap: wrap; gap: 16px; margin: 14px 0 2px; }
+.tipshot { flex: 1 1 340px; margin: 0; min-width: 0; }
+.tipshot-img {
+  display: block; width: 100%; height: auto;
+  border: 1px solid var(--rule); border-radius: 2px; background: var(--paper-3);
+}
+.tipshot figcaption {
+  font-family: var(--face-data); font-size: 11.5px; line-height: 1.5;
+  color: var(--ink-faint); margin-top: 6px;
+}
+
 .tip { border-bottom: 1px solid var(--rule); }
 .tip-line {
   display: flex; align-items: baseline; gap: 12px;
@@ -1656,6 +1671,34 @@ const TIPS = [
     [`{{tips.g10.i4}}`,
      `{{tips.g10.i4w}}`],
   ]},
+
+  /* The only section that walks one job end to end. It is last because it
+     leans on most of the others, and because the two screenshots make it the
+     one section worth scrolling to rather than reading in passing.        */
+  { h: `{{tips.g12.h}}`,
+    lead: `{{tips.g12.lead}}`,
+    items: [
+    [`{{tips.g12.i1}}`,
+     `{{tips.g12.i1w}}`],
+    [`{{tips.g12.i2}}`,
+     `{{tips.g12.i2w}}`],
+    [`{{tips.g12.i3}}`,
+     `{{tips.g12.i3w}}`],
+    [`{{tips.g12.i4}}`,
+     `{{tips.g12.i4w}}`],
+    [`{{tips.g12.i5}}`,
+     `{{tips.g12.i5w}}`],
+    [`{{tips.g12.i6}}`,
+     `{{tips.g12.i6w}}`],
+    [`{{tips.g12.i7}}`,
+     `{{tips.g12.i7w}}`],
+    [`{{tips.g12.i8}}`,
+     `{{tips.g12.i8w}}`],
+  ],
+    shots: [
+    [`__SHOT.shot-lily-layout__`, `{{tips.g12.cap1}}`],
+    [`__SHOT.shot-lily-cross__`, `{{tips.g12.cap2}}`],
+  ]},
 ];
 
 /* The whole game loop as one chain. Steps that claim something about the mod
@@ -1736,7 +1779,13 @@ function tipGroup(g, id) {
         <span class="why-pop" role="note">${why}</span></span>` : ""}
     </div></li>`;
   }
-  return html + `</ul></section>`;
+  html += `</ul>`;
+  /* alt is left empty on purpose: the caption below carries the description,
+     and giving both would read the same sentence twice on a screen reader. */
+  if (g.shots) html += `<div class="tipshots">${g.shots.map(([src, cap]) =>
+    `<figure class="tipshot"><img class="tipshot-img" src="${src}" alt="" loading="lazy">
+      <figcaption>${cap}</figcaption></figure>`).join("")}</div>`;
+  return html + `</section>`;
 }
 
 /* Eleven sections is a long scroll, so it opens with a list of what is here.

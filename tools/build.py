@@ -19,6 +19,8 @@ ROOT = os.path.join(HERE, os.pardir)
 SITE = 'https://paner91-ux.github.io/gtnh-cropsnh-planner/'
 
 KEY = re.compile(r'\{\{([A-Za-z0-9_.]+)\}\}')
+# a screenshot in the markup, named after the file it comes from in tools/
+SHOT = re.compile(r'__SHOT\.([A-Za-z0-9_-]+)__')
 # values are dropped into JS template literals, so these have to survive intact
 INTERP = re.compile(r'\$\{[^{}]*\}')
 # keys build.py uses itself instead of substituting them into the template
@@ -228,11 +230,25 @@ for k in data['soilBase']:
 with open(os.path.join(HERE, 'favicon.svg'), encoding='utf-8') as f:
     icon = base64.b64encode(f.read().encode()).decode()
 
+# screenshots ride along the same way and for the same reason: the page is one
+# file that works with no network at all, and an <img src> would end that. They
+# are the same bytes in every language, so they are read once rather than per page.
+shots = {}
+for name in sorted(set(SHOT.findall(src))):
+    spath = os.path.join(HERE, f'{name}.webp')
+    if not os.path.exists(spath):
+        raise SystemExit(f'page.src.html asks for tools/{name}.webp, which is not there')
+    with open(spath, 'rb') as f:
+        shots[f'__SHOT.{name}__'] = ('data:image/webp;base64,'
+                                     + base64.b64encode(f.read()).decode())
+
 for code in order(cats):
     cat = cats[code]
     blob = json.dumps(localise(code, cat, base), ensure_ascii=False, separators=(',', ':'))
     # an untranslated string falls back to English rather than showing its key
     text = KEY.sub(lambda m: cat.get(m.group(1), base[m.group(1)]), src)
+    for placeholder, uri in shots.items():
+        text = text.replace(placeholder, uri)
     nav = langnav(code, cats)
     text = re.sub(r'[ \t]*__LANGS__\n', f'    {nav}\n' if nav else '', text)
     page = (f'<!doctype html>\n<html lang="{code}">\n<head>\n<meta charset="utf-8">\n'

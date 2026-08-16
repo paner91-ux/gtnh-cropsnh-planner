@@ -108,6 +108,14 @@ the build and breaks in the browser.
 Edit `favicon.svg` and run `build.py`. It is base64-encoded into the page head as a data URI, so
 `index.html` stays a single self-contained file with no external requests.
 
+## Adding a screenshot
+
+Put a `.webp` in this directory and write `__SHOT.<name>__` where the `src` belongs; `build.py`
+inlines it as a data URI for the same reason as the favicon, and refuses to build if the file is
+missing. The bytes are read once and reused across languages, so a screenshot costs its own size
+in every built page - keep it under about 60 kB. `checkpage.js` asserts that no placeholder
+survives the build and that every `src` is a data URI.
+
 ## Changing the page
 
 Edit `page.src.html`, then run `build.py`. That file holds the whole page - markup, styles, script

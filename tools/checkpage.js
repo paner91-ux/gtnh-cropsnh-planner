@@ -263,6 +263,18 @@ for (const pagePath of pages) {
        `${byHand.name} is harvestable by hand and the drawer claimed otherwise`);
   }
 
+  /* The screenshots ride in the page as data URIs, so a file that went missing
+     or a placeholder build.py never substituted shows up here rather than as a
+     broken image in the browser. Both halves are asserted: the count catches a
+     figure that stopped being emitted, the src catches one emitted empty.   */
+  api.setView("tips");
+  api.render();
+  const shots = [...view.innerHTML.matchAll(/<img class="tipshot-img" src="([^"]*)"/g)];
+  ok(shots.length === 2, `the tips view drew ${shots.length} screenshots, expected 2`);
+  ok(shots.every(m => m[1].startsWith("data:image/")),
+     "a screenshot is not embedded as a data URI, so the page is no longer self-contained");
+  ok(!/__SHOT/.test(html), "a __SHOT placeholder survived the build");
+
   /* The two rail markers make a claim the rail has no other way to show: that
      a crop stick will never hand you this crop. The expected counts are worked
      out from the data here rather than written down, so the check survives a
