@@ -325,7 +325,7 @@
   "guide.a5": "<b>A recipe.</b> Some pairs have a fixed result. A ${cropLink(\"Carrot\")} next to a ${cropLink(\"Potato\")} gives ${cropLink(\"SugarCane\")} half the time, a Carrot a quarter of the time and a Potato the last quarter. No other crop can come out of that pair.",
   "guide.a6": "<b>A pool mutation.</b> Every crop carries a few tags, called breeding pools. When a pair fits no recipe, the game gives you a random crop that carries one of the parents' tags.",
   "guide.a7": "Potato carries three tags: ${poolLink(\"root\")}, ${poolLink(\"yellow\")} and ${poolLink(\"food\")}. Click any of them to see every crop it holds. Plant two Potatoes one block apart with a double crop stick in the gap and the stick draws from all ${GUIDE_POOL_UNION} crops carrying any of those tags. That half is spread across the whole pool, so the smaller the pool, the better your odds for any one crop. Two crops that share only Root draw from ${POOLM.root.length}, which is ${pct(0.5 / POOLM.root.length)} each.",
-  "guide.a8": "Tick off the crops you have in the list on the left. Ready lists recipes you can run now. One parent short lists recipes that are missing one parent. Pool roulette shows the odds for any pair.",
+  "guide.a8": "Tick off the crops you have in the list on the left. <button class=\"goview\" type=\"button\" data-goview=\"ready\">Ready</button> lists recipes you can run now. One parent short lists recipes that are missing one parent. Pool roulette shows the odds for any pair.",
   "guide.seeAll": "See every result for two Potatoes",
   "guide.pickLabel": "Two of ",
   "guide.openReady": "Open Ready now",
