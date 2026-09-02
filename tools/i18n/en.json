@@ -315,7 +315,7 @@
   "guide.s9": "Right-click every plant with a Plant Lens to read the numbers.",
   "guide.s10": "Pick the plant with the highest numbers. Break everything else.",
   "guide.s11": "Fertilize and water the stick of the plant you kept, then repeat from step 7. Keep going until a plant shows 31/31/31.",
-  "guide.s12": "Right-click that plant with a Spade. You get a seed carrying the same numbers, and the plant stays standing.",
+  "guide.s12": "Once that plant is 31/31/31 and fully grown, right-click it with a Spade. You get a seed carrying the same numbers, and the plant stays standing.",
   "guide.more": "Read the detail",
   "guide.after.h": "What the seed is for",
   "guide.a1": "A new plant gets its three numbers from the plants it grew from, never from what it turns out to be. Grow it from one plant and it gets that plant's numbers. Grow it from two and it gets their average.",
