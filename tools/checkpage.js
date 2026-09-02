@@ -112,6 +112,14 @@ for (const pagePath of pages) {
   api.setView("guide"); api.render();
   const targets = [...view.innerHTML.matchAll(/data-jump="([^"]+)"/g)].map(m => m[1]);
   ok(targets.length > 0, "the guide has no link into Tips & tricks");
+  /* The roulette shortcut carries a pair. Both halves have to name a crop that
+     exists, or the button lands on an empty Pool view. */
+  const guideHtml = view.innerHTML;
+  const pairAttrs = [...guideHtml.matchAll(/data-pair-([ab])="([^"]*)"/g)].map(m => m[2]);
+  ok(pairAttrs.length === 2, "the guide's roulette shortcut is missing one half of its pair");
+  for (const id of pairAttrs)
+    ok(!!api.C[id], `the guide's roulette shortcut names ${id}, which is not a crop`);
+
   api.setView("tips"); api.render();
   const tipsHtml = view.innerHTML;
   for (const t of targets)

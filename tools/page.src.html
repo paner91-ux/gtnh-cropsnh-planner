@@ -535,6 +535,9 @@ p, li { text-wrap: pretty; }
 /* Secondary to the step it hangs off - the step is the instruction, this is
    only the way through to the tip that proves it. */
 .guide-more { margin: 6px 0 0; font-size: 13px; }
+.guide-needs-h { margin: 18px 0 6px; font-size: 14px; }
+.guide-needs { margin: 0 0 18px; padding-left: 20px; }
+.guide-needs li { margin: 3px 0; }
 .flow-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 13px; }
 .flow-pick select { min-width: 190px; font-size: 13px; padding: 5px 8px; }
 
@@ -1679,58 +1682,79 @@ const TIPS = [
   ]},
 ];
 
-/* The first hour of the mod, in the order the pack's own questbook teaches it:
-   sticks, then what the numbers mean, then feeding, then one crop to 31/31/31,
-   then one concrete cross, then pools. No why boxes here on purpose - a step
-   that needs a source sends the reader to the tip that carries it, so the two
-   never drift apart. Keep it short; Tips & tricks is where the depth lives. */
-const GUIDE = [
-  { t: `{{guide.s1.t}}`,
-    d: `{{guide.s1.d}}`,
-    more: "sec-blocks" },
+/* The shortest route to one 31/31/31 crop, in the order the pack's own
+   questbook teaches it. The steps are a recipe and nothing else - no
+   alternatives, no mechanics, no why boxes. Everything that needs explaining
+   sits in the prose above and below them, which is also where variants live,
+   so a step never stops working for someone who has not unlocked something. */
+/* Two Potatoes share every pool Potato is in, so the draw spreads over the
+   union of all three rather than any one of them. Counted from the data so the
+   number in the text cannot go stale when the mod moves a crop between pools.
+   Declared before the strings that interpolate it - they are built once when
+   the script loads, so a const declared after them is still in its dead zone. */
+const GUIDE_POOL_UNION =
+  new Set(["root", "yellow", "food"].flatMap(p => POOLM[p] || [])).size;
 
-  { t: `{{guide.s2.t}}`,
-    d: `{{guide.s2.d}}`,
-    more: "sec-stats" },
-
-  { t: `{{guide.s3.t}}`,
-    d: `{{guide.s3.d}}`,
-    more: "sec-water" },
-
-  { t: `{{guide.s4.t}}`,
-    d: `{{guide.s4.d}}`,
-    more: "sec-stats" },
-
-  { t: `{{guide.s5.t}}`,
-    d: `{{guide.s5.d}}`,
-    more: "sec-mistakes" },
-
-  { t: `{{guide.s6.t}}`,
-    d: `{{guide.s6.d}}`,
-    pick: true },
+/* Spelled out rather than built from a loop: build.py finds the keys a page
+   uses by scanning the template for the double-brace markers themselves, so a
+   name assembled at runtime would read as an unused string and stop the build. */
+const GUIDE_BEFORE = [
+  `{{guide.b1}}`, `{{guide.b2}}`, `{{guide.b3}}`, `{{guide.b4}}`, `{{guide.b5}}`,
+  `{{guide.b6}}`, `{{guide.b7}}`, `{{guide.b8}}`, `{{guide.b9}}`,
 ];
+const GUIDE_NEEDS = [
+  `{{guide.n1}}`, `{{guide.n2}}`, `{{guide.n3}}`, `{{guide.n4}}`,
+  `{{guide.n5}}`, `{{guide.n6}}`, `{{guide.n7}}`,
+];
+const GUIDE_STEPS = [
+  `{{guide.s1}}`, `{{guide.s2}}`, `{{guide.s3}}`, `{{guide.s4}}`, `{{guide.s5}}`, `{{guide.s6}}`,
+  `{{guide.s7}}`, `{{guide.s8}}`, `{{guide.s9}}`, `{{guide.s10}}`, `{{guide.s11}}`, `{{guide.s12}}`,
+];
+const GUIDE_AFTER = [
+  `{{guide.a1}}`, `{{guide.a2}}`, `{{guide.a3}}`, `{{guide.a4}}`,
+  `{{guide.a5}}`, `{{guide.a6}}`, `{{guide.a7}}`,
+];
+
+/* Step number -> the tip group that carries the source for what it claims. */
+const GUIDE_MORE = { 3: "sec-blocks", 5: "sec-water", 8: "sec-stats", 12: "sec-tools" };
 
 function renderGuide() {
   const opts = allSorted.map(c =>
     `<option value="${c.id}">${esc(c.name)}${owned.has(c.id) ? " ✓" : ""}</option>`).join("");
+
   let html = `<p class="viewnote">{{guide.note}}</p><div class="tips">
+    <section class="tipgroup" id="sec-guide-before">
+      <h3>{{guide.before.h}}</h3>
+      ${GUIDE_BEFORE.map(p => `<p>${p}</p>`).join("")}
+    </section>
+
     <section class="tipgroup" id="sec-guide">
-    <h3>{{guide.title}}</h3>
-    <p class="lead">{{guide.lead}}</p>
-    <ol class="flow-steps">`;
-  GUIDE.forEach((s, i) => {
+      <h3>{{guide.title}}</h3>
+      <p class="lead">{{guide.lead}}</p>
+      <h4 class="guide-needs-h">{{guide.needs.h}}</h4>
+      <ul class="guide-needs">${GUIDE_NEEDS.map(n => `<li>${n}</li>`).join("")}</ul>
+      <ol class="flow-steps">`;
+
+  GUIDE_STEPS.forEach((s, i) => {
+    const more = GUIDE_MORE[i + 1];
     html += `<li class="flow-step"><span class="flow-n">${i + 1}</span><div class="flow-body">
-      <div class="flow-head"><p><b>${s.t}</b></p></div>
-      <p>${s.d}</p>`;
-    if (s.pick) html += `<div class="flow-pick"><label>{{guide.pickLabel}}<select class="field" id="flowPick"><option value="">-</option>${opts}</select></label></div>`;
-    if (s.more) html += `<p class="guide-more"><button class="goview" type="button" data-goview="tips" data-jump="${s.more}">{{guide.more}}</button></p>`;
+      <p>${s}</p>`;
+    if (more) html += `<p class="guide-more"><button class="goview" type="button" data-goview="tips" data-jump="${more}">{{guide.more}}</button></p>`;
     html += `</div></li>`;
   });
-  /* One action at the end rather than a button hanging off a step - a reader
-     who got this far wants the tool, not more reading.                      */
-  return html + `</ol><p class="lead">{{guide.end}}</p>
-    <p><button class="goview" type="button" data-goview="ready">{{guide.openReady}}</button></p>
+
+  html += `</ol></section>
+
+    <section class="tipgroup" id="sec-guide-after">
+      <h3>{{guide.after.h}}</h3>
+      ${GUIDE_AFTER.map(p => `<p>${p}</p>`).join("")}
+      <p><button class="goview" type="button" data-goview="pool"
+         data-pair-a="Potato" data-pair-b="Potato">{{guide.seeAll}}</button></p>
+      <div class="flow-pick"><label>{{guide.pickLabel}}<select class="field" id="flowPick"><option value="">-</option>${opts}</select></label></div>
+      <p>{{guide.a8}}</p>
+      <p><button class="goview" type="button" data-goview="ready">{{guide.openReady}}</button></p>
     </section></div>`;
+  return html;
 }
 
 /* A tip with no why box is one that has no source in the mod - the ones about
@@ -2296,6 +2320,10 @@ document.addEventListener("click", e => {
      view has rendered. */
   const goview = e.target.closest("[data-goview]");
   if (goview) {
+    /* A guide link can carry a pair, which has to be set before the view it
+       lands on renders, or the roulette would draw the old one. */
+    if (goview.dataset.pairA && goview.dataset.pairB)
+      setPair(goview.dataset.pairA, goview.dataset.pairB);
     view = goview.dataset.goview;
     render();
     if (goview.dataset.jump)
