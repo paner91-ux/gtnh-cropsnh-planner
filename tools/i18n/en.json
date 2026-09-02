@@ -320,7 +320,7 @@
   "guide.after.h": "What the seed is for",
   "guide.a1": "A new plant gets its three numbers from the plants it grew from, never from what it turns out to be. Grow it from one plant and it gets that plant's numbers. Grow it from two and it gets their average.",
   "guide.a2": "A fertilized 31/31/31 plant breeds into another 31/31/31 plant. If the fertilizer runs out, the new plant can come out at 29 or 30.",
-  "guide.a3": "A double crop stick can grow three different things. Half the time it grows a copy of one of the plants beside it, whatever else was possible.",
+  "guide.a3": "A double crop stick can grow three different things. Half the time it grows a copy of one of the plants beside it.",
   "guide.a4": "<b>A copy.</b> The plants next to the stick are all the same species, so a copy is all you can get. This is the loop above.",
   "guide.a5": "<b>A recipe.</b> Some pairs have a fixed result. A ${cropLink(\"Carrot\")} next to a ${cropLink(\"Potato\")} gives ${cropLink(\"SugarCane\")} half the time, a Carrot a quarter of the time and a Potato the last quarter. No other crop can come out of that pair.",
   "guide.a6": "<b>A pool mutation.</b> Every crop carries a few tags, called breeding pools. When a pair fits no recipe, the game gives you a random crop that carries one of the parents' tags.",
