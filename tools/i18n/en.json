@@ -310,7 +310,7 @@
   "guide.s4": "Right-click a ${cropLink(\"Potato\")} onto the crop stick. You now have a Potato crop at 1/1/1.",
   "guide.s5": "Right-click the crop stick with bone meal to fertilize it, then right-click it with a Watering Can from Extra Utilities to fill its water.",
   "guide.s6": "Wait until the Potato is at least 80% grown. A Plant Lens shows the growth progress.",
-  "guide.s7": "On the four blocks north, south, east and west of the Potato, place a crop stick and right-click a second one onto each. Each one breeds on its own, so you get four tries per round instead of one.",
+  "guide.s7": "Place a double crop stick on each of the four blocks north, south, east and west of the Potato. Each one breeds on its own, so you get four tries per round instead of one.",
   "guide.s8": "Wait. A copy of the Potato grows on each double crop stick. Because the parent had fertilizer, no copy is worse than the parent: each number stays the same or goes up by as much as 4.",
   "guide.s9": "Right-click every plant with a Plant Lens to read the numbers.",
   "guide.s10": "Pick the plant with the highest numbers. Break everything else.",
