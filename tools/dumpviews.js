@@ -106,7 +106,7 @@ const seed = ["Wheat", "Potato", "Carrot", "Dandelion", "Poppy", "BrownMushroom"
               "RedMushroom", "Barley", "Cactus", "SugarCane"].filter(id => api.C[id]);
 api.setOwned(seed);
 
-for (const v of ["ready", "near", "pool", "path", "biome", "tips", "about"]) {
+for (const v of ["ready", "near", "pool", "path", "biome", "guide", "tips", "about"]) {
   api.setView(v);
   api.render();
   dump(`view: ${v}`, view.innerHTML);

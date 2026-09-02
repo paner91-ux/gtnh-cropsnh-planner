@@ -549,6 +549,9 @@ p, li { text-wrap: pretty; }
 .flow-body p { margin: 0; }
 .flow-head { display: flex; align-items: baseline; gap: 12px; }
 .flow-head p { flex: 1; min-width: 0; }
+/* Secondary to the step it hangs off - the step is the instruction, this is
+   only the way through to the tip that proves it. */
+.guide-more { margin: 6px 0 0; font-size: 13px; }
 .flow-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 13px; }
 .flow-pick select { min-width: 190px; font-size: 13px; padding: 5px 8px; }
 
@@ -782,6 +785,7 @@ footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2p
         <button class="tab" type="button" role="tab" data-view="pool">Pool roulette</button>
         <button class="tab" type="button" role="tab" data-view="path">Route to a goal</button>
         <button class="tab" type="button" role="tab" data-view="biome">Biomes</button>
+        <button class="tab" type="button" role="tab" data-view="guide">Quick start</button>
         <button class="tab" type="button" role="tab" data-view="tips">Tips &amp; tricks</button>
         <button class="tab" type="button" role="tab" data-view="about">About this page</button>
       </div>
@@ -1349,7 +1353,10 @@ function cardFor(m, unlockIds) {
 
 function renderReady() {
   const list = readyList();
-  if (!owned.size) return `<div class="empty">Tick off what you have in the rail on the left.</div>`;
+  /* Holding nothing is what a first-time visitor looks like, so this is the
+     one place worth pointing them at the walk-through. */
+  if (!owned.size) return `<div class="empty">Tick off what you have in the rail on the left.
+    <p><button class="goview" type="button" data-goview="guide">New here? Read the Quick start</button></p></div>`;
   if (!list.length) return `<div class="empty">No new recipe is fully covered by this set.<br>Try <b>One parent short</b> or the <b>Pool roulette</b>.</div>`;
   return `<p class="viewnote">Recipes where you already hold every parent. Put the parents around a double crop stick, and make sure the ground under the stick satisfies the result's requirements - otherwise the attempt is discarded silently. Click a card to mark what you are building and it stays at the front; click it again to set it aside at the end. Anything you have not ruled on sits in between, which is also where a new recipe turns up.</p>
     <div class="grid">${markFirst(list).map(m => cardFor(m, readyUnlocks.get(m))).join("")}</div>`;
@@ -1503,7 +1510,7 @@ const APP = {
 };
 
 const TIPS = [
-  { h: `Common mistakes`,
+  { id: "sec-mistakes", h: `Common mistakes`,
     lead: `Three setups that fail silently. None of them show an error.`,
     items: [
     [`<b>Farmland is not dirt.</b> This is the single most common one. Tilling flips a block between two requirements that share nothing at all: <b>${Object.values(C).filter(c => topParts(c).join() === "farmland").length} crops want farmland</b> and refuse plain dirt, while <b>${Object.values(C).filter(c => topParts(c).join() === "dirtGrass").length} want dirt or grass and nothing else</b>. Check the top block on the card against the block actually under your stick.`,
@@ -1544,7 +1551,7 @@ const TIPS = [
      `This is the same <em>wouldCropBeAbleToGrow()</em> check. Every requirement whose <em>onlyPreventsHarvest()</em> is false stops the result from being planted at all, and the attempt is discarded rather than substituted.`],
   ]},
 
-  { h: `Where the blocks go`,
+  { id: "sec-blocks", h: `Where the blocks go`,
     lead: `Two blocks below the stick are checked, at different depths and against different lists.`,
     items: [
     [`The <b>top block</b> is the one directly under the crop stick. The <b>under block</b> goes one deeper, two blocks below the stick and underneath the top block.`,
@@ -1561,7 +1568,7 @@ const TIPS = [
      `<em>canGrow()</em> returns false for a mature plant before looking at any requirement, so there is nothing left for a missing sub-soil to stop. Nothing removes the plant either - a stick only breaks itself through <em>onInvalidSoilDetected()</em>, which the block calls after reading <em>y - 1</em> against the crop's soil list, while the sub-soil sits at <em>y - 2</em> and is not part of that check. <em>canCross()</em> asks only for a crop, no weed, and growth past the crossing threshold, so the stripped parent still counts as a parent. <em>canHarvest()</em> does re-run the requirements, which is why the block has to be back for the harvest.`],
   ]},
 
-  { h: `Water and fertiliser`,
+  { id: "sec-water", h: `Water and fertiliser`,
     lead: `Both feed a single number the game calls the Nutrient Score, and that number decides how fast anything grows - or whether it grows at all.`,
     items: [
     [`<b>A full water tank is worth +10 Nutrient Score, and so is full fertiliser.</b> They add up rather than replace each other: a crop that is watered but not fertilised has half of what the pair is worth, and topping the fertiliser up as well is another 50% of growth speed. The base score is 5 and an open sky adds 2. These two tanks are the largest contribution you control.`,
@@ -1588,7 +1595,7 @@ const TIPS = [
      `<em>getNutrientScore()</em> adds 2 when <em>World.canBlockSeeTheSky()</em> is true for the block above the stick, and the growth tick only refills water when <em>World.isRainingAt()</em> is true, which never happens below ground. The biome comes from <em>getBiomeGenForCoordsBody(x, z)</em>, which takes no y coordinate at all.`],
   ]},
 
-  { h: `Getting good stats`,
+  { id: "sec-stats", h: `Getting good stats`,
     lead: `Growth, gain and resistance drift a little on every successful cross.`,
     items: [
     [`<b>Fertiliser in every parent stops stats from dropping.</b> One parent running dry restores the negative half of the roll for all three stats.`,
@@ -1601,7 +1608,7 @@ const TIPS = [
      `<em>getGrowthRate()</em> builds its base as <em>BASE_GROWTH_SPEED + growth</em>, where <em>BASE_GROWTH_SPEED</em> is 6, then scales that base by the percentage it gets from comparing <em>score × 5</em> with <em>tier × 10</em>. The best that percentage can ever do is multiply by 3.65, which needs a perfect score of 55 on a tier 1 crop, while the stat alone spans 7 to 37.`],
   ]},
 
-  { h: `Tools`,
+  { id: "sec-tools", h: `Tools`,
     lead: `Six items you can hold. One of them changes how seeds come off a plant.`,
     items: [
     [`<b>A spade in your hand adds a seed to every harvest, and the plant stays standing.</b> Right-click a grown crop the way you always do: you get the produce, plus a seed carrying that plant's exact stats, and the plant drops back to zero growth and grows again. Bare-handed there is no seed at harvest at all, and the only way to one is breaking the plant. The plain <b>Spade</b> drops a single seed on a roll against resistance, so 31 gives one every time; the <b>Reinforced Spade</b> skips the roll entirely and drops <b>resistance ÷ 10</b> of them, which is three or four from a 31/31/31 plant. Neither ever wears out.`,
@@ -1620,7 +1627,7 @@ const TIPS = [
      `<em>ItemCropSticks.onItemUse()</em> builds one flag out of <em>player.isSneaking()</em> and either creative mode or <em>stackSize &gt;= 2</em>. With the flag set it places the block, subtracts 2 from the stack rather than 1, then calls <em>setCrossCrop(true)</em> on the tile it has just created. A stack of one fails the second half of that test, so the flag stays false and the click places an ordinary stick. The two-click route is <em>onRightClick()</em>, which upgrades a stick that is already standing for one more and is the only one of the two that plays the cross-crop sound.`],
   ]},
 
-  { h: `Weeds`,
+  { id: "sec-weeds", h: `Weeds`,
     lead: `Weeds cannot destroy a grown crop. The risk is to the empty stick between the parents.`,
     items: [
     [`<b>Resistance 31 is total immunity, and it covers three separate checks:</b> the plant cannot be overgrown, cannot fall sick, and cannot be trampled. Below 31 the chance of resisting a disease is resistance ÷ 31, so 20 gives about 65% and 25 about 81%. It is the most useful stat to max on anything you intend to leave standing.`,
@@ -1689,69 +1696,58 @@ const TIPS = [
   ]},
 ];
 
-/* The whole game loop as one chain. Steps that claim something about the mod
-   carry the same why box as a tip; the navigational ones do not.           */
-const FLOW = [
-  { t: `Pick any crop`,
-    d: `Barley, Wheat, whatever you already have. The choice does not affect anything later.` },
+/* The first hour of the mod, in the order the pack's own questbook teaches it:
+   sticks, then what the numbers mean, then feeding, then one crop to 31/31/31,
+   then one concrete cross, then pools. No why boxes here on purpose - a step
+   that needs a source sends the reader to the tip that carries it, so the two
+   never drift apart. Keep it short; Tips & tricks is where the depth lives. */
+const GUIDE = [
+  { t: `Put down a double crop stick`,
+    d: `Crop sticks are the supports every plant grows on. Place one, then right-click a second stick onto it. That <b>double</b> stick is the only one that breeds - a single stick just holds a plant. Put it on the ground the crop actually wants, because the wrong block is the most common reason nothing ever shows up.`,
+    more: "sec-blocks" },
 
-  { t: `Take it to 31/31/31`,
-    d: `Growth, Gain and Resistance each cap at 31. Do this before anything else, and only once - one plant of one crop is enough.`,
-    w: `<em>variateStat()</em> takes the average of every parent that counted - integer division - then adds a roll drawn uniformly between the <em>Breeding Range Low</em> and <em>High</em> configs, -2 to +4 by default. A negative roll is replaced with zero <b>only</b> when every counted parent still holds fertiliser, so a fertilised copy can equal its parent but never fall below it. The total is finally clamped into 1…31 by <em>Constants.MIN_SEED_STAT</em> and <em>MAX_SEED_STAT</em>.`,
-    cycle: {
-      h: `repeat until all three read 31`,
-      w: `<em>Plant Lens</em> is an item in the mod, tooltip "Inspects crops". Right-clicking a crop prints the seed name, then <em>Stats -- Growth / Gain / Resistance</em>, then <em>Soil -- Fertilizer / Water / Weed-EX</em>, plus a warning line if the plant is sick or a growth requirement is unmet. One look covers both the numbers and whether the stick is actually still fed.`,
-      items: [
-        `Plant it. Keep <b>fertiliser</b> in its stick at all times - that is what removes the downward rolls. Water only affects growth speed.`,
-        `Put a <b>double crop stick</b> next to it and wait for a copy to appear.`,
-        `Check the copy with a <b>Plant Lens</b>.`,
-        `If the numbers went up, breed from that plant instead and remove the old one. Weaker plants of the same crop left nearby pull the average down.`
-      ]
-    } },
+  { t: `Learn the three numbers`,
+    d: `Every seed carries <b>Growth</b>, <b>Gain</b> and <b>Resistance</b>, each from 1 to 31. Growth is speed, Gain is how much you get per harvest, and Resistance decides whether the plant shrugs off disease and whether it hands the seed back when you pull it up. At Resistance 31 the seed always survives.`,
+    more: "sec-stats" },
 
-  { t: `Make a second copy`,
-    d: `Run the cycle above once more. A fertilised copy of a 31/31/31 plant is always 31/31/31, so this one needs no checking. With a <b>Spade</b> you can skip this step, and the next one says why one plant is then enough.`,
-    w: `The average of a single 31/31/31 parent is 31. Upward rolls hit the clamp at 31 and downward rolls are already removed by the fertiliser check, so 31/31/31 is the only reachable result.` },
+  { t: `Keep water and fertiliser topped up`,
+    d: `The stick holds both, and they add up rather than replace each other: full water is worth 10, full fertiliser another 10, on a base of 5, and open sky adds 2. Under the score a crop needs, it makes no progress at all and eventually falls sick. Fertiliser has a second job as well, which is the next step.`,
+    more: "sec-water" },
 
-  { t: `Take the two seeds`,
-    d: `With a <b>Spade</b> in hand, right-click a grown plant: the seed comes off and the plant stays standing, so one plant hands you both. Without one, left-click both plants instead. At resistance 31 the seed always drops; below 31 it can be destroyed along with the plant, which is why step 2 comes first.`,
-    w: `<em>onLeftClick()</em> calls <em>doPlayerHarvest(player, true)</em>, which drops whatever <em>getSeedDrop()</em> returns. That method is gated on <em>passesResistanceCheck()</em>, namely <em>resistance &gt; random(0…30)</em>, so only 31 never fails. A failed roll is not a retry either: the same method ends with an unconditional <em>clear()</em> whenever the remove flag is set, so the plant is gone and you get nothing. A spade changes which branch runs at all: it implements <em>IHarvestDropModifier</em>, so <em>doPlayerHarvest(player, false)</em> adds the seed to the harvest drops while the plant is only reset to zero growth.` },
+  { t: `Take one crop to 31/31/31`,
+    d: `Put a double stick next to a grown plant with nothing else around it and wait - it copies itself, and every copy rolls its three numbers again. Keep <b>fertiliser in every stick</b>, because that is what stops a roll going downwards. Harvest the better one, put it back, repeat until all three read 31. You only have to do this once.`,
+    more: "sec-stats" },
 
-  { t: `Plant them one block apart, double crop stick in the gap`,
-    d: `Seed, double stick, seed. The middle stick's ground decides what can appear on it, so build that for the crop you want. The parents only need ground valid for their own crop.`,
-    w: `The soil and sub-soil checks run against the breeding stick's own coordinates. Neighbours are read for their crop, their stats, how grown they are and whether their own stick still holds fertiliser, never for what they are standing on. <em>attemptBreeding()</em> then opens with a roll against the <em>Breeding Chance</em> config, default 3, and returns immediately on two results out of three.` },
+  { t: `Make your first real cross`,
+    d: `Plant a ${cropLink("Carrot")} and a ${cropLink("Potato")} one block apart with a double stick in the gap, and wait for ${cropLink("SugarCane")}. It asks for no special ground, so it works anywhere the two parents already grow - which makes it the cleanest first cross in the pack.`,
+    more: "sec-mistakes" },
 
-  { t: `Check what the pair can produce`,
-    d: `Two of the same crop never trigger a recipe, but they match every pool that crop belongs to. Pick it below for the full list of results and their odds.`,
+  { t: `Then let the pools do the work`,
+    d: `Stand two copies of your 31/31/31 crop around one double stick and it keeps rolling for new species that share a breeding pool with it. This is the intended way to collect crops early, and whatever turns up is already 31/31/31, because a new plant takes its numbers from its parents and never from itself.`,
     pick: true },
-
-  { t: `Tick each new seed and repeat`,
-    d: `More seeds means more recipes within reach, and recipes beat pool draws whenever a mutation is rolled at all.`,
-    ready: true,
-    w: `Recipes are looked up from the parents present and one is drawn before any pool draw happens. Pools are only consulted when there is no matching recipe, or when the matched recipe's own conditions fail.` },
 ];
 
-function renderFlow() {
+function renderGuide() {
   const opts = allSorted.map(c =>
     `<option value="${c.id}">${esc(c.name)}${owned.has(c.id) ? " ✓" : ""}</option>`).join("");
-  let html = `<section class="tipgroup" id="sec-flow">
-    <h3>Getting started</h3>
-    <p class="lead">Seven steps from one crop to a working breeding setup. The sections below explain the mechanics behind them.</p>
+  let html = `<p class="viewnote">Six steps, in the order the pack's own questbook teaches them. This is the short version - each step has a link to the tip that carries the detail and names where it was read from.</p><div class="tips">
+    <section class="tipgroup" id="sec-guide">
+    <h3>Quick start</h3>
+    <p class="lead">Almost everything gets easier once you hold a single crop at 31/31/31. These six steps get you there, then show you what it unlocks.</p>
     <ol class="flow-steps">`;
-  FLOW.forEach((s, i) => {
+  GUIDE.forEach((s, i) => {
     html += `<li class="flow-step"><span class="flow-n">${i + 1}</span><div class="flow-body">
-      <div class="flow-head"><p><b>${s.t}</b></p>${s.w ? `<span class="why"><button class="why-btn" type="button">why</button>
-        <span class="why-pop" role="note">${s.w}</span></span>` : ""}</div>
+      <div class="flow-head"><p><b>${s.t}</b></p></div>
       <p>${s.d}</p>`;
-    if (s.cycle) html += `<div class="flow-cycle">
-      <div class="flow-cycle-h"><span>&#8635; ${s.cycle.h}</span>${s.cycle.w ? `<span class="why"><button class="why-btn" type="button">why</button>
-        <span class="why-pop" role="note">${s.cycle.w}</span></span>` : ""}</div>
-      <ol>${s.cycle.items.map(i => `<li>${i}</li>`).join("")}</ol></div>`;
     if (s.pick) html += `<div class="flow-pick"><label>Two of <select class="field" id="flowPick"><option value="">-</option>${opts}</select></label></div>`;
-    if (s.ready) html += `<p><button class="goview" type="button" data-goview="ready">Open Ready now</button></p>`;
+    if (s.more) html += `<p class="guide-more"><button class="goview" type="button" data-goview="tips" data-jump="${s.more}">Read the detail</button></p>`;
     html += `</div></li>`;
   });
-  return html + `</ol></section>`;
+  /* One action at the end rather than a button hanging off a step - a reader
+     who got this far wants the tool, not more reading.                      */
+  return html + `</ol><p class="lead">That is the whole loop. Tick off what you hold in the rail on the left, and the other tabs will keep telling you what is worth trying next.</p>
+    <p><button class="goview" type="button" data-goview="ready">Open Ready now</button></p>
+    </section></div>`;
 }
 
 /* A tip with no why box is one that has no source in the mod - the ones about
@@ -1807,14 +1803,16 @@ function renderBiomes() {
     <div id="biomeList">${biomeList()}</div>`;
 }
 
+/* Reference only. The linear walk-through lives in its own view, so a group
+   can be reordered here without a step in the guide quietly pointing at the
+   wrong heading - the ids the guide links to are on the groups themselves. */
 function renderTips() {
-  const secs = [{ id: "sec-flow", h: `Getting started` }]
-    .concat(TIPS.map((g, i) => ({ id: `sec-${i}`, h: g.h })));
+  const secs = TIPS.map((g, i) => ({ id: g.id || `sec-${i}`, h: g.h }));
   const index = `<nav class="tipindex" aria-label="Sections on this page">${
     secs.map(s => `<button type="button" data-jump="${s.id}">${s.h}</button>`).join("")}</nav>`;
 
-  let html = `<p class="viewnote">Everything here was read out of the pack's own code rather than collected from experience, so it should hold exactly. Hover <span class="why-btn" style="cursor:default">why</span> on any line to see where it comes from.</p>${index}<div class="tips">` + renderFlow();
-  TIPS.forEach((g, i) => { html += tipGroup(g, `sec-${i}`); });
+  let html = `<p class="viewnote">Everything here was read out of the pack's own code rather than collected from experience, so it should hold exactly. Hover <span class="why-btn" style="cursor:default">why</span> on any line to see where it comes from.</p>${index}<div class="tips">`;
+  TIPS.forEach((g, i) => { html += tipGroup(g, g.id || `sec-${i}`); });
   return html + `</div>`;
 }
 
@@ -2211,6 +2209,7 @@ function render() {
     view === "near" ? renderNear() :
     view === "pool" ? renderPool() :
     view === "biome" ? renderBiomes() :
+    view === "guide" ? renderGuide() :
     view === "tips" ? renderTips() :
     view === "about" ? renderAbout() : renderPath();
 
@@ -2243,7 +2242,7 @@ function toggle(id) {
 /* The hash carries the whole view, so a link lands on exactly what you were
    looking at. Written with replaceState: sharing works without every tab
    click becoming a history entry. Nothing here leaves the browser.       */
-const VIEWS = ["ready", "near", "pool", "path", "biome", "tips", "about"];
+const VIEWS = ["ready", "near", "pool", "path", "biome", "guide", "tips", "about"];
 let readingHash = false;
 
 function writeHash() {
@@ -2309,10 +2308,19 @@ document.addEventListener("click", e => {
   if (poolSortButton) { togglePoolSort(poolSortButton.dataset.poolSort); return; }
   const crop = e.target.closest("[data-crop]");
   if (crop) { showCrop(crop.dataset.crop); return; }
+  /* Before the plain jump, because a guide link carries both: it switches view
+     first and only then scrolls, and the target does not exist until the new
+     view has rendered. */
+  const goview = e.target.closest("[data-goview]");
+  if (goview) {
+    view = goview.dataset.goview;
+    render();
+    if (goview.dataset.jump)
+      $(goview.dataset.jump)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    return;
+  }
   const jump = e.target.closest("[data-jump]");
   if (jump) { $(jump.dataset.jump)?.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
-  const goview = e.target.closest("[data-goview]");
-  if (goview) { view = goview.dataset.goview; render(); return; }
   /* last, so every button inside a card wins over marking it */
   const card = e.target.closest(".card[data-key]");
   if (card) { cycleMark(card.dataset.key); return; }

@@ -549,6 +549,9 @@ p, li { text-wrap: pretty; }
 .flow-body p { margin: 0; }
 .flow-head { display: flex; align-items: baseline; gap: 12px; }
 .flow-head p { flex: 1; min-width: 0; }
+/* Secondary to the step it hangs off - the step is the instruction, this is
+   only the way through to the tip that proves it. */
+.guide-more { margin: 6px 0 0; font-size: 13px; }
 .flow-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 13px; }
 .flow-pick select { min-width: 190px; font-size: 13px; padding: 5px 8px; }
 
@@ -782,6 +785,7 @@ footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2p
         <button class="tab" type="button" role="tab" data-view="pool">突变池轮盘</button>
         <button class="tab" type="button" role="tab" data-view="path">通往目标</button>
         <button class="tab" type="button" role="tab" data-view="biome">生物群系</button>
+        <button class="tab" type="button" role="tab" data-view="guide">Quick start</button>
         <button class="tab" type="button" role="tab" data-view="tips">技巧与机制</button>
         <button class="tab" type="button" role="tab" data-view="about">关于本页</button>
       </div>
@@ -1349,7 +1353,10 @@ function cardFor(m, unlockIds) {
 
 function renderReady() {
   const list = readyList();
-  if (!owned.size) return `<div class="empty">在左边的边栏里勾上你已经有的。</div>`;
+  /* Holding nothing is what a first-time visitor looks like, so this is the
+     one place worth pointing them at the walk-through. */
+  if (!owned.size) return `<div class="empty">在左边的边栏里勾上你已经有的。
+    <p><button class="goview" type="button" data-goview="guide">New here? Read the Quick start</button></p></div>`;
   if (!list.length) return `<div class="empty">这套种子没有完整覆盖任何新配方。<br>试试<b>差一个亲本</b>或<b>突变池轮盘</b>。</div>`;
   return `<p class="viewnote">全部亲本你都已经持有的配方。把亲本摆在双层作物架周围，并确认架子下面的地面满足产物的需求，否则这次尝试会被悄悄丢掉。点一张卡片把它标记成你正在做的东西，它会留在最前面；再点一次就把它搁到一边、排到末尾。你还没拿定主意的留在中间，新出现的配方也落在那里。</p>
     <div class="grid">${markFirst(list).map(m => cardFor(m, readyUnlocks.get(m))).join("")}</div>`;
@@ -1503,7 +1510,7 @@ const APP = {
 };
 
 const TIPS = [
-  { h: `常见错误`,
+  { id: "sec-mistakes", h: `常见错误`,
     lead: `三种会静默失败的摆法，都不会报错。`,
     items: [
     [`<b>耕地不是泥土。</b>这是最常见的一个。锄地会让方块在两套毫无交集的需求之间来回翻：<b>${Object.values(C).filter(c => topParts(c).join() === "farmland").length} 种作物要耕地</b>，不认普通泥土；而<b>${Object.values(C).filter(c => topParts(c).join() === "dirtGrass").length} 种只要泥土或草方块</b>，别的都不行。请把卡片上的上层方块和作物架下面实际的方块对一下。`,
@@ -1544,7 +1551,7 @@ const TIPS = [
      `这就是同一个 <em>wouldCropBeAbleToGrow()</em> 检查。任何 <em>onlyPreventsHarvest()</em> 为 false 的需求都会让结果根本种不下去，而这次尝试是被丢掉，不是换成别的。`],
   ]},
 
-  { h: `方块放在哪里`,
+  { id: "sec-blocks", h: `方块放在哪里`,
     lead: `作物架下面有两个方块会被检查，深度不同，对照的列表也不同。`,
     items: [
     [`<b>上层方块</b>是紧贴作物架下面的那一格。<b>下层方块</b>再深一格，也就是作物架下面第二格、上层方块的下面。`,
@@ -1561,7 +1568,7 @@ const TIPS = [
      `<em>canGrow()</em> 对成熟的植株在看任何需求之前就返回 false，所以缺了的下层方块已经没有东西可以拦了。也没有任何东西会移除植株：架子只会通过 <em>onInvalidSoilDetected()</em> 自己断掉，而那是方块读了 <em>y - 1</em> 并对照作物的土壤列表之后调用的，下层方块坐在 <em>y - 2</em>，不在那次检查里。<em>canCross()</em> 只要求有作物、没有杂草、生长过了杂交阈值，所以被抽走方块的亲本仍然算亲本。<em>canHarvest()</em> 确实会重跑需求，这就是收获时方块必须放回去的原因。`],
   ]},
 
-  { h: `水和肥料`,
+  { id: "sec-water", h: `水和肥料`,
     lead: `两样都汇进游戏里叫做营养评分的同一个数，而这个数决定东西长得多快，甚至决定它长不长。`,
     items: [
     [`<b>水罐满值 +10 营养评分，肥料满也是 +10。</b>这两项是相加，不是互相替代：只浇了水没施肥的作物，只拿到两者之和的一半，把肥料也补满就是再多 50% 的生长速度。基础分是 5，露天再加 2。这两个罐子是你能掌控的最大的贡献。`,
@@ -1588,7 +1595,7 @@ const TIPS = [
      `<em>getNutrientScore()</em> 在作物架上方的方块满足 <em>World.canBlockSeeTheSky()</em> 时加 2。生长刻只有在 <em>World.isRainingAt()</em> 为真时才补水，而这在地下永远不会发生。群系来自 <em>getBiomeGenForCoordsBody(x, z)</em>，它根本不接收 y 坐标。`],
   ]},
 
-  { h: `把属性堆好`,
+  { id: "sec-stats", h: `把属性堆好`,
     lead: `每一次成功的杂交，生长速度、产量和抗性都会小幅漂一下。`,
     items: [
     [`<b>每个亲本里都有肥料就不会掉属性。</b>只要有一个亲本干了，三项属性向下的那一半判定就都回来了。`,
@@ -1601,7 +1608,7 @@ const TIPS = [
      `<em>getGrowthRate()</em> 以 <em>BASE_GROWTH_SPEED + growth</em> 作为基数，其中 <em>BASE_GROWTH_SPEED</em> 是 6，然后把这个基数乘上由 <em>score × 5</em> 与 <em>tier × 10</em> 相比得出的百分比。这个百分比最多只能乘到 3.65 倍，而且要等级 1 的作物拿到满分 55 才行；属性本身却能从 7 一直到 37。`],
   ]},
 
-  { h: `工具`,
+  { id: "sec-tools", h: `工具`,
     lead: `六件拿在手里的东西。其中一件改变了种子从植株上下来的方式。`,
     items: [
     [`<b>手里拿着铲子，每次收获都会多出一颗种子，而植株留在原地。</b>照常右键一株长好的作物：你拿到产物，外加一颗带着这株确切属性的种子，植株回到零成长继续长。空手收获根本不出种子，拿到种子的唯一办法是把植株拔掉。普通<b>铲子</b>要靠一次对抗性的判定才掉一颗，所以抗性 31 时每次都掉；<b>强化铲子</b>完全不做这个判定，直接掉 <b>抗性 ÷ 10</b> 颗，也就是 31/31/31 的植株掉三到四颗。两把都不会损坏。`,
@@ -1620,7 +1627,7 @@ const TIPS = [
      `<em>ItemCropSticks.onItemUse()</em> 由 <em>player.isSneaking()</em> 加上创造模式或 <em>stackSize &gt;= 2</em> 两者之一，算出一个标志。标志成立时它放下方块，从堆里扣 2 而不是 1，然后对刚创建的 tile 调用 <em>setCrossCrop(true)</em>。只有一根的堆过不了后半个条件，标志保持 false，这一下就只放一根普通作物架。点两次的那条路是 <em>onRightClick()</em>，用多一根把已经立着的作物架升成双层，两条路里只有它会播放双层作物架的声音。`],
   ]},
 
-  { h: `杂草`,
+  { id: "sec-weeds", h: `杂草`,
     lead: `杂草毁不掉长成的作物。危险的是亲本之间那根空架子。`,
     items: [
     [`<b>抗性 31 是完全免疫，而且管住三项各自独立的检查：</b>植株不会被杂草盖过、不会生病、也不会被踩坏。31 以下扛住疾病的概率是抗性 ÷ 31，抗性 20 约 65%，25 约 81%。凡是你打算一直留着的东西，这是最值得堆满的属性。`,
@@ -1689,69 +1696,58 @@ const TIPS = [
   ]},
 ];
 
-/* The whole game loop as one chain. Steps that claim something about the mod
-   carry the same why box as a tip; the navigational ones do not.           */
-const FLOW = [
-  { t: `随便挑一种作物`,
-    d: `大麦、小麦，你手上有什么都行。这个选择不影响后面任何事。` },
+/* The first hour of the mod, in the order the pack's own questbook teaches it:
+   sticks, then what the numbers mean, then feeding, then one crop to 31/31/31,
+   then one concrete cross, then pools. No why boxes here on purpose - a step
+   that needs a source sends the reader to the tip that carries it, so the two
+   never drift apart. Keep it short; Tips & tricks is where the depth lives. */
+const GUIDE = [
+  { t: `Put down a double crop stick`,
+    d: `Crop sticks are the supports every plant grows on. Place one, then right-click a second stick onto it. That <b>double</b> stick is the only one that breeds - a single stick just holds a plant. Put it on the ground the crop actually wants, because the wrong block is the most common reason nothing ever shows up.`,
+    more: "sec-blocks" },
 
-  { t: `把它堆到 31/31/31`,
-    d: `生长速度、产量和抗性各自的上限都是 31。先做这件事，而且只做一次，一种作物的一株就够了。`,
-    w: `<em>variateStat()</em> 取所有计入的亲本的平均值（整数除法），再加上一个在 <em>Breeding Range Low</em> 和 <em>High</em> 配置项之间均匀抽出来的变化量，默认 -2 到 +4。<b>只有</b>当每个计入的亲本都还有肥料时，负的结果才会被换成零，所以施过肥的复制品可以等于亲本，但绝不会低于它。最后由 <em>Constants.MIN_SEED_STAT</em> 和 <em>MAX_SEED_STAT</em> 把总数夹进 1…31。`,
-    cycle: {
-      h: `重复到三项都是 31`,
-      w: `<em>植物透镜</em>是模组里的一个物品，提示文本是 “Inspects crops”。右键作物会打出种子名称，然后是 <em>Stats -- Growth / Gain / Resistance</em>，再是 <em>Soil -- Fertilizer / Water / Weed-EX</em>，如果植株生病或者某项生长需求没满足，还会多一行警告。看一眼就同时知道数值和架子是不是真的还有供给。`,
-      items: [
-        `种下它。<b>肥料</b>要一直在它的架子里，那才是去掉向下判定的东西。水只影响生长速度。`,
-        `在旁边放一根<b>双层作物架</b>，等复制品出现。`,
-        `用<b>植物透镜</b>看看这个复制品。`,
-        `如果数值上去了，就改从那一株继续杂交，把旧的移掉。同种作物里较弱的植株留在附近会把平均值拉下来。`
-      ]
-    } },
+  { t: `Learn the three numbers`,
+    d: `Every seed carries <b>Growth</b>, <b>Gain</b> and <b>Resistance</b>, each from 1 to 31. Growth is speed, Gain is how much you get per harvest, and Resistance decides whether the plant shrugs off disease and whether it hands the seed back when you pull it up. At Resistance 31 the seed always survives.`,
+    more: "sec-stats" },
 
-  { t: `再做一个复制品`,
-    d: `把上面那个循环再跑一遍。31/31/31 植株施过肥的复制品必定是 31/31/31，所以这一个不用检查。手里有<b>铲子</b>的话这一步可以跳过，下一步会说明为什么那时一株就够。`,
-    w: `单个 31/31/31 亲本的平均值就是 31。向上的判定撞在 31 的上限上，向下的判定已经被肥料检查去掉，所以 31/31/31 是唯一可能出现的结果。` },
+  { t: `Keep water and fertiliser topped up`,
+    d: `The stick holds both, and they add up rather than replace each other: full water is worth 10, full fertiliser another 10, on a base of 5, and open sky adds 2. Under the score a crop needs, it makes no progress at all and eventually falls sick. Fertiliser has a second job as well, which is the next step.`,
+    more: "sec-water" },
 
-  { t: `拿两颗种子`,
-    d: `手里拿着<b>铲子</b>，右键一株长好的植株：种子取下来，植株留在原地，所以一株就能给你两颗。没有铲子就左键这两株。抗性 31 时种子必掉；低于 31 它可能连植株一起被毁，这正是第 2 步要排在前面的原因。`,
-    w: `<em>onLeftClick()</em> 调用 <em>doPlayerHarvest(player, true)</em>，掉落 <em>getSeedDrop()</em> 返回的东西。那个方法卡在 <em>passesResistanceCheck()</em> 上，也就是 <em>resistance &gt; random(0…30)</em>，所以只有 31 从不失手。判定失败也不是可以重来：同一个方法在移除标志置位时以一个无条件的 <em>clear()</em> 收尾，所以植株没了，你什么也没拿到。铲子改变的是究竟走哪条分支：它实现了 <em>IHarvestDropModifier</em>，所以 <em>doPlayerHarvest(player, false)</em> 会把种子加进收获掉落，而植株只是被清回零成长。` },
+  { t: `Take one crop to 31/31/31`,
+    d: `Put a double stick next to a grown plant with nothing else around it and wait - it copies itself, and every copy rolls its three numbers again. Keep <b>fertiliser in every stick</b>, because that is what stops a roll going downwards. Harvest the better one, put it back, repeat until all three read 31. You only have to do this once.`,
+    more: "sec-stats" },
 
-  { t: `隔一格种下，中间放双层作物架`,
-    d: `种子、双层架、种子。中间那根架子脚下的地面决定它上面能出现什么，所以照你想要的作物去搭。亲本只需要对它们自己那种作物有效的地面。`,
-    w: `土壤和下层方块的检查只对杂交架自己的坐标跑。读邻居是为了它的作物、它的属性、它长到什么程度，以及它自己的架子里还有没有肥料，从来不看它站在什么上面。接着 <em>attemptBreeding()</em> 一开头就对 <em>Breeding Chance</em> 配置项（默认 3）掷一次，三次里有两次直接返回。` },
+  { t: `Make your first real cross`,
+    d: `Plant a ${cropLink("Carrot")} and a ${cropLink("Potato")} one block apart with a double stick in the gap, and wait for ${cropLink("SugarCane")}. It asks for no special ground, so it works anywhere the two parents already grow - which makes it the cleanest first cross in the pack.`,
+    more: "sec-mistakes" },
 
-  { t: `看看这一对能产出什么`,
-    d: `两株相同的作物永远不触发配方，但它们匹配这种作物所属的每一个池。在下面选它，就能看到完整的结果列表和概率。`,
+  { t: `Then let the pools do the work`,
+    d: `Stand two copies of your 31/31/31 crop around one double stick and it keeps rolling for new species that share a breeding pool with it. This is the intended way to collect crops early, and whatever turns up is already 31/31/31, because a new plant takes its numbers from its parents and never from itself.`,
     pick: true },
-
-  { t: `把每颗新种子勾上，然后重复`,
-    d: `种子越多，够得着的配方就越多，而只要掷出了突变，配方总是排在池抽取前面。`,
-    ready: true,
-    w: `配方是按在场的亲本查出来的，而且在任何池抽取之前就先抽一个。只有在没有匹配的配方、或者匹配到的配方自己的条件不满足时，才会去查池。` },
 ];
 
-function renderFlow() {
+function renderGuide() {
   const opts = allSorted.map(c =>
     `<option value="${c.id}">${esc(c.name)}${owned.has(c.id) ? " ✓" : ""}</option>`).join("");
-  let html = `<section class="tipgroup" id="sec-flow">
-    <h3>从头开始</h3>
-    <p class="lead">从一种作物到一套能用的杂交装置，七步。下面各节讲背后的机制。</p>
+  let html = `<p class="viewnote">Six steps, in the order the pack's own questbook teaches them. This is the short version - each step has a link to the tip that carries the detail and names where it was read from.</p><div class="tips">
+    <section class="tipgroup" id="sec-guide">
+    <h3>Quick start</h3>
+    <p class="lead">Almost everything gets easier once you hold a single crop at 31/31/31. These six steps get you there, then show you what it unlocks.</p>
     <ol class="flow-steps">`;
-  FLOW.forEach((s, i) => {
+  GUIDE.forEach((s, i) => {
     html += `<li class="flow-step"><span class="flow-n">${i + 1}</span><div class="flow-body">
-      <div class="flow-head"><p><b>${s.t}</b></p>${s.w ? `<span class="why"><button class="why-btn" type="button">依据</button>
-        <span class="why-pop" role="note">${s.w}</span></span>` : ""}</div>
+      <div class="flow-head"><p><b>${s.t}</b></p></div>
       <p>${s.d}</p>`;
-    if (s.cycle) html += `<div class="flow-cycle">
-      <div class="flow-cycle-h"><span>&#8635; ${s.cycle.h}</span>${s.cycle.w ? `<span class="why"><button class="why-btn" type="button">依据</button>
-        <span class="why-pop" role="note">${s.cycle.w}</span></span>` : ""}</div>
-      <ol>${s.cycle.items.map(i => `<li>${i}</li>`).join("")}</ol></div>`;
-    if (s.pick) html += `<div class="flow-pick"><label>两株 <select class="field" id="flowPick"><option value="">-</option>${opts}</select></label></div>`;
-    if (s.ready) html += `<p><button class="goview" type="button" data-goview="ready">打开“现在可培育”</button></p>`;
+    if (s.pick) html += `<div class="flow-pick"><label>Two of <select class="field" id="flowPick"><option value="">-</option>${opts}</select></label></div>`;
+    if (s.more) html += `<p class="guide-more"><button class="goview" type="button" data-goview="tips" data-jump="${s.more}">Read the detail</button></p>`;
     html += `</div></li>`;
   });
-  return html + `</ol></section>`;
+  /* One action at the end rather than a button hanging off a step - a reader
+     who got this far wants the tool, not more reading.                      */
+  return html + `</ol><p class="lead">That is the whole loop. Tick off what you hold in the rail on the left, and the other tabs will keep telling you what is worth trying next.</p>
+    <p><button class="goview" type="button" data-goview="ready">Open Ready now</button></p>
+    </section></div>`;
 }
 
 /* A tip with no why box is one that has no source in the mod - the ones about
@@ -1807,14 +1803,16 @@ function renderBiomes() {
     <div id="biomeList">${biomeList()}</div>`;
 }
 
+/* Reference only. The linear walk-through lives in its own view, so a group
+   can be reordered here without a step in the guide quietly pointing at the
+   wrong heading - the ids the guide links to are on the groups themselves. */
 function renderTips() {
-  const secs = [{ id: "sec-flow", h: `从头开始` }]
-    .concat(TIPS.map((g, i) => ({ id: `sec-${i}`, h: g.h })));
+  const secs = TIPS.map((g, i) => ({ id: g.id || `sec-${i}`, h: g.h }));
   const index = `<nav class="tipindex" aria-label="本页的章节">${
     secs.map(s => `<button type="button" data-jump="${s.id}">${s.h}</button>`).join("")}</nav>`;
 
-  let html = `<p class="viewnote">这里的每一条都是从整合包自己的代码里读出来的，不是靠经验攒的，所以应当分毫不差。把鼠标停在任意一行的 <span class="why-btn" style="cursor:default">依据</span> 上，就能看到它的出处。</p>${index}<div class="tips">` + renderFlow();
-  TIPS.forEach((g, i) => { html += tipGroup(g, `sec-${i}`); });
+  let html = `<p class="viewnote">这里的每一条都是从整合包自己的代码里读出来的，不是靠经验攒的，所以应当分毫不差。把鼠标停在任意一行的 <span class="why-btn" style="cursor:default">依据</span> 上，就能看到它的出处。</p>${index}<div class="tips">`;
+  TIPS.forEach((g, i) => { html += tipGroup(g, g.id || `sec-${i}`); });
   return html + `</div>`;
 }
 
@@ -2211,6 +2209,7 @@ function render() {
     view === "near" ? renderNear() :
     view === "pool" ? renderPool() :
     view === "biome" ? renderBiomes() :
+    view === "guide" ? renderGuide() :
     view === "tips" ? renderTips() :
     view === "about" ? renderAbout() : renderPath();
 
@@ -2243,7 +2242,7 @@ function toggle(id) {
 /* The hash carries the whole view, so a link lands on exactly what you were
    looking at. Written with replaceState: sharing works without every tab
    click becoming a history entry. Nothing here leaves the browser.       */
-const VIEWS = ["ready", "near", "pool", "path", "biome", "tips", "about"];
+const VIEWS = ["ready", "near", "pool", "path", "biome", "guide", "tips", "about"];
 let readingHash = false;
 
 function writeHash() {
@@ -2309,10 +2308,19 @@ document.addEventListener("click", e => {
   if (poolSortButton) { togglePoolSort(poolSortButton.dataset.poolSort); return; }
   const crop = e.target.closest("[data-crop]");
   if (crop) { showCrop(crop.dataset.crop); return; }
+  /* Before the plain jump, because a guide link carries both: it switches view
+     first and only then scrolls, and the target does not exist until the new
+     view has rendered. */
+  const goview = e.target.closest("[data-goview]");
+  if (goview) {
+    view = goview.dataset.goview;
+    render();
+    if (goview.dataset.jump)
+      $(goview.dataset.jump)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    return;
+  }
   const jump = e.target.closest("[data-jump]");
   if (jump) { $(jump.dataset.jump)?.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
-  const goview = e.target.closest("[data-goview]");
-  if (goview) { view = goview.dataset.goview; render(); return; }
   /* last, so every button inside a card wins over marking it */
   const card = e.target.closest(".card[data-key]");
   if (card) { cycleMark(card.dataset.key); return; }

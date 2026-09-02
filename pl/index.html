@@ -549,6 +549,9 @@ p, li { text-wrap: pretty; }
 .flow-body p { margin: 0; }
 .flow-head { display: flex; align-items: baseline; gap: 12px; }
 .flow-head p { flex: 1; min-width: 0; }
+/* Secondary to the step it hangs off - the step is the instruction, this is
+   only the way through to the tip that proves it. */
+.guide-more { margin: 6px 0 0; font-size: 13px; }
 .flow-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 13px; }
 .flow-pick select { min-width: 190px; font-size: 13px; padding: 5px 8px; }
 
@@ -782,6 +785,7 @@ footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2p
         <button class="tab" type="button" role="tab" data-view="pool">Ruletka pul</button>
         <button class="tab" type="button" role="tab" data-view="path">Droga do celu</button>
         <button class="tab" type="button" role="tab" data-view="biome">Biomy</button>
+        <button class="tab" type="button" role="tab" data-view="guide">Quick start</button>
         <button class="tab" type="button" role="tab" data-view="tips">Porady i sztuczki</button>
         <button class="tab" type="button" role="tab" data-view="about">O tej stronie</button>
       </div>
@@ -1349,7 +1353,10 @@ function cardFor(m, unlockIds) {
 
 function renderReady() {
   const list = readyList();
-  if (!owned.size) return `<div class="empty">Zaznacz po lewej to, co masz.</div>`;
+  /* Holding nothing is what a first-time visitor looks like, so this is the
+     one place worth pointing them at the walk-through. */
+  if (!owned.size) return `<div class="empty">Zaznacz po lewej to, co masz.
+    <p><button class="goview" type="button" data-goview="guide">New here? Read the Quick start</button></p></div>`;
   if (!list.length) return `<div class="empty">Żaden nowy przepis nie jest w całości pokryty tym zestawem.<br>Zajrzyj do <b>Brakuje jednego rodzica</b> albo do <b>Ruletki pul</b>.</div>`;
   return `<p class="viewnote">Przepisy, do których masz już wszystkich rodziców. Ustaw rodziców wokół podwójnego patyka i sprawdź, czy ziemia pod patykiem spełnia wymagania wyniku - inaczej próba przepada bez słowa. Kliknij kafelek, żeby oznaczyć to, nad czym pracujesz, a zostanie z przodu; kliknij drugi raz, żeby odłożyć go na koniec. To, czego jeszcze nie rozstrzygnąłeś, siedzi pomiędzy i tam też pojawia się nowy przepis.</p>
     <div class="grid">${markFirst(list).map(m => cardFor(m, readyUnlocks.get(m))).join("")}</div>`;
@@ -1503,7 +1510,7 @@ const APP = {
 };
 
 const TIPS = [
-  { h: `Najczęstsze błędy`,
+  { id: "sec-mistakes", h: `Najczęstsze błędy`,
     lead: `Trzy układy, które zawodzą po cichu. Żaden nie pokazuje błędu.`,
     items: [
     [`<b>Farmland to nie dirt.</b> To zdecydowanie najczęstszy z nich. Przekopanie motyką przerzuca blok między dwoma wymaganiami, które nie mają ze sobą nic wspólnego: <b>${Object.values(C).filter(c => topParts(c).join() === "farmland").length} roślin chce farmland</b> i odrzuca zwykły dirt, a <b>${Object.values(C).filter(c => topParts(c).join() === "dirtGrass").length} chce dirt albo grass i nic poza tym</b>. Porównaj blok wierzchni z kafelka z tym, co faktycznie leży pod twoim patykiem.`,
@@ -1544,7 +1551,7 @@ const TIPS = [
      `To jest to samo sprawdzenie <em>wouldCropBeAbleToGrow()</em>. Każde wymaganie, którego <em>onlyPreventsHarvest()</em> jest fałszem, w ogóle nie pozwala zasadzić wyniku, a próba przepada zamiast zostać zastąpiona czymś innym.`],
   ]},
 
-  { h: `Gdzie leżą bloki`,
+  { id: "sec-blocks", h: `Gdzie leżą bloki`,
     lead: `Pod patykiem sprawdzane są dwa bloki, na różnych głębokościach i wobec różnych list.`,
     items: [
     [`<b>Blok wierzchni</b> to ten bezpośrednio pod patykiem. <b>Blok pod spodem</b> leży o jeden głębiej, dwa bloki pod patykiem i pod blokiem wierzchnim.`,
@@ -1561,7 +1568,7 @@ const TIPS = [
      `<em>canGrow()</em> przy dojrzałej roślinie zwraca false, zanim spojrzy na jakiekolwiek wymaganie, więc brakujące podglebie nie ma już czego zatrzymać. Nic tej rośliny też nie usuwa - patyk łamie się sam wyłącznie przez <em>onInvalidSoilDetected()</em>, które blok wywołuje po odczytaniu <em>y - 1</em> i porównaniu z listą gleb rośliny, a podglebie leży na <em>y - 2</em> i nie należy do tego sprawdzenia. <em>canCross()</em> pyta tylko o to, czy jest roślina, czy nie ma chwasta i czy wzrost przekroczył próg krzyżowania, więc ogołocony rodzic dalej liczy się jako rodzic. <em>canHarvest()</em> wymagania sprawdza ponownie i dlatego na zbiór blok musi wrócić.`],
   ]},
 
-  { h: `Woda i nawóz`,
+  { id: "sec-water", h: `Woda i nawóz`,
     lead: `Oba zasilają jedną liczbę, którą gra nazywa Nutrient Score, a ta liczba decyduje o tempie wzrostu wszystkiego - albo o tym, czy w ogóle coś rośnie.`,
     items: [
     [`<b>Pełny zbiornik wody to +10 do Nutrient Score, a pełny nawóz tyle samo.</b> Dodają się, a nie zastępują: roślina podlana, ale nienawieziona ma połowę tego, co dają razem, a uzupełnienie nawozu to kolejne 50% tempa wzrostu. Podstawa wynosi 5, a otwarte niebo dokłada 2. Te dwa zbiorniki to największy składnik, na który masz wpływ.`,
@@ -1588,7 +1595,7 @@ const TIPS = [
      `<em>getNutrientScore()</em> dodaje 2, gdy <em>World.canBlockSeeTheSky()</em> jest prawdą dla bloku nad patykiem, a tik wzrostu dolewa wody tylko wtedy, gdy prawdą jest <em>World.isRainingAt()</em>, co pod ziemią nie zdarza się nigdy. Biom pochodzi z <em>getBiomeGenForCoordsBody(x, z)</em>, które nie przyjmuje współrzędnej y w ogóle.`],
   ]},
 
-  { h: `Jak wyciągnąć dobre staty`,
+  { id: "sec-stats", h: `Jak wyciągnąć dobre staty`,
     lead: `Wzrost, plon i odporność drgają po każdym udanym skrzyżowaniu.`,
     items: [
     [`<b>Nawóz w każdym rodzicu powstrzymuje spadki statów.</b> Wystarczy, że jednemu zabraknie, a ujemna połowa losowania wraca dla wszystkich trzech statów.`,
@@ -1601,7 +1608,7 @@ const TIPS = [
      `<em>getGrowthRate()</em> buduje bazę jako <em>BASE_GROWTH_SPEED + growth</em>, gdzie <em>BASE_GROWTH_SPEED</em> wynosi 6, a potem skaluje tę bazę procentem z porównania <em>wynik × 5</em> z <em>tier × 10</em>. Najwięcej, co ten procent potrafi, to pomnożyć przez 3,65, i wymaga to idealnego wyniku 55 na roślinie z tieru 1, podczas gdy sam stat rozciąga się od 7 do 37.`],
   ]},
 
-  { h: `Narzędzia`,
+  { id: "sec-tools", h: `Narzędzia`,
     lead: `Sześć przedmiotów, które bierze się do ręki. Jeden z nich zmienia sposób, w jaki nasiona schodzą z rośliny.`,
     items: [
     [`<b>Spade w ręku dokłada nasiono do każdego zbioru, a roślina zostaje na miejscu.</b> Klikasz dojrzałą roślinę prawym tak jak zawsze: dostajesz plon, a do tego nasiono z dokładnymi statami tej rośliny, a sama roślina wraca do zera wzrostu i rośnie dalej. Gołą ręką przy zbiorze nasiona nie ma w ogóle, a jedyna droga do niego wiedzie przez zerwanie rośliny. Zwykły <b>Spade</b> zrzuca jedno nasiono po udanym rzucie przeciwko odporności, więc przy 31 za każdym razem; <b>Reinforced Spade</b> pomija rzut w całości i zrzuca ich <b>odporność ÷ 10</b>, czyli trzy albo cztery z rośliny 31/31/31. Żaden z nich się nie zużywa.`,
@@ -1620,7 +1627,7 @@ const TIPS = [
      `<em>ItemCropSticks.onItemUse()</em> składa jedną flagę z <em>player.isSneaking()</em> oraz trybu kreatywnego albo <em>stackSize &gt;= 2</em>. Przy ustawionej fladze stawia blok, odejmuje ze stosu 2 zamiast 1, po czym woła <em>setCrossCrop(true)</em> na dopiero co utworzonym tile. Stos z jednym patykiem oblewa drugą połowę tego testu, więc flaga zostaje false i kliknięcie stawia zwykły patyk. Droga na dwa kliknięcia to <em>onRightClick()</em>, które podnosi stojący już patyk za jeden kolejny i jako jedyne z tych dwóch odtwarza dźwięk podwójnego patyka.`],
   ]},
 
-  { h: `Chwasty`,
+  { id: "sec-weeds", h: `Chwasty`,
     lead: `Chwasty nie niszczą wyrośniętej rośliny. Zagrożony jest pusty patyk między rodzicami.`,
     items: [
     [`<b>Odporność 31 to pełna niewrażliwość i pokrywa trzy osobne sprawdzenia:</b> rośliny nie da się zagłuszyć, nie może zachorować i nie da się jej zadeptać. Poniżej 31 szansa na oparcie się chorobie to odporność ÷ 31, czyli 20 daje około 65%, a 25 około 81%. To najbardziej opłacalny stat do wymaksowania na wszystkim, co zamierzasz zostawić stojące.`,
@@ -1689,69 +1696,58 @@ const TIPS = [
   ]},
 ];
 
-/* The whole game loop as one chain. Steps that claim something about the mod
-   carry the same why box as a tip; the navigational ones do not.           */
-const FLOW = [
-  { t: `Wybierz dowolną roślinę`,
-    d: `Barley, Wheat, cokolwiek już masz. Ten wybór nie wpływa na nic później.` },
+/* The first hour of the mod, in the order the pack's own questbook teaches it:
+   sticks, then what the numbers mean, then feeding, then one crop to 31/31/31,
+   then one concrete cross, then pools. No why boxes here on purpose - a step
+   that needs a source sends the reader to the tip that carries it, so the two
+   never drift apart. Keep it short; Tips & tricks is where the depth lives. */
+const GUIDE = [
+  { t: `Put down a double crop stick`,
+    d: `Crop sticks are the supports every plant grows on. Place one, then right-click a second stick onto it. That <b>double</b> stick is the only one that breeds - a single stick just holds a plant. Put it on the ground the crop actually wants, because the wrong block is the most common reason nothing ever shows up.`,
+    more: "sec-blocks" },
 
-  { t: `Doprowadź ją do 31/31/31`,
-    d: `Wzrost, plon i odporność kończą się na 31. Zrób to przed czymkolwiek innym i tylko raz - wystarczy jedna roślina jednego gatunku.`,
-    w: `<em>variateStat()</em> bierze średnią ze wszystkich rodziców, którzy się liczyli - dzielenie całkowite - a potem dodaje rzut losowany równomiernie między konfigami <em>Breeding Range Low</em> i <em>High</em>, domyślnie od -2 do +4. Ujemny rzut jest zastępowany zerem <b>tylko</b> wtedy, gdy każdy liczony rodzic ma jeszcze nawóz, więc nawożona kopia może dorównać rodzicowi, ale nigdy nie spadnie poniżej. Suma jest na koniec przycinana do 1…31 przez <em>Constants.MIN_SEED_STAT</em> i <em>MAX_SEED_STAT</em>.`,
-    cycle: {
-      h: `powtarzaj, aż wszystkie trzy pokażą 31`,
-      w: `<em>Plant Lens</em> to przedmiot w modzie, z opisem "Inspects crops". Kliknięcie prawym na roślinie wypisuje nazwę nasiona, potem <em>Stats -- Growth / Gain / Resistance</em>, potem <em>Soil -- Fertilizer / Water / Weed-EX</em>, a do tego linię ostrzeżenia, jeżeli roślina choruje albo któreś wymaganie wzrostu nie jest spełnione. Jedno spojrzenie pokrywa i liczby, i to, czy patyk jest faktycznie nadal zasilany.`,
-      items: [
-        `Zasadź ją. Trzymaj w jej patyku <b>nawóz</b> przez cały czas - to on usuwa ujemne rzuty. Woda wpływa tylko na tempo wzrostu.`,
-        `Postaw obok <b>podwójny patyk</b> i poczekaj, aż pojawi się kopia.`,
-        `Sprawdź kopię <b>Plant Lensem</b>.`,
-        `Jeżeli liczby poszły w górę, krzyżuj dalej z tej rośliny, a starą usuń. Słabsze rośliny tego samego gatunku zostawione obok ciągną średnią w dół.`
-      ]
-    } },
+  { t: `Learn the three numbers`,
+    d: `Every seed carries <b>Growth</b>, <b>Gain</b> and <b>Resistance</b>, each from 1 to 31. Growth is speed, Gain is how much you get per harvest, and Resistance decides whether the plant shrugs off disease and whether it hands the seed back when you pull it up. At Resistance 31 the seed always survives.`,
+    more: "sec-stats" },
 
-  { t: `Zrób drugą kopię`,
-    d: `Przejdź powyższy cykl jeszcze raz. Nawożona kopia rośliny 31/31/31 zawsze wychodzi 31/31/31, więc tej nie trzeba już sprawdzać. Ze <b>Spade</b> ten krok możesz pominąć, a następny mówi, czemu jedna roślina wtedy wystarczy.`,
-    w: `Średnia z jednego rodzica 31/31/31 to 31. Rzuty w górę trafiają w ograniczenie na 31, a rzuty w dół są już usunięte przez sprawdzenie nawozu, więc 31/31/31 jest jedynym osiągalnym wynikiem.` },
+  { t: `Keep water and fertiliser topped up`,
+    d: `The stick holds both, and they add up rather than replace each other: full water is worth 10, full fertiliser another 10, on a base of 5, and open sky adds 2. Under the score a crop needs, it makes no progress at all and eventually falls sick. Fertiliser has a second job as well, which is the next step.`,
+    more: "sec-water" },
 
-  { t: `Zabierz dwa nasiona`,
-    d: `Ze <b>Spade</b> w ręku klikasz dojrzałą roślinę prawym: nasiono schodzi, a roślina zostaje na miejscu, więc jedna roślina daje ci oba. Bez niego kliknij obie rośliny lewym. Przy odporności 31 nasiono wypada zawsze; poniżej 31 może zostać zniszczone razem z rośliną i dlatego krok 2 jest pierwszy.`,
-    w: `<em>onLeftClick()</em> woła <em>doPlayerHarvest(player, true)</em>, które wyrzuca to, co zwróci <em>getSeedDrop()</em>. Ta metoda jest zablokowana przez <em>passesResistanceCheck()</em>, czyli <em>odporność &gt; random(0…30)</em>, więc tylko 31 nigdy nie zawodzi. Nieudany rzut nie oznacza też kolejnej próby: ta sama metoda kończy się bezwarunkowym <em>clear()</em>, gdy ustawiona jest flaga usunięcia, więc rośliny nie ma, a ty nie dostajesz nic. Spade zmienia to, która gałąź w ogóle się wykonuje: implementuje <em>IHarvestDropModifier</em>, więc <em>doPlayerHarvest(player, false)</em> dokłada nasiono do plonu, a roślina jest tylko cofana do zera wzrostu.` },
+  { t: `Take one crop to 31/31/31`,
+    d: `Put a double stick next to a grown plant with nothing else around it and wait - it copies itself, and every copy rolls its three numbers again. Keep <b>fertiliser in every stick</b>, because that is what stops a roll going downwards. Harvest the better one, put it back, repeat until all three read 31. You only have to do this once.`,
+    more: "sec-stats" },
 
-  { t: `Zasadź je w odstępie jednego bloku, podwójny patyk w przerwie`,
-    d: `Nasiono, podwójny patyk, nasiono. O tym, co może się pojawić na środkowym patyku, decyduje ziemia pod nim, więc przygotuj ją pod roślinę, którą chcesz. Rodzicom wystarczy ziemia dobra dla nich samych.`,
-    w: `Sprawdzenia gleby i podglebia idą po współrzędnych samego patyka do krzyżowania. Sąsiedzi są czytani po to, jaką są rośliną, jakie mają staty, jak bardzo są wyrośnięci i czy ich własny patyk ma jeszcze nawóz, nigdy po to, na czym stoją. <em>attemptBreeding()</em> zaczyna potem od rzutu przeciwko konfigowi <em>Breeding Chance</em>, domyślnie 3, i przy dwóch wynikach na trzy wychodzi natychmiast.` },
+  { t: `Make your first real cross`,
+    d: `Plant a ${cropLink("Carrot")} and a ${cropLink("Potato")} one block apart with a double stick in the gap, and wait for ${cropLink("SugarCane")}. It asks for no special ground, so it works anywhere the two parents already grow - which makes it the cleanest first cross in the pack.`,
+    more: "sec-mistakes" },
 
-  { t: `Sprawdź, co może dać ta para`,
-    d: `Dwie te same rośliny nigdy nie uruchomią przepisu, ale pasują do każdej puli, do której ta roślina należy. Wybierz ją poniżej, żeby zobaczyć pełną listę wyników i ich szanse.`,
+  { t: `Then let the pools do the work`,
+    d: `Stand two copies of your 31/31/31 crop around one double stick and it keeps rolling for new species that share a breeding pool with it. This is the intended way to collect crops early, and whatever turns up is already 31/31/31, because a new plant takes its numbers from its parents and never from itself.`,
     pick: true },
-
-  { t: `Zaznacz każde nowe nasiono i powtarzaj`,
-    d: `Więcej nasion to więcej przepisów w zasięgu, a przepisy biją losowanie z puli za każdym razem, gdy w ogóle wypadnie mutacja.`,
-    ready: true,
-    w: `Przepisy są wyszukiwane po obecnych rodzicach i jeden z nich jest losowany, zanim dojdzie do jakiegokolwiek losowania z puli. Pule są brane pod uwagę tylko wtedy, gdy nie ma pasującego przepisu albo gdy warunki dopasowanego przepisu zawiodą.` },
 ];
 
-function renderFlow() {
+function renderGuide() {
   const opts = allSorted.map(c =>
     `<option value="${c.id}">${esc(c.name)}${owned.has(c.id) ? " ✓" : ""}</option>`).join("");
-  let html = `<section class="tipgroup" id="sec-flow">
-    <h3>Od czego zacząć</h3>
-    <p class="lead">Siedem kroków od jednej rośliny do działającej hodowli. Sekcje poniżej tłumaczą mechanikę, która za tym stoi.</p>
+  let html = `<p class="viewnote">Six steps, in the order the pack's own questbook teaches them. This is the short version - each step has a link to the tip that carries the detail and names where it was read from.</p><div class="tips">
+    <section class="tipgroup" id="sec-guide">
+    <h3>Quick start</h3>
+    <p class="lead">Almost everything gets easier once you hold a single crop at 31/31/31. These six steps get you there, then show you what it unlocks.</p>
     <ol class="flow-steps">`;
-  FLOW.forEach((s, i) => {
+  GUIDE.forEach((s, i) => {
     html += `<li class="flow-step"><span class="flow-n">${i + 1}</span><div class="flow-body">
-      <div class="flow-head"><p><b>${s.t}</b></p>${s.w ? `<span class="why"><button class="why-btn" type="button">skąd</button>
-        <span class="why-pop" role="note">${s.w}</span></span>` : ""}</div>
+      <div class="flow-head"><p><b>${s.t}</b></p></div>
       <p>${s.d}</p>`;
-    if (s.cycle) html += `<div class="flow-cycle">
-      <div class="flow-cycle-h"><span>&#8635; ${s.cycle.h}</span>${s.cycle.w ? `<span class="why"><button class="why-btn" type="button">skąd</button>
-        <span class="why-pop" role="note">${s.cycle.w}</span></span>` : ""}</div>
-      <ol>${s.cycle.items.map(i => `<li>${i}</li>`).join("")}</ol></div>`;
-    if (s.pick) html += `<div class="flow-pick"><label>Dwie sztuki: <select class="field" id="flowPick"><option value="">-</option>${opts}</select></label></div>`;
-    if (s.ready) html += `<p><button class="goview" type="button" data-goview="ready">Otwórz Do zrobienia od ręki</button></p>`;
+    if (s.pick) html += `<div class="flow-pick"><label>Two of <select class="field" id="flowPick"><option value="">-</option>${opts}</select></label></div>`;
+    if (s.more) html += `<p class="guide-more"><button class="goview" type="button" data-goview="tips" data-jump="${s.more}">Read the detail</button></p>`;
     html += `</div></li>`;
   });
-  return html + `</ol></section>`;
+  /* One action at the end rather than a button hanging off a step - a reader
+     who got this far wants the tool, not more reading.                      */
+  return html + `</ol><p class="lead">That is the whole loop. Tick off what you hold in the rail on the left, and the other tabs will keep telling you what is worth trying next.</p>
+    <p><button class="goview" type="button" data-goview="ready">Open Ready now</button></p>
+    </section></div>`;
 }
 
 /* A tip with no why box is one that has no source in the mod - the ones about
@@ -1807,14 +1803,16 @@ function renderBiomes() {
     <div id="biomeList">${biomeList()}</div>`;
 }
 
+/* Reference only. The linear walk-through lives in its own view, so a group
+   can be reordered here without a step in the guide quietly pointing at the
+   wrong heading - the ids the guide links to are on the groups themselves. */
 function renderTips() {
-  const secs = [{ id: "sec-flow", h: `Od czego zacząć` }]
-    .concat(TIPS.map((g, i) => ({ id: `sec-${i}`, h: g.h })));
+  const secs = TIPS.map((g, i) => ({ id: g.id || `sec-${i}`, h: g.h }));
   const index = `<nav class="tipindex" aria-label="Sekcje na tej stronie">${
     secs.map(s => `<button type="button" data-jump="${s.id}">${s.h}</button>`).join("")}</nav>`;
 
-  let html = `<p class="viewnote">Wszystko tutaj zostało odczytane z kodu samej paczki, a nie zebrane z doświadczenia, więc powinno się zgadzać dokładnie. Najedź na <span class="why-btn" style="cursor:default">skąd</span> przy dowolnej linii, żeby zobaczyć źródło.</p>${index}<div class="tips">` + renderFlow();
-  TIPS.forEach((g, i) => { html += tipGroup(g, `sec-${i}`); });
+  let html = `<p class="viewnote">Wszystko tutaj zostało odczytane z kodu samej paczki, a nie zebrane z doświadczenia, więc powinno się zgadzać dokładnie. Najedź na <span class="why-btn" style="cursor:default">skąd</span> przy dowolnej linii, żeby zobaczyć źródło.</p>${index}<div class="tips">`;
+  TIPS.forEach((g, i) => { html += tipGroup(g, g.id || `sec-${i}`); });
   return html + `</div>`;
 }
 
@@ -2211,6 +2209,7 @@ function render() {
     view === "near" ? renderNear() :
     view === "pool" ? renderPool() :
     view === "biome" ? renderBiomes() :
+    view === "guide" ? renderGuide() :
     view === "tips" ? renderTips() :
     view === "about" ? renderAbout() : renderPath();
 
@@ -2243,7 +2242,7 @@ function toggle(id) {
 /* The hash carries the whole view, so a link lands on exactly what you were
    looking at. Written with replaceState: sharing works without every tab
    click becoming a history entry. Nothing here leaves the browser.       */
-const VIEWS = ["ready", "near", "pool", "path", "biome", "tips", "about"];
+const VIEWS = ["ready", "near", "pool", "path", "biome", "guide", "tips", "about"];
 let readingHash = false;
 
 function writeHash() {
@@ -2309,10 +2308,19 @@ document.addEventListener("click", e => {
   if (poolSortButton) { togglePoolSort(poolSortButton.dataset.poolSort); return; }
   const crop = e.target.closest("[data-crop]");
   if (crop) { showCrop(crop.dataset.crop); return; }
+  /* Before the plain jump, because a guide link carries both: it switches view
+     first and only then scrolls, and the target does not exist until the new
+     view has rendered. */
+  const goview = e.target.closest("[data-goview]");
+  if (goview) {
+    view = goview.dataset.goview;
+    render();
+    if (goview.dataset.jump)
+      $(goview.dataset.jump)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    return;
+  }
   const jump = e.target.closest("[data-jump]");
   if (jump) { $(jump.dataset.jump)?.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
-  const goview = e.target.closest("[data-goview]");
-  if (goview) { view = goview.dataset.goview; render(); return; }
   /* last, so every button inside a card wins over marking it */
   const card = e.target.closest(".card[data-key]");
   if (card) { cycleMark(card.dataset.key); return; }

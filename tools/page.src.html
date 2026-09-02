@@ -532,6 +532,9 @@ p, li { text-wrap: pretty; }
 .flow-body p { margin: 0; }
 .flow-head { display: flex; align-items: baseline; gap: 12px; }
 .flow-head p { flex: 1; min-width: 0; }
+/* Secondary to the step it hangs off - the step is the instruction, this is
+   only the way through to the tip that proves it. */
+.guide-more { margin: 6px 0 0; font-size: 13px; }
 .flow-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 13px; }
 .flow-pick select { min-width: 190px; font-size: 13px; padding: 5px 8px; }
 
@@ -765,6 +768,7 @@ footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2p
         <button class="tab" type="button" role="tab" data-view="pool">{{tab.pool}}</button>
         <button class="tab" type="button" role="tab" data-view="path">{{tab.path}}</button>
         <button class="tab" type="button" role="tab" data-view="biome">{{tab.biome}}</button>
+        <button class="tab" type="button" role="tab" data-view="guide">{{tab.guide}}</button>
         <button class="tab" type="button" role="tab" data-view="tips">{{tab.tips}}</button>
         <button class="tab" type="button" role="tab" data-view="about">{{tab.about}}</button>
       </div>
@@ -1332,7 +1336,10 @@ function cardFor(m, unlockIds) {
 
 function renderReady() {
   const list = readyList();
-  if (!owned.size) return `<div class="empty">{{empty.tickFirst}}</div>`;
+  /* Holding nothing is what a first-time visitor looks like, so this is the
+     one place worth pointing them at the walk-through. */
+  if (!owned.size) return `<div class="empty">{{empty.tickFirst}}
+    <p><button class="goview" type="button" data-goview="guide">{{empty.newHere}}</button></p></div>`;
   if (!list.length) return `<div class="empty">{{empty.readyNone}}</div>`;
   return `<p class="viewnote">{{ready.note}}</p>
     <div class="grid">${markFirst(list).map(m => cardFor(m, readyUnlocks.get(m))).join("")}</div>`;
@@ -1486,7 +1493,7 @@ const APP = {
 };
 
 const TIPS = [
-  { h: `{{tips.g1.h}}`,
+  { id: "sec-mistakes", h: `{{tips.g1.h}}`,
     lead: `{{tips.g1.lead}}`,
     items: [
     [`{{tips.g1.i1}}`,
@@ -1527,7 +1534,7 @@ const TIPS = [
      `{{tips.g3.i6w}}`],
   ]},
 
-  { h: `{{tips.g4.h}}`,
+  { id: "sec-blocks", h: `{{tips.g4.h}}`,
     lead: `{{tips.g4.lead}}`,
     items: [
     [`{{tips.g4.i1}}`,
@@ -1544,7 +1551,7 @@ const TIPS = [
      `{{tips.g4.i6w}}`],
   ]},
 
-  { h: `{{tips.g5.h}}`,
+  { id: "sec-water", h: `{{tips.g5.h}}`,
     lead: `{{tips.g5.lead}}`,
     items: [
     [`{{tips.g5.i1}}`,
@@ -1571,7 +1578,7 @@ const TIPS = [
      `{{tips.g5.i11w}}`],
   ]},
 
-  { h: `{{tips.g6.h}}`,
+  { id: "sec-stats", h: `{{tips.g6.h}}`,
     lead: `{{tips.g6.lead}}`,
     items: [
     [`{{tips.g6.i1}}`,
@@ -1584,7 +1591,7 @@ const TIPS = [
      `{{tips.g6.i4w}}`],
   ]},
 
-  { h: `{{tips.g11.h}}`,
+  { id: "sec-tools", h: `{{tips.g11.h}}`,
     lead: `{{tips.g11.lead}}`,
     items: [
     [`{{tips.g11.i1}}`,
@@ -1603,7 +1610,7 @@ const TIPS = [
      `{{tips.g11.i7w}}`],
   ]},
 
-  { h: `{{tips.g7.h}}`,
+  { id: "sec-weeds", h: `{{tips.g7.h}}`,
     lead: `{{tips.g7.lead}}`,
     items: [
     [`{{tips.g7.i1}}`,
@@ -1672,69 +1679,58 @@ const TIPS = [
   ]},
 ];
 
-/* The whole game loop as one chain. Steps that claim something about the mod
-   carry the same why box as a tip; the navigational ones do not.           */
-const FLOW = [
-  { t: `{{flow.s1.t}}`,
-    d: `{{flow.s1.d}}` },
+/* The first hour of the mod, in the order the pack's own questbook teaches it:
+   sticks, then what the numbers mean, then feeding, then one crop to 31/31/31,
+   then one concrete cross, then pools. No why boxes here on purpose - a step
+   that needs a source sends the reader to the tip that carries it, so the two
+   never drift apart. Keep it short; Tips & tricks is where the depth lives. */
+const GUIDE = [
+  { t: `{{guide.s1.t}}`,
+    d: `{{guide.s1.d}}`,
+    more: "sec-blocks" },
 
-  { t: `{{flow.s2.t}}`,
-    d: `{{flow.s2.d}}`,
-    w: `{{flow.s2.w}}`,
-    cycle: {
-      h: `{{flow.s2.cyc.h}}`,
-      w: `{{flow.s2.cyc.w}}`,
-      items: [
-        `{{flow.s2.cyc.items}}`,
-        `{{flow.s2.cyc.i1}}`,
-        `{{flow.s2.cyc.i2}}`,
-        `{{flow.s2.cyc.i3}}`
-      ]
-    } },
+  { t: `{{guide.s2.t}}`,
+    d: `{{guide.s2.d}}`,
+    more: "sec-stats" },
 
-  { t: `{{flow.s3.t}}`,
-    d: `{{flow.s3.d}}`,
-    w: `{{flow.s3.w}}` },
+  { t: `{{guide.s3.t}}`,
+    d: `{{guide.s3.d}}`,
+    more: "sec-water" },
 
-  { t: `{{flow.s4.t}}`,
-    d: `{{flow.s4.d}}`,
-    w: `{{flow.s4.w}}` },
+  { t: `{{guide.s4.t}}`,
+    d: `{{guide.s4.d}}`,
+    more: "sec-stats" },
 
-  { t: `{{flow.s5.t}}`,
-    d: `{{flow.s5.d}}`,
-    w: `{{flow.s5.w}}` },
+  { t: `{{guide.s5.t}}`,
+    d: `{{guide.s5.d}}`,
+    more: "sec-mistakes" },
 
-  { t: `{{flow.s6.t}}`,
-    d: `{{flow.s6.d}}`,
+  { t: `{{guide.s6.t}}`,
+    d: `{{guide.s6.d}}`,
     pick: true },
-
-  { t: `{{flow.s7.t}}`,
-    d: `{{flow.s7.d}}`,
-    ready: true,
-    w: `{{flow.s7.w}}` },
 ];
 
-function renderFlow() {
+function renderGuide() {
   const opts = allSorted.map(c =>
     `<option value="${c.id}">${esc(c.name)}${owned.has(c.id) ? " ✓" : ""}</option>`).join("");
-  let html = `<section class="tipgroup" id="sec-flow">
-    <h3>{{flow.title}}</h3>
-    <p class="lead">{{flow.lead}}</p>
+  let html = `<p class="viewnote">{{guide.note}}</p><div class="tips">
+    <section class="tipgroup" id="sec-guide">
+    <h3>{{guide.title}}</h3>
+    <p class="lead">{{guide.lead}}</p>
     <ol class="flow-steps">`;
-  FLOW.forEach((s, i) => {
+  GUIDE.forEach((s, i) => {
     html += `<li class="flow-step"><span class="flow-n">${i + 1}</span><div class="flow-body">
-      <div class="flow-head"><p><b>${s.t}</b></p>${s.w ? `<span class="why"><button class="why-btn" type="button">{{word.why}}</button>
-        <span class="why-pop" role="note">${s.w}</span></span>` : ""}</div>
+      <div class="flow-head"><p><b>${s.t}</b></p></div>
       <p>${s.d}</p>`;
-    if (s.cycle) html += `<div class="flow-cycle">
-      <div class="flow-cycle-h"><span>&#8635; ${s.cycle.h}</span>${s.cycle.w ? `<span class="why"><button class="why-btn" type="button">{{word.why}}</button>
-        <span class="why-pop" role="note">${s.cycle.w}</span></span>` : ""}</div>
-      <ol>${s.cycle.items.map(i => `<li>${i}</li>`).join("")}</ol></div>`;
-    if (s.pick) html += `<div class="flow-pick"><label>{{flow.pickLabel}}<select class="field" id="flowPick"><option value="">-</option>${opts}</select></label></div>`;
-    if (s.ready) html += `<p><button class="goview" type="button" data-goview="ready">{{flow.openReady}}</button></p>`;
+    if (s.pick) html += `<div class="flow-pick"><label>{{guide.pickLabel}}<select class="field" id="flowPick"><option value="">-</option>${opts}</select></label></div>`;
+    if (s.more) html += `<p class="guide-more"><button class="goview" type="button" data-goview="tips" data-jump="${s.more}">{{guide.more}}</button></p>`;
     html += `</div></li>`;
   });
-  return html + `</ol></section>`;
+  /* One action at the end rather than a button hanging off a step - a reader
+     who got this far wants the tool, not more reading.                      */
+  return html + `</ol><p class="lead">{{guide.end}}</p>
+    <p><button class="goview" type="button" data-goview="ready">{{guide.openReady}}</button></p>
+    </section></div>`;
 }
 
 /* A tip with no why box is one that has no source in the mod - the ones about
@@ -1790,14 +1786,16 @@ function renderBiomes() {
     <div id="biomeList">${biomeList()}</div>`;
 }
 
+/* Reference only. The linear walk-through lives in its own view, so a group
+   can be reordered here without a step in the guide quietly pointing at the
+   wrong heading - the ids the guide links to are on the groups themselves. */
 function renderTips() {
-  const secs = [{ id: "sec-flow", h: `{{flow.title}}` }]
-    .concat(TIPS.map((g, i) => ({ id: `sec-${i}`, h: g.h })));
+  const secs = TIPS.map((g, i) => ({ id: g.id || `sec-${i}`, h: g.h }));
   const index = `<nav class="tipindex" aria-label="{{tips.indexLabel}}">${
     secs.map(s => `<button type="button" data-jump="${s.id}">${s.h}</button>`).join("")}</nav>`;
 
-  let html = `<p class="viewnote">{{tips.note}}</p>${index}<div class="tips">` + renderFlow();
-  TIPS.forEach((g, i) => { html += tipGroup(g, `sec-${i}`); });
+  let html = `<p class="viewnote">{{tips.note}}</p>${index}<div class="tips">`;
+  TIPS.forEach((g, i) => { html += tipGroup(g, g.id || `sec-${i}`); });
   return html + `</div>`;
 }
 
@@ -2194,6 +2192,7 @@ function render() {
     view === "near" ? renderNear() :
     view === "pool" ? renderPool() :
     view === "biome" ? renderBiomes() :
+    view === "guide" ? renderGuide() :
     view === "tips" ? renderTips() :
     view === "about" ? renderAbout() : renderPath();
 
@@ -2226,7 +2225,7 @@ function toggle(id) {
 /* The hash carries the whole view, so a link lands on exactly what you were
    looking at. Written with replaceState: sharing works without every tab
    click becoming a history entry. Nothing here leaves the browser.       */
-const VIEWS = ["ready", "near", "pool", "path", "biome", "tips", "about"];
+const VIEWS = ["ready", "near", "pool", "path", "biome", "guide", "tips", "about"];
 let readingHash = false;
 
 function writeHash() {
@@ -2292,10 +2291,19 @@ document.addEventListener("click", e => {
   if (poolSortButton) { togglePoolSort(poolSortButton.dataset.poolSort); return; }
   const crop = e.target.closest("[data-crop]");
   if (crop) { showCrop(crop.dataset.crop); return; }
+  /* Before the plain jump, because a guide link carries both: it switches view
+     first and only then scrolls, and the target does not exist until the new
+     view has rendered. */
+  const goview = e.target.closest("[data-goview]");
+  if (goview) {
+    view = goview.dataset.goview;
+    render();
+    if (goview.dataset.jump)
+      $(goview.dataset.jump)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    return;
+  }
   const jump = e.target.closest("[data-jump]");
   if (jump) { $(jump.dataset.jump)?.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
-  const goview = e.target.closest("[data-goview]");
-  if (goview) { view = goview.dataset.goview; render(); return; }
   /* last, so every button inside a card wins over marking it */
   const card = e.target.closest(".card[data-key]");
   if (card) { cycleMark(card.dataset.key); return; }

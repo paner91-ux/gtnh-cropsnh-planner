@@ -549,6 +549,9 @@ p, li { text-wrap: pretty; }
 .flow-body p { margin: 0; }
 .flow-head { display: flex; align-items: baseline; gap: 12px; }
 .flow-head p { flex: 1; min-width: 0; }
+/* Secondary to the step it hangs off - the step is the instruction, this is
+   only the way through to the tip that proves it. */
+.guide-more { margin: 6px 0 0; font-size: 13px; }
 .flow-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 13px; }
 .flow-pick select { min-width: 190px; font-size: 13px; padding: 5px 8px; }
 
@@ -782,6 +785,7 @@ footer.note a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2p
         <button class="tab" type="button" role="tab" data-view="pool">プールのルーレット</button>
         <button class="tab" type="button" role="tab" data-view="path">目標への経路</button>
         <button class="tab" type="button" role="tab" data-view="biome">バイオーム</button>
+        <button class="tab" type="button" role="tab" data-view="guide">Quick start</button>
         <button class="tab" type="button" role="tab" data-view="tips">コツと仕組み</button>
         <button class="tab" type="button" role="tab" data-view="about">このページについて</button>
       </div>
@@ -1349,7 +1353,10 @@ function cardFor(m, unlockIds) {
 
 function renderReady() {
   const list = readyList();
-  if (!owned.size) return `<div class="empty">左の欄で持っているものにチェックを入れてください。</div>`;
+  /* Holding nothing is what a first-time visitor looks like, so this is the
+     one place worth pointing them at the walk-through. */
+  if (!owned.size) return `<div class="empty">左の欄で持っているものにチェックを入れてください。
+    <p><button class="goview" type="button" data-goview="guide">New here? Read the Quick start</button></p></div>`;
   if (!list.length) return `<div class="empty">この組み合わせで親がすべてそろうレシピはありません。<br><b>親があと一つ</b>か<b>プールのルーレット</b>を試してください。</div>`;
   return `<p class="viewnote">親をすべて持っているレシピです。二重支柱の周りに親を並べ、支柱の下の地面が結果の条件を満たしているか確かめてください。満たしていないと試行は何も告げずに捨てられます。カードをクリックすると今作っているものとして印が付いて先頭に残り、もう一度クリックすると脇に寄って末尾に並びます。まだ決めていないものはその間に入り、新しいレシピもそこに現れます。</p>
     <div class="grid">${markFirst(list).map(m => cardFor(m, readyUnlocks.get(m))).join("")}</div>`;
@@ -1503,7 +1510,7 @@ const APP = {
 };
 
 const TIPS = [
-  { h: `よくある失敗`,
+  { id: "sec-mistakes", h: `よくある失敗`,
     lead: `何も告げずに失敗する三つの形。どれもエラーは出ません。`,
     items: [
     [`<b>耕地は土ではありません。</b>これが一番多い失敗です。耕すという操作は、共通点がまったくない二つの条件の間をブロックが行き来することを意味します。<b>${Object.values(C).filter(c => topParts(c).join() === "farmland").length} 種は耕地を要求し</b>ただの土を受け付けません。一方<b>${Object.values(C).filter(c => topParts(c).join() === "dirtGrass").length} 種は土か草ブロックだけ</b>で、他は通りません。カードの土壌ブロックと、支柱の下に実際に置いてあるブロックを見比べてください。`,
@@ -1544,7 +1551,7 @@ const TIPS = [
      `これは <em>wouldCropBeAbleToGrow()</em> と同じ確認です。<em>onlyPreventsHarvest()</em> が false の条件はどれも結果をそもそも植えられなくし、その試行は差し替えられるのではなく捨てられます。`],
   ]},
 
-  { h: `ブロックをどこに置くか`,
+  { id: "sec-blocks", h: `ブロックをどこに置くか`,
     lead: `支柱の下では二つのブロックが確認されます。深さも、照合するリストも違います。`,
     items: [
     [`<b>土壌ブロック</b>は支柱のすぐ下の一マスです。<b>下のブロック</b>はさらに一つ深く、支柱から二マス下、土壌ブロックの真下です。`,
@@ -1561,7 +1568,7 @@ const TIPS = [
      `<em>canGrow()</em> は成熟した株に対して条件を一つも見ないうちに false を返すので、下のブロックが欠けていても止めるものがもう残っていません。株を取り除くものもありません。支柱が自分から折れるのは <em>onInvalidSoilDetected()</em> 経由だけで、それはブロックが <em>y - 1</em> を読んで作物の土壌リストと照らした後に呼ばれます。下のブロックは <em>y - 2</em> にあり、その確認には入っていません。<em>canCross()</em> が求めるのは作物があること、雑草でないこと、交配の閾値を超えて育っていることだけなので、下を抜かれた親も親のままです。<em>canHarvest()</em> は条件を確かに振り直すので、収穫のときにはブロックを戻しておく必要があります。`],
   ]},
 
-  { h: `水と肥料`,
+  { id: "sec-water", h: `水と肥料`,
     lead: `どちらもゲームが栄養素スコアと呼ぶ一つの数値に流れ込み、その数値が育つ速さを、さらには育つかどうかを決めます。`,
     items: [
     [`<b>水タンクが満杯なら栄養素スコア +10、肥料が満杯でも +10。</b>この二つは置き換えではなく足し算です。水はやったが肥料は切らしている作物は二つ分の半分しか得ておらず、肥料も満たせば成長速度がさらに 50% 上がります。基礎値は 5 で、空が見えるとさらに +2。自分で動かせる要素としてはこの二つのタンクが最大です。`,
@@ -1588,7 +1595,7 @@ const TIPS = [
      `<em>getNutrientScore()</em> は支柱の上のブロックで <em>World.canBlockSeeTheSky()</em> が真のとき 2 を足します。成長 tick が水を補充するのは <em>World.isRainingAt()</em> が真のときだけで、地下では決して起きません。バイオームは <em>getBiomeGenForCoordsBody(x, z)</em> から来ますが、これは y 座標をまったく受け取りません。`],
   ]},
 
-  { h: `良い能力値を得る`,
+  { id: "sec-stats", h: `良い能力値を得る`,
     lead: `交配が成功するたび、成長値、収量値、耐性値は少しずつ揺れます。`,
     items: [
     [`<b>すべての親に肥料が入っていれば能力値は下がりません。</b>親が一つでも切らしていると、三つの能力値すべてで判定の負の側が復活します。`,
@@ -1601,7 +1608,7 @@ const TIPS = [
      `<em>getGrowthRate()</em> は <em>BASE_GROWTH_SPEED + growth</em> を土台にします。<em>BASE_GROWTH_SPEED</em> は 6 です。そのうえで <em>score × 5</em> と <em>tier × 10</em> の比較から出る割合を土台に掛けます。この割合が出せる最大は 3.65 倍で、Tier 1 の作物で満点の 55 を取ったときに限られます。一方で能力値だけで 7 から 37 まで動きます。`],
   ]},
 
-  { h: `道具`,
+  { id: "sec-tools", h: `道具`,
     lead: `手に持てる物が六つ。そのうち一つは、株から種を取る手順そのものを変えます。`,
     items: [
     [`<b>スペードを手に持っていると、収穫のたびに種が一つ増え、株はそのまま残ります。</b>いつも通り成熟した作物を右クリックするだけです。収穫物に加えて、その株の能力値をそのまま持つ種が手に入り、株は成長値ゼロに戻ってまた育ちます。素手では収穫で種は一切出ず、種を得る唯一の道は株を壊すことです。普通の<b>スペード</b>は耐性値への判定に勝ったときだけ種を一つ落とすので、31 なら毎回です。<b>強化スペード</b>は判定そのものを行わず、<b>耐性値 ÷ 10</b> 個を落とすので、31/31/31 の株からは三つか四つです。どちらも壊れません。`,
@@ -1620,7 +1627,7 @@ const TIPS = [
      `<em>ItemCropSticks.onItemUse()</em> は <em>player.isSneaking()</em> と、クリエイティブか <em>stackSize &gt;= 2</em> のどちらかとから、フラグを一つ作ります。フラグが立っていればブロックを置き、スタックから 1 ではなく 2 を引き、直前に作ったタイルに対して <em>setCrossCrop(true)</em> を呼びます。一本だけのスタックはこの後半で落ちるので、フラグは false のままとなり、そのクリックは普通の支柱を置きます。二回クリックする方の経路は <em>onRightClick()</em> で、すでに立っている支柱をもう一本で二重にします。二重支柱の音が鳴るのは、二つのうちこちらだけです。`],
   ]},
 
-  { h: `雑草`,
+  { id: "sec-weeds", h: `雑草`,
     lead: `雑草は育った作物を壊せません。危ないのは親と親のあいだの空の支柱です。`,
     items: [
     [`<b>耐性値 31 は完全な免疫で、独立した三つの確認をまとめて抑えます。</b>雑草に覆われず、病気にもならず、踏み荒らされもしません。31 未満なら病気に耐える確率は耐性値 ÷ 31 で、20 でおよそ 65%、25 でおよそ 81% です。立てたままにしておくつもりのものなら、最も上げる価値のある能力値です。`,
@@ -1689,69 +1696,58 @@ const TIPS = [
   ]},
 ];
 
-/* The whole game loop as one chain. Steps that claim something about the mod
-   carry the same why box as a tip; the navigational ones do not.           */
-const FLOW = [
-  { t: `作物を一つ選ぶ`,
-    d: `大麦でも小麦でも、すでに持っているもので構いません。この選択は後に何も影響しません。` },
+/* The first hour of the mod, in the order the pack's own questbook teaches it:
+   sticks, then what the numbers mean, then feeding, then one crop to 31/31/31,
+   then one concrete cross, then pools. No why boxes here on purpose - a step
+   that needs a source sends the reader to the tip that carries it, so the two
+   never drift apart. Keep it short; Tips & tricks is where the depth lives. */
+const GUIDE = [
+  { t: `Put down a double crop stick`,
+    d: `Crop sticks are the supports every plant grows on. Place one, then right-click a second stick onto it. That <b>double</b> stick is the only one that breeds - a single stick just holds a plant. Put it on the ground the crop actually wants, because the wrong block is the most common reason nothing ever shows up.`,
+    more: "sec-blocks" },
 
-  { t: `31/31/31 まで上げる`,
-    d: `成長値、収量値、耐性値はそれぞれ 31 が上限です。他の何より先に、しかも一度だけ行ってください。一種類の一株で足ります。`,
-    w: `<em>variateStat()</em> は数に入ったすべての親の平均を取り（整数除算です）、そこに <em>Breeding Range Low</em> と <em>High</em> の設定値の間から一様に引いた変化量を足します。既定では -2 から +4 です。負の結果がゼロに置き換わるのは、数に入った親のすべてにまだ肥料があるとき<b>だけ</b>なので、肥料を与えたコピーは親と同じにはなっても親を下回ることはありません。最後に <em>Constants.MIN_SEED_STAT</em> と <em>MAX_SEED_STAT</em> が合計を 1…31 に収めます。`,
-    cycle: {
-      h: `三つとも 31 になるまで繰り返す`,
-      w: `<em>園芸用虫めがね</em>は Mod のアイテムで、説明文は “Inspects crops” です。作物を右クリックすると種の名前、続いて <em>Stats -- Growth / Gain / Resistance</em>、さらに <em>Soil -- Fertilizer / Water / Weed-EX</em> が表示され、株が病気か生育条件を満たしていなければ警告の行が加わります。一度見るだけで数値と、支柱に実際にまだ供給があるかの両方がわかります。`,
-      items: [
-        `植えます。その支柱に<b>肥料</b>を常に入れておいてください。下振れを消すのはそれです。水は生育速度にしか効きません。`,
-        `隣に<b>二重支柱</b>を置き、コピーが現れるのを待ちます。`,
-        `そのコピーを<b>園芸用虫めがね</b>で確認します。`,
-        `数値が上がっていたら、以後はその株から交配し、古いほうを取り除きます。同じ作物の弱い株が近くに残っていると平均を下げます。`
-      ]
-    } },
+  { t: `Learn the three numbers`,
+    d: `Every seed carries <b>Growth</b>, <b>Gain</b> and <b>Resistance</b>, each from 1 to 31. Growth is speed, Gain is how much you get per harvest, and Resistance decides whether the plant shrugs off disease and whether it hands the seed back when you pull it up. At Resistance 31 the seed always survives.`,
+    more: "sec-stats" },
 
-  { t: `コピーをもう一つ作る`,
-    d: `上の繰り返しをもう一巡します。31/31/31 の株に肥料を与えて作ったコピーは必ず 31/31/31 なので、こちらは確認不要です。<b>スペード</b>があればこの手順は飛ばせます。理由は次の手順にあります。`,
-    w: `31/31/31 の親が一つだけなら平均は 31 です。上振れは 31 の上限に当たり、下振れは肥料の確認ですでに消えているので、31/31/31 だけが起こりうる結果になります。` },
+  { t: `Keep water and fertiliser topped up`,
+    d: `The stick holds both, and they add up rather than replace each other: full water is worth 10, full fertiliser another 10, on a base of 5, and open sky adds 2. Under the score a crop needs, it makes no progress at all and eventually falls sick. Fertiliser has a second job as well, which is the next step.`,
+    more: "sec-water" },
 
-  { t: `種を二つ取る`,
-    d: `<b>スペード</b>を手に持って成熟した株を右クリックします。種だけが外れて株はそのまま残るので、一株から二つとも取れます。持っていない場合は両方を左クリックしてください。耐性値 31 なら種は必ず落ちます。31 未満では株ごと壊れることがあり、手順 2 を先に置いているのはそのためです。`,
-    w: `<em>onLeftClick()</em> は <em>doPlayerHarvest(player, true)</em> を呼び、<em>getSeedDrop()</em> が返すものを落とします。そのメソッドは <em>passesResistanceCheck()</em>、つまり <em>resistance &gt; random(0…30)</em> に阻まれるので、外さないのは 31 だけです。判定に負けてもやり直しはできません。同じメソッドは除去フラグが立っていれば必ず <em>clear()</em> で終わるので、株は消えて何も残りません。スペードはそもそもどちらの分岐が走るかを変えます。<em>IHarvestDropModifier</em> を実装しているので、<em>doPlayerHarvest(player, false)</em> が収穫物に種を足し、株のほうは成長値ゼロに戻るだけです。` },
+  { t: `Take one crop to 31/31/31`,
+    d: `Put a double stick next to a grown plant with nothing else around it and wait - it copies itself, and every copy rolls its three numbers again. Keep <b>fertiliser in every stick</b>, because that is what stops a roll going downwards. Harvest the better one, put it back, repeat until all three read 31. You only have to do this once.`,
+    more: "sec-stats" },
 
-  { t: `一マス空けて植え、あいだに二重支柱を置く`,
-    d: `種、二重支柱、種。真ん中の支柱の地面がそこに何が出られるかを決めるので、欲しい作物に合わせて組んでください。親は自分の作物に有効な地面さえあれば十分です。`,
-    w: `土壌と下のブロックの確認は交配用支柱自身の座標に対して行われます。隣について読まれるのは作物、能力値、育ち具合、自分の支柱にまだ肥料が入っているかどうかだけで、何の上に立っているかは見られません。続いて <em>attemptBreeding()</em> が冒頭で <em>Breeding Chance</em> 設定（既定値 3）を振り、三回のうち二回はそこで戻ります。` },
+  { t: `Make your first real cross`,
+    d: `Plant a ${cropLink("Carrot")} and a ${cropLink("Potato")} one block apart with a double stick in the gap, and wait for ${cropLink("SugarCane")}. It asks for no special ground, so it works anywhere the two parents already grow - which makes it the cleanest first cross in the pack.`,
+    more: "sec-mistakes" },
 
-  { t: `そのペアから何が出るか確かめる`,
-    d: `同じ作物二つはレシピを決して起こしませんが、その作物が属するすべてのプールに一致します。下で選べば結果と確率の一覧がすべて出ます。`,
+  { t: `Then let the pools do the work`,
+    d: `Stand two copies of your 31/31/31 crop around one double stick and it keeps rolling for new species that share a breeding pool with it. This is the intended way to collect crops early, and whatever turns up is already 31/31/31, because a new plant takes its numbers from its parents and never from itself.`,
     pick: true },
-
-  { t: `新しい種にチェックを入れて繰り返す`,
-    d: `種が増えるほど手の届くレシピが増え、変異が振られたときレシピはプールの抽選より必ず優先されます。`,
-    ready: true,
-    w: `レシピはその場にいる親から検索され、どのプールの抽選よりも先に一つ引かれます。プールが参照されるのは、一致するレシピがないか、一致したレシピ自身の条件が満たされないときだけです。` },
 ];
 
-function renderFlow() {
+function renderGuide() {
   const opts = allSorted.map(c =>
     `<option value="${c.id}">${esc(c.name)}${owned.has(c.id) ? " ✓" : ""}</option>`).join("");
-  let html = `<section class="tipgroup" id="sec-flow">
-    <h3>はじめかた</h3>
-    <p class="lead">作物一つから使える交配設備までの七手順。仕組みの説明は下の各節にあります。</p>
+  let html = `<p class="viewnote">Six steps, in the order the pack's own questbook teaches them. This is the short version - each step has a link to the tip that carries the detail and names where it was read from.</p><div class="tips">
+    <section class="tipgroup" id="sec-guide">
+    <h3>Quick start</h3>
+    <p class="lead">Almost everything gets easier once you hold a single crop at 31/31/31. These six steps get you there, then show you what it unlocks.</p>
     <ol class="flow-steps">`;
-  FLOW.forEach((s, i) => {
+  GUIDE.forEach((s, i) => {
     html += `<li class="flow-step"><span class="flow-n">${i + 1}</span><div class="flow-body">
-      <div class="flow-head"><p><b>${s.t}</b></p>${s.w ? `<span class="why"><button class="why-btn" type="button">根拠</button>
-        <span class="why-pop" role="note">${s.w}</span></span>` : ""}</div>
+      <div class="flow-head"><p><b>${s.t}</b></p></div>
       <p>${s.d}</p>`;
-    if (s.cycle) html += `<div class="flow-cycle">
-      <div class="flow-cycle-h"><span>&#8635; ${s.cycle.h}</span>${s.cycle.w ? `<span class="why"><button class="why-btn" type="button">根拠</button>
-        <span class="why-pop" role="note">${s.cycle.w}</span></span>` : ""}</div>
-      <ol>${s.cycle.items.map(i => `<li>${i}</li>`).join("")}</ol></div>`;
-    if (s.pick) html += `<div class="flow-pick"><label>二つ並べる作物: <select class="field" id="flowPick"><option value="">-</option>${opts}</select></label></div>`;
-    if (s.ready) html += `<p><button class="goview" type="button" data-goview="ready">「今すぐ作れる」を開く</button></p>`;
+    if (s.pick) html += `<div class="flow-pick"><label>Two of <select class="field" id="flowPick"><option value="">-</option>${opts}</select></label></div>`;
+    if (s.more) html += `<p class="guide-more"><button class="goview" type="button" data-goview="tips" data-jump="${s.more}">Read the detail</button></p>`;
     html += `</div></li>`;
   });
-  return html + `</ol></section>`;
+  /* One action at the end rather than a button hanging off a step - a reader
+     who got this far wants the tool, not more reading.                      */
+  return html + `</ol><p class="lead">That is the whole loop. Tick off what you hold in the rail on the left, and the other tabs will keep telling you what is worth trying next.</p>
+    <p><button class="goview" type="button" data-goview="ready">Open Ready now</button></p>
+    </section></div>`;
 }
 
 /* A tip with no why box is one that has no source in the mod - the ones about
@@ -1807,14 +1803,16 @@ function renderBiomes() {
     <div id="biomeList">${biomeList()}</div>`;
 }
 
+/* Reference only. The linear walk-through lives in its own view, so a group
+   can be reordered here without a step in the guide quietly pointing at the
+   wrong heading - the ids the guide links to are on the groups themselves. */
 function renderTips() {
-  const secs = [{ id: "sec-flow", h: `はじめかた` }]
-    .concat(TIPS.map((g, i) => ({ id: `sec-${i}`, h: g.h })));
+  const secs = TIPS.map((g, i) => ({ id: g.id || `sec-${i}`, h: g.h }));
   const index = `<nav class="tipindex" aria-label="このページの節">${
     secs.map(s => `<button type="button" data-jump="${s.id}">${s.h}</button>`).join("")}</nav>`;
 
-  let html = `<p class="viewnote">ここに書いてあることはすべてパック自身のコードから読み出したもので、経験から集めたものではないので、そのとおりに成り立つはずです。どの行でも <span class="why-btn" style="cursor:default">根拠</span> にカーソルを合わせると出典が出ます。</p>${index}<div class="tips">` + renderFlow();
-  TIPS.forEach((g, i) => { html += tipGroup(g, `sec-${i}`); });
+  let html = `<p class="viewnote">ここに書いてあることはすべてパック自身のコードから読み出したもので、経験から集めたものではないので、そのとおりに成り立つはずです。どの行でも <span class="why-btn" style="cursor:default">根拠</span> にカーソルを合わせると出典が出ます。</p>${index}<div class="tips">`;
+  TIPS.forEach((g, i) => { html += tipGroup(g, g.id || `sec-${i}`); });
   return html + `</div>`;
 }
 
@@ -2211,6 +2209,7 @@ function render() {
     view === "near" ? renderNear() :
     view === "pool" ? renderPool() :
     view === "biome" ? renderBiomes() :
+    view === "guide" ? renderGuide() :
     view === "tips" ? renderTips() :
     view === "about" ? renderAbout() : renderPath();
 
@@ -2243,7 +2242,7 @@ function toggle(id) {
 /* The hash carries the whole view, so a link lands on exactly what you were
    looking at. Written with replaceState: sharing works without every tab
    click becoming a history entry. Nothing here leaves the browser.       */
-const VIEWS = ["ready", "near", "pool", "path", "biome", "tips", "about"];
+const VIEWS = ["ready", "near", "pool", "path", "biome", "guide", "tips", "about"];
 let readingHash = false;
 
 function writeHash() {
@@ -2309,10 +2308,19 @@ document.addEventListener("click", e => {
   if (poolSortButton) { togglePoolSort(poolSortButton.dataset.poolSort); return; }
   const crop = e.target.closest("[data-crop]");
   if (crop) { showCrop(crop.dataset.crop); return; }
+  /* Before the plain jump, because a guide link carries both: it switches view
+     first and only then scrolls, and the target does not exist until the new
+     view has rendered. */
+  const goview = e.target.closest("[data-goview]");
+  if (goview) {
+    view = goview.dataset.goview;
+    render();
+    if (goview.dataset.jump)
+      $(goview.dataset.jump)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    return;
+  }
   const jump = e.target.closest("[data-jump]");
   if (jump) { $(jump.dataset.jump)?.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
-  const goview = e.target.closest("[data-goview]");
-  if (goview) { view = goview.dataset.goview; render(); return; }
   /* last, so every button inside a card wins over marking it */
   const card = e.target.closest(".card[data-key]");
   if (card) { cycleMark(card.dataset.key); return; }

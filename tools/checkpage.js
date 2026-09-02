@@ -80,7 +80,7 @@ function load(pagePath) {
   return { api: sandbox.__api, byId, nodes, hashes, html };
 }
 
-const VIEWS = ["ready", "near", "pool", "path", "biome", "tips", "about"];
+const VIEWS = ["ready", "near", "pool", "path", "biome", "guide", "tips", "about"];
 let failed = 0;
 
 for (const pagePath of pages) {
@@ -105,6 +105,17 @@ for (const pagePath of pages) {
     ok(view.innerHTML.length > 0, `view ${v} rendered nothing`);
     ok(!view.innerHTML.includes("{{"), `view ${v} left a {{key}} unreplaced`);
   }
+
+  /* Every "read the detail" link in the guide has to land on a section that
+     Tips actually renders. Checked against the markup and not getElementById,
+     because the stub answers for any id and would call a dead link alive. */
+  api.setView("guide"); api.render();
+  const targets = [...view.innerHTML.matchAll(/data-jump="([^"]+)"/g)].map(m => m[1]);
+  ok(targets.length > 0, "the guide has no link into Tips & tricks");
+  api.setView("tips"); api.render();
+  const tipsHtml = view.innerHTML;
+  for (const t of targets)
+    ok(tipsHtml.includes(`id="${t}"`), `guide links to ${t}, which Tips & tricks does not render`);
 
   /* Each drawer kind has its own strings, so each gets opened. */
   const crop = Object.keys(api.C).sort()[0];
