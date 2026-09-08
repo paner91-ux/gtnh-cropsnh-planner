@@ -512,6 +512,7 @@
    ],
    "subsoil": [],
    "biomes": [
+    "LUSH",
     "SWAMP",
     "WET"
    ],
@@ -911,7 +912,8 @@
    "subsoil": [],
    "biomes": [
     "COLD",
-    "PLAINS"
+    "PLAINS",
+    "SPARSE"
    ],
    "maxLight": null,
    "minLight": null,
@@ -1392,6 +1394,7 @@
    "subsoil": [],
    "biomes": [
     "FOREST",
+    "LUSH",
     "PLAINS"
    ],
    "maxLight": null,
@@ -3183,6 +3186,7 @@
    ],
    "subsoil": [],
    "biomes": [
+    "LUSH",
     "PLAINS",
     "WET"
    ],
@@ -3236,6 +3240,7 @@
    "subsoil": [],
    "biomes": [
     "FOREST",
+    "LUSH",
     "PLAINS"
    ],
    "maxLight": null,
@@ -3288,6 +3293,7 @@
    ],
    "subsoil": [],
    "biomes": [
+    "LUSH",
     "PLAINS",
     "WET"
    ],
@@ -3404,6 +3410,7 @@
    "subsoil": [],
    "biomes": [
     "HILLS",
+    "LUSH",
     "PLAINS"
    ],
    "maxLight": null,
@@ -3430,6 +3437,7 @@
    "subsoil": [],
    "biomes": [
     "COLD",
+    "CONIFEROUS",
     "PLAINS"
    ],
    "maxLight": null,
@@ -3734,6 +3742,7 @@
    "subsoil": [],
    "biomes": [
     "HOT",
+    "LUSH",
     "PLAINS"
    ],
    "maxLight": null,
@@ -3762,6 +3771,7 @@
     "ruby"
    ],
    "biomes": [
+    "COLD",
     "MOUNTAIN",
     "RIVER"
    ],
@@ -4402,6 +4412,7 @@
    "subsoil": [],
    "biomes": [
     "COLD",
+    "FOREST",
     "WET"
    ],
    "maxLight": null,
@@ -4485,8 +4496,8 @@
    ],
    "subsoil": [],
    "biomes": [
-    "DEAD",
-    "NETHER"
+    "NETHER",
+    "SPOOKY"
    ],
    "maxLight": null,
    "minLight": null,
@@ -5032,6 +5043,7 @@
    "subsoil": [],
    "biomes": [
     "COLD",
+    "LUSH",
     "PLAINS"
    ],
    "maxLight": null,
