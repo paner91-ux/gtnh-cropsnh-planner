@@ -114,7 +114,7 @@ sub-soils and light requirements are all read straight out of the compiled mod:
 | `en_US.lang` | display names, exactly as they appear in NEI, and the biome tag names |
 | the pack's `lang` configs | the same names in the other languages, read the same way |
 
-Built against **CropsNH 2.0.101**, as shipped in the GTNH 2.9 daily builds (nightly 659).
+Built against **CropsNH 2.0.139**, as shipped in the GTNH 2.9 daily builds (daily 790).
 In that version: 179 crops, 172 recipes, 66 pools.
 
 The **Biomes** tab is the one exception. Biome tags are Forge's, and each biome is registered by

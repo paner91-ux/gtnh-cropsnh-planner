@@ -45,7 +45,7 @@
   "help.open": "Will not grow in ${open.length} of the ${Object.keys(BIOMES).length} biomes:",
   "help.roofed": "Grows outdoors, but will not grow under a roof or underground, in ${roofed.length}:",
   "help.none": "With no water and no fertiliser it still grows anywhere in this pack.",
-  "foot.data": "Extracted from the bytecode of <code>cropsnh-2.0.101.jar</code>, as shipped in GTNH 2.9 - recipes, pools, soils, sub-soils and light requirements come straight out of <code>MutationLoader</code>, <code>CropLoader</code> and <code>SubSoilRequirementLoader</code>, not from a wiki. Nothing else in the pack registers crops with CropsNH, so the list above is the whole set rather than a selection.",
+  "foot.data": "Extracted from the bytecode of <code>cropsnh-2.0.139.jar</code>, as shipped in GTNH 2.9 - recipes, pools, soils, sub-soils and light requirements come straight out of <code>MutationLoader</code>, <code>CropLoader</code> and <code>SubSoilRequirementLoader</code>, not from a wiki. Nothing else in the pack registers crops with CropsNH, so the list above is the whole set rather than a selection.",
   "foot.privacy": "Your ticks are stored in this browser and nowhere else. The page makes no external requests and works offline - move a list between copies from <b>Manage list</b> in the sidebar.",
   "msg.badFormat": "Unrecognised format - paste a code from this tool.",
   "msg.noneKnown": "Found no known crops in that - nothing was changed.",

@@ -44,7 +44,7 @@
   "help.open": "Nie urośnie w ${open.length} biomach ze ${Object.keys(BIOMES).length}:",
   "help.roofed": "Pod niebem urośnie, ale pod dachem albo pod ziemią nie, w ${roofed.length}:",
   "help.none": "Bez wody i bez nawozu i tak urośnie wszędzie w tej paczce.",
-  "foot.data": "Odczytane z bajtkodu <code>cropsnh-2.0.101.jar</code> w wersji z GTNH 2.9 - przepisy, pule, gleby, podglebia i wymagania światła pochodzą wprost z <code>MutationLoader</code>, <code>CropLoader</code> i <code>SubSoilRequirementLoader</code>, nie z wiki. Żaden inny mod w paczce nie rejestruje roślin w CropsNH, więc powyższa lista to komplet, a nie wybór.",
+  "foot.data": "Odczytane z bajtkodu <code>cropsnh-2.0.139.jar</code> w wersji z GTNH 2.9 - przepisy, pule, gleby, podglebia i wymagania światła pochodzą wprost z <code>MutationLoader</code>, <code>CropLoader</code> i <code>SubSoilRequirementLoader</code>, nie z wiki. Żaden inny mod w paczce nie rejestruje roślin w CropsNH, więc powyższa lista to komplet, a nie wybór.",
   "foot.privacy": "Zaznaczenia są przechowywane w tej przeglądarce i nigdzie indziej. Strona nie wysyła żadnych zapytań na zewnątrz i działa bez internetu - listę przeniesiesz między kopiami przez <b>Zarządzaj listą</b> w panelu bocznym.",
   "msg.badFormat": "Nieznany format - wklej kod z tego narzędzia.",
   "msg.noneKnown": "Nie znalazłem tam żadnej znanej rośliny - nic nie zostało zmienione.",

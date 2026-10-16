@@ -44,7 +44,7 @@
   "help.open": "在 ${Object.keys(BIOMES).length} 个生物群系里，有 ${open.length} 个长不起来：",
   "help.roofed": "露天能长，但在屋顶下或者地下长不起来的有 ${roofed.length} 个：",
   "help.none": "没有水也没有肥，它在这个整合包里照样到处都能长。",
-  "foot.data": "从 GTNH 2.9 附带的 <code>cropsnh-2.0.101.jar</code> 字节码里提取：配方、突变池、土壤、下层方块和光照需求全部直接来自 <code>MutationLoader</code>、<code>CropLoader</code> 和 <code>SubSoilRequirementLoader</code>，不是抄的维基。整合包里没有别的东西向 CropsNH 注册作物，所以上面这份列表是全集，不是精选。",
+  "foot.data": "从 GTNH 2.9 附带的 <code>cropsnh-2.0.139.jar</code> 字节码里提取：配方、突变池、土壤、下层方块和光照需求全部直接来自 <code>MutationLoader</code>、<code>CropLoader</code> 和 <code>SubSoilRequirementLoader</code>，不是抄的维基。整合包里没有别的东西向 CropsNH 注册作物，所以上面这份列表是全集，不是精选。",
   "foot.privacy": "你的勾选只存在这个浏览器里，别无他处。本页不发任何外部请求，离线也能用，用边栏里的<b>管理列表</b>可以在不同副本之间搬运列表。",
   "msg.badFormat": "无法识别的格式，请粘贴本工具生成的代码。",
   "msg.noneKnown": "里面没找到已知的作物，什么都没有改动。",

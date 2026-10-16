@@ -44,7 +44,7 @@
   "help.open": "${Object.keys(BIOMES).length} 個のうち ${open.length} 個では育ちません：",
   "help.roofed": "空の下なら育ちますが、屋根の下や地下では育たないのが ${roofed.length} 個：",
   "help.none": "水も肥料もなくても、このパックではどこでも育ちます。",
-  "foot.data": "GTNH 2.9 同梱の <code>cropsnh-2.0.101.jar</code> のバイトコードから抽出しています。レシピ、変異プール、土壌、下のブロック、明るさの条件はすべて <code>MutationLoader</code>、<code>CropLoader</code>、<code>SubSoilRequirementLoader</code> から直接得たもので、Wiki の写しではありません。このパックで CropsNH に作物を登録するものは他になく、上の一覧は抜粋ではなく全部です。",
+  "foot.data": "GTNH 2.9 同梱の <code>cropsnh-2.0.139.jar</code> のバイトコードから抽出しています。レシピ、変異プール、土壌、下のブロック、明るさの条件はすべて <code>MutationLoader</code>、<code>CropLoader</code>、<code>SubSoilRequirementLoader</code> から直接得たもので、Wiki の写しではありません。このパックで CropsNH に作物を登録するものは他になく、上の一覧は抜粋ではなく全部です。",
   "foot.privacy": "チェックはこのブラウザーにだけ保存され、どこにも送られません。ページは外部への通信を一切行わずオフラインでも動きます。コピー間でリストを移すにはサイドバーの<b>リストの管理</b>を使ってください。",
   "msg.badFormat": "形式を認識できません。このツールが出したコードを貼ってください。",
   "msg.noneKnown": "既知の作物が見つからなかったので、何も変更していません。",

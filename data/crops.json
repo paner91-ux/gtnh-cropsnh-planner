@@ -634,7 +634,7 @@
    ],
    "maxLight": null,
    "minLight": null,
-   "growth": 1200,
+   "growth": 1600,
    "altSeed": true,
    "machineGrow": false,
    "pools": [
@@ -662,7 +662,7 @@
    ],
    "maxLight": null,
    "minLight": null,
-   "growth": 1200,
+   "growth": 1600,
    "altSeed": true,
    "machineGrow": false,
    "pools": [
@@ -691,7 +691,7 @@
    ],
    "maxLight": null,
    "minLight": null,
-   "growth": 1200,
+   "growth": 1600,
    "altSeed": true,
    "machineGrow": false,
    "pools": [
@@ -723,7 +723,7 @@
    ],
    "maxLight": null,
    "minLight": null,
-   "growth": 1200,
+   "growth": 1600,
    "altSeed": true,
    "machineGrow": false,
    "pools": [
@@ -752,7 +752,7 @@
    ],
    "maxLight": null,
    "minLight": null,
-   "growth": 1200,
+   "growth": 1600,
    "altSeed": true,
    "machineGrow": false,
    "pools": [
@@ -781,7 +781,7 @@
    ],
    "maxLight": null,
    "minLight": null,
-   "growth": 1200,
+   "growth": 1600,
    "altSeed": true,
    "machineGrow": false,
    "pools": [
@@ -809,7 +809,7 @@
    ],
    "maxLight": null,
    "minLight": null,
-   "growth": 1200,
+   "growth": 1600,
    "altSeed": true,
    "machineGrow": false,
    "pools": [],
@@ -833,7 +833,7 @@
    ],
    "maxLight": null,
    "minLight": null,
-   "growth": 1200,
+   "growth": 1600,
    "altSeed": true,
    "machineGrow": false,
    "pools": [
@@ -917,7 +917,7 @@
    ],
    "maxLight": null,
    "minLight": null,
-   "growth": 450,
+   "growth": 900,
    "altSeed": false,
    "machineGrow": false,
    "pools": [
@@ -1485,7 +1485,7 @@
    ],
    "maxLight": null,
    "minLight": null,
-   "growth": 7200,
+   "growth": 10800,
    "altSeed": false,
    "machineGrow": false,
    "pools": [
@@ -1586,7 +1586,7 @@
     "chicken",
     "food"
    ],
-   "flavour": "Not to be confused with eggplants."
+   "flavour": "Not to be confused with eggplants"
   },
   "EmberMoss": {
    "id": "EmberMoss",
@@ -2221,7 +2221,7 @@
    ],
    "maxLight": null,
    "minLight": null,
-   "growth": 450,
+   "growth": 600,
    "altSeed": false,
    "machineGrow": false,
    "pools": [
@@ -2234,7 +2234,7 @@
     "food",
     "fish"
    ],
-   "flavour": "Screams."
+   "flavour": "Screams"
   },
   "GraniteLily": {
    "id": "GraniteLily",
@@ -3096,7 +3096,7 @@
     "metal",
     "fire"
    ],
-   "flavour": "Makes a nice hum in the wind."
+   "flavour": "Makes a nice hum in the wind"
   },
   "OilBerry": {
    "id": "OilBerry",
@@ -3104,7 +3104,7 @@
    "nameKey": "cropsnh_crops.oilBerry",
    "name": "Oil Berry",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropOilBerry",
-   "tier": 4,
+   "tier": 8,
    "soil": [
     "oil"
    ],
@@ -3587,7 +3587,7 @@
     "metal",
     "bush"
    ],
-   "flavour": "It's trying its best."
+   "flavour": "It's trying its best"
   },
   "Raspberry": {
    "id": "Raspberry",
@@ -3763,7 +3763,7 @@
    "nameKey": "cropsnh_crops.rubyne",
    "name": "Rubyne",
    "cls": "com.gtnewhorizon.cropsnh.crops.material.CropRubyne",
-   "tier": 4,
+   "tier": 8,
    "soil": [
     "stone"
    ],
@@ -3777,7 +3777,7 @@
    ],
    "maxLight": null,
    "minLight": null,
-   "growth": 800,
+   "growth": 1200,
    "altSeed": false,
    "machineGrow": false,
    "pools": [
@@ -3842,7 +3842,7 @@
     "root",
     "saltpeter"
    ],
-   "flavour": "Inedible."
+   "flavour": "Inedible"
   },
   "SandLily": {
    "id": "SandLily",
@@ -4725,7 +4725,7 @@
    "altSeed": false,
    "machineGrow": true,
    "pools": [],
-   "flavour": "The queen of crops."
+   "flavour": "The queen of crops"
   },
   "Tomato": {
    "id": "Tomato",
@@ -7357,7 +7357,9 @@
    "materials": [
     "Knightmetal"
    ],
-   "modBlocks": []
+   "modBlocks": [
+    "tile.KnightmetalBlock"
+   ]
   },
   "steeleaf": {
    "oredict": [
